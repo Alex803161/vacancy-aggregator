@@ -433,7 +433,12 @@
     </div>
 </footer>
 
-<script src="api.js?v=5"></script>
+<script>
+    // Динамическая загрузка api.js с защитой от кеша
+    var apiScript = document.createElement('script');
+    apiScript.src = 'api.js?v=' + Date.now();
+    document.body.appendChild(apiScript);
+</script>
 
 <script type="application/ld+json">
 {
