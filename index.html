@@ -436,8 +436,8 @@
     </div>
 </footer>
 
-<!-- Динамическая загрузка api.js с защитой от кеша -->
 <script>
+    // Динамическая загрузка api.js с защитой от кеша
     (function() {
         var apiScript = document.createElement('script');
         apiScript.src = 'api.js?v=' + Date.now();
@@ -445,8 +445,8 @@
     })();
 </script>
 
-<!-- Автоперезагрузка, если api.js не загрузился из-за кеша -->
 <script>
+    // Автоперезагрузка, если api.js не загрузился из-за кеша
     setTimeout(() => {
         if (typeof fetchVacanciesFromAPI === 'undefined') {
             location.reload(true);
@@ -481,26 +481,6 @@
 </script>
 
 <script>
-    // ========== ДЕМО-ДАННЫЕ (запасной вариант) ==========
-    const DEMO_VACANCIES = [
-        {
-            id: 1, title: "Оператор на линии розлива в ЖБ банку", salary: "от 75 000 ₽ за месяц", salary_details: "на руки",
-            experience: "Без опыта", payment: "Выплаты: два раза в месяц", company: "ООО Частная Пивоварня ШВАРЦКАЙЗЕР",
-            rating: 4.2, reviews: 5, city: "деревня Чёлохово", metro: [],
-            description: "Розлив в банку на специализированной линии с ЧПУ. Ведение технологического процесса производства безалкогольных напитков.",
-            requirements: "Ответственность, физическая выносливость, готовность к обучению.",
-            link: "#", source: "demo", logo: null, phone: null, schedule: null, employmentType: null, premium: false
-        },
-        {
-            id: 2, title: "Кассир", salary: "80 000 – 100 000 ₽", salary_details: "до вычета налогов",
-            experience: "Без опыта", payment: "Выплаты: два раза в месяц", company: "Пятёрочка. Команда магазинов",
-            rating: 3.6, reviews: 13400, city: "Москва", metro: ["Библиотека им.Ленина", "Кропоткинская", "Парк культуры", "Охотный ряд"],
-            description: "Работа за кассой, обслуживание покупателей, поддержание порядка на кассовой зоне.",
-            requirements: "Внимательность, вежливость, готовность к работе с деньгами.",
-            link: "#", source: "demo", logo: null, phone: null, schedule: null, employmentType: null, premium: false
-        }
-    ];
-
     // ========== ЗАГРУЗКА ПРЯМЫХ ВАКАНСИЙ ==========
     function loadDirectVacancies() {
         const stored = localStorage.getItem('directVacancies');
@@ -646,7 +626,7 @@
             </div>
             <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
                 <a href="${vac.link}" target="_blank" class="modal-link" style="flex:1;text-align:center;">Смотреть на hh.ru</a>
-                <button class="btn btn-contact" onclick="alert('${vac.phone ? 'Телефон: ' + escapeHtml(vac.phone) : 'Связь с компанией (демо)'}')">☎ Связаться</button>
+                <button class="btn btn-contact" onclick="alert('${vac.phone ? 'Телефон: ' + escapeHtml(vac.phone) : 'Связь с компанией ' + escapeHtml(vac.company)}')">☎ Связаться</button>
             </div>`;
         overlay.classList.add('active');
     }
@@ -708,7 +688,7 @@
         }
 
         if (!vacancies.length && !append) {
-            container.innerHTML = '<div class="no-results">Ничего не найдено</div>';
+            container.innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
             loader.classList.remove('visible');
             updateDocumentTitle(0);
             return;
@@ -728,16 +708,12 @@
             const premiumBadge = v.premium ? '<span class="premium-badge">Премиум</span>' : '';
             const premiumClass = v.premium ? ' premium' : '';
 
-            // Логотип или заглушка
             const logoHtml = v.logo
                 ? `<img class="logo-img" src="${escapeHtml(v.logo)}" alt="Логотип" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
                 : '';
             const placeholderHtml = `<div class="logo-placeholder" style="background:${bgColor}; display:${v.logo ? 'none' : 'flex'}">${firstLetter}</div>`;
 
-            // Телефон
             const phoneHtml = v.phone ? `<div class="contact-phone">📞 ${escapeHtml(v.phone)}</div>` : '';
-
-            // График и тип занятости
             const scheduleHtml = (v.schedule || v.employmentType)
                 ? `<div class="schedule-info">${[v.employmentType, v.schedule].filter(Boolean).join(' · ')}</div>`
                 : '';
@@ -789,7 +765,7 @@
                 e.stopPropagation();
                 const card = this.closest('.vacancy-card');
                 const vac = allLoadedVacancies.find(v => v.id === +card.dataset.id);
-                alert('Вы откликнулись на вакансию: ' + vac.title + '\n(демо-режим)');
+                alert('Вы откликнулись на вакансию: ' + vac.title);
             });
         });
         document.querySelectorAll('.btn-contact').forEach(btn => {
@@ -798,7 +774,7 @@
                 const card = this.closest('.vacancy-card');
                 const vac = allLoadedVacancies.find(v => v.id === +card.dataset.id);
                 if (vac.phone) alert('Телефон работодателя: ' + vac.phone);
-                else alert('Связь с компанией ' + vac.company + '\n(в реальной версии здесь будет телефон или чат)');
+                else alert('Связь с компанией ' + vac.company);
             });
         });
         document.querySelectorAll('.btn-share').forEach(btn => {
@@ -845,13 +821,10 @@
 
         try {
             let results = [];
-
-            // 1. Загружаем из API
             if (typeof fetchVacanciesFromAPI === 'function') {
                 results = await fetchVacanciesFromAPI(query);
             }
 
-            // 2. Добавляем прямые вакансии
             const direct = loadDirectVacancies();
             if (direct.length > 0) {
                 const filteredDirect = query ? direct.filter(v =>
@@ -862,12 +835,13 @@
                 results = [...results, ...filteredDirect];
             }
 
-            // 3. Если результатов нет — показываем демо
             if (!results.length) {
-                results = DEMO_VACANCIES;
+                document.getElementById('vacanciesContainer').innerHTML = '<div class="no-results">По вашему запросу ничего не найдено</div>';
+                updateDocumentTitle(0);
+                loader.classList.remove('visible');
+                return;
             }
 
-            // 4. Применяем фильтры и сортировку
             results = applyExtraFilters(results);
             if (document.getElementById('sortBySalary').classList.contains('active')) {
                 results = sortVacancies(results);
@@ -875,7 +849,6 @@
                 results = sortVacancies(results);
             }
 
-            // 5. Отображаем
             allLoadedVacancies = results;
             displayedCount = 0;
             renderVacancies(results.slice(0, 5), false);
@@ -930,7 +903,6 @@
         loadFiltersFromStorage();
         renderHistory();
 
-        // Ждём загрузку api.js (динамический тег script)
         const initSearch = () => {
             if (typeof fetchVacanciesFromAPI === 'function') {
                 performSearch('');
