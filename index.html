@@ -736,7 +736,7 @@
                         ${placeholderHtml}
                         <div class="company-text">
                             <span class="company-name">${escapeHtml(v.company)}</span>
-                            <span class="rating-row"><span class="rating-stars">⭐ ${v.rating}</span><span>• ${v.reviews.toLocaleString()} отзывов</span></span>
+                            <span class="rating-row"><span class="rating-stars">⭐ ${v.rating}</span><span>• ${(v.reviews || 0).toLocaleString()} отзывов</span></span>
                         </div>
                     </div>
                     ${scheduleHtml}
