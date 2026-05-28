@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Разместить вакансию — Ваканса</title>
+    <meta name="description" content="Прямое размещение вакансий работодателями. Опубликуйте вакансию на Вакансе быстро и просто.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 24px 16px;
+            color: #0f172a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #edf2f7;
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0047cc;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .btn-submit {
+            background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(180deg, #0039a6 0%, #002d80 100%);
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        .back-link a {
+            color: #64748b;
+            text-decoration: none;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 14px;
+            align-items: center;
+        }
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin: 0 4px 0 0;
+        }
+        .premium-label {
+            color: #b45309;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h1>📋 Разместить вакансию</h1>
+        <p style="color:#64748b; margin-bottom:20px; text-align:center;">Ваша вакансия появится на сайте после модерации.</p>
+        
+        <div id="formContainer">
+            <label for="jobTitle">Название вакансии *</label>
+            <input type="text" id="jobTitle" placeholder="Например: Менеджер по продажам" required>
+
+            <label for="companyName">Компания *</label>
+            <input type="text" id="companyName" placeholder="ООО 'Ромашка'" required>
+
+            <label for="salary">Зарплата</label>
+            <input type="text" id="salary" placeholder="80 000 – 100 000 ₽">
+
+            <label for="experience">Опыт работы</label>
+            <select id="experience">
+                <option value="Без опыта">Без опыта</option>
+                <option value="Опыт от 1 года">От 1 года</option>
+                <option value="Опыт 2-3 года">2-3 года</option>
+                <option value="Опыт от 5 лет">От 5 лет</option>
+            </select>
+
+            <label for="city">Город *</label>
+            <input type="text" id="city" placeholder="Москва" required>
+
+            <label for="description">Описание и обязанности</label>
+            <textarea id="description" rows="4" placeholder="Что нужно делать?"></textarea>
+
+            <label for="requirements">Требования</label>
+            <textarea id="requirements" rows="3" placeholder="Кого ищем?"></textarea>
+
+            <label for="contactPhone">Контактный телефон *</label>
+            <input type="tel" id="contactPhone" placeholder="+7 (999) 123-45-67" required>
+
+            <label for="contactEmail">Email для связи</label>
+            <input type="email" id="contactEmail" placeholder="hr@company.ru">
+
+            <label>Тип размещения</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="listingType" value="free" checked> Бесплатное
+                </label>
+                <label class="premium-label">
+                    <input type="radio" name="listingType" value="premium"> Платное (выделение) — 500 ₽
+                </label>
+            </div>
+
+            <button class="btn-submit" id="submitBtn">Опубликовать вакансию</button>
+        </div>
+        <div class="back-link">
+            <a href="index.html">← Вернуться на главную</a>
+        </div>
+    </div>
+    <div id="toast" class="toast">Вакансия отправлена!</div>
+
+    <script>
+        const POST_VACANCY_URL = "https://functions.yandexcloud.net/d4elglnd7snuva0iavj0";
+
+        document.getElementById('submitBtn').addEventListener('click', async () => {
+            const title = document.getElementById('jobTitle').value.trim();
+            const company = document.getElementById('companyName').value.trim();
+            const salary = document.getElementById('salary').value.trim();
+            const experience = document.getElementById('experience').value;
+            const city = document.getElementById('city').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const requirements = document.getElementById('requirements').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const listingType = document.querySelector('input[name="listingType"]:checked').value;
+
+            if (!title || !company || !city || !phone) {
+                alert('Пожалуйста, заполните обязательные поля (название, компания, город, телефон).');
+                return;
+            }
+
+            const vacancyData = {
+                id: Date.now(),
+                title,
+                company,
+                salary: salary || "Не указана",
+                salary_details: "",
+                experience,
+                payment: "По договорённости",
+                city,
+                metro: [],
+                description: description || "Описание отсутствует",
+                requirements: requirements || "Требования не указаны",
+                contactPhone: phone,
+                contactEmail: email || "Не указан",
+                date: new Date().toISOString(),
+                source: "direct",
+                premium: listingType === 'premium'
+            };
+
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = "Отправка...";
+            btn.disabled = true;
+
+            try {
+                // Отправляем в облачную функцию (если URL настроен)
+                if (!POST_VACANCY_URL.includes("ВАШ_URL_ФУНКЦИИ")) {
+                    await fetch(POST_VACANCY_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(vacancyData)
+                    });
+                }
+
+                // Сохраняем локально
+                const directVacancies = JSON.parse(localStorage.getItem('directVacancies') || '[]');
+                directVacancies.push(vacancyData);
+                localStorage.setItem('directVacancies', JSON.stringify(directVacancies));
+
+                // Показываем уведомление
+                document.getElementById('toast').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('toast').classList.remove('show');
+                    document.getElementById('formContainer').reset();
+                }, 2000);
+            } catch (error) {
+                alert('Произошла ошибка. Попробуйте позже.');
+            } finally {
+                btn.textContent = "Опубликовать вакансию";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
