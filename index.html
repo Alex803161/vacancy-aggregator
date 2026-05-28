@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="yandex-verification" content="724a38f920387b6a" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Ваканса — свежие вакансии Москвы и России. Поиск работы рядом с метро</title>
     <meta name="description" content="Ваканса — агрегатор вакансий от прямых работодателей. Ищите работу по должности, городу и метро. Кассир, продавец, управляющий — более 1000 актуальных предложений.">
     <meta name="keywords" content="работа, вакансии, поиск работы, агрегатор вакансий, hh.ru, труд, занятость">
@@ -433,11 +436,13 @@
     </div>
 </footer>
 
+<!-- Динамическая загрузка api.js с защитой от кеша -->
 <script>
-    // Динамическая загрузка api.js с защитой от кеша
-    var apiScript = document.createElement('script');
-    apiScript.src = 'api.js?v=' + Date.now();
-    document.body.appendChild(apiScript);
+    (function() {
+        var apiScript = document.createElement('script');
+        apiScript.src = 'api.js?v=' + Date.now();
+        document.body.appendChild(apiScript);
+    })();
 </script>
 
 <script type="application/ld+json">
@@ -915,7 +920,16 @@
     document.addEventListener('DOMContentLoaded', () => {
         loadFiltersFromStorage();
         renderHistory();
-        performSearch('');
+
+        // Даём время на загрузку api.js (динамический тег script)
+        const initSearch = () => {
+            if (typeof fetchVacanciesFromAPI === 'function') {
+                performSearch('');
+            } else {
+                setTimeout(initSearch, 100);
+            }
+        };
+        initSearch();
 
         document.getElementById('searchButton').addEventListener('click', updateSearchAndRender);
         document.getElementById('resetButton').addEventListener('click', resetSearch);
