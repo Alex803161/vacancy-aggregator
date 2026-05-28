@@ -813,23 +813,27 @@
     }
     function sortVacancies(vacancies) {
         return [...vacancies].sort((a,b) => {
-            // Сначала сортируем по премиум, потом по зарплате
             if (a.premium && !b.premium) return -1;
             if (!a.premium && b.premium) return 1;
             return sortBySalaryAsc ? extractMinSalary(a.salary) - extractMinSalary(b.salary) : extractMinSalary(b.salary) - extractMinSalary(a.salary);
         });
     }
 
-    // ========== ПОИСК (с объединением источников) ==========
+    // ========== ПОИСК (исправленная версия) ==========
     async function performSearch(query) {
         const loader = document.getElementById('scrollLoader');
         loader.classList.remove('visible');
         renderSkeletons(5);
 
         try {
-            // Получаем данные из API
-            let results = typeof fetchVacanciesFromAPI === 'function' ? await fetchVacanciesFromAPI(query) : [];
-            // Добавляем прямые вакансии
+            let results = [];
+
+            // 1. Загружаем из API
+            if (typeof fetchVacanciesFromAPI === 'function') {
+                results = await fetchVacanciesFromAPI(query);
+            }
+
+            // 2. Добавляем прямые вакансии
             const direct = loadDirectVacancies();
             if (direct.length > 0) {
                 const filteredDirect = query ? direct.filter(v =>
@@ -839,20 +843,29 @@
                 ) : direct;
                 results = [...results, ...filteredDirect];
             }
-            if (!results.length) results = DEMO_VACANCIES; // fallback
 
+            // 3. Если результатов нет — показываем демо
+            if (!results.length) {
+                results = DEMO_VACANCIES;
+            }
+
+            // 4. Применяем фильтры и сортировку
             results = applyExtraFilters(results);
             if (document.getElementById('sortBySalary').classList.contains('active')) {
                 results = sortVacancies(results);
             } else {
-                // По умолчанию премиум выше
+                // Премиум всегда выше
                 results = sortVacancies(results);
             }
+
+            // 5. Отображаем
             allLoadedVacancies = results;
             displayedCount = 0;
-            renderVacancies(results.slice(0,5), false);
+            renderVacancies(results.slice(0, 5), false);
+            updateDocumentTitle(results.length);
             vibrateOnNewData();
         } catch (e) {
+            console.error(e);
             document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки. Попробуйте позже.</div>';
             allLoadedVacancies = [];
             updateDocumentTitle(0);
