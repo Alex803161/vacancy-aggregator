@@ -8,8 +8,8 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>Ваканса — свежие вакансии Москвы и России. Поиск работы рядом с метро</title>
-    <meta name="description" content="Ваканса — агрегатор вакансий от прямых работодателей. Ищите работу по должности, городу и метро.">
-    <meta name="keywords" content="работа, вакансии, поиск работы, агрегатор вакансий, hh.ru">
+    <meta name="description" content="Ваканса — агрегатор вакансий от прямых работодателей. Ищите работу по должности, городу и метро. Кассир, продавец, управляющий — более 1000 актуальных предложений.">
+    <meta name="keywords" content="работа, вакансии, поиск работы, агрегатор вакансий, hh.ru, труд, занятость">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <style>
         /* ========== CSS-ПЕРЕМЕННЫЕ (светлая тема по умолчанию) ========== */
@@ -168,10 +168,14 @@
         .sort-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
         .sort-btn.active .arrow { text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
 
-        /* Переключатель вибрации */
+        /* Переключатель вибрации (виден только на мобильных) */
         .vibrate-toggle {
-            display: flex; align-items: center; gap: 8px; margin-left: auto; cursor: pointer;
+            display: none; /* Скрыт по умолчанию */
+            align-items: center; gap: 8px; margin-left: auto; cursor: pointer;
             user-select: none; font-size: 0.85rem; color: var(--text-secondary);
+        }
+        @media (max-width: 768px) {
+            .vibrate-toggle { display: flex; }
         }
         .vibrate-toggle input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
         .switch {
@@ -408,4 +412,24 @@
         <li>Кассир в Пятёрочку, Москва, зарплата 80 000 – 100 000 ₽, без опыта.</li>
         <li>Продавец-консультант в Магнит, Москва, зарплата 90 000 – 120 000 ₽, опыт от 1 года.</li>
         <li>Старший смены в Ашан, Москва, зарплата 110 000 – 130 000 ₽, опыт 2-3 года.</li>
-        <li>Фасовщик в Перекрёсток, Москва, зарплата 
+        <li>Фасовщик в Перекрёсток, Москва, зарплата 70 000 – 85 000 ₽, без опыта.</li>
+        <li>Управляющий магазином в Лента, Москва, зарплата 150 000 ₽, опыт от 5 лет.</li>
+    </ul>
+</div>
+
+<button id="backToTop" class="back-to-top">↑</button>
+
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<div id="toast" class="toast">Ссылка скопирована</div>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="privacy.html">Политика конфиденциальности</a>
+            <a href="terms.html">Пользовательское соглашение</
