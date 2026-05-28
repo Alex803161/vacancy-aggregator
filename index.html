@@ -445,6 +445,15 @@
     })();
 </script>
 
+<!-- Автоперезагрузка, если api.js не загрузился из-за кеша -->
+<script>
+    setTimeout(() => {
+        if (typeof fetchVacanciesFromAPI === 'undefined') {
+            location.reload(true);
+        }
+    }, 2500);
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -921,7 +930,7 @@
         loadFiltersFromStorage();
         renderHistory();
 
-        // Даём время на загрузку api.js (динамический тег script)
+        // Ждём загрузку api.js (динамический тег script)
         const initSearch = () => {
             if (typeof fetchVacanciesFromAPI === 'function') {
                 performSearch('');
