@@ -1,12 +1,12 @@
-// api.js v.1.0.3 – финальный маппинг для hh.ru
+// api.js v.1.0.4 – расширенный поиск (убрано ограничение search_field)
 const HH_PROXY_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
 
 async function fetchVacanciesFromAPI(query) {
     const params = new URLSearchParams({
         text: query || "",
         per_page: "100",
-        order_by: "relevance",
-        search_field: "name"
+        order_by: "relevance"
+        // search_field больше не отправляем – ищем по всем полям
     });
 
     try {
@@ -15,7 +15,6 @@ async function fetchVacanciesFromAPI(query) {
         const data = await resp.json();
 
         return (data.items || []).map(item => {
-            // Зарплата
             let salaryStr = "Не указана";
             let salaryDetails = "";
             if (item.salary) {
@@ -28,7 +27,6 @@ async function fetchVacanciesFromAPI(query) {
                 if (item.salary.gross) salaryDetails = "до вычета налогов";
             }
 
-            // Опыт
             const experienceMap = {
                 "noExperience": "Без опыта",
                 "between1And3": "От 1 года до 3 лет",
@@ -36,11 +34,8 @@ async function fetchVacanciesFromAPI(query) {
                 "moreThan6": "Более 6 лет"
             };
 
-            // Логотип
             const logo = item.employer?.logo_urls?.["90"] || item.employer?.logo_urls?.original || null;
-            // Телефон
             const phone = item.contacts?.phones?.[0]?.formatted || null;
-            // График и занятость
             const schedule = item.work_schedule_by_days?.map(d => d.name).join(', ') || null;
             const employmentType = item.employment_form?.name || null;
 
