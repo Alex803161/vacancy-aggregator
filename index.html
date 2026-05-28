@@ -433,7 +433,7 @@
     </div>
 </footer>
 
-<script src="api.js?v=3"></script>
+<script src="api.js?v=4"></script>
 
 <script type="application/ld+json">
 {
@@ -590,7 +590,6 @@
             }
             const name = document.getElementById('feedbackName').value.trim();
             const email = document.getElementById('feedbackEmail').value.trim();
-            // Сохраняем в localStorage для демонстрации
             const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
             feedbacks.push({ name, email, message, date: new Date().toISOString() });
             localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
@@ -736,7 +735,7 @@
                         ${placeholderHtml}
                         <div class="company-text">
                             <span class="company-name">${escapeHtml(v.company)}</span>
-                            <span class="rating-row"><span class="rating-stars">⭐ ${v.rating}</span><span>• ${(v.reviews || 0).toLocaleString()} отзывов</span></span>
+                            <span class="rating-row"><span class="rating-stars">⭐ ${v.rating || '4.0'}</span><span>• ${(v.reviews || 0).toLocaleString()} отзывов</span></span>
                         </div>
                     </div>
                     ${scheduleHtml}
@@ -819,7 +818,7 @@
         });
     }
 
-    // ========== ПОИСК (исправленная версия) ==========
+    // ========== ПОИСК (финальная версия) ==========
     async function performSearch(query) {
         const loader = document.getElementById('scrollLoader');
         loader.classList.remove('visible');
@@ -854,7 +853,6 @@
             if (document.getElementById('sortBySalary').classList.contains('active')) {
                 results = sortVacancies(results);
             } else {
-                // Премиум всегда выше
                 results = sortVacancies(results);
             }
 
