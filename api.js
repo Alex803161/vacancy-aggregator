@@ -1,5 +1,5 @@
-// Прокси-сервер, который точно возвращает CORS-заголовки
-const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+// Прокси, который работает без ручных действий
+const PROXY_URL = "https://api.allorigins.win/raw?url=";
 const HH_API_URL = "https://api.hh.ru/vacancies";
 
 async function fetchVacanciesFromAPI(query, signal) {
@@ -9,22 +9,35 @@ async function fetchVacanciesFromAPI(query, signal) {
         order_by: "relevance"
     });
     const targetUrl = `${HH_API_URL}?${params.toString()}`;
-    const proxyUrl = `${PROXY_URL}${targetUrl}`;
+    const proxyUrl = `${PROXY_URL}${encodeURIComponent(targetUrl)}`;
+    
+    console.log("📡 Запрос к прокси:", proxyUrl);
     
     try {
         const resp = await fetch(proxyUrl, { signal });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
+        
+        // allorigins.win возвращает объект с полем contents
+        const wrapper = await resp.json();
+        let data;
+        if (wrapper.contents) {
+            data = JSON.parse(wrapper.contents);
+        } else {
+            data = wrapper;
+        }
         
         if (data.items && data.items.length) {
+            console.log(`✅ Получено ${data.items.length} вакансий`);
             return mapHHVacancies(data.items);
         } else {
-            console.warn("API вернул пустой массив");
+            console.warn("⚠️ API вернул пустой массив");
             return [];
         }
     } catch (e) {
-        console.error("Ошибка загрузки вакансий:", e);
-        return [];  // возвращаем пустой массив, а не демо
+        if (e.name !== 'AbortError') {
+            console.error("❌ Ошибка загрузки вакансий:", e);
+        }
+        return []; // Никаких демо-вакансий – только реальные
     }
 }
 
