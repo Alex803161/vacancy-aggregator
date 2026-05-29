@@ -1,4 +1,4 @@
-https://d5dev88lelh404bictuo.628pfjdx.apigw.yandexcloud.net
+https://"d5dev88lelh404bictuo.628pfjdx.apigw.yandexcloud.net";
 
 const FALLBACK_VACANCIES = [
     {
