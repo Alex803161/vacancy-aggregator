@@ -1,5 +1,6 @@
-const HH_PROXY_URL = "https://d4enif5klq871kh78jdp.apigw.yandexcloud.net";
+const HH_PROXY_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
 
+// Резервные вакансии (показываются, если прокси не отвечает)
 const FALLBACK_VACANCIES = [
     {
         id: 1001,
@@ -73,11 +74,13 @@ async function fetchVacanciesFromAPI(query, signal) {
                 return mapHHVacancies(data.items);
             }
         }
-        console.warn("Прокси вернул ошибку, используем резервные вакансии");
+        console.warn("⚠️ Прокси вернул ошибку, используем резервные вакансии");
     } catch (e) {
-        console.warn("Ошибка запроса к прокси, используем резервные вакансии:", e);
+        if (e.name !== 'AbortError') {
+            console.warn("⚠️ Ошибка запроса к прокси, используем резервные вакансии:", e);
+        }
     }
-    // ВСЕГДА возвращаем резервные вакансии, если не получили реальные
+    // Всегда возвращаем резервные вакансии, если реальные не пришли
     return getFallbackVacancies(query);
 }
 
