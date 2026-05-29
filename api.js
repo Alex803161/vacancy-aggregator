@@ -1,4 +1,4 @@
-https://"d5dev88lelh404bictuo.628pfjdx.apigw.yandexcloud.net";
+const HH_PROXY_URL = "https://d4enif5klq871kh78jdp.apigw.yandexcloud.net";
 
 const FALLBACK_VACANCIES = [
     {
