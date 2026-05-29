@@ -3,176 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>JobScout — Агрегатор вакансий</title>
+    <title>JobHunter — поиск работы как на hh.ru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        :root {
-            --bg-page: #f7f8fc;
-            --bg-card: #ffffff;
-            --text-primary: #1e2a3a;
-            --text-secondary: #4a5b6e;
-            --border: #e2e8f0;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-            --shadow-hover: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-            --heart: #ef4444;
-            --skeleton-base: #e2e8f0;
-            --skeleton-wave: rgba(255, 255, 255, 0.5);
-            --input-bg: #ffffff;
-        }
-
-        body.dark {
-            --bg-page: #0f172a;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border: #334155;
-            --accent: #3b82f6;
-            --accent-hover: #60a5fa;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-hover: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
-            --input-bg: #334155;
-            --skeleton-base: #2d3a4e;
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background: var(--bg-page);
-            color: var(--text-primary);
-            line-height: 1.4;
-            padding-bottom: 60px;
+            font-family: 'Inter', sans-serif;
+            background: #f7f9fc;
+            color: #1a2c3e;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* Темная тема */
+        body.dark {
+            background: #0e141b;
+            color: #e2e8f0;
+        }
+
+        body.dark .card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark .sidebar {
+            background: #111827;
+            border-color: #1f2a3e;
+        }
+
+        body.dark .filter-group input,
+        body.dark .filter-group select,
+        body.dark .search-input {
+            background: #2d3a4e;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        body.dark .history-item {
+            background: #334155;
+            color: #cbd5e1;
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Header */
+        /* Шапка как на hh.ru */
         .header {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 0;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(8px);
-            background-color: var(--bg-card);
+            background: rgba(255,255,255,0.96);
+        }
+
+        body.dark .header {
+            background: rgba(15, 23, 42, 0.96);
+            border-bottom-color: #1e293b;
         }
 
         .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 0;
+            gap: 20px;
             flex-wrap: wrap;
-            gap: 12px;
         }
 
         .logo {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            background: linear-gradient(135deg, #2c6e9e, #4a9fcf);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .theme-toggle {
-            background: var(--bg-page);
-            border: 1px solid var(--border);
-            border-radius: 60px;
-            padding: 8px 16px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        /* Search + Filters */
-        .search-section {
-            margin: 24px 0 20px;
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 14px 18px;
-            font-size: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 60px;
-            background: var(--input-bg);
-            color: var(--text-primary);
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-        }
-
-        .btn-primary {
-            background: var(--accent);
+            background: #f1f5f9;
             border: none;
-            padding: 0 28px;
-            border-radius: 60px;
-            font-weight: 600;
-            color: white;
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        body.dark .theme-toggle {
+            background: #2d3a4e;
+            color: #e2e8f0;
+        }
+
+        /* Главный макет: сайдбар + контент */
+        .main-layout {
+            display: flex;
+            gap: 32px;
+            margin: 32px 0;
+        }
+
+        /* Левая панель фильтров */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid #e2edf2;
+            align-self: start;
+            position: sticky;
+            top: 90px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .filter-group {
+            margin-bottom: 24px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #5a6e7c;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cfdfe9;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            background: white;
             transition: 0.2s;
         }
 
-        .btn-primary:hover {
-            background: var(--accent-hover);
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #2c6e9e;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44,110,158,0.1);
         }
 
-        .filters {
+        .salary-row {
             display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-bottom: 24px;
-            align-items: center;
-        }
-
-        .filter-select, .filter-input {
-            padding: 10px 14px;
-            border-radius: 40px;
-            border: 1px solid var(--border);
-            background: var(--input-bg);
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            min-width: 130px;
+            gap: 8px;
         }
 
         .sort-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            padding: 10px 18px;
+            width: 100%;
+            background: #eef2f8;
+            border: none;
+            padding: 10px;
             border-radius: 40px;
-            cursor: pointer;
             font-weight: 500;
-            background: var(--bg-card);
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.2s;
         }
 
-        /* History */
-        .history-area {
-            margin-bottom: 20px;
+        .sort-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* История поиска */
+        .history-section {
+            margin-bottom: 24px;
+        }
+
+        .history-header {
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
         }
 
         .history-badges {
@@ -182,67 +204,92 @@
         }
 
         .history-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 40px;
+            background: #eff3f6;
             padding: 6px 14px;
-            font-size: 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
             cursor: pointer;
+            transition: 0.1s;
         }
 
         .clear-history {
+            font-size: 0.7rem;
             background: none;
             border: none;
-            color: var(--text-secondary);
-            text-decoration: underline;
+            color: #2c6e9e;
             cursor: pointer;
-            font-size: 0.75rem;
         }
 
-        /* Cards grid */
-        .vacancies-grid {
+        /* Список вакансий */
+        .vacancies-area {
+            flex: 1;
+        }
+
+        .search-bar {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin: 20px 0 40px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
-        .vacancy-card {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 20px;
-            box-shadow: var(--shadow);
+        .search-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid #cfdfe9;
+            border-radius: 60px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .btn-primary {
+            background: #2c6e9e;
+            color: white;
+            border: none;
+            padding: 0 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
             transition: 0.2s;
-            border: 1px solid var(--border);
+        }
+
+        .btn-primary:hover {
+            background: #1f557d;
+        }
+
+        /* Карточка вакансии в стиле hh */
+        .vacancy-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #e2edf2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: all 0.2s;
             cursor: pointer;
             position: relative;
         }
 
         .vacancy-card:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.12);
+            border-color: #cbdde6;
         }
 
         .card-header {
             display: flex;
             gap: 16px;
-            align-items: center;
-            margin-bottom: 12px;
         }
 
         .company-logo {
-            width: 56px;
-            height: 56px;
-            background: #eef2ff;
+            width: 64px;
+            height: 64px;
+            background: #eef2fa;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.4rem;
-            background: var(--bg-page);
-            border: 1px solid var(--border);
-            color: var(--accent);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c6e9e;
             flex-shrink: 0;
             overflow: hidden;
         }
@@ -250,10 +297,10 @@
         .company-logo img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
-        .card-info {
+        .card-main {
             flex: 1;
         }
 
@@ -261,197 +308,204 @@
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 6px;
+            color: #1a2c3e;
+        }
+
+        body.dark .vacancy-title {
+            color: #f1f5f9;
         }
 
         .company-name {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-weight: 500;
+            color: #4b6a7c;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
         }
 
         .salary {
             font-weight: 700;
-            color: var(--accent);
+            color: #2c6e9e;
             margin: 8px 0;
+            font-size: 1rem;
         }
 
-        .meta {
+        .card-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            gap: 16px;
+            font-size: 0.8rem;
+            color: #5f7f92;
+            margin-top: 8px;
         }
 
         .favorite-btn {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: none;
+            background: transparent;
             border: none;
             font-size: 1.6rem;
             cursor: pointer;
-            color: #cbd5e1;
+            color: #b9cfdf;
             transition: 0.1s;
         }
 
         .favorite-btn.active {
-            color: var(--heart);
+            color: #e5484d;
         }
 
-        /* Skeleton */
+        /* Скелетоны */
         .skeleton-card {
-            background: var(--bg-card);
-            border-radius: 24px;
+            background: white;
+            border-radius: 20px;
             padding: 20px;
-            border: 1px solid var(--border);
+            margin-bottom: 16px;
+            border: 1px solid #e2edf2;
         }
 
         .skeleton-line {
-            height: 20px;
-            background: var(--skeleton-base);
+            height: 18px;
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.2s infinite;
             border-radius: 12px;
             margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
         }
-
-        .skeleton-line::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--skeleton-wave), transparent);
-            animation: shimmer 1.2s infinite;
-        }
-
-        .skeleton-title { width: 70%; height: 26px; }
-        .skeleton-company { width: 45%; }
-        .skeleton-salary { width: 40%; }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%);}
-            100% { transform: translateX(100%);}
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        /* modal */
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 2000;
         }
 
-        .modal-content {
-            background: var(--bg-card);
-            max-width: 650px;
+        .modal-card {
+            background: white;
+            max-width: 680px;
             width: 90%;
             border-radius: 32px;
-            padding: 28px;
+            padding: 32px;
             max-height: 85vh;
             overflow-y: auto;
-            border: 1px solid var(--border);
         }
 
-        .modal h3 { font-size: 1.6rem; margin-bottom: 12px; }
-        .modal p { margin: 12px 0; color: var(--text-secondary);}
-        .modal-close {
-            background: var(--accent);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 40px;
-            color: white;
-            margin-top: 16px;
-            cursor: pointer;
+        body.dark .modal-card {
+            background: #1e293b;
         }
 
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            color: #6c868e;
         }
 
         footer {
             text-align: center;
+            padding: 30px 0;
             font-size: 0.75rem;
-            margin-top: 40px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; }
         }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="container header-inner">
-        <div class="logo">JobScout</div>
-        <button class="theme-toggle" id="themeToggle">🌙 Тёмная</button>
+        <div class="logo">JobHunter</div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i> Тёмная тема</button>
     </div>
 </div>
 
-<div class="container">
-    <div class="search-section">
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Должность, профессия, ключевые слова..." value="Программист">
-            <button id="searchBtn" class="btn-primary">Найти</button>
+<div class="container main-layout">
+    <!-- Левая колонка: фильтры и история -->
+    <aside class="sidebar">
+        <h3><i class="fas fa-sliders-h"></i> Фильтры</h3>
+        <div class="filter-group">
+            <label>Город</label>
+            <input type="text" id="cityFilter" placeholder="Москва, Санкт-Петербург...">
         </div>
-        <div class="filters">
-            <input type="text" id="cityFilter" class="filter-input" placeholder="Город (Москва)">
-            <select id="expFilter" class="filter-select">
-                <option value="">Любой опыт</option>
+        <div class="filter-group">
+            <label>Опыт работы</label>
+            <select id="expFilter">
+                <option value="">Любой</option>
                 <option value="Без опыта">Без опыта</option>
-                <option value="От 1 года до 3 лет">1-3 года</option>
-                <option value="От 3 до 6 лет">3-6 лет</option>
+                <option value="От 1 года до 3 лет">1–3 года</option>
+                <option value="От 3 до 6 лет">3–6 лет</option>
                 <option value="Более 6 лет">Более 6 лет</option>
             </select>
-            <input type="number" id="salaryFromFilter" class="filter-input" placeholder="Зарплата от (₽)">
-            <button id="sortSalaryBtn" class="sort-btn">↑ По зарплате</button>
         </div>
-        <div class="history-area">
-            <span>🔍 Недавние:</span>
+        <div class="filter-group">
+            <label>Зарплата от (₽)</label>
+            <input type="number" id="salaryFromFilter" placeholder="например 80000">
+        </div>
+        <button id="sortSalaryBtn" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате (↑)</button>
+
+        <div class="history-section" style="margin-top: 32px;">
+            <div class="history-header">
+                <h3><i class="fas fa-history"></i> История</h3>
+                <button id="clearHistoryBtn" class="clear-history">Очистить</button>
+            </div>
             <div id="historyContainer" class="history-badges"></div>
-            <button id="clearHistoryBtn" class="clear-history">Очистить</button>
         </div>
+    </aside>
+
+    <!-- Правая часть: поиск + список вакансий -->
+    <div class="vacancies-area">
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Должность, ключевые слова..." value="Python разработчик">
+            <button id="searchBtn" class="btn-primary"><i class="fas fa-search"></i> Найти</button>
+        </div>
+        <div id="vacanciesContainer" class="vacancies-list"></div>
+        <div id="loadingTrigger" style="height: 10px;"></div>
     </div>
-    <div id="vacanciesContainer" class="vacancies-grid"></div>
-    <div id="loadingTrigger" style="height: 20px;"></div>
 </div>
+<footer>© JobHunter — поиск работы, похожий на hh.ru</footer>
 
 <div id="modal" class="modal">
-    <div class="modal-content">
-        <h3 id="modalTitle"></h3>
-        <p><strong>Компания:</strong> <span id="modalCompany"></span></p>
-        <p><strong>Зарплата:</strong> <span id="modalSalary"></span></p>
-        <p><strong>Город / Метро:</strong> <span id="modalMetro"></span></p>
-        <p><strong>График:</strong> <span id="modalSchedule"></span></p>
-        <p><strong>Требования:</strong> <span id="modalRequirements"></span></p>
-        <p><strong>Обязанности:</strong> <span id="modalDescription"></span></p>
-        <p><strong>Телефон:</strong> <span id="modalPhone"></span></p>
-        <a id="modalLink" href="#" target="_blank" style="color: var(--accent);">Открыть на HH.ru →</a>
-        <div><button class="modal-close" id="closeModalBtn">Закрыть</button></div>
+    <div class="modal-card">
+        <h2 id="modalTitle" style="margin-bottom: 12px;"></h2>
+        <p><strong><i class="fas fa-building"></i> Компания:</strong> <span id="modalCompany"></span></p>
+        <p><strong><i class="fas fa-ruble-sign"></i> Зарплата:</strong> <span id="modalSalary"></span></p>
+        <p><strong><i class="fas fa-map-marker-alt"></i> Город / Метро:</strong> <span id="modalMetro"></span></p>
+        <p><strong><i class="fas fa-calendar-alt"></i> График:</strong> <span id="modalSchedule"></span></p>
+        <p><strong><i class="fas fa-tasks"></i> Требования:</strong> <span id="modalRequirements"></span></p>
+        <p><strong><i class="fas fa-clipboard-list"></i> Обязанности:</strong> <span id="modalDescription"></span></p>
+        <p><strong><i class="fas fa-phone-alt"></i> Контакты:</strong> <span id="modalPhone"></span></p>
+        <a id="modalLink" href="#" target="_blank" style="display: inline-block; margin: 16px 0; color:#2c6e9e;">Смотреть на hh.ru →</a>
+        <div><button class="btn-primary" id="closeModalBtn" style="padding: 8px 24px;">Закрыть</button></div>
     </div>
 </div>
 
 <script src="api.js"></script>
 <script>
-    // ---------- STATE ----------
-    let allVacancies = [];         // исходный массив из API
-    let filteredVacancies = [];    // текущий отфильтрованный + сортировка
+    // Глобальное состояние
+    let allVacancies = [];
+    let filteredVacancies = [];
     let currentPage = 0;
     const PAGE_SIZE = 5;
     let isLoading = false;
     let hasMore = true;
-    let currentSearchQuery = "Программист";
-    let currentSortBySalary = false;   // false: по умолчанию по релевантности, true: по убыванию зарплаты (парсим число)
-    
-    // favorites & history
-    let favorites = new Set();      // id вакансии (число)
-    let searchHistory = [];          // строки запросов
-    
+    let sortBySalary = false;
+    let favorites = new Set();
+    let searchHistory = [];
+
     // DOM
     const container = document.getElementById('vacanciesContainer');
     const searchInput = document.getElementById('searchInput');
@@ -460,145 +514,133 @@
     const expFilter = document.getElementById('expFilter');
     const salaryFromFilter = document.getElementById('salaryFromFilter');
     const sortSalaryBtn = document.getElementById('sortSalaryBtn');
-    const themeToggle = document.getElementById('themeToggle');
     const historyContainer = document.getElementById('historyContainer');
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
-    const modal = document.getElementById('modal');
-    
-    // helper: извлечь число из строки зарплаты (примерное)
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Helper: извлечь число из зарплаты
     function extractSalaryNumber(salaryStr) {
         if (!salaryStr || salaryStr === "Не указана") return 0;
-        const match = salaryStr.match(/(\d+[\s]?\d*)/g);
-        if (match) {
-            let num = parseInt(match[0].replace(/\s/g, ''), 10);
-            return isNaN(num) ? 0 : num;
-        }
+        const match = salaryStr.match(/(\d+[\s]?\d+)/);
+        if (match) return parseInt(match[0].replace(/\s/g, ''), 10);
         return 0;
     }
-    
-    // Фильтрация и сортировка
-    function applyFiltersAndSort() {
+
+    // Фильтрация + сортировка
+    function filterAndSort() {
         let filtered = [...allVacancies];
-        const cityRaw = cityFilter.value.trim().toLowerCase();
-        const expValue = expFilter.value;
-        const salaryFromVal = parseInt(salaryFromFilter.value, 10);
-        
-        if (cityRaw) {
-            filtered = filtered.filter(v => v.city.toLowerCase().includes(cityRaw));
-        }
-        if (expValue) {
-            filtered = filtered.filter(v => v.experience === expValue);
-        }
-        if (!isNaN(salaryFromVal) && salaryFromVal > 0) {
-            filtered = filtered.filter(v => extractSalaryNumber(v.salary) >= salaryFromVal);
-        }
-        
-        if (currentSortBySalary) {
-            filtered.sort((a,b) => extractSalaryNumber(b.salary) - extractSalaryNumber(a.salary));
-        } else {
-            // исходный порядок как пришёл с API (по relevance), сохраняем стабильность
-            // но лучше держать индекс
-        }
+        const cityVal = cityFilter.value.trim().toLowerCase();
+        const expVal = expFilter.value;
+        const salaryFrom = parseInt(salaryFromFilter.value, 10);
+
+        if (cityVal) filtered = filtered.filter(v => v.city.toLowerCase().includes(cityVal));
+        if (expVal) filtered = filtered.filter(v => v.experience === expVal);
+        if (!isNaN(salaryFrom) && salaryFrom > 0) filtered = filtered.filter(v => extractSalaryNumber(v.salary) >= salaryFrom);
+
+        if (sortBySalary) filtered.sort((a,b) => extractSalaryNumber(b.salary) - extractSalaryNumber(a.salary));
         filteredVacancies = filtered;
         hasMore = true;
         currentPage = 0;
-        renderSkeletons();
-        setTimeout(() => {
-            renderVacancies(true);
-        }, 50);
+        renderSkeletonsAndLoad();
     }
-    
-    // рендер пачки
+
+    async function renderSkeletonsAndLoad() {
+        renderSkeletons(true);
+        setTimeout(() => renderVacancies(true), 60);
+    }
+
+    function renderSkeletons(clear = true) {
+        if (clear) container.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+            const sk = document.createElement('div');
+            sk.className = 'skeleton-card';
+            sk.innerHTML = `<div class="skeleton-line" style="height:24px; width:60%"></div>
+                            <div class="skeleton-line" style="width:40%"></div>
+                            <div class="skeleton-line" style="width:50%"></div>
+                            <div class="skeleton-line" style="width:80%"></div>`;
+            container.appendChild(sk);
+        }
+    }
+
     function renderVacancies(reset = true) {
         if (reset) {
             currentPage = 0;
             container.innerHTML = '';
         }
         const start = currentPage * PAGE_SIZE;
-        const end = start + PAGE_SIZE;
-        const pageItems = filteredVacancies.slice(start, end);
+        const pageItems = filteredVacancies.slice(start, start + PAGE_SIZE);
         if (pageItems.length === 0 && currentPage === 0 && filteredVacancies.length === 0) {
-            container.innerHTML = '<div class="empty-state">📭 По вашему запросу ничего не найдено</div>';
+            container.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i> По вашему запросу ничего не найдено</div>';
             hasMore = false;
             return;
         }
-        pageItems.forEach(vac => {
-            const card = createVacancyCard(vac);
-            container.appendChild(card);
-        });
-        if (end >= filteredVacancies.length) hasMore = false;
-        else hasMore = true;
+        pageItems.forEach(vac => container.appendChild(createCard(vac)));
+        hasMore = (start + PAGE_SIZE) < filteredVacancies.length;
         isLoading = false;
     }
-    
-    function createVacancyCard(vac) {
-        const div = document.createElement('div');
-        div.className = 'vacancy-card';
-        div.setAttribute('data-id', vac.id);
-        const logoHtml = vac.logo ? `<img src="${vac.logo}" alt="logo" style="width:100%;height:100%;object-fit:contain;">` : (vac.company.charAt(0) || '🏢');
-        const logoDiv = `<div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого">` : vac.company.charAt(0).toUpperCase()}</div>`;
-        const isFav = favorites.has(vac.id) ? 'active' : '';
-        div.innerHTML = `
-            <button class="favorite-btn ${isFav}" data-id="${vac.id}">${isFav ? '❤️' : '🤍'}</button>
+
+    function createCard(vac) {
+        const card = document.createElement('div');
+        card.className = 'vacancy-card';
+        card.setAttribute('data-id', vac.id);
+        const logoHtml = vac.logo ? `<img src="${vac.logo}" alt="logo">` : vac.company.charAt(0).toUpperCase();
+        const isFav = favorites.has(vac.id);
+        card.innerHTML = `
+            <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${vac.id}">${isFav ? '❤️' : '🤍'}</button>
             <div class="card-header">
-                ${logoDiv}
-                <div class="card-info">
+                <div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого">` : vac.company.charAt(0)}</div>
+                <div class="card-main">
                     <div class="vacancy-title">${escapeHtml(vac.title)}</div>
                     <div class="company-name">${escapeHtml(vac.company)}</div>
                     <div class="salary">${escapeHtml(vac.salary)}</div>
-                    <div class="meta">
-                        <span>📍 ${escapeHtml(vac.city) || 'Не указан'}</span>
-                        <span>💼 ${escapeHtml(vac.experience)}</span>
-                        <span>⭐ ${vac.rating}</span>
+                    <div class="card-meta">
+                        <span><i class="fas fa-map-pin"></i> ${escapeHtml(vac.city) || 'Не указан'}</span>
+                        <span><i class="fas fa-briefcase"></i> ${escapeHtml(vac.experience)}</span>
+                        <span><i class="fas fa-star" style="color:#f5b042;"></i> 4.0</span>
                     </div>
                 </div>
             </div>
         `;
-        const favBtn = div.querySelector('.favorite-btn');
+        const favBtn = card.querySelector('.favorite-btn');
         favBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleFavorite(vac.id);
-            const newActive = favorites.has(vac.id);
-            favBtn.textContent = newActive ? '❤️' : '🤍';
-            if(newActive) favBtn.classList.add('active');
+            const active = favorites.has(vac.id);
+            favBtn.textContent = active ? '❤️' : '🤍';
+            if (active) favBtn.classList.add('active');
             else favBtn.classList.remove('active');
         });
-        div.addEventListener('click', () => showModal(vac));
-        return div;
+        card.addEventListener('click', () => showModal(vac));
+        return card;
     }
-    
+
     function toggleFavorite(id) {
-        if(favorites.has(id)) favorites.delete(id);
+        if (favorites.has(id)) favorites.delete(id);
         else favorites.add(id);
         localStorage.setItem('job_favorites', JSON.stringify([...favorites]));
     }
-    
+
     function loadFavorites() {
         const stored = localStorage.getItem('job_favorites');
-        if(stored) {
-            try {
-                const arr = JSON.parse(stored);
-                favorites = new Set(arr);
-            } catch(e) {}
-        }
+        if (stored) favorites = new Set(JSON.parse(stored));
     }
-    
-    // history
+
+    // История поиска
     function addToHistory(query) {
-        if(!query.trim()) return;
+        if (!query.trim()) return;
         searchHistory = searchHistory.filter(q => q !== query);
         searchHistory.unshift(query);
-        if(searchHistory.length > 5) searchHistory.pop();
+        if (searchHistory.length > 6) searchHistory.pop();
         localStorage.setItem('search_history', JSON.stringify(searchHistory));
         renderHistory();
     }
-    
+
     function renderHistory() {
         historyContainer.innerHTML = '';
         searchHistory.forEach(term => {
             const badge = document.createElement('span');
             badge.className = 'history-item';
-            badge.textContent = term;
+            badge.innerHTML = `<i class="fas fa-clock"></i> ${escapeHtml(term)}`;
             badge.addEventListener('click', () => {
                 searchInput.value = term;
                 performSearch(term);
@@ -606,119 +648,112 @@
             historyContainer.appendChild(badge);
         });
     }
-    
+
     function clearHistory() {
         searchHistory = [];
         localStorage.setItem('search_history', JSON.stringify(searchHistory));
         renderHistory();
     }
-    
-    // загрузка вакансий через прокси
+
+    // Загрузка вакансий через прокси (api.js)
     async function performSearch(query) {
-        currentSearchQuery = query;
+        currentPage = 0;
+        sortBySalary = false;
+        sortSalaryBtn.innerHTML = '<i class="fas fa-arrow-up"></i> По зарплате (↑)';
         addToHistory(query);
-        isLoading = true;
         renderSkeletons(true);
+        isLoading = true;
         try {
-            const vacancies = await fetchVacanciesFromAPI(query);
-            allVacancies = vacancies;
-            currentSortBySalary = false;
-            applyFiltersAndSort(); // пересчитает filtered и отрендерит
-        } catch(e) {
-            console.error(e);
-            container.innerHTML = '<div class="empty-state">⚠️ Ошибка загрузки, попробуйте позже</div>';
+            const data = await fetchVacanciesFromAPI(query);
+            allVacancies = data;
+            filterAndSort();
+        } catch (err) {
+            console.error(err);
+            container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Ошибка загрузки. Проверьте соединение</div>';
         } finally {
             isLoading = false;
         }
     }
-    
-    function renderSkeletons(clear = true) {
-        if(clear) container.innerHTML = '';
-        for(let i=0; i<3; i++) {
-            const sk = document.createElement('div');
-            sk.className = 'skeleton-card';
-            sk.innerHTML = `<div class="skeleton-line skeleton-title"></div><div class="skeleton-line skeleton-company"></div><div class="skeleton-line skeleton-salary"></div><div class="skeleton-line" style="width:60%"></div>`;
-            container.appendChild(sk);
-        }
-    }
-    
-    // бесконечный скролл
-    function onScroll() {
+
+    // Бесконечная подгрузка
+    function handleScroll() {
         const trigger = document.getElementById('loadingTrigger');
-        if(!trigger) return;
+        if (!trigger) return;
         const rect = trigger.getBoundingClientRect();
-        if(rect.top < window.innerHeight + 100 && !isLoading && hasMore) {
+        if (rect.top < window.innerHeight + 150 && !isLoading && hasMore) {
             isLoading = true;
             currentPage++;
-            setTimeout(() => {
-                const start = currentPage * PAGE_SIZE;
-                const end = start + PAGE_SIZE;
-                const newItems = filteredVacancies.slice(start, end);
-                if(newItems.length === 0) {
-                    hasMore = false;
-                    isLoading = false;
-                    return;
-                }
-                newItems.forEach(vac => {
-                    const card = createVacancyCard(vac);
-                    container.appendChild(card);
-                });
-                if(end >= filteredVacancies.length) hasMore = false;
+            const start = currentPage * PAGE_SIZE;
+            const newItems = filteredVacancies.slice(start, start + PAGE_SIZE);
+            if (newItems.length === 0) {
+                hasMore = false;
                 isLoading = false;
-            }, 300);
+                return;
+            }
+            newItems.forEach(vac => container.appendChild(createCard(vac)));
+            isLoading = false;
+            if (start + PAGE_SIZE >= filteredVacancies.length) hasMore = false;
         }
     }
-    
-    // modal logic
+
+    // Модальное окно
     function showModal(vac) {
         document.getElementById('modalTitle').innerText = vac.title;
         document.getElementById('modalCompany').innerText = vac.company;
         document.getElementById('modalSalary').innerText = vac.salary;
-        const metroStr = vac.metro?.length ? vac.metro.join(', ') : 'Не указано';
-        document.getElementById('modalMetro').innerText = `${vac.city || ''} • ${metroStr}`;
-        document.getElementById('modalSchedule').innerText = vac.schedule || 'Не указан';
-        document.getElementById('modalRequirements').innerText = vac.requirements || 'Нет данных';
+        const metroText = vac.metro?.length ? vac.metro.join(', ') : '—';
+        document.getElementById('modalMetro').innerText = `${vac.city || ''} • ст. метро: ${metroText}`;
+        document.getElementById('modalSchedule').innerText = vac.schedule || 'Полный день';
+        document.getElementById('modalRequirements').innerText = vac.requirements || 'Не указаны';
         document.getElementById('modalDescription').innerText = vac.description || 'Нет описания';
         document.getElementById('modalPhone').innerText = vac.phone || 'Не указан';
         document.getElementById('modalLink').href = vac.link;
-        modal.style.display = 'flex';
+        document.getElementById('modal').style.display = 'flex';
     }
-    
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    
-    // тема
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Темная тема
     function initTheme() {
-        const dark = localStorage.getItem('theme_dark') === 'true';
-        if(dark) document.body.classList.add('dark');
-        themeToggle.innerText = dark ? '☀️ Светлая' : '🌙 Тёмная';
+        const isDark = localStorage.getItem('theme_dark') === 'true';
+        if (isDark) document.body.classList.add('dark');
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
     }
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark');
         const isDark = document.body.classList.contains('dark');
         localStorage.setItem('theme_dark', isDark);
-        themeToggle.innerText = isDark ? '☀️ Светлая' : '🌙 Тёмная';
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
     });
-    
-    // Event listeners
+
+    // Слушатели
     searchBtn.addEventListener('click', () => performSearch(searchInput.value.trim() || "разработчик"));
-    cityFilter.addEventListener('input', () => applyFiltersAndSort());
-    expFilter.addEventListener('change', () => applyFiltersAndSort());
-    salaryFromFilter.addEventListener('input', () => applyFiltersAndSort());
+    cityFilter.addEventListener('input', () => filterAndSort());
+    expFilter.addEventListener('change', () => filterAndSort());
+    salaryFromFilter.addEventListener('input', () => filterAndSort());
     sortSalaryBtn.addEventListener('click', () => {
-        currentSortBySalary = !currentSortBySalary;
-        sortSalaryBtn.innerText = currentSortBySalary ? '↓ По умолчанию' : '↑ По зарплате';
-        applyFiltersAndSort();
+        sortBySalary = !sortBySalary;
+        sortSalaryBtn.innerHTML = sortBySalary ? '<i class="fas fa-arrow-down"></i> По умолчанию' : '<i class="fas fa-arrow-up"></i> По зарплате (↑)';
+        filterAndSort();
     });
     clearHistoryBtn.addEventListener('click', clearHistory);
-    window.addEventListener('scroll', onScroll);
-    document.getElementById('closeModalBtn').addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
-    
+    window.addEventListener('scroll', handleScroll);
+    document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('modal').style.display = 'none');
+    window.addEventListener('click', (e) => { if (e.target === document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; });
+
     // Инициализация
     async function bootstrap() {
         loadFavorites();
         const storedHistory = localStorage.getItem('search_history');
-        if(storedHistory) {
+        if (storedHistory) {
             try { searchHistory = JSON.parse(storedHistory); } catch(e) {}
             renderHistory();
         }
