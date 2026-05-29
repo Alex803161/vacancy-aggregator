@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Ваканса — агрегатор вакансий</title>
-    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы.">
+    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             padding: 24px 16px;
@@ -18,6 +23,7 @@
             overflow-x: hidden;
             transition: background 0.2s, color 0.2s;
         }
+
         /* Светлая тема */
         body.light {
             background: #f3f4f6;
@@ -57,6 +63,14 @@
             background: #eef2ff;
             color: #1e293b;
         }
+        body.light .btn-contact {
+            background: #2d2d2d;
+            color: white;
+        }
+        body.light .btn-contact:hover {
+            background: #1a1a1a;
+        }
+
         /* Тёмная тема */
         body.dark {
             background: #0f172a;
@@ -96,6 +110,13 @@
             background: #334155;
             color: #e2e8f0;
         }
+        body.dark .btn-contact {
+            background: #4b5563;
+            color: white;
+        }
+        body.dark .btn-contact:hover {
+            background: #374151;
+        }
         body.dark .meta-item {
             background: #3b2e5e;
             color: #c4b5fd;
@@ -107,16 +128,17 @@
             background: #332e1f;
             color: #fbbf24;
         }
-        body.dark .btn-contact, body.dark .btn-share {
+        body.dark .btn-share {
             color: #cbd5e1;
         }
-        body.dark .btn-contact:hover, body.dark .btn-share:hover {
+        body.dark .btn-share:hover {
             background: #334155;
         }
         body.dark .vacancy-card.premium {
             background: #2a2438;
             border-color: #f5b042;
         }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -407,7 +429,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            align-items: center;
+            align-items: stretch;
         }
         .btn {
             font-weight: 600;
@@ -418,20 +440,28 @@
             text-align: center;
             padding: 9px 16px;
             border-radius: 20px;
+            flex: 1;
         }
         .btn-respond {
             background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
             color: white;
-            flex: 1;
         }
         .btn-respond:hover {
             background: linear-gradient(180deg, #0039a6 0%, #002d80 100%);
         }
-        .btn-contact, .btn-share {
+        .btn-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-share {
             background: transparent;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 4px;
+            flex: 0.5;
         }
         .save-btn {
             position: absolute;
@@ -502,43 +532,98 @@
             font-weight: 600;
             cursor: pointer;
         }
+        /* Полноэкранное модальное окно */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
         }
         .modal-overlay.active {
             display: flex;
         }
         .modal {
-            border-radius: 24px;
-            max-width: 600px;
+            background: white;
             width: 90%;
-            padding: 24px;
+            max-width: 1000px;
+            height: 90%;
+            border-radius: 28px;
+            padding: 28px;
             position: relative;
-            max-height: 80vh;
             overflow-y: auto;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+        }
+        body.dark .modal {
+            background: #1e293b;
         }
         .modal-close {
-            position: absolute;
-            top: 12px; right: 16px;
-            background: none;
+            position: sticky;
+            top: 0;
+            float: right;
+            background: #eef2ff;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            z-index: 10;
+        }
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            clear: both;
+        }
+        .modal-salary {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 16px;
+        }
+        .modal-company {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .modal-section {
+            margin-bottom: 24px;
+        }
+        .modal-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0047cc;
+        }
+        body.dark .modal-section h4 {
+            color: #93c5fd;
+        }
+        .modal-description {
+            line-height: 1.5;
+            color: #334155;
+        }
+        body.dark .modal-description {
+            color: #cbd5e1;
         }
         .modal-link {
             display: inline-block;
             margin-top: 16px;
             background: #0047cc;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 40px;
             text-decoration: none;
+            font-weight: 600;
         }
         .site-footer {
             margin-top: 40px;
@@ -572,8 +657,10 @@
         @media (max-width: 768px) {
             .main-layout { flex-direction: column; }
             .sidebar { width: 100%; position: static; }
-            .button-group { flex-direction: column; align-items: stretch; }
-            .btn-contact, .btn-share { justify-content: center; }
+            .button-group { flex-direction: row; }
+            .btn-share { flex: 1; }
+            .modal { width: 95%; height: 95%; padding: 16px; }
+            .modal-title { font-size: 1.4rem; }
         }
         .theme-switch {
             position: fixed;
@@ -681,7 +768,7 @@
             </div>
             <div id="vacanciesContainer" class="vacancies-list"></div>
             <div id="loadMoreWrapper" class="load-more-wrapper" style="display: none;">
-                <button id="loadMoreBtn" class="load-more-btn">Показать ещё вакансии</button>
+                <button id="loadMoreBtn" class="load-more-btn">Показать ещё вакансии (10)</button>
             </div>
         </div>
     </div>
@@ -727,7 +814,9 @@
                 description: job.description || '',
                 requirements: job.description || '',
                 link: '#',
-                isPremium: job.isPremium === true
+                isPremium: job.isPremium === true,
+                phone: job.phone || null,
+                schedule: 'Полный день'
             }));
         } catch(e) { return []; }
     }
@@ -735,15 +824,12 @@
     // ----- РЕАЛЬНЫЕ ВАКАНСИИ ЧЕРЕЗ ПРОКСИ -----
     async function fetchRealVacancies(query, signal) {
         if (typeof fetchVacanciesFromAPI !== 'function') {
-            console.error('❌ api.js не загружен или функция fetchVacanciesFromAPI не определена');
+            console.error('❌ api.js не загружен');
             return [];
         }
         try {
             const items = await fetchVacanciesFromAPI(query, signal);
-            if (!items || !items.length) {
-                console.warn('⚠️ API вернул пустой массив для запроса:', query);
-                return [];
-            }
+            if (!items || !items.length) return [];
             return items.map(item => ({
                 id: item.id,
                 title: item.title,
@@ -759,10 +845,12 @@
                 description: item.description,
                 requirements: item.requirements,
                 link: item.link,
-                isPremium: false
+                isPremium: false,
+                phone: item.phone || null,
+                schedule: item.schedule || 'Полный день'
             }));
         } catch (err) {
-            console.error('❌ Ошибка при загрузке вакансий с прокси:', err);
+            console.error('❌ Ошибка API:', err);
             return [];
         }
     }
@@ -770,11 +858,7 @@
     async function loadAllVacancies(query, signal) {
         const direct = loadDirectVacancies();
         const real = await fetchRealVacancies(query, signal);
-        const combined = [...direct, ...real];
-        if (!combined.length) {
-            console.warn('⚠️ Нет ни прямых, ни реальных вакансий. Проверьте API и localStorage.');
-        }
-        return combined;
+        return [...direct, ...real];
     }
 
     // ----- СОСТОЯНИЕ -----
@@ -784,6 +868,7 @@
     let displayedCount = 0;
     let sortBySalaryActive = false;
     let currentAbortController = null;
+    const PAGE_BATCH = 10;   // показывать по 10 вакансий
 
     function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
     function extractMinSalary(salaryStr) { const m = salaryStr.match(/\d[\d\s]*\d|\d/); return m ? parseInt(m[0].replace(/\s/g, '')) || 0 : 0; }
@@ -843,7 +928,7 @@
         return [...vacancies].sort((a,b) => extractMinSalary(b.salary) - extractMinSalary(a.salary));
     }
 
-    // Рендер карточек (оптимизирован, без дублирования событий)
+    // Рендер карточек с делегированием событий
     function renderVacancies(vacanciesArray, append = false) {
         const container = document.getElementById('vacanciesContainer');
         const counterSpan = document.querySelector('#counterDisplay span');
@@ -855,7 +940,7 @@
             counterSpan.innerText = '0';
             return;
         }
-        const newItems = append ? vacanciesArray : vacanciesArray.slice(0, 5);
+        const newItems = append ? vacanciesArray : vacanciesArray.slice(0, PAGE_BATCH);
         displayedCount += newItems.length;
         counterSpan.innerText = displayedCount;
         const fragment = document.createDocumentFragment();
@@ -877,48 +962,15 @@
                 <div class="meta-row"><span class="meta-item">${escapeHtml(vac.experience)}</span><span class="meta-item">${escapeHtml(vac.payment)}</span></div>
                 <div class="company-block"><div class="logo-placeholder" style="background:${bgColor};">${firstLetter}</div><div class="company-text"><span class="company-name">${escapeHtml(vac.company)}</span><span class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</span></div></div>
                 <div class="address-block">${escapeHtml(vac.city)}<div class="metro-list">${metroList}${extraMetro}</div></div>
-                <div class="button-group"><button class="btn btn-respond">Откликнуться</button><button class="btn btn-contact">📞 Связаться</button><button class="btn btn-share" data-link="${vac.link}">🔗 Поделиться</button></div>
+                <div class="button-group">
+                    <button class="btn btn-respond">Откликнуться</button>
+                    <button class="btn btn-contact">📞 Связаться</button>
+                    <button class="btn btn-share" data-link="${vac.link}">🔗 Поделиться</button>
+                </div>
             `;
             fragment.appendChild(card);
         });
         container.appendChild(fragment);
-
-        // Обработчики (вешаем один раз на родителя)
-        if (!container._handlersAttached) {
-            container.addEventListener('click', (e) => {
-                const card = e.target.closest('.vacancy-card');
-                if (!card) return;
-                if (e.target.closest('.save-btn')) return;
-                if (e.target.closest('.btn-respond')) { alert('Вы откликнулись на вакансию (демо-режим)'); return; }
-                if (e.target.closest('.btn-contact')) { alert('Связь с компанией (в реальной версии здесь будет телефон или чат)'); return; }
-                if (e.target.closest('.btn-share')) {
-                    const link = e.target.closest('.btn-share').dataset.link;
-                    navigator.clipboard.writeText(link).then(() => alert('Ссылка скопирована'));
-                    return;
-                }
-                const id = parseInt(card.dataset.id);
-                const vac = allLoadedVacancies.find(v => v.id === id);
-                if (vac) showModal(vac);
-            });
-            container.addEventListener('click', (e) => {
-                const saveBtn = e.target.closest('.save-btn');
-                if (!saveBtn) return;
-                e.stopPropagation();
-                const id = parseInt(saveBtn.dataset.id);
-                if (savedVacancies.includes(id)) {
-                    savedVacancies = savedVacancies.filter(i => i !== id);
-                    saveBtn.classList.remove('saved');
-                    saveBtn.textContent = '♡';
-                } else {
-                    savedVacancies.push(id);
-                    saveBtn.classList.add('saved');
-                    saveBtn.textContent = '♥';
-                }
-                localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies));
-            });
-            container._handlersAttached = true;
-        }
-
         if (displayedCount >= allLoadedVacancies.length) loadMoreWrapper.style.display = 'none';
         else loadMoreWrapper.style.display = 'block';
     }
@@ -938,11 +990,11 @@
             if (sortBySalaryActive) results = sortVacancies(results);
             allLoadedVacancies = results;
             displayedCount = 0;
-            renderVacancies(results.slice(0,5), false);
+            renderVacancies(results.slice(0, PAGE_BATCH), false);
         } catch(e) {
             if (e.name !== 'AbortError') {
-                console.error('Критическая ошибка поиска:', e);
-                document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки. Проверьте консоль (F12) и убедитесь, что api.js работает.</div>';
+                console.error(e);
+                document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки. Проверьте консоль.</div>';
             }
         }
     }
@@ -956,24 +1008,93 @@
         performSearch(document.getElementById('searchInput').value);
     }
 
-    function loadMore() { const next = allLoadedVacancies.slice(displayedCount, displayedCount+5); if (next.length) renderVacancies(next, true); }
+    function loadMore() {
+        const next = allLoadedVacancies.slice(displayedCount, displayedCount + PAGE_BATCH);
+        if (next.length) renderVacancies(next, true);
+    }
 
-    // Модалка
+    // Полноэкранное модальное окно с деталями
     function showModal(vac) {
-        document.getElementById('modalContent').innerHTML = `
-            <h2>${escapeHtml(vac.title)}</h2>
+        const phoneHtml = vac.phone ? `<p><strong>📞 Телефон:</strong> ${escapeHtml(vac.phone)}</p>` : '<p><strong>📞 Телефон:</strong> не указан</p>';
+        const metroHtml = vac.metro && vac.metro.length ? `<p><strong>🚇 Метро:</strong> ${vac.metro.join(', ')}</p>` : '';
+        const scheduleHtml = vac.schedule ? `<p><strong>🕒 График работы:</strong> ${escapeHtml(vac.schedule)}</p>` : '';
+        const content = `
+            <h2 class="modal-title">${escapeHtml(vac.title)}</h2>
             <div class="modal-salary">${escapeHtml(vac.salary)} <small>${escapeHtml(vac.salary_details)}</small></div>
             <div class="modal-company">${escapeHtml(vac.company)} — ⭐ ${vac.rating} (${vac.reviews.toLocaleString()} отзывов)</div>
-            <div class="modal-description"><strong>Описание:</strong><br>${escapeHtml(vac.description)}<br><br><strong>Требования:</strong><br>${escapeHtml(vac.requirements)}</div>
-            <a href="${vac.link}" target="_blank" class="modal-link">Смотреть на hh.ru →</a>
+            
+            <div class="modal-section">
+                <h4>📌 Обязанности</h4>
+                <div class="modal-description">${escapeHtml(vac.description) || 'Не указаны'}</div>
+            </div>
+            <div class="modal-section">
+                <h4>⚙️ Требования работодателя</h4>
+                <div class="modal-description">${escapeHtml(vac.requirements) || 'Не указаны'}</div>
+            </div>
+            <div class="modal-section">
+                <h4>📍 Место работы</h4>
+                <p><strong>Город:</strong> ${escapeHtml(vac.city) || 'Не указан'}</p>
+                ${metroHtml}
+                ${scheduleHtml}
+            </div>
+            <div class="modal-section">
+                ${phoneHtml}
+            </div>
+            <a href="${vac.link}" target="_blank" class="modal-link">Смотреть оригинал вакансии →</a>
         `;
+        document.getElementById('modalContent').innerHTML = content;
         document.getElementById('modalOverlay').classList.add('active');
     }
-    function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 
-    // Тема
+    function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
+
+    // Глобальные обработчики (делегирование)
+    function setupGlobalHandlers() {
+        const container = document.getElementById('vacanciesContainer');
+        container.addEventListener('click', (e) => {
+            const card = e.target.closest('.vacancy-card');
+            if (!card) return;
+            const id = parseInt(card.dataset.id);
+            const vac = allLoadedVacancies.find(v => v.id === id);
+            if (!vac) return;
+
+            if (e.target.closest('.btn-respond')) {
+                alert('Вы откликнулись на вакансию (демо-режим)');
+                return;
+            }
+            if (e.target.closest('.btn-contact')) {
+                alert(`Связь с компанией ${vac.company}\nТелефон: ${vac.phone || 'не указан'}`);
+                return;
+            }
+            if (e.target.closest('.btn-share')) {
+                const link = e.target.closest('.btn-share').dataset.link;
+                navigator.clipboard.writeText(link).then(() => alert('Ссылка скопирована'));
+                return;
+            }
+            if (e.target.closest('.save-btn')) return;
+            // Открыть полноэкранное модальное окно
+            showModal(vac);
+        });
+
+        container.addEventListener('click', (e) => {
+            const saveBtn = e.target.closest('.save-btn');
+            if (!saveBtn) return;
+            e.stopPropagation();
+            const id = parseInt(saveBtn.dataset.id);
+            if (savedVacancies.includes(id)) {
+                savedVacancies = savedVacancies.filter(i => i !== id);
+                saveBtn.classList.remove('saved');
+                saveBtn.textContent = '♡';
+            } else {
+                savedVacancies.push(id);
+                saveBtn.classList.add('saved');
+                saveBtn.textContent = '♥';
+            }
+            localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies));
+        });
+    }
+
+    // ----- ТЕМА -----
     const themeToggleBtn = document.getElementById('themeToggle');
     function setTheme(theme) {
         document.body.classList.remove('light', 'dark');
@@ -985,7 +1106,7 @@
     setTheme(savedTheme);
     themeToggleBtn.addEventListener('click', () => { const newTheme = document.body.classList.contains('light') ? 'dark' : 'light'; setTheme(newTheme); });
 
-    // События
+    // ----- ИНИЦИАЛИЗАЦИЯ -----
     document.getElementById('searchButton').addEventListener('click', () => performSearch(document.getElementById('searchInput').value));
     document.getElementById('resetSidebarBtn').addEventListener('click', resetAllFilters);
     document.getElementById('searchInput').addEventListener('keypress', e => e.key === 'Enter' && performSearch(e.target.value));
@@ -995,8 +1116,10 @@
     document.getElementById('sortBySalary').addEventListener('click', function() { sortBySalaryActive = !sortBySalaryActive; this.classList.toggle('active'); performSearch(document.getElementById('searchInput').value); });
     document.getElementById('clearHistoryBtn').addEventListener('click', () => { searchHistory = []; localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); renderHistory(); });
     document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
 
-    // Старт
+    setupGlobalHandlers();
     renderHistory();
     performSearch('Программист');
 </script>
