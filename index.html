@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Ваканса — агрегатор вакансий</title>
-    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний.">
+    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             padding: 24px 16px;
@@ -22,8 +18,7 @@
             overflow-x: hidden;
             transition: background 0.2s, color 0.2s;
         }
-
-        /* Светлая тема (по умолчанию) */
+        /* Светлая тема */
         body.light {
             background: #f3f4f6;
             color: #0f172a;
@@ -36,8 +31,7 @@
             background: white;
             border-color: #e2e8f0;
         }
-        body.light .filter-select,
-        body.light .filter-input {
+        body.light .filter-select, body.light .filter-input {
             background: white;
             border-color: #cbd5e1;
             color: #0f172a;
@@ -54,20 +48,15 @@
         body.light .reset-sidebar-btn {
             background: #f1f5f9;
             color: #475569;
-            border-color: #cbd5e1;
         }
         body.light .counter {
             background: #e0e7ff;
             color: #0047cc;
         }
-        body.light .footer-links a,
-        body.light .footer-copy {
-            color: #64748b;
+        body.light .history-item {
+            background: #eef2ff;
+            color: #1e293b;
         }
-        body.light .footer-links a:hover {
-            color: #0047cc;
-        }
-
         /* Тёмная тема */
         body.dark {
             background: #0f172a;
@@ -81,8 +70,7 @@
             background: #1e293b;
             border-color: #334155;
         }
-        body.dark .filter-select,
-        body.dark .filter-input {
+        body.dark .filter-select, body.dark .filter-input {
             background: #2d3a4e;
             border-color: #475569;
             color: #f1f5f9;
@@ -99,11 +87,14 @@
         body.dark .reset-sidebar-btn {
             background: #334155;
             color: #cbd5e1;
-            border-color: #475569;
         }
         body.dark .counter {
             background: #2d3a4e;
             color: #93c5fd;
+        }
+        body.dark .history-item {
+            background: #334155;
+            color: #e2e8f0;
         }
         body.dark .meta-item {
             background: #3b2e5e;
@@ -116,49 +107,28 @@
             background: #332e1f;
             color: #fbbf24;
         }
-        body.dark .address-block {
-            color: #9ca3af;
-        }
-        body.dark .metro-list {
-            color: #93c5fd;
-        }
-        body.dark .btn-contact,
-        body.dark .btn-share {
+        body.dark .btn-contact, body.dark .btn-share {
             color: #cbd5e1;
         }
-        body.dark .btn-contact:hover,
-        body.dark .btn-share:hover {
+        body.dark .btn-contact:hover, body.dark .btn-share:hover {
             background: #334155;
-            color: white;
         }
         body.dark .vacancy-card.premium {
             background: #2a2438;
             border-color: #f5b042;
         }
-        body.dark .footer-links a,
-        body.dark .footer-copy {
-            color: #9ca3af;
-        }
-        body.dark .footer-links a:hover {
-            color: #60a5fa;
-        }
-
         .container {
             max-width: 1280px;
             margin: 0 auto;
             width: 100%;
             flex: 1;
         }
-
-        /* Двухколоночный макет */
         .main-layout {
             display: flex;
             gap: 28px;
             margin-bottom: 32px;
             flex-wrap: wrap;
         }
-
-        /* Левая боковая панель (фильтры, история) */
         .sidebar {
             width: 280px;
             flex-shrink: 0;
@@ -185,9 +155,6 @@
             font-weight: 500;
             margin-bottom: 8px;
             color: #64748b;
-        }
-        body.dark .filter-group label {
-            color: #9ca3af;
         }
         .filter-select, .filter-input {
             width: 100%;
@@ -226,13 +193,17 @@
             border-radius: 30px;
             font-size: 0.75rem;
             cursor: pointer;
-            background: #eef2ff;
-            color: #1e293b;
-            transition: 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        body.dark .history-item {
-            background: #334155;
-            color: #e2e8f0;
+        .delete-history {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1;
+            color: inherit;
         }
         .clear-history {
             background: none;
@@ -241,21 +212,16 @@
             cursor: pointer;
             color: #0047cc;
         }
-        body.dark .clear-history {
-            color: #93c5fd;
-        }
         .reset-sidebar-btn {
             width: 100%;
             padding: 10px;
             border-radius: 40px;
             font-weight: 500;
-            border: 1px solid;
+            border: 1px solid #cbd5e1;
             background: #f1f5f9;
             cursor: pointer;
             margin-top: 8px;
         }
-
-        /* Правая область: поиск + вакансии */
         .content-area {
             flex: 1;
             min-width: 0;
@@ -313,8 +279,6 @@
             flex-direction: column;
             gap: 16px;
         }
-
-        /* Карточка вакансии (как в оригинале) */
         .vacancy-card {
             border-radius: 20px;
             padding: 18px 20px;
@@ -522,8 +486,7 @@
             border-radius: 32px;
             background: white;
         }
-        body.dark .no-results,
-        body.dark .error-state {
+        body.dark .no-results, body.dark .error-state {
             background: #1e293b;
         }
         .load-more-wrapper {
@@ -539,13 +502,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-        body.dark .load-more-btn {
-            background: #1e293b;
-            border-color: #3b82f6;
-            color: #93c5fd;
-        }
-
-        /* Модальное окно */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -584,11 +540,6 @@
             border-radius: 40px;
             text-decoration: none;
         }
-        body.dark .modal-link {
-            background: #3b82f6;
-        }
-
-        /* Подвал */
         .site-footer {
             margin-top: 40px;
             padding: 24px 16px;
@@ -618,27 +569,12 @@
         .footer-copy {
             font-size: 0.8rem;
         }
-
-        /* Адаптив: на мобилках колонки вертикально */
         @media (max-width: 768px) {
-            .main-layout {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                position: static;
-                margin-bottom: 16px;
-            }
-            .button-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .btn-contact, .btn-share {
-                justify-content: center;
-            }
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn-contact, .btn-share { justify-content: center; }
         }
-
-        /* Кнопка переключения темы (плавающая) */
         .theme-switch {
             position: fixed;
             bottom: 24px;
@@ -655,7 +591,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
         }
         body.dark .theme-switch {
             background: #3b82f6;
@@ -677,12 +612,6 @@
             justify-content: center;
             gap: 12px;
         }
-        body.dark .header h1 {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
         .logo-heart {
             display: inline-block;
             width: 44px;
@@ -697,42 +626,23 @@
             clip-path: path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z");
             transform: scale(1.3);
             transform-origin: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 
-                        0 1px 0 rgba(255, 255, 255, 0.3) inset,
-                        0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             flex-shrink: 0;
-        }
-        body.dark .logo-heart {
-            background: repeating-linear-gradient(
-                45deg,
-                #60a5fa 0px,
-                #60a5fa 6px,
-                rgba(96, 165, 250, 0.5) 6px,
-                rgba(96, 165, 250, 0.5) 12px
-            );
         }
         .header p {
             color: #6b7280;
             font-size: 1rem;
             font-style: italic;
         }
-        body.dark .header p {
-            color: #9ca3af;
-        }
     </style>
 </head>
 <body class="light">
 <div class="container">
     <div class="header">
-        <h1>
-            <span class="logo-heart"></span>
-            Ваканса
-        </h1>
+        <h1><span class="logo-heart"></span> Ваканса</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
-
     <div class="main-layout">
-        <!-- Левая боковая панель: фильтры, история, сброс -->
         <aside class="sidebar">
             <h3><i class="fas fa-sliders-h"></i> Фильтры</h3>
             <div class="filter-group">
@@ -753,28 +663,22 @@
                 <label>Зарплата от (₽)</label>
                 <input type="number" id="filterSalaryFrom" class="filter-input" placeholder="80000">
             </div>
-            <button id="sortBySalary" class="sort-btn">↑ По зарплате</button>
-
+            <button id="sortBySalary" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button>
             <div class="history-header">
                 <h3>История поиска</h3>
                 <button id="clearHistoryBtn" class="clear-history">Очистить</button>
             </div>
             <div id="historyContainer" class="history-badges"></div>
-
             <button id="resetSidebarBtn" class="reset-sidebar-btn">Сбросить все фильтры</button>
         </aside>
-
-        <!-- Правая область: поиск и список вакансий -->
         <div class="content-area">
             <div class="search-bar">
                 <input type="text" id="searchInput" class="search-input" placeholder="Должность, компания, ключевые слова..." value="Программист">
                 <button id="searchButton" class="search-btn">Найти</button>
             </div>
-
             <div class="results-header">
                 <div class="counter" id="counterDisplay">Найдено: <span>0</span></div>
             </div>
-
             <div id="vacanciesContainer" class="vacancies-list"></div>
             <div id="loadMoreWrapper" class="load-more-wrapper" style="display: none;">
                 <button id="loadMoreBtn" class="load-more-btn">Показать ещё вакансии</button>
@@ -782,14 +686,12 @@
         </div>
     </div>
 </div>
-
 <div id="modalOverlay" class="modal-overlay">
     <div class="modal">
         <button class="modal-close" id="modalClose">&times;</button>
         <div id="modalContent"></div>
     </div>
 </div>
-
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-links">
@@ -801,9 +703,7 @@
         <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
     </div>
 </footer>
-
 <button id="themeToggle" class="theme-switch">🌙 Тёмная</button>
-
 <script src="api.js"></script>
 <script>
     // ----- ПРЯМЫЕ ВАКАНСИИ ИЗ LOCALSTORAGE -----
@@ -834,9 +734,16 @@
 
     // ----- РЕАЛЬНЫЕ ВАКАНСИИ ЧЕРЕЗ ПРОКСИ -----
     async function fetchRealVacancies(query, signal) {
-        if (typeof fetchVacanciesFromAPI !== 'function') return [];
+        if (typeof fetchVacanciesFromAPI !== 'function') {
+            console.error('❌ api.js не загружен или функция fetchVacanciesFromAPI не определена');
+            return [];
+        }
         try {
             const items = await fetchVacanciesFromAPI(query, signal);
+            if (!items || !items.length) {
+                console.warn('⚠️ API вернул пустой массив для запроса:', query);
+                return [];
+            }
             return items.map(item => ({
                 id: item.id,
                 title: item.title,
@@ -854,13 +761,20 @@
                 link: item.link,
                 isPremium: false
             }));
-        } catch(e) { return []; }
+        } catch (err) {
+            console.error('❌ Ошибка при загрузке вакансий с прокси:', err);
+            return [];
+        }
     }
 
     async function loadAllVacancies(query, signal) {
         const direct = loadDirectVacancies();
         const real = await fetchRealVacancies(query, signal);
-        return [...direct, ...real];
+        const combined = [...direct, ...real];
+        if (!combined.length) {
+            console.warn('⚠️ Нет ни прямых, ни реальных вакансий. Проверьте API и localStorage.');
+        }
+        return combined;
     }
 
     // ----- СОСТОЯНИЕ -----
@@ -890,11 +804,11 @@
     }
     function renderHistory() {
         const container = document.getElementById('historyContainer');
-        if (!searchHistory.length) { container.innerHTML = ''; return; }
+        if (!searchHistory.length) { container.innerHTML = '<span style="font-size:0.75rem; color:#94a3b8;">Пусто</span>'; return; }
         container.innerHTML = searchHistory.map(q => `
             <div class="history-item" data-query="${escapeHtml(q)}">
                 ${escapeHtml(q)}
-                <button class="delete-history" data-query="${escapeHtml(q)}" style="background:none; border:none; margin-left:6px; cursor:pointer;">✕</button>
+                <button class="delete-history" data-query="${escapeHtml(q)}">✕</button>
             </div>
         `).join('');
         document.querySelectorAll('.history-item').forEach(el => {
@@ -929,13 +843,18 @@
         return [...vacancies].sort((a,b) => extractMinSalary(b.salary) - extractMinSalary(a.salary));
     }
 
-    // Рендер карточек
+    // Рендер карточек (оптимизирован, без дублирования событий)
     function renderVacancies(vacanciesArray, append = false) {
         const container = document.getElementById('vacanciesContainer');
         const counterSpan = document.querySelector('#counterDisplay span');
         const loadMoreWrapper = document.getElementById('loadMoreWrapper');
         if (!append) { container.innerHTML = ''; displayedCount = 0; }
-        if (!vacanciesArray.length && !append) { container.innerHTML = '<div class="no-results">Ничего не найдено</div>'; loadMoreWrapper.style.display = 'none'; counterSpan.innerText = '0'; return; }
+        if (!vacanciesArray.length && !append) {
+            container.innerHTML = '<div class="no-results">Ничего не найдено</div>';
+            loadMoreWrapper.style.display = 'none';
+            counterSpan.innerText = '0';
+            return;
+        }
         const newItems = append ? vacanciesArray : vacanciesArray.slice(0, 5);
         displayedCount += newItems.length;
         counterSpan.innerText = displayedCount;
@@ -963,25 +882,50 @@
             fragment.appendChild(card);
         });
         container.appendChild(fragment);
-        // Обработчики
-        document.querySelectorAll('.vacancy-card').forEach(card => {
-            card.removeEventListener('click', card.clickHandler);
-            card.clickHandler = (e) => { if (!e.target.closest('button')) { const id = parseInt(card.dataset.id); const vac = allLoadedVacancies.find(v => v.id === id); if (vac) showModal(vac); } };
-            card.addEventListener('click', card.clickHandler);
-        });
-        document.querySelectorAll('.save-btn').forEach(btn => {
-            btn.removeEventListener('click', btn.saveHandler);
-            btn.saveHandler = (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); if (savedVacancies.includes(id)) { savedVacancies = savedVacancies.filter(i => i !== id); btn.classList.remove('saved'); btn.textContent = '♡'; } else { savedVacancies.push(id); btn.classList.add('saved'); btn.textContent = '♥'; } localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies)); };
-            btn.addEventListener('click', btn.saveHandler);
-        });
-        document.querySelectorAll('.btn-respond').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Вы откликнулись на вакансию (демо-режим)'); }));
-        document.querySelectorAll('.btn-contact').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Связь с компанией (в реальной версии здесь будет телефон или чат)'); }));
-        document.querySelectorAll('.btn-share').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); navigator.clipboard.writeText(btn.dataset.link).then(() => alert('Ссылка скопирована')); }));
+
+        // Обработчики (вешаем один раз на родителя)
+        if (!container._handlersAttached) {
+            container.addEventListener('click', (e) => {
+                const card = e.target.closest('.vacancy-card');
+                if (!card) return;
+                if (e.target.closest('.save-btn')) return;
+                if (e.target.closest('.btn-respond')) { alert('Вы откликнулись на вакансию (демо-режим)'); return; }
+                if (e.target.closest('.btn-contact')) { alert('Связь с компанией (в реальной версии здесь будет телефон или чат)'); return; }
+                if (e.target.closest('.btn-share')) {
+                    const link = e.target.closest('.btn-share').dataset.link;
+                    navigator.clipboard.writeText(link).then(() => alert('Ссылка скопирована'));
+                    return;
+                }
+                const id = parseInt(card.dataset.id);
+                const vac = allLoadedVacancies.find(v => v.id === id);
+                if (vac) showModal(vac);
+            });
+            container.addEventListener('click', (e) => {
+                const saveBtn = e.target.closest('.save-btn');
+                if (!saveBtn) return;
+                e.stopPropagation();
+                const id = parseInt(saveBtn.dataset.id);
+                if (savedVacancies.includes(id)) {
+                    savedVacancies = savedVacancies.filter(i => i !== id);
+                    saveBtn.classList.remove('saved');
+                    saveBtn.textContent = '♡';
+                } else {
+                    savedVacancies.push(id);
+                    saveBtn.classList.add('saved');
+                    saveBtn.textContent = '♥';
+                }
+                localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies));
+            });
+            container._handlersAttached = true;
+        }
+
         if (displayedCount >= allLoadedVacancies.length) loadMoreWrapper.style.display = 'none';
         else loadMoreWrapper.style.display = 'block';
     }
 
-    function showSkeletons() { document.getElementById('vacanciesContainer').innerHTML = `<div class="skeleton-card"><div class="skeleton-line" style="height:24px;width:60%"></div><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:80%"></div></div>`.repeat(3); }
+    function showSkeletons() {
+        document.getElementById('vacanciesContainer').innerHTML = `<div class="skeleton-card"><div class="skeleton-line" style="height:24px;width:60%"></div><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:80%"></div></div>`.repeat(3);
+    }
 
     async function performSearch(query) {
         if (currentAbortController) currentAbortController.abort();
@@ -995,7 +939,12 @@
             allLoadedVacancies = results;
             displayedCount = 0;
             renderVacancies(results.slice(0,5), false);
-        } catch(e) { if (e.name !== 'AbortError') document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки</div>'; }
+        } catch(e) {
+            if (e.name !== 'AbortError') {
+                console.error('Критическая ошибка поиска:', e);
+                document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки. Проверьте консоль (F12) и убедитесь, что api.js работает.</div>';
+            }
+        }
     }
 
     function resetAllFilters() {
@@ -1024,7 +973,7 @@
     document.getElementById('modalClose').addEventListener('click', closeModal);
     document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 
-    // ----- ТЕМНАЯ ТЕМА -----
+    // Тема
     const themeToggleBtn = document.getElementById('themeToggle');
     function setTheme(theme) {
         document.body.classList.remove('light', 'dark');
@@ -1036,7 +985,7 @@
     setTheme(savedTheme);
     themeToggleBtn.addEventListener('click', () => { const newTheme = document.body.classList.contains('light') ? 'dark' : 'light'; setTheme(newTheme); });
 
-    // ----- СОБЫТИЯ -----
+    // События
     document.getElementById('searchButton').addEventListener('click', () => performSearch(document.getElementById('searchInput').value));
     document.getElementById('resetSidebarBtn').addEventListener('click', resetAllFilters);
     document.getElementById('searchInput').addEventListener('keypress', e => e.key === 'Enter' && performSearch(e.target.value));
@@ -1047,7 +996,7 @@
     document.getElementById('clearHistoryBtn').addEventListener('click', () => { searchHistory = []; localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); renderHistory(); });
     document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
 
-    // Инициализация
+    // Старт
     renderHistory();
     performSearch('Программист');
 </script>
