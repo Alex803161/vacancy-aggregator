@@ -200,6 +200,18 @@
             background: #1e293b;
             border-color: #f5b042;
         }
+        .premium-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #f5b042;
+            color: #1a2c3e;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+        }
         .card-header {
             display: flex;
             gap: 16px;
@@ -249,6 +261,7 @@
             font-size: 1.6rem;
             cursor: pointer;
             color: #b9cfdf;
+            z-index: 2;
         }
         .favorite-btn.active {
             color: #e5484d;
@@ -359,7 +372,7 @@
         <div id="sentinel" style="height: 10px;"></div>
     </div>
 </div>
-<footer>© Ваканса — агрегатор вакансий</footer>
+<footer>© Ваканса — агрегатор вакансий | <a href="post-job.html" style="color:#2c6e9e;">Добавить вакансию</a></footer>
 <div id="modal" class="modal">
     <div class="modal-card">
         <h2 id="modalTitle"></h2>
@@ -390,8 +403,8 @@
             this.searchHistory = [];
             this.currentQuery = "Python разработчик";
             this.abortController = null;
-            this.cache = new Map(); // ключ: query, значение: { data, timestamp }
-            this.cacheTTL = 5 * 60 * 1000; // 5 минут
+            this.cache = new Map();
+            this.cacheTTL = 5 * 60 * 1000;
             this.init();
         }
 
@@ -432,6 +445,35 @@
             };
         }
 
+        loadDirectVacancies() {
+            const stored = localStorage.getItem('direct_jobs');
+            if (!stored) return [];
+            try {
+                const jobs = JSON.parse(stored);
+                return jobs.map(job => ({
+                    id: job.id,
+                    title: job.title,
+                    company: job.company,
+                    city: job.city || 'Не указан',
+                    salary: job.salary || 'Не указана',
+                    salaryNum: this.extractSalaryNumber(job.salary),
+                    description: job.description || '',
+                    requirements: job.description || '',
+                    experience: 'Не указан',
+                    metro: [],
+                    link: '#',
+                    logo: null,
+                    phone: null,
+                    schedule: 'Полный день',
+                    isPremium: job.isPremium === true,
+                    source: 'direct'
+                }));
+            } catch(e) {
+                console.error('Ошибка загрузки прямых вакансий', e);
+                return [];
+            }
+        }
+
         async performSearch(query) {
             if (this.abortController) this.abortController.abort();
             this.abortController = new AbortController();
@@ -445,10 +487,12 @@
                 if (cached && (Date.now() - cached.timestamp) < this.cacheTTL) {
                     vacancies = cached.data;
                 } else {
-                    vacancies = await fetchVacanciesFromAPI(query);
+                    vacancies = await fetchVacanciesFromAPI(query, this.abortController.signal);
                     this.cache.set(query, { data: vacancies, timestamp: Date.now() });
                 }
-                this.allVacancies = vacancies.map(v => ({ ...v, salaryNum: this.extractSalaryNumber(v.salary) }));
+                const directVacancies = this.loadDirectVacancies();
+                const all = [...directVacancies, ...vacancies];
+                this.allVacancies = all.map(v => ({ ...v, salaryNum: this.extractSalaryNumber(v.salary) }));
                 this.sortBySalary = false;
                 document.getElementById('sortSalaryBtn').innerHTML = '<i class="fas fa-arrow-up"></i> По зарплате';
                 this.filterAndRender();
@@ -505,11 +549,11 @@
             card.className = `vacancy-card ${vac.isPremium ? 'premium' : ''}`;
             card.setAttribute('data-id', vac.id);
             const isFav = this.favorites.has(vac.id);
-            const logoHtml = vac.logo ? `<img src="${vac.logo}" alt="logo" loading="lazy">` : vac.company.charAt(0).toUpperCase();
             card.innerHTML = `
+                ${vac.isPremium ? '<div class="premium-badge">⭐ ПРЕМИУМ</div>' : ''}
                 <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${vac.id}">${isFav ? '❤️' : '🤍'}</button>
                 <div class="card-header">
-                    <div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого" loading="lazy">` : vac.company.charAt(0)}</div>
+                    <div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого" loading="lazy">` : (vac.company.charAt(0) || '🏢')}</div>
                     <div class="card-main">
                         <div class="vacancy-title">${this.escapeHtml(vac.title)}</div>
                         <div class="company-name">${this.escapeHtml(vac.company)}</div>
