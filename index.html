@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Ваканса — агрегатор вакансий</title>
+    <title>Ваканса — поиск работы</title>
     <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <style>
-        /* ----- БАЗОВЫЕ СТИЛИ + ТЕМНАЯ ТЕМА ----- */
         * {
             margin: 0;
             padding: 0;
@@ -15,8 +14,10 @@
         }
 
         body {
+            background: #f3f4f6;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             padding: 24px 16px;
+            color: #0f172a;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -174,7 +175,7 @@
             overflow-x: hidden;
         }
 
-        /* Шапка с логотипом */
+        /* Шапка */
         .header {
             margin-bottom: 28px;
             text-align: center;
@@ -257,7 +258,7 @@
             background: #3b82f6;
         }
 
-        /* Поисковая строка */
+        /* Поисковая строка (как в исходнике) */
         .search-section {
             border-radius: 56px;
             padding: 6px;
@@ -352,7 +353,7 @@
             color: #94a3b8;
         }
 
-        /* Панель фильтров */
+        /* Панель фильтров (как в исходнике) */
         .filters-panel {
             border-radius: 20px;
             padding: 16px 20px;
@@ -427,7 +428,7 @@
             flex-direction: column;
             gap: 16px;
         }
-        /* Карточка вакансии */
+        /* Карточка вакансии (исходный стиль) */
         .vacancy-card {
             border-radius: 20px;
             padding: 18px 20px;
@@ -892,7 +893,7 @@
     function getFirstLetter(c) { return c.charAt(0).toUpperCase(); }
     function getRandomColor(letter) { const colors = ['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7']; return colors[letter.charCodeAt(0) % colors.length]; }
 
-    // История поиска
+    // История поиска (как в исходнике)
     function addToHistory(q) {
         if (!q.trim()) return;
         searchHistory = [q.trim(), ...searchHistory.filter(h => h !== q.trim())].slice(0, 7);
@@ -946,7 +947,7 @@
         return [...vacancies].sort((a,b) => extractMinSalary(b.salary) - extractMinSalary(a.salary));
     }
 
-    // Рендер
+    // Рендер (точно как в исходнике, но с премиум-бейджем)
     function renderVacancies(vacanciesArray, append = false) {
         const container = document.getElementById('vacanciesContainer');
         const counterSpan = document.querySelector('#counterDisplay span');
