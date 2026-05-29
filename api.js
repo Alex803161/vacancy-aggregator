@@ -1,5 +1,5 @@
-// Прокси, который работает без ручных действий
-const PROXY_URL = "https://api.allorigins.win/raw?url=";
+// Адрес вашего прокси на Vercel (уже исправлен)
+const CF_WORKER_PROXY = "https://vacancy-aggregator-seven.vercel.app/api/proxy?url=";
 const HH_API_URL = "https://api.hh.ru/vacancies";
 
 async function fetchVacanciesFromAPI(query, signal) {
@@ -9,22 +9,12 @@ async function fetchVacanciesFromAPI(query, signal) {
         order_by: "relevance"
     });
     const targetUrl = `${HH_API_URL}?${params.toString()}`;
-    const proxyUrl = `${PROXY_URL}${encodeURIComponent(targetUrl)}`;
-    
-    console.log("📡 Запрос к прокси:", proxyUrl);
+    const proxyUrl = `${CF_WORKER_PROXY}${encodeURIComponent(targetUrl)}`;
     
     try {
         const resp = await fetch(proxyUrl, { signal });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        
-        // allorigins.win возвращает объект с полем contents
-        const wrapper = await resp.json();
-        let data;
-        if (wrapper.contents) {
-            data = JSON.parse(wrapper.contents);
-        } else {
-            data = wrapper;
-        }
+        const data = await resp.json();
         
         if (data.items && data.items.length) {
             console.log(`✅ Получено ${data.items.length} вакансий`);
@@ -37,7 +27,7 @@ async function fetchVacanciesFromAPI(query, signal) {
         if (e.name !== 'AbortError') {
             console.error("❌ Ошибка загрузки вакансий:", e);
         }
-        return []; // Никаких демо-вакансий – только реальные
+        return [];
     }
 }
 
