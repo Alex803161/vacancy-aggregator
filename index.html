@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Ваканса — агрегатор вакансий</title>
-    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию.">
+    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -370,15 +370,16 @@
     setTheme(localStorage.getItem('theme')||'light');
     themeBtn.addEventListener('click',()=>setTheme(document.body.classList.contains('light')?'dark':'light'));
 
-    // DEBOUNCE
+    // DEBOUNCE (увеличен до 800 мс)
     function debounce(func, delay) { let timer; return function(...args) { clearTimeout(timer); timer = setTimeout(() => func.apply(this, args), delay); }; }
 
     // СОБЫТИЯ
     document.getElementById('searchButton').addEventListener('click',()=>{ let q=document.getElementById('searchInput').value; if(q.trim()) addToHistory(q); performSearch(q); });
     document.getElementById('resetSidebarBtn').addEventListener('click',resetFilters);
     document.getElementById('searchInput').addEventListener('keypress',e=>{if(e.key==='Enter'){ let q=e.target.value; if(q.trim()) addToHistory(q); performSearch(q); }});
-    document.getElementById('filterCity').addEventListener('input', debounce(() => performSearch(document.getElementById('searchInput').value), 500));
-    document.getElementById('filterSalaryFrom').addEventListener('input', debounce(() => performSearch(document.getElementById('searchInput').value), 500));
+    // Поля с debounce 800 мс
+    document.getElementById('filterCity').addEventListener('input', debounce(() => performSearch(document.getElementById('searchInput').value), 800));
+    document.getElementById('filterSalaryFrom').addEventListener('input', debounce(() => performSearch(document.getElementById('searchInput').value), 800));
     document.getElementById('filterExperience').addEventListener('change', () => performSearch(document.getElementById('searchInput').value));
     document.getElementById('sortBySalary').addEventListener('click',function(){ sortBySalary=!sortBySalary; this.classList.toggle('active'); performSearch(document.getElementById('searchInput').value); });
     document.getElementById('clearHistoryBtn').addEventListener('click',()=>{ searchHistory=[]; localStorage.setItem('searchHistory','[]'); renderHistory(); });
