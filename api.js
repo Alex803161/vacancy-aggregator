@@ -1,70 +1,6 @@
-// Публичный CORS-прокси (не требует облачной функции)
-const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+// Прокси-сервер, который точно возвращает CORS-заголовки
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const HH_API_URL = "https://api.hh.ru/vacancies";
-
-// Резервные вакансии (на случай, если прокси временно недоступен)
-const FALLBACK_VACANCIES = [
-    {
-        id: 1001,
-        title: "Программист 1С",
-        salary: "150 000 – 200 000 ₽",
-        salary_details: "на руки",
-        experience: "От 1 года до 3 лет",
-        payment: "Выплаты: два раза в месяц",
-        company: "ТехноПроект",
-        city: "Москва",
-        metro: ["Фрунзенская"],
-        description: "Разработка и доработка конфигураций 1С:Предприятие.",
-        requirements: "Опыт работы с 1С от 1 года, знание платформы 8.3.",
-        link: "#",
-        logo: null,
-        phone: "+7 (495) 123-45-67",
-        schedule: "Полный день",
-        rating: 4.2,
-        reviews: 156,
-        isPremium: false
-    },
-    {
-        id: 1002,
-        title: "Python разработчик",
-        salary: "180 000 – 250 000 ₽",
-        salary_details: "до вычета налогов",
-        experience: "От 3 до 6 лет",
-        payment: "Выплаты: раз в месяц",
-        company: "ИТ Решения",
-        city: "Санкт-Петербург",
-        metro: ["Петроградская"],
-        description: "Разработка бэкенд-сервисов на FastAPI.",
-        requirements: "Опыт коммерческой разработки на Python от 3 лет, знание SQLAlchemy, Docker.",
-        link: "#",
-        logo: null,
-        phone: "+7 (812) 987-65-43",
-        schedule: "Гибкий график",
-        rating: 4.5,
-        reviews: 89,
-        isPremium: false
-    },
-    {
-        id: 1003,
-        title: "Frontend-разработчик React",
-        salary: "200 000 – 250 000 ₽",
-        salary_details: "на руки",
-        experience: "От 3 до 6 лет",
-        payment: "Выплаты: два раза в месяц",
-        company: "ВебСтудия",
-        city: "Москва",
-        metro: ["Китай-город"],
-        description: "Разработка интерфейсов на React, TypeScript.",
-        requirements: "Опыт работы с React от 3 лет, знание Redux, Next.js.",
-        link: "#",
-        logo: null,
-        phone: "+7 (495) 555-12-34",
-        schedule: "Удалённо",
-        rating: 4.7,
-        reviews: 45,
-        isPremium: true
-    }
-];
 
 async function fetchVacanciesFromAPI(query, signal) {
     const params = new URLSearchParams({
@@ -72,44 +8,24 @@ async function fetchVacanciesFromAPI(query, signal) {
         per_page: "100",
         order_by: "relevance"
     });
-    const fullUrl = `${HH_API_URL}?${params.toString()}`;
-    const proxyUrl = `${CORS_PROXY}${encodeURIComponent(fullUrl)}`;
+    const targetUrl = `${HH_API_URL}?${params.toString()}`;
+    const proxyUrl = `${PROXY_URL}${targetUrl}`;
     
     try {
         const resp = await fetch(proxyUrl, { signal });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         
-        // Обработка ответа от allorigins.win
-        let vacanciesData;
-        if (data.contents) {
-            vacanciesData = JSON.parse(data.contents);
+        if (data.items && data.items.length) {
+            return mapHHVacancies(data.items);
         } else {
-            vacanciesData = data;
+            console.warn("API вернул пустой массив");
+            return [];
         }
-        
-        if (vacanciesData.items && vacanciesData.items.length) {
-            return mapHHVacancies(vacanciesData.items);
-        }
-        
-        console.warn("Прокси вернул пустой ответ, используем резервные вакансии");
-        return getFallbackVacancies(query);
     } catch (e) {
-        if (e.name !== 'AbortError') {
-            console.error("Ошибка запроса к прокси:", e);
-        }
-        return getFallbackVacancies(query);
+        console.error("Ошибка загрузки вакансий:", e);
+        return [];  // возвращаем пустой массив, а не демо
     }
-}
-
-function getFallbackVacancies(query) {
-    if (!query) return FALLBACK_VACANCIES;
-    const q = query.toLowerCase();
-    return FALLBACK_VACANCIES.filter(v =>
-        v.title.toLowerCase().includes(q) ||
-        v.company.toLowerCase().includes(q) ||
-        v.description.toLowerCase().includes(q)
-    );
 }
 
 function mapHHVacancies(items) {
