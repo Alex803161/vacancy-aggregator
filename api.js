@@ -1,4 +1,4 @@
-const HH_PROXY_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
+const HH_PROXY_URL = "https://functions.yandexcloud.net/https://d5dev88lelh404bictuo.628pfjdx.apigw.yandexcloud.net";
 
 // Резервные вакансии (показываются, если прокси не отвечает)
 const FALLBACK_VACANCIES = [
