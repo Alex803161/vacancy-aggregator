@@ -1,5 +1,69 @@
 const HH_PROXY_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
 
+// Резервные вакансии (показываются, если прокси не отвечает)
+const FALLBACK_VACANCIES = [
+    {
+        id: 1001,
+        title: "Программист 1С",
+        salary: "150 000 – 200 000 ₽",
+        salary_details: "на руки",
+        experience: "От 1 года до 3 лет",
+        payment: "Выплаты: два раза в месяц",
+        company: "ТехноПроект",
+        city: "Москва",
+        metro: ["Фрунзенская"],
+        description: "Разработка и доработка конфигураций 1С:Предприятие.",
+        requirements: "Опыт работы с 1С от 1 года, знание платформы 8.3.",
+        link: "#",
+        logo: null,
+        phone: "+7 (495) 123-45-67",
+        schedule: "Полный день",
+        rating: 4.2,
+        reviews: 156,
+        isPremium: false
+    },
+    {
+        id: 1002,
+        title: "Python разработчик",
+        salary: "180 000 – 250 000 ₽",
+        salary_details: "до вычета налогов",
+        experience: "От 3 до 6 лет",
+        payment: "Выплаты: раз в месяц",
+        company: "ИТ Решения",
+        city: "Санкт-Петербург",
+        metro: ["Петроградская"],
+        description: "Разработка бэкенд-сервисов на FastAPI.",
+        requirements: "Опыт коммерческой разработки на Python от 3 лет, знание SQLAlchemy, Docker.",
+        link: "#",
+        logo: null,
+        phone: "+7 (812) 987-65-43",
+        schedule: "Гибкий график",
+        rating: 4.5,
+        reviews: 89,
+        isPremium: false
+    },
+    {
+        id: 1003,
+        title: "Frontend-разработчик React",
+        salary: "200 000 – 250 000 ₽",
+        salary_details: "на руки",
+        experience: "От 3 до 6 лет",
+        payment: "Выплаты: два раза в месяц",
+        company: "ВебСтудия",
+        city: "Москва",
+        metro: ["Китай-город"],
+        description: "Разработка интерфейсов на React, TypeScript.",
+        requirements: "Опыт работы с React от 3 лет, знание Redux, Next.js.",
+        link: "#",
+        logo: null,
+        phone: "+7 (495) 555-12-34",
+        schedule: "Удалённо",
+        rating: 4.7,
+        reviews: 45,
+        isPremium: true
+    }
+];
+
 async function fetchVacanciesFromAPI(query, signal, retries = 3) {
     const params = new URLSearchParams({ text: query || "", per_page: "100", order_by: "relevance" });
     for (let attempt = 1; attempt <= retries; attempt++) {
@@ -7,10 +71,15 @@ async function fetchVacanciesFromAPI(query, signal, retries = 3) {
             const resp = await fetch(`${HH_PROXY_URL}?${params}`, { signal });
             if (resp.ok) {
                 const data = await resp.json();
-                return mapHHVacancies(data.items || []);
+                if (data.items && data.items.length) {
+                    return mapHHVacancies(data.items);
+                } else {
+                    console.warn("⚠️ API вернул пустой массив, используем резервные вакансии");
+                    return getFallbackVacancies(query);
+                }
             }
             if (resp.status >= 500 && attempt < retries) {
-                console.warn(`Прокси вернул ${resp.status}, повторная попытка ${attempt}...`);
+                console.warn(`⚠️ Прокси вернул ${resp.status}, повторная попытка ${attempt}...`);
                 await new Promise(r => setTimeout(r, 1000 * attempt));
                 continue;
             }
@@ -18,14 +87,25 @@ async function fetchVacanciesFromAPI(query, signal, retries = 3) {
         } catch (e) {
             if (e.name === 'AbortError') throw e;
             if (attempt === retries) {
-                console.error(`Ошибка API после ${retries} попыток:`, e);
-                return [];  // возвращаем пустой массив, не падаем
+                console.error(`❌ Ошибка API после ${retries} попыток:`, e);
+                console.warn('🔄 Используем резервные вакансии');
+                return getFallbackVacancies(query);
             }
-            console.warn(`Ошибка, повторная попытка ${attempt}...`);
+            console.warn(`⚠️ Ошибка, повторная попытка ${attempt}...`);
             await new Promise(r => setTimeout(r, 1000 * attempt));
         }
     }
-    return [];
+    return getFallbackVacancies(query);
+}
+
+function getFallbackVacancies(query) {
+    if (!query) return FALLBACK_VACANCIES;
+    const q = query.toLowerCase();
+    return FALLBACK_VACANCIES.filter(v =>
+        v.title.toLowerCase().includes(q) ||
+        v.company.toLowerCase().includes(q) ||
+        v.description.toLowerCase().includes(q)
+    );
 }
 
 function mapHHVacancies(items) {
