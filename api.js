@@ -1,6 +1,8 @@
-const HH_PROXY_URL = "https://d5dev88lelh404bictuo.628pfjdx.apigw.yandexcloud.net";
+// Публичный CORS-прокси (не требует облачной функции)
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
+const HH_API_URL = "https://api.hh.ru/vacancies";
 
-// Резервные вакансии (показываются, если прокси не отвечает)
+// Резервные вакансии (на случай, если прокси временно недоступен)
 const FALLBACK_VACANCIES = [
     {
         id: 1001,
@@ -65,23 +67,39 @@ const FALLBACK_VACANCIES = [
 ];
 
 async function fetchVacanciesFromAPI(query, signal) {
-    const params = new URLSearchParams({ text: query || "", per_page: "100", order_by: "relevance" });
+    const params = new URLSearchParams({
+        text: query || "",
+        per_page: "100",
+        order_by: "relevance"
+    });
+    const fullUrl = `${HH_API_URL}?${params.toString()}`;
+    const proxyUrl = `${CORS_PROXY}${encodeURIComponent(fullUrl)}`;
+    
     try {
-        const resp = await fetch(`${HH_PROXY_URL}?${params}`, { signal });
-        if (resp.ok) {
-            const data = await resp.json();
-            if (data.items && data.items.length) {
-                return mapHHVacancies(data.items);
-            }
+        const resp = await fetch(proxyUrl, { signal });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+        
+        // Обработка ответа от allorigins.win
+        let vacanciesData;
+        if (data.contents) {
+            vacanciesData = JSON.parse(data.contents);
+        } else {
+            vacanciesData = data;
         }
-        console.warn("⚠️ Прокси вернул ошибку, используем резервные вакансии");
+        
+        if (vacanciesData.items && vacanciesData.items.length) {
+            return mapHHVacancies(vacanciesData.items);
+        }
+        
+        console.warn("Прокси вернул пустой ответ, используем резервные вакансии");
+        return getFallbackVacancies(query);
     } catch (e) {
         if (e.name !== 'AbortError') {
-            console.warn("⚠️ Ошибка запроса к прокси, используем резервные вакансии:", e);
+            console.error("Ошибка запроса к прокси:", e);
         }
+        return getFallbackVacancies(query);
     }
-    // Всегда возвращаем резервные вакансии, если реальные не пришли
-    return getFallbackVacancies(query);
 }
 
 function getFallbackVacancies(query) {
