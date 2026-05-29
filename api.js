@@ -73,14 +73,12 @@ async function fetchVacanciesFromAPI(query, signal) {
                 return mapHHVacancies(data.items);
             }
         }
-        // Если ответ не ОК или пустой, используем резерв
         console.warn("Прокси вернул ошибку, используем резервные вакансии");
-        return getFallbackVacancies(query);
     } catch (e) {
-        // Любая ошибка (включая AbortError) – показываем резерв
         console.warn("Ошибка запроса к прокси, используем резервные вакансии:", e);
-        return getFallbackVacancies(query);
     }
+    // ВСЕГДА возвращаем резервные вакансии, если не получили реальные
+    return getFallbackVacancies(query);
 }
 
 function getFallbackVacancies(query) {
