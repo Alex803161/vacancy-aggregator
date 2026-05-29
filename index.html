@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Ваканса — поиск работы</title>
+    <title>Ваканса — агрегатор вакансий</title>
     <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний.">
-    <meta name="keywords" content="работа, вакансии, поиск работы, агрегатор вакансий, hh.ru, труд, занятость">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <style>
+        /* ----- БАЗОВЫЕ СТИЛИ + ТЕМНАЯ ТЕМА ----- */
         * {
             margin: 0;
             padding: 0;
@@ -15,14 +15,155 @@
         }
 
         body {
-            background: #f3f4f6;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             padding: 24px 16px;
-            color: #0f172a;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden;  /* фикс горизонтальной прокрутки на телефоне */
+            overflow-x: hidden;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* Светлая тема (по умолчанию) */
+        body.light {
+            background: #f3f4f6;
+            color: #0f172a;
+        }
+        body.light .header h1 {
+            background: linear-gradient(135deg, #0047cc, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        body.light .search-section,
+        body.light .filters-panel,
+        body.light .vacancy-card,
+        body.light .skeleton-card,
+        body.light .modal,
+        body.light .site-footer {
+            background: white;
+            border-color: #e2e8f0;
+        }
+        body.light .search-section {
+            border-color: #cbd5e1;
+        }
+        body.light .filter-select,
+        body.light .filter-input {
+            background: white;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+        body.light .sort-btn {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #334155;
+        }
+        body.light .sort-btn.active {
+            background: #0047cc;
+            color: white;
+        }
+        body.light .reset-btn {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        body.light .counter {
+            background: #e0e7ff;
+            color: #0047cc;
+        }
+        body.light .footer-links a,
+        body.light .footer-copy {
+            color: #64748b;
+        }
+        body.light .footer-links a:hover {
+            color: #0047cc;
+        }
+
+        /* Тёмная тема */
+        body.dark {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        body.dark .header h1 {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        body.dark .search-section,
+        body.dark .filters-panel,
+        body.dark .vacancy-card,
+        body.dark .skeleton-card,
+        body.dark .modal,
+        body.dark .site-footer {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        body.dark .search-section {
+            border-color: #475569;
+        }
+        body.dark .search-input,
+        body.dark .filter-select,
+        body.dark .filter-input {
+            background: #2d3a4e;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        body.dark .search-input::placeholder {
+            color: #94a3b8;
+        }
+        body.dark .sort-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #cbd5e1;
+        }
+        body.dark .sort-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+        body.dark .reset-btn {
+            background: #334155;
+            color: #cbd5e1;
+        }
+        body.dark .counter {
+            background: #2d3a4e;
+            color: #93c5fd;
+        }
+        body.dark .meta-item {
+            background: #3b2e5e;
+            color: #c4b5fd;
+        }
+        body.dark .company-name {
+            color: #f1f5f9;
+        }
+        body.dark .rating-row {
+            background: #332e1f;
+            color: #fbbf24;
+        }
+        body.dark .address-block {
+            color: #9ca3af;
+        }
+        body.dark .metro-list {
+            color: #93c5fd;
+        }
+        body.dark .btn-contact,
+        body.dark .btn-share {
+            color: #cbd5e1;
+        }
+        body.dark .btn-contact:hover,
+        body.dark .btn-share:hover {
+            background: #334155;
+            color: white;
+        }
+        body.dark .vacancy-card.premium {
+            background: #2a2438;
+            border-color: #f5b042;
+        }
+        body.dark .footer-links a,
+        body.dark .footer-copy {
+            color: #9ca3af;
+        }
+        body.dark .footer-links a:hover {
+            color: #60a5fa;
         }
 
         .container {
@@ -33,34 +174,29 @@
             overflow-x: hidden;
         }
 
-        /* Шапка */
+        /* Шапка с логотипом */
         .header {
             margin-bottom: 28px;
             text-align: center;
         }
-
         .header h1 {
             font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0047cc, #3b82f6);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
             margin-bottom: 6px;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.3);
         }
-
         .header p {
             color: #6b7280;
             font-size: 1rem;
             font-style: italic;
         }
-
+        body.dark .header p {
+            color: #9ca3af;
+        }
         .logo-heart {
             display: inline-block;
             width: 44px;
@@ -80,10 +216,49 @@
                         0 -1px 0 rgba(0, 0, 0, 0.1) inset;
             flex-shrink: 0;
         }
+        body.dark .logo-heart {
+            background: repeating-linear-gradient(
+                45deg,
+                #60a5fa 0px,
+                #60a5fa 6px,
+                rgba(96, 165, 250, 0.5) 6px,
+                rgba(96, 165, 250, 0.5) 12px
+            );
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 
+                        0 1px 0 rgba(255, 255, 255, 0.1) inset,
+                        0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+        }
 
-        /* Поиск */
+        /* Кнопка переключения темы */
+        .theme-switch {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0047cc;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 12px 18px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .theme-switch:hover {
+            transform: scale(1.02);
+            background: #0039a6;
+        }
+        body.dark .theme-switch {
+            background: #3b82f6;
+        }
+
+        /* Поисковая строка */
         .search-section {
-            background: white;
             border-radius: 56px;
             padding: 6px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -92,23 +267,20 @@
             gap: 8px;
             flex-wrap: wrap;
             align-items: center;
-            border: 2px solid #cbd5e1;
+            border: 2px solid;
             transition: border-color 0.2s;
             position: relative;
         }
-
         .search-section:focus-within {
             border-color: #0047cc;
             box-shadow: 0 4px 12px rgba(0, 71, 204, 0.15);
         }
-
         .search-input-wrapper {
             flex: 1;
             min-width: 200px;
             padding-left: 14px;
             position: relative;
         }
-
         .search-input {
             width: 100%;
             padding: 14px 16px;
@@ -117,11 +289,6 @@
             outline: none;
             background: transparent;
         }
-
-        .search-input::placeholder {
-            color: #94a3b8;
-        }
-
         .search-btn {
             background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
             color: white;
@@ -131,16 +298,11 @@
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.2s;
             height: 50px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
         }
-
         .search-btn:hover {
             background: linear-gradient(180deg, #0039a6 0%, #002d80 100%);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         /* История поиска */
@@ -157,81 +319,72 @@
             z-index: 10;
             display: none;
         }
-
+        body.dark .search-history {
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
         .search-history.active {
             display: block;
         }
-
         .history-item {
             padding: 12px 20px;
             cursor: pointer;
             font-size: 0.9rem;
-            color: #334155;
             border-bottom: 1px solid #f1f5f9;
-            transition: background 0.2s;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        body.dark .history-item {
+            border-bottom-color: #334155;
+        }
         .history-item:hover {
             background: #f8fafc;
         }
-
-        .history-item .delete-history {
+        body.dark .history-item:hover {
+            background: #2d3a4e;
+        }
+        .delete-history {
             background: none;
             border: none;
-            color: #94a3b8;
-            cursor: pointer;
             font-size: 1.2rem;
-            padding: 0 4px;
+            cursor: pointer;
+            color: #94a3b8;
         }
 
-        /* Фильтры и сортировка */
+        /* Панель фильтров */
         .filters-panel {
-            background: white;
             border-radius: 20px;
             padding: 16px 20px;
             margin-bottom: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             align-items: center;
-            border: 1px solid #edf2f7;
+            border: 1px solid;
         }
-
         .filter-group {
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
         }
-
         .filter-group label {
             font-size: 0.85rem;
             color: #64748b;
             white-space: nowrap;
         }
-
+        body.dark .filter-group label {
+            color: #9ca3af;
+        }
         .filter-select, .filter-input {
             padding: 8px 12px;
-            border: 1px solid #cbd5e1;
             border-radius: 20px;
             font-size: 0.85rem;
             outline: none;
-            background: white;
             min-width: 140px;
         }
-
-        .filter-select:focus, .filter-input:focus {
-            border-color: #0047cc;
-            box-shadow: 0 0 0 2px rgba(0,71,204,0.1);
-        }
-
         .sort-btn {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
             padding: 8px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
@@ -239,17 +392,9 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s;
-            color: #334155;
             font-weight: 500;
+            border: 1px solid;
         }
-
-        .sort-btn.active {
-            background: #0047cc;
-            color: white;
-            border-color: #0047cc;
-        }
-
         /* Результаты */
         .results-header {
             display: flex;
@@ -259,60 +404,50 @@
             flex-wrap: wrap;
             gap: 12px;
         }
-
         .counter {
-            background: #e0e7ff;
             padding: 6px 14px;
             border-radius: 40px;
             font-size: 0.9rem;
             font-weight: 500;
-            color: #0047cc;
         }
-
         .reset-btn {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            color: #475569;
-            font-size: 0.85rem;
-            cursor: pointer;
             padding: 8px 16px;
             border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
             font-weight: 500;
+            border: 1px solid #cbd5e1;
+            background: #f1f5f9;
         }
-
-        .reset-btn:hover {
-            background: #e2e8f0;
+        body.dark .reset-btn {
+            border-color: #475569;
         }
-
         .vacancies-list {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
-
         /* Карточка вакансии */
         .vacancy-card {
-            background: white;
             border-radius: 20px;
             padding: 18px 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             transition: all 0.2s ease;
-            border: 1px solid #edf2f7;
+            border: 1px solid;
             position: relative;
             cursor: pointer;
         }
-
         .vacancy-card.premium {
-            border: 2px solid #f5b042;
+            border-width: 2px;
+            border-color: #f5b042;
             background: #fffef7;
         }
-
+        body.dark .vacancy-card.premium {
+            background: #2a2438;
+        }
         .vacancy-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
-            border-color: #cbd5e1;
         }
-
         .premium-badge {
             position: absolute;
             top: 12px;
@@ -325,28 +460,26 @@
             color: #1a2c3e;
             z-index: 2;
         }
-
         .job-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #0f172a;
             margin-bottom: 6px;
             padding-right: 40px;
         }
-
         .salary {
             font-size: 1.25rem;
             font-weight: 700;
             color: #059669;
             margin-bottom: 8px;
         }
-
+        body.dark .salary {
+            color: #34d399;
+        }
         .salary small {
             font-size: 0.75rem;
             font-weight: normal;
             color: #64748b;
         }
-
         .meta-row {
             display: flex;
             flex-wrap: wrap;
@@ -354,36 +487,36 @@
             margin-bottom: 14px;
             font-size: 0.8rem;
         }
-
         .meta-item {
-            background: #ede9fe;
-            color: #5b21b6;
             padding: 4px 10px;
             border-radius: 20px;
         }
-
         .company-block {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 12px;
         }
-
         .logo-placeholder {
             width: 44px;
             height: 44px;
             border-radius: 10px;
-            background: #e0e7ff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 1.4rem;
-            color: #0047cc;
             flex-shrink: 0;
             text-transform: uppercase;
         }
-
+        body.light .logo-placeholder {
+            background: #e0e7ff;
+            color: #0047cc;
+        }
+        body.dark .logo-placeholder {
+            background: #334155;
+            color: #93c5fd;
+        }
         .company-text {
             display: flex;
             flex-wrap: wrap;
@@ -391,43 +524,40 @@
             gap: 8px;
             flex: 1;
         }
-
         .company-name {
             font-weight: 600;
-            color: #1e293b;
             font-size: 0.9rem;
         }
-
         .rating-row {
             display: flex;
             align-items: center;
             gap: 4px;
             font-size: 0.85rem;
-            color: #b45309;
-            background: #fffbeb;
             padding: 2px 8px;
             border-radius: 20px;
         }
-
+        body.light .rating-row {
+            background: #fffbeb;
+            color: #b45309;
+        }
         .address-block {
             margin-bottom: 14px;
             font-size: 0.85rem;
-            color: #64748b;
         }
-
         .metro-list {
             margin-top: 4px;
             font-size: 0.8rem;
             color: #0047cc;
         }
-
+        body.dark .metro-list {
+            color: #93c5fd;
+        }
         .button-group {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             align-items: center;
         }
-
         .btn {
             font-weight: 600;
             font-size: 0.85rem;
@@ -438,30 +568,20 @@
             padding: 9px 16px;
             border-radius: 20px;
         }
-
         .btn-respond {
             background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
             color: white;
             flex: 1;
         }
-
         .btn-respond:hover {
             background: linear-gradient(180deg, #0039a6 0%, #002d80 100%);
         }
-
         .btn-contact, .btn-share {
             background: transparent;
-            color: #475569;
             display: flex;
             align-items: center;
             gap: 4px;
         }
-
-        .btn-contact:hover, .btn-share:hover {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
         .save-btn {
             position: absolute;
             top: 14px;
@@ -480,20 +600,16 @@
             color: #94a3b8;
             z-index: 2;
         }
-
+        body.dark .save-btn {
+            background: #2d3a4e;
+            border-color: #475569;
+        }
         .save-btn.saved {
             background: #ff6b6b;
             color: white;
             border-color: #dc2626;
         }
-
-        .save-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Скелетоны (загрузка) */
         .skeleton-card {
-            background: white;
             border-radius: 20px;
             padding: 18px 20px;
             margin-bottom: 16px;
@@ -506,18 +622,23 @@
             border-radius: 12px;
             margin-bottom: 12px;
         }
+        body.dark .skeleton-line {
+            background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+        }
         @keyframes shimmer {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-
         .no-results, .error-state {
             text-align: center;
             padding: 60px 20px;
-            background: white;
             border-radius: 32px;
+            background: white;
         }
-
+        body.dark .no-results,
+        body.dark .error-state {
+            background: #1e293b;
+        }
         .spinner {
             width: 40px;
             height: 40px;
@@ -527,16 +648,11 @@
             animation: spin 0.7s linear infinite;
             margin: 0 auto 16px;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        @keyframes spin { to { transform: rotate(360deg); } }
         .load-more-wrapper {
             text-align: center;
             margin-top: 24px;
         }
-
         .load-more-btn {
             background: white;
             border: 2px solid #0047cc;
@@ -546,13 +662,11 @@
             font-weight: 600;
             cursor: pointer;
         }
-
-        .load-more-btn:hover {
-            background: #0047cc;
-            color: white;
+        body.dark .load-more-btn {
+            background: #1e293b;
+            border-color: #3b82f6;
+            color: #93c5fd;
         }
-
-        /* Модальное окно */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -562,13 +676,10 @@
             justify-content: center;
             z-index: 1000;
         }
-
         .modal-overlay.active {
             display: flex;
         }
-
         .modal {
-            background: white;
             border-radius: 24px;
             max-width: 600px;
             width: 90%;
@@ -577,7 +688,6 @@
             max-height: 80vh;
             overflow-y: auto;
         }
-
         .modal-close {
             position: absolute;
             top: 12px; right: 16px;
@@ -586,17 +696,26 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-
+        .modal-link {
+            display: inline-block;
+            margin-top: 16px;
+            background: #0047cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+        }
+        body.dark .modal-link {
+            background: #3b82f6;
+        }
         /* Подвал */
         .site-footer {
             margin-top: 40px;
             padding: 24px 16px;
-            background: white;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid;
             text-align: center;
             width: 100%;
         }
-
         .footer-content {
             max-width: 960px;
             margin: 0 auto;
@@ -606,52 +725,30 @@
             align-items: center;
             gap: 20px;
         }
-
         .footer-links {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .footer-links a {
-            color: #64748b;
             text-decoration: none;
             font-size: 0.85rem;
         }
-
-        .footer-links a:hover {
-            color: #0047cc;
-            text-decoration: underline;
-        }
-
         .footer-copy {
-            color: #94a3b8;
             font-size: 0.8rem;
         }
-
-        /* Адаптивность */
         @media (max-width: 640px) {
-            body {
-                padding: 16px 12px;
-            }
-            .button-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .btn-contact, .btn-share {
-                justify-content: center;
-            }
-            .filter-group {
-                width: 100%;
-            }
-            .filter-select, .filter-input {
-                flex: 1;
-            }
+            body { padding: 16px 12px; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn-contact, .btn-share { justify-content: center; }
+            .filter-group { width: 100%; }
+            .filter-select, .filter-input { flex: 1; }
+            .theme-switch { bottom: 16px; right: 16px; padding: 8px 14px; font-size: 0.8rem; }
         }
     </style>
 </head>
-<body>
+<body class="light">
 <div class="container">
     <div class="header">
         <h1>
@@ -702,7 +799,6 @@
     </div>
 </div>
 
-<!-- Модальное окно -->
 <div id="modalOverlay" class="modal-overlay">
     <div class="modal">
         <button class="modal-close" id="modalClose">&times;</button>
@@ -722,9 +818,11 @@
     </div>
 </footer>
 
+<button id="themeToggle" class="theme-switch">🌙 Тёмная</button>
+
 <script src="api.js"></script>
 <script>
-    // ==================== ПРЯМЫЕ ВАКАНСИИ ИЗ LOCALSTORAGE ====================
+    // ----- ПРЯМЫЕ ВАКАНСИИ ИЗ LOCALSTORAGE -----
     function loadDirectVacancies() {
         const stored = localStorage.getItem('direct_jobs');
         if (!stored) return [];
@@ -747,17 +845,12 @@
                 link: '#',
                 isPremium: job.isPremium === true
             }));
-        } catch(e) {
-            return [];
-        }
+        } catch(e) { return []; }
     }
 
-    // ==================== РЕАЛЬНЫЕ ВАКАНСИИ ЧЕРЕЗ ПРОКСИ ====================
+    // ----- РЕАЛЬНЫЕ ВАКАНСИИ ЧЕРЕЗ ПРОКСИ -----
     async function fetchRealVacancies(query, signal) {
-        if (typeof fetchVacanciesFromAPI !== 'function') {
-            console.warn('api.js не загружен');
-            return [];
-        }
+        if (typeof fetchVacanciesFromAPI !== 'function') return [];
         try {
             const items = await fetchVacanciesFromAPI(query, signal);
             return items.map(item => ({
@@ -777,20 +870,16 @@
                 link: item.link,
                 isPremium: false
             }));
-        } catch(e) {
-            if (e.name !== 'AbortError') console.error(e);
-            return [];
-        }
+        } catch(e) { return []; }
     }
 
-    // ==================== ОБЪЕДИНЁННАЯ ЗАГРУЗКА ====================
     async function loadAllVacancies(query, signal) {
         const direct = loadDirectVacancies();
         const real = await fetchRealVacancies(query, signal);
         return [...direct, ...real];
     }
 
-    // ==================== СОСТОЯНИЕ ====================
+    // ----- СОСТОЯНИЕ -----
     let savedVacancies = JSON.parse(localStorage.getItem('savedVacancies')) || [];
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     let allLoadedVacancies = [];
@@ -798,101 +887,50 @@
     let sortBySalaryActive = false;
     let currentAbortController = null;
 
-    // ==================== УТИЛИТЫ ====================
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
-    }
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
+    function extractMinSalary(salaryStr) { const m = salaryStr.match(/\d[\d\s]*\d|\d/); return m ? parseInt(m[0].replace(/\s/g, '')) || 0 : 0; }
+    function getFirstLetter(c) { return c.charAt(0).toUpperCase(); }
+    function getRandomColor(letter) { const colors = ['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7']; return colors[letter.charCodeAt(0) % colors.length]; }
 
-    function extractMinSalary(salaryStr) {
-        const nums = salaryStr.match(/\d[\d\s]*\d|\d/g);
-        if (nums && nums.length) return parseInt(nums[0].replace(/\s/g, '')) || 0;
-        return 0;
-    }
-
-    function getFirstLetter(company) {
-        return company.charAt(0).toUpperCase();
-    }
-
-    function getRandomColor(letter) {
-        const colors = ['#e0e7ff', '#dbeafe', '#ede9fe', '#fce7f3', '#ffedd5', '#dcfce7'];
-        const idx = letter.charCodeAt(0) % colors.length;
-        return colors[idx];
-    }
-
-    // ==================== ИСТОРИЯ ПОИСКА ====================
-    function addToHistory(query) {
-        if (!query.trim()) return;
-        searchHistory = [query.trim(), ...searchHistory.filter(h => h !== query.trim())].slice(0, 7);
+    // История поиска
+    function addToHistory(q) {
+        if (!q.trim()) return;
+        searchHistory = [q.trim(), ...searchHistory.filter(h => h !== q.trim())].slice(0, 7);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         renderHistory();
     }
-
-    function removeFromHistory(query) {
-        searchHistory = searchHistory.filter(h => h !== query);
+    function removeFromHistory(q) {
+        searchHistory = searchHistory.filter(h => h !== q);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         renderHistory();
     }
-
     function renderHistory() {
         const container = document.getElementById('searchHistory');
-        if (!searchHistory.length) {
-            container.classList.remove('active');
-            return;
-        }
-        container.innerHTML = searchHistory.map(q => `
-            <div class="history-item">
-                <span class="history-text">${escapeHtml(q)}</span>
-                <button class="delete-history" data-query="${escapeHtml(q)}">×</button>
-            </div>
-        `).join('');
+        if (!searchHistory.length) { container.classList.remove('active'); return; }
+        container.innerHTML = searchHistory.map(q => `<div class="history-item"><span class="history-text">${escapeHtml(q)}</span><button class="delete-history" data-query="${escapeHtml(q)}">×</button></div>`).join('');
         container.classList.add('active');
-        document.querySelectorAll('.history-text').forEach(el => {
-            el.addEventListener('click', () => {
-                document.getElementById('searchInput').value = el.textContent;
-                updateSearchAndRender();
-                container.classList.remove('active');
-            });
-        });
-        document.querySelectorAll('.delete-history').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                removeFromHistory(btn.dataset.query);
-            });
-        });
+        document.querySelectorAll('.history-text').forEach(el => el.addEventListener('click', () => { document.getElementById('searchInput').value = el.textContent; updateSearchAndRender(); container.classList.remove('active'); }));
+        document.querySelectorAll('.delete-history').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); removeFromHistory(btn.dataset.query); }));
     }
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-input-wrapper')) {
-            document.getElementById('searchHistory').classList.remove('active');
-        }
-    });
+    document.addEventListener('click', e => { if (!e.target.closest('.search-input-wrapper')) document.getElementById('searchHistory').classList.remove('active'); });
     document.getElementById('searchInput').addEventListener('focus', renderHistory);
 
-    // ==================== МОДАЛЬНОЕ ОКНО ====================
-    function showModal(vacancy) {
-        const overlay = document.getElementById('modalOverlay');
-        const content = document.getElementById('modalContent');
-        content.innerHTML = `
-            <h2 class="modal-title">${escapeHtml(vacancy.title)}</h2>
-            <div class="modal-salary">${escapeHtml(vacancy.salary)} <small>${escapeHtml(vacancy.salary_details)}</small></div>
-            <div class="modal-company">${escapeHtml(vacancy.company)} — ⭐ ${vacancy.rating} (${vacancy.reviews.toLocaleString()} отзывов)</div>
-            <div class="modal-description">
-                <strong>Описание:</strong><br>${escapeHtml(vacancy.description)}<br><br>
-                <strong>Требования:</strong><br>${escapeHtml(vacancy.requirements)}
-            </div>
-            <a href="${vacancy.link}" target="_blank" class="modal-link" style="display:inline-block; margin-top:16px; background:#0047cc; color:white; padding:10px 20px; border-radius:40px; text-decoration:none;">Смотреть на hh.ru →</a>
+    // Модалка
+    function showModal(vac) {
+        document.getElementById('modalContent').innerHTML = `
+            <h2>${escapeHtml(vac.title)}</h2>
+            <div class="modal-salary">${escapeHtml(vac.salary)} <small>${escapeHtml(vac.salary_details)}</small></div>
+            <div class="modal-company">${escapeHtml(vac.company)} — ⭐ ${vac.rating} (${vac.reviews.toLocaleString()} отзывов)</div>
+            <div class="modal-description"><strong>Описание:</strong><br>${escapeHtml(vac.description)}<br><br><strong>Требования:</strong><br>${escapeHtml(vac.requirements)}</div>
+            <a href="${vac.link}" target="_blank" class="modal-link">Смотреть на hh.ru →</a>
         `;
-        overlay.classList.add('active');
+        document.getElementById('modalOverlay').classList.add('active');
     }
-
-    function closeModal() {
-        document.getElementById('modalOverlay').classList.remove('active');
-    }
+    function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
     document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
+    document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 
-    // ==================== ФИЛЬТРАЦИЯ И СОРТИРОВКА ====================
+    // Фильтры и сортировка
     function applyExtraFilters(vacancies) {
         const city = document.getElementById('filterCity').value.trim().toLowerCase();
         const exp = document.getElementById('filterExperience').value;
@@ -900,205 +938,107 @@
         let filtered = [...vacancies];
         if (city) filtered = filtered.filter(v => v.city.toLowerCase().includes(city));
         if (exp) filtered = filtered.filter(v => v.experience === exp);
-        if (salaryFrom > 0) filtered = filtered.filter(v => extractMinSalary(v.salary) >= salaryFrom);
+        if (salaryFrom) filtered = filtered.filter(v => extractMinSalary(v.salary) >= salaryFrom);
         return filtered;
     }
-
     function sortVacancies(vacancies) {
         if (!sortBySalaryActive) return [...vacancies];
         return [...vacancies].sort((a,b) => extractMinSalary(b.salary) - extractMinSalary(a.salary));
     }
 
-    // ==================== РЕНДЕР КАРТОЧЕК ====================
+    // Рендер
     function renderVacancies(vacanciesArray, append = false) {
         const container = document.getElementById('vacanciesContainer');
         const counterSpan = document.querySelector('#counterDisplay span');
         const loadMoreWrapper = document.getElementById('loadMoreWrapper');
-
-        if (!append) {
-            container.innerHTML = '';
-            displayedCount = 0;
-        }
-        if (!vacanciesArray.length && !append) {
-            container.innerHTML = `<div class="no-results">Ничего не найдено</div>`;
-            loadMoreWrapper.style.display = 'none';
-            counterSpan.innerText = '0';
-            return;
-        }
-
+        if (!append) { container.innerHTML = ''; displayedCount = 0; }
+        if (!vacanciesArray.length && !append) { container.innerHTML = '<div class="no-results">Ничего не найдено</div>'; loadMoreWrapper.style.display = 'none'; counterSpan.innerText = '0'; return; }
         const newItems = append ? vacanciesArray : vacanciesArray.slice(0, 5);
         displayedCount += newItems.length;
         counterSpan.innerText = displayedCount;
-
         const fragment = document.createDocumentFragment();
         newItems.forEach(vac => {
             const isSaved = savedVacancies.includes(vac.id);
-            const heartClass = isSaved ? 'saved' : '';
-            const heartSymbol = isSaved ? '♥' : '♡';
             const firstLetter = getFirstLetter(vac.company);
             const bgColor = getRandomColor(firstLetter);
-            const metroList = vac.metro.slice(0, 2).join(', ');
-            const extraMetro = vac.metro.length > 2 ? ` и еще ${vac.metro.length - 2}` : '';
+            const metroList = vac.metro.slice(0,2).join(', ');
+            const extraMetro = vac.metro.length > 2 ? ` и еще ${vac.metro.length-2}` : '';
             const premiumBadge = vac.isPremium ? '<div class="premium-badge">⭐ ПРЕМИУМ</div>' : '';
-
             const card = document.createElement('div');
             card.className = `vacancy-card ${vac.isPremium ? 'premium' : ''}`;
             card.setAttribute('data-id', vac.id);
             card.innerHTML = `
                 ${premiumBadge}
-                <button class="save-btn ${heartClass}" data-id="${vac.id}">${heartSymbol}</button>
+                <button class="save-btn ${isSaved ? 'saved' : ''}" data-id="${vac.id}">${isSaved ? '♥' : '♡'}</button>
                 <div class="job-title">${escapeHtml(vac.title)}</div>
                 <div class="salary">${escapeHtml(vac.salary)} <small>${escapeHtml(vac.salary_details)}</small></div>
-                <div class="meta-row">
-                    <span class="meta-item">${escapeHtml(vac.experience)}</span>
-                    <span class="meta-item">${escapeHtml(vac.payment)}</span>
-                </div>
-                <div class="company-block">
-                    <div class="logo-placeholder" style="background: ${bgColor};">${firstLetter}</div>
-                    <div class="company-text">
-                        <span class="company-name">${escapeHtml(vac.company)}</span>
-                        <span class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</span>
-                    </div>
-                </div>
-                <div class="address-block">
-                    ${escapeHtml(vac.city)}
-                    <div class="metro-list">${metroList}${extraMetro}</div>
-                </div>
-                <div class="button-group">
-                    <button class="btn btn-respond">Откликнуться</button>
-                    <button class="btn btn-contact">📞 Связаться</button>
-                    <button class="btn btn-share" data-link="${vac.link}">🔗 Поделиться</button>
-                </div>
+                <div class="meta-row"><span class="meta-item">${escapeHtml(vac.experience)}</span><span class="meta-item">${escapeHtml(vac.payment)}</span></div>
+                <div class="company-block"><div class="logo-placeholder" style="background:${bgColor};">${firstLetter}</div><div class="company-text"><span class="company-name">${escapeHtml(vac.company)}</span><span class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</span></div></div>
+                <div class="address-block">${escapeHtml(vac.city)}<div class="metro-list">${metroList}${extraMetro}</div></div>
+                <div class="button-group"><button class="btn btn-respond">Откликнуться</button><button class="btn btn-contact">📞 Связаться</button><button class="btn btn-share" data-link="${vac.link}">🔗 Поделиться</button></div>
             `;
             fragment.appendChild(card);
         });
         container.appendChild(fragment);
-
         // Обработчики
         document.querySelectorAll('.vacancy-card').forEach(card => {
             card.removeEventListener('click', card.clickHandler);
-            const handler = (e) => {
-                if (e.target.closest('button')) return;
-                const id = parseInt(card.dataset.id);
-                const vac = allLoadedVacancies.find(v => v.id === id);
-                if (vac) showModal(vac);
-            };
-            card.clickHandler = handler;
-            card.addEventListener('click', handler);
+            card.clickHandler = (e) => { if (!e.target.closest('button')) { const id = parseInt(card.dataset.id); const vac = allLoadedVacancies.find(v => v.id === id); if (vac) showModal(vac); } };
+            card.addEventListener('click', card.clickHandler);
         });
-
         document.querySelectorAll('.save-btn').forEach(btn => {
             btn.removeEventListener('click', btn.saveHandler);
-            const saveHandler = (e) => {
-                e.stopPropagation();
-                const id = parseInt(btn.dataset.id);
-                if (savedVacancies.includes(id)) {
-                    savedVacancies = savedVacancies.filter(i => i !== id);
-                    btn.classList.remove('saved');
-                    btn.textContent = '♡';
-                } else {
-                    savedVacancies.push(id);
-                    btn.classList.add('saved');
-                    btn.textContent = '♥';
-                }
-                localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies));
-            };
-            btn.saveHandler = saveHandler;
-            btn.addEventListener('click', saveHandler);
+            btn.saveHandler = (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); if (savedVacancies.includes(id)) { savedVacancies = savedVacancies.filter(i => i !== id); btn.classList.remove('saved'); btn.textContent = '♡'; } else { savedVacancies.push(id); btn.classList.add('saved'); btn.textContent = '♥'; } localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies)); };
+            btn.addEventListener('click', btn.saveHandler);
         });
-
-        document.querySelectorAll('.btn-respond').forEach(btn => {
-            btn.removeEventListener('click', btn.respondHandler);
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                alert('Вы откликнулись на вакансию (демо-режим)');
-            });
-        });
-        document.querySelectorAll('.btn-contact').forEach(btn => {
-            btn.removeEventListener('click', btn.contactHandler);
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                alert('Связь с компанией (в реальной версии здесь будет телефон или чат)');
-            });
-        });
-        document.querySelectorAll('.btn-share').forEach(btn => {
-            btn.removeEventListener('click', btn.shareHandler);
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const link = btn.dataset.link;
-                navigator.clipboard.writeText(link).then(() => alert('Ссылка скопирована')).catch(() => alert('Ошибка копирования'));
-            });
-        });
-
+        document.querySelectorAll('.btn-respond').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Вы откликнулись на вакансию (демо-режим)'); }));
+        document.querySelectorAll('.btn-contact').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Связь с компанией (в реальной версии здесь будет телефон или чат)'); }));
+        document.querySelectorAll('.btn-share').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); navigator.clipboard.writeText(btn.dataset.link).then(() => alert('Ссылка скопирована')); }));
         if (displayedCount >= allLoadedVacancies.length) loadMoreWrapper.style.display = 'none';
         else loadMoreWrapper.style.display = 'block';
     }
+    function showSkeletons() { document.getElementById('vacanciesContainer').innerHTML = `<div class="skeleton-card"><div class="skeleton-line" style="height:24px;width:60%"></div><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:80%"></div></div>`.repeat(3); }
 
-    function showSkeletons() {
-        const container = document.getElementById('vacanciesContainer');
-        container.innerHTML = `<div class="skeleton-card"><div class="skeleton-line" style="height:24px; width:60%"></div><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:80%"></div></div>`.repeat(3);
-    }
-
-    // ==================== ОСНОВНОЙ ПОИСК ====================
     async function performSearch(query) {
         if (currentAbortController) currentAbortController.abort();
         currentAbortController = new AbortController();
-        const signal = currentAbortController.signal;
-
         showSkeletons();
         document.getElementById('loadMoreWrapper').style.display = 'none';
-
         try {
-            let results = await loadAllVacancies(query, signal);
+            let results = await loadAllVacancies(query, currentAbortController.signal);
             results = applyExtraFilters(results);
             if (sortBySalaryActive) results = sortVacancies(results);
             allLoadedVacancies = results;
             displayedCount = 0;
-            renderVacancies(results.slice(0, 5), false);
-        } catch (err) {
-            if (err.name !== 'AbortError') {
-                document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки. Попробуйте позже.</div>';
-            }
-        }
+            renderVacancies(results.slice(0,5), false);
+        } catch(e) { if (e.name !== 'AbortError') document.getElementById('vacanciesContainer').innerHTML = '<div class="error-state">Ошибка загрузки</div>'; }
     }
+    function updateSearchAndRender() { const q = document.getElementById('searchInput').value; if (q.trim()) addToHistory(q); performSearch(q); document.getElementById('searchHistory').classList.remove('active'); }
+    function resetSearch() { document.getElementById('searchInput').value = ''; document.getElementById('filterCity').value = ''; document.getElementById('filterExperience').value = ''; document.getElementById('filterSalaryFrom').value = ''; sortBySalaryActive = false; document.getElementById('sortBySalary').classList.remove('active'); performSearch(''); }
+    function loadMore() { const next = allLoadedVacancies.slice(displayedCount, displayedCount+5); if (next.length) renderVacancies(next, true); }
 
-    function updateSearchAndRender() {
-        const query = document.getElementById('searchInput').value;
-        if (query.trim()) addToHistory(query);
-        performSearch(query);
-        document.getElementById('searchHistory').classList.remove('active');
+    // ----- ТЕМНАЯ ТЕМА -----
+    const themeToggleBtn = document.getElementById('themeToggle');
+    function setTheme(theme) {
+        document.body.classList.remove('light', 'dark');
+        document.body.classList.add(theme);
+        localStorage.setItem('theme', theme);
+        themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Светлая' : '🌙 Тёмная';
     }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    themeToggleBtn.addEventListener('click', () => { const newTheme = document.body.classList.contains('light') ? 'dark' : 'light'; setTheme(newTheme); });
 
-    function resetSearch() {
-        document.getElementById('searchInput').value = '';
-        document.getElementById('filterCity').value = '';
-        document.getElementById('filterExperience').value = '';
-        document.getElementById('filterSalaryFrom').value = '';
-        sortBySalaryActive = false;
-        document.getElementById('sortBySalary').classList.remove('active');
-        performSearch('');
-    }
-
-    function loadMore() {
-        const nextBatch = allLoadedVacancies.slice(displayedCount, displayedCount + 5);
-        if (nextBatch.length) renderVacancies(nextBatch, true);
-    }
-
-    // ==================== СОБЫТИЯ ====================
+    // ----- СОБЫТИЯ -----
     document.getElementById('searchButton').addEventListener('click', updateSearchAndRender);
     document.getElementById('resetButton').addEventListener('click', resetSearch);
     document.getElementById('searchInput').addEventListener('keypress', e => e.key === 'Enter' && updateSearchAndRender());
     document.getElementById('filterCity').addEventListener('input', () => performSearch(document.getElementById('searchInput').value));
     document.getElementById('filterExperience').addEventListener('change', () => performSearch(document.getElementById('searchInput').value));
     document.getElementById('filterSalaryFrom').addEventListener('input', () => performSearch(document.getElementById('searchInput').value));
-    document.getElementById('sortBySalary').addEventListener('click', function() {
-        sortBySalaryActive = !sortBySalaryActive;
-        this.classList.toggle('active');
-        performSearch(document.getElementById('searchInput').value);
-    });
+    document.getElementById('sortBySalary').addEventListener('click', function() { sortBySalaryActive = !sortBySalaryActive; this.classList.toggle('active'); performSearch(document.getElementById('searchInput').value); });
     document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
 
-    // Старт
     performSearch('');
 </script>
 </body>
