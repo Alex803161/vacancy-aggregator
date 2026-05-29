@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>JobHunter — поиск работы как на hh.ru</title>
+    <title>Ваканса – агрегатор вакансий</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -12,30 +12,24 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: #f7f9fc;
             color: #1a2c3e;
             transition: background 0.2s, color 0.2s;
         }
-
-        /* Темная тема */
         body.dark {
             background: #0e141b;
             color: #e2e8f0;
         }
-
         body.dark .card {
             background: #1e293b;
             border-color: #334155;
         }
-
         body.dark .sidebar {
             background: #111827;
             border-color: #1f2a3e;
         }
-
         body.dark .filter-group input,
         body.dark .filter-group select,
         body.dark .search-input {
@@ -43,19 +37,15 @@
             border-color: #475569;
             color: #f1f5f9;
         }
-
         body.dark .history-item {
             background: #334155;
             color: #cbd5e1;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
-        /* Шапка как на hh.ru */
         .header {
             background: white;
             border-bottom: 1px solid #e2e8f0;
@@ -65,12 +55,10 @@
             backdrop-filter: blur(8px);
             background: rgba(255,255,255,0.96);
         }
-
         body.dark .header {
             background: rgba(15, 23, 42, 0.96);
             border-bottom-color: #1e293b;
         }
-
         .header-inner {
             display: flex;
             justify-content: space-between;
@@ -79,7 +67,6 @@
             gap: 20px;
             flex-wrap: wrap;
         }
-
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
@@ -87,9 +74,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
         }
-
         .theme-toggle {
             background: #f1f5f9;
             border: none;
@@ -100,22 +85,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
         }
-
         body.dark .theme-toggle {
             background: #2d3a4e;
             color: #e2e8f0;
         }
-
-        /* Главный макет: сайдбар + контент */
         .main-layout {
             display: flex;
             gap: 32px;
             margin: 32px 0;
         }
-
-        /* Левая панель фильтров */
         .sidebar {
             width: 280px;
             flex-shrink: 0;
@@ -127,17 +106,13 @@
             position: sticky;
             top: 90px;
         }
-
         .sidebar h3 {
             font-size: 1.1rem;
             margin-bottom: 18px;
-            font-weight: 600;
         }
-
         .filter-group {
             margin-bottom: 24px;
         }
-
         .filter-group label {
             display: block;
             font-size: 0.85rem;
@@ -145,7 +120,6 @@
             margin-bottom: 8px;
             color: #5a6e7c;
         }
-
         .filter-group input,
         .filter-group select {
             width: 100%;
@@ -154,21 +128,7 @@
             border-radius: 14px;
             font-size: 0.9rem;
             background: white;
-            transition: 0.2s;
         }
-
-        .filter-group input:focus,
-        .filter-group select:focus {
-            border-color: #2c6e9e;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(44,110,158,0.1);
-        }
-
-        .salary-row {
-            display: flex;
-            gap: 8px;
-        }
-
         .sort-btn {
             width: 100%;
             background: #eef2f8;
@@ -178,59 +138,32 @@
             font-weight: 500;
             cursor: pointer;
             margin-top: 8px;
-            transition: 0.2s;
         }
-
-        .sort-btn:hover {
-            background: #e2e8f0;
-        }
-
-        /* История поиска */
-        .history-section {
-            margin-bottom: 24px;
-        }
-
         .history-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
             margin-bottom: 10px;
         }
-
         .history-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-
         .history-item {
             background: #eff3f6;
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 0.75rem;
             cursor: pointer;
-            transition: 0.1s;
         }
-
-        .clear-history {
-            font-size: 0.7rem;
-            background: none;
-            border: none;
-            color: #2c6e9e;
-            cursor: pointer;
-        }
-
-        /* Список вакансий */
         .vacancies-area {
             flex: 1;
         }
-
         .search-bar {
             display: flex;
             gap: 12px;
             margin-bottom: 24px;
         }
-
         .search-input {
             flex: 1;
             padding: 14px 20px;
@@ -239,7 +172,6 @@
             font-size: 1rem;
             background: white;
         }
-
         .btn-primary {
             background: #2c6e9e;
             color: white;
@@ -248,14 +180,7 @@
             border-radius: 60px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
         }
-
-        .btn-primary:hover {
-            background: #1f557d;
-        }
-
-        /* Карточка вакансии в стиле hh */
         .vacancy-card {
             background: white;
             border-radius: 20px;
@@ -267,18 +192,18 @@
             cursor: pointer;
             position: relative;
         }
-
-        .vacancy-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.12);
-            border-color: #cbdde6;
+        .vacancy-card.premium {
+            border: 2px solid #f5b042;
+            background: linear-gradient(white, #fffaf0);
         }
-
+        body.dark .vacancy-card.premium {
+            background: #1e293b;
+            border-color: #f5b042;
+        }
         .card-header {
             display: flex;
             gap: 16px;
         }
-
         .company-logo {
             width: 64px;
             height: 64px;
@@ -293,51 +218,28 @@
             flex-shrink: 0;
             overflow: hidden;
         }
-
         .company-logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-
-        .card-main {
-            flex: 1;
-        }
-
         .vacancy-title {
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 6px;
-            color: #1a2c3e;
         }
-
-        body.dark .vacancy-title {
-            color: #f1f5f9;
-        }
-
-        .company-name {
-            font-weight: 500;
-            color: #4b6a7c;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-        }
-
         .salary {
             font-weight: 700;
             color: #2c6e9e;
             margin: 8px 0;
-            font-size: 1rem;
         }
-
         .card-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
             font-size: 0.8rem;
             color: #5f7f92;
-            margin-top: 8px;
         }
-
         .favorite-btn {
             position: absolute;
             top: 20px;
@@ -347,14 +249,10 @@
             font-size: 1.6rem;
             cursor: pointer;
             color: #b9cfdf;
-            transition: 0.1s;
         }
-
         .favorite-btn.active {
             color: #e5484d;
         }
-
-        /* Скелетоны */
         .skeleton-card {
             background: white;
             border-radius: 20px;
@@ -362,7 +260,6 @@
             margin-bottom: 16px;
             border: 1px solid #e2edf2;
         }
-
         .skeleton-line {
             height: 18px;
             background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
@@ -371,13 +268,10 @@
             border-radius: 12px;
             margin-bottom: 12px;
         }
-
         @keyframes shimmer {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-
-        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -389,7 +283,6 @@
             align-items: center;
             z-index: 2000;
         }
-
         .modal-card {
             background: white;
             max-width: 680px;
@@ -399,18 +292,14 @@
             max-height: 85vh;
             overflow-y: auto;
         }
-
         body.dark .modal-card {
             background: #1e293b;
         }
-
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            font-size: 1rem;
             color: #6c868e;
         }
-
         footer {
             text-align: center;
             padding: 30px 0;
@@ -418,7 +307,6 @@
             border-top: 1px solid #e2e8f0;
             margin-top: 20px;
         }
-
         @media (max-width: 900px) {
             .main-layout { flex-direction: column; }
             .sidebar { width: 100%; position: static; }
@@ -428,18 +316,16 @@
 <body>
 <div class="header">
     <div class="container header-inner">
-        <div class="logo">JobHunter</div>
-        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i> Тёмная тема</button>
+        <div class="logo">Ваканса</div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i> Тёмная</button>
     </div>
 </div>
-
 <div class="container main-layout">
-    <!-- Левая колонка: фильтры и история -->
     <aside class="sidebar">
         <h3><i class="fas fa-sliders-h"></i> Фильтры</h3>
         <div class="filter-group">
             <label>Город</label>
-            <input type="text" id="cityFilter" placeholder="Москва, Санкт-Петербург...">
+            <input type="text" id="cityFilter" placeholder="Москва, СПб...">
         </div>
         <div class="filter-group">
             <label>Опыт работы</label>
@@ -453,314 +339,312 @@
         </div>
         <div class="filter-group">
             <label>Зарплата от (₽)</label>
-            <input type="number" id="salaryFromFilter" placeholder="например 80000">
+            <input type="number" id="salaryFromFilter" placeholder="80000">
         </div>
-        <button id="sortSalaryBtn" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате (↑)</button>
-
-        <div class="history-section" style="margin-top: 32px;">
+        <button id="sortSalaryBtn" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button>
+        <div style="margin-top: 32px;">
             <div class="history-header">
                 <h3><i class="fas fa-history"></i> История</h3>
-                <button id="clearHistoryBtn" class="clear-history">Очистить</button>
+                <button id="clearHistoryBtn" class="clear-history" style="background:none;border:none;color:#2c6e9e;cursor:pointer;">Очистить</button>
             </div>
             <div id="historyContainer" class="history-badges"></div>
         </div>
     </aside>
-
-    <!-- Правая часть: поиск + список вакансий -->
     <div class="vacancies-area">
         <div class="search-bar">
             <input type="text" id="searchInput" class="search-input" placeholder="Должность, ключевые слова..." value="Python разработчик">
             <button id="searchBtn" class="btn-primary"><i class="fas fa-search"></i> Найти</button>
         </div>
         <div id="vacanciesContainer" class="vacancies-list"></div>
-        <div id="loadingTrigger" style="height: 10px;"></div>
+        <div id="sentinel" style="height: 10px;"></div>
     </div>
 </div>
-<footer>© JobHunter — поиск работы, похожий на hh.ru</footer>
-
+<footer>© Ваканса — агрегатор вакансий</footer>
 <div id="modal" class="modal">
     <div class="modal-card">
-        <h2 id="modalTitle" style="margin-bottom: 12px;"></h2>
+        <h2 id="modalTitle"></h2>
         <p><strong><i class="fas fa-building"></i> Компания:</strong> <span id="modalCompany"></span></p>
         <p><strong><i class="fas fa-ruble-sign"></i> Зарплата:</strong> <span id="modalSalary"></span></p>
-        <p><strong><i class="fas fa-map-marker-alt"></i> Город / Метро:</strong> <span id="modalMetro"></span></p>
+        <p><strong><i class="fas fa-map-marker-alt"></i> Метро:</strong> <span id="modalMetro"></span></p>
         <p><strong><i class="fas fa-calendar-alt"></i> График:</strong> <span id="modalSchedule"></span></p>
         <p><strong><i class="fas fa-tasks"></i> Требования:</strong> <span id="modalRequirements"></span></p>
         <p><strong><i class="fas fa-clipboard-list"></i> Обязанности:</strong> <span id="modalDescription"></span></p>
-        <p><strong><i class="fas fa-phone-alt"></i> Контакты:</strong> <span id="modalPhone"></span></p>
-        <a id="modalLink" href="#" target="_blank" style="display: inline-block; margin: 16px 0; color:#2c6e9e;">Смотреть на hh.ru →</a>
-        <div><button class="btn-primary" id="closeModalBtn" style="padding: 8px 24px;">Закрыть</button></div>
+        <p><strong><i class="fas fa-phone-alt"></i> Телефон:</strong> <span id="modalPhone"></span></p>
+        <a id="modalLink" href="#" target="_blank" style="color:#2c6e9e;">Открыть на hh.ru →</a>
+        <div><button class="btn-primary" id="closeModalBtn" style="margin-top:16px;">Закрыть</button></div>
     </div>
 </div>
 
 <script src="api.js"></script>
 <script>
-    // Глобальное состояние
-    let allVacancies = [];
-    let filteredVacancies = [];
-    let currentPage = 0;
-    const PAGE_SIZE = 5;
-    let isLoading = false;
-    let hasMore = true;
-    let sortBySalary = false;
-    let favorites = new Set();
-    let searchHistory = [];
-
-    // DOM
-    const container = document.getElementById('vacanciesContainer');
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const cityFilter = document.getElementById('cityFilter');
-    const expFilter = document.getElementById('expFilter');
-    const salaryFromFilter = document.getElementById('salaryFromFilter');
-    const sortSalaryBtn = document.getElementById('sortSalaryBtn');
-    const historyContainer = document.getElementById('historyContainer');
-    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
-    const themeToggle = document.getElementById('themeToggle');
-
-    // Helper: извлечь число из зарплаты
-    function extractSalaryNumber(salaryStr) {
-        if (!salaryStr || salaryStr === "Не указана") return 0;
-        const match = salaryStr.match(/(\d+[\s]?\d+)/);
-        if (match) return parseInt(match[0].replace(/\s/g, ''), 10);
-        return 0;
-    }
-
-    // Фильтрация + сортировка
-    function filterAndSort() {
-        let filtered = [...allVacancies];
-        const cityVal = cityFilter.value.trim().toLowerCase();
-        const expVal = expFilter.value;
-        const salaryFrom = parseInt(salaryFromFilter.value, 10);
-
-        if (cityVal) filtered = filtered.filter(v => v.city.toLowerCase().includes(cityVal));
-        if (expVal) filtered = filtered.filter(v => v.experience === expVal);
-        if (!isNaN(salaryFrom) && salaryFrom > 0) filtered = filtered.filter(v => extractSalaryNumber(v.salary) >= salaryFrom);
-
-        if (sortBySalary) filtered.sort((a,b) => extractSalaryNumber(b.salary) - extractSalaryNumber(a.salary));
-        filteredVacancies = filtered;
-        hasMore = true;
-        currentPage = 0;
-        renderSkeletonsAndLoad();
-    }
-
-    async function renderSkeletonsAndLoad() {
-        renderSkeletons(true);
-        setTimeout(() => renderVacancies(true), 60);
-    }
-
-    function renderSkeletons(clear = true) {
-        if (clear) container.innerHTML = '';
-        for (let i = 0; i < 3; i++) {
-            const sk = document.createElement('div');
-            sk.className = 'skeleton-card';
-            sk.innerHTML = `<div class="skeleton-line" style="height:24px; width:60%"></div>
-                            <div class="skeleton-line" style="width:40%"></div>
-                            <div class="skeleton-line" style="width:50%"></div>
-                            <div class="skeleton-line" style="width:80%"></div>`;
-            container.appendChild(sk);
+    class VacancyApp {
+        constructor() {
+            this.allVacancies = [];
+            this.filteredVacancies = [];
+            this.currentPage = 0;
+            this.pageSize = 5;
+            this.isLoading = false;
+            this.hasMore = true;
+            this.sortBySalary = false;
+            this.favorites = new Set();
+            this.searchHistory = [];
+            this.currentQuery = "Python разработчик";
+            this.abortController = null;
+            this.cache = new Map(); // ключ: query, значение: { data, timestamp }
+            this.cacheTTL = 5 * 60 * 1000; // 5 минут
+            this.init();
         }
-    }
 
-    function renderVacancies(reset = true) {
-        if (reset) {
-            currentPage = 0;
-            container.innerHTML = '';
+        init() {
+            this.loadFavorites();
+            this.loadHistory();
+            this.initTheme();
+            this.bindEvents();
+            this.setupIntersectionObserver();
+            this.performSearch(this.currentQuery);
         }
-        const start = currentPage * PAGE_SIZE;
-        const pageItems = filteredVacancies.slice(start, start + PAGE_SIZE);
-        if (pageItems.length === 0 && currentPage === 0 && filteredVacancies.length === 0) {
-            container.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i> По вашему запросу ничего не найдено</div>';
-            hasMore = false;
-            return;
-        }
-        pageItems.forEach(vac => container.appendChild(createCard(vac)));
-        hasMore = (start + PAGE_SIZE) < filteredVacancies.length;
-        isLoading = false;
-    }
 
-    function createCard(vac) {
-        const card = document.createElement('div');
-        card.className = 'vacancy-card';
-        card.setAttribute('data-id', vac.id);
-        const logoHtml = vac.logo ? `<img src="${vac.logo}" alt="logo">` : vac.company.charAt(0).toUpperCase();
-        const isFav = favorites.has(vac.id);
-        card.innerHTML = `
-            <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${vac.id}">${isFav ? '❤️' : '🤍'}</button>
-            <div class="card-header">
-                <div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого">` : vac.company.charAt(0)}</div>
-                <div class="card-main">
-                    <div class="vacancy-title">${escapeHtml(vac.title)}</div>
-                    <div class="company-name">${escapeHtml(vac.company)}</div>
-                    <div class="salary">${escapeHtml(vac.salary)}</div>
-                    <div class="card-meta">
-                        <span><i class="fas fa-map-pin"></i> ${escapeHtml(vac.city) || 'Не указан'}</span>
-                        <span><i class="fas fa-briefcase"></i> ${escapeHtml(vac.experience)}</span>
-                        <span><i class="fas fa-star" style="color:#f5b042;"></i> 4.0</span>
-                    </div>
-                </div>
-            </div>
-        `;
-        const favBtn = card.querySelector('.favorite-btn');
-        favBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleFavorite(vac.id);
-            const active = favorites.has(vac.id);
-            favBtn.textContent = active ? '❤️' : '🤍';
-            if (active) favBtn.classList.add('active');
-            else favBtn.classList.remove('active');
-        });
-        card.addEventListener('click', () => showModal(vac));
-        return card;
-    }
-
-    function toggleFavorite(id) {
-        if (favorites.has(id)) favorites.delete(id);
-        else favorites.add(id);
-        localStorage.setItem('job_favorites', JSON.stringify([...favorites]));
-    }
-
-    function loadFavorites() {
-        const stored = localStorage.getItem('job_favorites');
-        if (stored) favorites = new Set(JSON.parse(stored));
-    }
-
-    // История поиска
-    function addToHistory(query) {
-        if (!query.trim()) return;
-        searchHistory = searchHistory.filter(q => q !== query);
-        searchHistory.unshift(query);
-        if (searchHistory.length > 6) searchHistory.pop();
-        localStorage.setItem('search_history', JSON.stringify(searchHistory));
-        renderHistory();
-    }
-
-    function renderHistory() {
-        historyContainer.innerHTML = '';
-        searchHistory.forEach(term => {
-            const badge = document.createElement('span');
-            badge.className = 'history-item';
-            badge.innerHTML = `<i class="fas fa-clock"></i> ${escapeHtml(term)}`;
-            badge.addEventListener('click', () => {
-                searchInput.value = term;
-                performSearch(term);
+        bindEvents() {
+            document.getElementById('searchBtn').addEventListener('click', () => {
+                const query = document.getElementById('searchInput').value.trim();
+                if (query) this.performSearch(query);
             });
-            historyContainer.appendChild(badge);
-        });
-    }
-
-    function clearHistory() {
-        searchHistory = [];
-        localStorage.setItem('search_history', JSON.stringify(searchHistory));
-        renderHistory();
-    }
-
-    // Загрузка вакансий через прокси (api.js)
-    async function performSearch(query) {
-        currentPage = 0;
-        sortBySalary = false;
-        sortSalaryBtn.innerHTML = '<i class="fas fa-arrow-up"></i> По зарплате (↑)';
-        addToHistory(query);
-        renderSkeletons(true);
-        isLoading = true;
-        try {
-            const data = await fetchVacanciesFromAPI(query);
-            allVacancies = data;
-            filterAndSort();
-        } catch (err) {
-            console.error(err);
-            container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Ошибка загрузки. Проверьте соединение</div>';
-        } finally {
-            isLoading = false;
+            document.getElementById('cityFilter').addEventListener('input', this.debounce(() => this.filterAndRender(), 300));
+            document.getElementById('expFilter').addEventListener('change', () => this.filterAndRender());
+            document.getElementById('salaryFromFilter').addEventListener('input', this.debounce(() => this.filterAndRender(), 300));
+            document.getElementById('sortSalaryBtn').addEventListener('click', () => {
+                this.sortBySalary = !this.sortBySalary;
+                const btn = document.getElementById('sortSalaryBtn');
+                btn.innerHTML = this.sortBySalary ? '<i class="fas fa-arrow-down"></i> По умолчанию' : '<i class="fas fa-arrow-up"></i> По зарплате';
+                this.filterAndRender();
+            });
+            document.getElementById('clearHistoryBtn').addEventListener('click', () => this.clearHistory());
+            document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+            document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('modal').style.display = 'none');
+            window.addEventListener('click', (e) => { if (e.target === document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; });
         }
-    }
 
-    // Бесконечная подгрузка
-    function handleScroll() {
-        const trigger = document.getElementById('loadingTrigger');
-        if (!trigger) return;
-        const rect = trigger.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 150 && !isLoading && hasMore) {
-            isLoading = true;
-            currentPage++;
-            const start = currentPage * PAGE_SIZE;
-            const newItems = filteredVacancies.slice(start, start + PAGE_SIZE);
-            if (newItems.length === 0) {
-                hasMore = false;
-                isLoading = false;
+        debounce(func, delay) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        async performSearch(query) {
+            if (this.abortController) this.abortController.abort();
+            this.abortController = new AbortController();
+            this.currentQuery = query;
+            this.addToHistory(query);
+            this.showSkeletons(true);
+            this.isLoading = true;
+            try {
+                let vacancies;
+                const cached = this.cache.get(query);
+                if (cached && (Date.now() - cached.timestamp) < this.cacheTTL) {
+                    vacancies = cached.data;
+                } else {
+                    vacancies = await fetchVacanciesFromAPI(query);
+                    this.cache.set(query, { data: vacancies, timestamp: Date.now() });
+                }
+                this.allVacancies = vacancies.map(v => ({ ...v, salaryNum: this.extractSalaryNumber(v.salary) }));
+                this.sortBySalary = false;
+                document.getElementById('sortSalaryBtn').innerHTML = '<i class="fas fa-arrow-up"></i> По зарплате';
+                this.filterAndRender();
+            } catch (err) {
+                if (err.name !== 'AbortError') console.error(err);
+                document.getElementById('vacanciesContainer').innerHTML = '<div class="empty-state">Ошибка загрузки</div>';
+            } finally {
+                this.isLoading = false;
+            }
+        }
+
+        extractSalaryNumber(salaryStr) {
+            if (!salaryStr || salaryStr === "Не указана") return 0;
+            const match = salaryStr.match(/(\d+[\s]?\d+)/);
+            return match ? parseInt(match[0].replace(/\s/g, ''), 10) : 0;
+        }
+
+        filterAndRender() {
+            let filtered = [...this.allVacancies];
+            const city = document.getElementById('cityFilter').value.trim().toLowerCase();
+            const exp = document.getElementById('expFilter').value;
+            const salaryFrom = parseInt(document.getElementById('salaryFromFilter').value, 10);
+            if (city) filtered = filtered.filter(v => v.city.toLowerCase().includes(city));
+            if (exp) filtered = filtered.filter(v => v.experience === exp);
+            if (!isNaN(salaryFrom)) filtered = filtered.filter(v => v.salaryNum >= salaryFrom);
+            if (this.sortBySalary) filtered.sort((a,b) => b.salaryNum - a.salaryNum);
+            this.filteredVacancies = filtered;
+            this.hasMore = true;
+            this.currentPage = 0;
+            this.renderVacancies(true);
+        }
+
+        renderVacancies(reset = true) {
+            const container = document.getElementById('vacanciesContainer');
+            if (reset) {
+                container.innerHTML = '';
+                this.currentPage = 0;
+            }
+            const start = this.currentPage * this.pageSize;
+            const pageItems = this.filteredVacancies.slice(start, start + this.pageSize);
+            if (pageItems.length === 0 && this.currentPage === 0) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i> По вашему запросу ничего не найдено</div>';
+                this.hasMore = false;
                 return;
             }
-            newItems.forEach(vac => container.appendChild(createCard(vac)));
-            isLoading = false;
-            if (start + PAGE_SIZE >= filteredVacancies.length) hasMore = false;
+            const fragment = document.createDocumentFragment();
+            pageItems.forEach(vac => fragment.appendChild(this.createCard(vac)));
+            container.appendChild(fragment);
+            this.hasMore = (start + this.pageSize) < this.filteredVacancies.length;
+        }
+
+        createCard(vac) {
+            const card = document.createElement('div');
+            card.className = `vacancy-card ${vac.isPremium ? 'premium' : ''}`;
+            card.setAttribute('data-id', vac.id);
+            const isFav = this.favorites.has(vac.id);
+            const logoHtml = vac.logo ? `<img src="${vac.logo}" alt="logo" loading="lazy">` : vac.company.charAt(0).toUpperCase();
+            card.innerHTML = `
+                <button class="favorite-btn ${isFav ? 'active' : ''}" data-id="${vac.id}">${isFav ? '❤️' : '🤍'}</button>
+                <div class="card-header">
+                    <div class="company-logo">${vac.logo ? `<img src="${vac.logo}" alt="лого" loading="lazy">` : vac.company.charAt(0)}</div>
+                    <div class="card-main">
+                        <div class="vacancy-title">${this.escapeHtml(vac.title)}</div>
+                        <div class="company-name">${this.escapeHtml(vac.company)}</div>
+                        <div class="salary">${this.escapeHtml(vac.salary)}</div>
+                        <div class="card-meta">
+                            <span><i class="fas fa-map-pin"></i> ${this.escapeHtml(vac.city) || 'Не указан'}</span>
+                            <span><i class="fas fa-briefcase"></i> ${this.escapeHtml(vac.experience)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            const favBtn = card.querySelector('.favorite-btn');
+            favBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleFavorite(vac.id);
+                const active = this.favorites.has(vac.id);
+                favBtn.textContent = active ? '❤️' : '🤍';
+                favBtn.classList.toggle('active', active);
+            });
+            card.addEventListener('click', () => this.showModal(vac));
+            return card;
+        }
+
+        showSkeletons(clear = true) {
+            const container = document.getElementById('vacanciesContainer');
+            if (clear) container.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const sk = document.createElement('div');
+                sk.className = 'skeleton-card';
+                sk.innerHTML = `<div class="skeleton-line" style="height:24px;width:60%"></div>
+                                <div class="skeleton-line" style="width:40%"></div>
+                                <div class="skeleton-line" style="width:50%"></div>
+                                <div class="skeleton-line" style="width:80%"></div>`;
+                container.appendChild(sk);
+            }
+        }
+
+        setupIntersectionObserver() {
+            const sentinel = document.getElementById('sentinel');
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !this.isLoading && this.hasMore) {
+                    this.isLoading = true;
+                    this.currentPage++;
+                    this.renderVacancies(false);
+                    this.isLoading = false;
+                }
+            }, { threshold: 0.1 });
+            observer.observe(sentinel);
+        }
+
+        toggleFavorite(id) {
+            if (this.favorites.has(id)) this.favorites.delete(id);
+            else this.favorites.add(id);
+            localStorage.setItem('job_favorites', JSON.stringify([...this.favorites]));
+        }
+
+        loadFavorites() {
+            const stored = localStorage.getItem('job_favorites');
+            if (stored) this.favorites = new Set(JSON.parse(stored));
+        }
+
+        addToHistory(query) {
+            if (!query.trim()) return;
+            this.searchHistory = this.searchHistory.filter(q => q !== query);
+            this.searchHistory.unshift(query);
+            if (this.searchHistory.length > 6) this.searchHistory.pop();
+            localStorage.setItem('search_history', JSON.stringify(this.searchHistory));
+            this.renderHistory();
+        }
+
+        renderHistory() {
+            const container = document.getElementById('historyContainer');
+            container.innerHTML = '';
+            this.searchHistory.forEach(term => {
+                const badge = document.createElement('span');
+                badge.className = 'history-item';
+                badge.innerHTML = `<i class="fas fa-clock"></i> ${this.escapeHtml(term)}`;
+                badge.addEventListener('click', () => {
+                    document.getElementById('searchInput').value = term;
+                    this.performSearch(term);
+                });
+                container.appendChild(badge);
+            });
+        }
+
+        loadHistory() {
+            const stored = localStorage.getItem('search_history');
+            if (stored) {
+                try { this.searchHistory = JSON.parse(stored); } catch(e) {}
+                this.renderHistory();
+            }
+        }
+
+        clearHistory() {
+            this.searchHistory = [];
+            localStorage.setItem('search_history', JSON.stringify(this.searchHistory));
+            this.renderHistory();
+        }
+
+        showModal(vac) {
+            document.getElementById('modalTitle').innerText = vac.title;
+            document.getElementById('modalCompany').innerText = vac.company;
+            document.getElementById('modalSalary').innerText = vac.salary;
+            const metro = vac.metro?.length ? vac.metro.join(', ') : '—';
+            document.getElementById('modalMetro').innerHTML = `${vac.city || ''} • ${metro}`;
+            document.getElementById('modalSchedule').innerText = vac.schedule || 'Полный день';
+            document.getElementById('modalRequirements').innerText = vac.requirements || 'Не указаны';
+            document.getElementById('modalDescription').innerText = vac.description || 'Нет описания';
+            document.getElementById('modalPhone').innerText = vac.phone || 'Не указан';
+            document.getElementById('modalLink').href = vac.link;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        initTheme() {
+            const isDark = localStorage.getItem('theme_dark') === 'true';
+            if (isDark) document.body.classList.add('dark');
+            const btn = document.getElementById('themeToggle');
+            btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
+        }
+
+        toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme_dark', isDark);
+            const btn = document.getElementById('themeToggle');
+            btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
+        }
+
+        escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
         }
     }
 
-    // Модальное окно
-    function showModal(vac) {
-        document.getElementById('modalTitle').innerText = vac.title;
-        document.getElementById('modalCompany').innerText = vac.company;
-        document.getElementById('modalSalary').innerText = vac.salary;
-        const metroText = vac.metro?.length ? vac.metro.join(', ') : '—';
-        document.getElementById('modalMetro').innerText = `${vac.city || ''} • ст. метро: ${metroText}`;
-        document.getElementById('modalSchedule').innerText = vac.schedule || 'Полный день';
-        document.getElementById('modalRequirements').innerText = vac.requirements || 'Не указаны';
-        document.getElementById('modalDescription').innerText = vac.description || 'Нет описания';
-        document.getElementById('modalPhone').innerText = vac.phone || 'Не указан';
-        document.getElementById('modalLink').href = vac.link;
-        document.getElementById('modal').style.display = 'flex';
-    }
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // Темная тема
-    function initTheme() {
-        const isDark = localStorage.getItem('theme_dark') === 'true';
-        if (isDark) document.body.classList.add('dark');
-        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
-    }
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        localStorage.setItem('theme_dark', isDark);
-        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
-    });
-
-    // Слушатели
-    searchBtn.addEventListener('click', () => performSearch(searchInput.value.trim() || "разработчик"));
-    cityFilter.addEventListener('input', () => filterAndSort());
-    expFilter.addEventListener('change', () => filterAndSort());
-    salaryFromFilter.addEventListener('input', () => filterAndSort());
-    sortSalaryBtn.addEventListener('click', () => {
-        sortBySalary = !sortBySalary;
-        sortSalaryBtn.innerHTML = sortBySalary ? '<i class="fas fa-arrow-down"></i> По умолчанию' : '<i class="fas fa-arrow-up"></i> По зарплате (↑)';
-        filterAndSort();
-    });
-    clearHistoryBtn.addEventListener('click', clearHistory);
-    window.addEventListener('scroll', handleScroll);
-    document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('modal').style.display = 'none');
-    window.addEventListener('click', (e) => { if (e.target === document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; });
-
-    // Инициализация
-    async function bootstrap() {
-        loadFavorites();
-        const storedHistory = localStorage.getItem('search_history');
-        if (storedHistory) {
-            try { searchHistory = JSON.parse(storedHistory); } catch(e) {}
-            renderHistory();
-        }
-        initTheme();
-        await performSearch("Программист");
-    }
-    bootstrap();
+    new VacancyApp();
 </script>
 </body>
 </html>
