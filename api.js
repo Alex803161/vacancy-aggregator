@@ -1,4 +1,4 @@
-const PROXY_URL = "https://vacancy-aggregator-seven.vercel.app/api/proxy?url=";
+const PROXY_URL = "https://hh-vacancy-proxy.vercel.app/api/proxy?url=";
 const API_URL = "https://api.hh.ru/vacancies";
 
 async function fetchVacanciesFromAPI(query) {
@@ -38,4 +38,4 @@ function formatSalary(s) {
     if (from) return `${from} ${cur}`;
     if (to) return `${to} ${cur}`;
     return 'з/п не указана';
-        }
+}
