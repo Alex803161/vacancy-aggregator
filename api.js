@@ -1,14 +1,13 @@
-const PROXY_URL = "https://api.allorigins.win/raw?url=";
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const API_URL = "https://api.hh.ru/vacancies";
 
 async function fetchVacanciesFromAPI(query) {
     const targetUrl = `${API_URL}?text=${encodeURIComponent(query)}&per_page=30&order_by=relevance`;
-    const proxyUrl = PROXY_URL + encodeURIComponent(targetUrl);
+    const proxyUrl = PROXY_URL + targetUrl;
     try {
         const resp = await fetch(proxyUrl);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const wrapper = await resp.json();
-        const data = wrapper.contents ? JSON.parse(wrapper.contents) : wrapper;
+        const data = await resp.json();
         if (data.items && data.items.length) {
             return data.items.map(item => ({
                 id: item.id,
