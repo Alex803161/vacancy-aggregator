@@ -1,24 +1,41 @@
-const PROXY_URL = "https://api.allorigins.win/raw?url=";
-const HH_API_URL = "https://api.hh.ru/vacancies";
+const PROXY_URL = "https://vacancy-aggregator-seven.vercel.app/api/proxy?url=";
+const API_URL = "https://api.hh.ru/vacancies";
 
 async function fetchVacanciesFromAPI(query) {
-    const params = new URLSearchParams({
-        text: query || "",
-        per_page: "20",
-        order_by: "relevance"
-    });
-    const targetUrl = `${HH_API_URL}?${params.toString()}`;
-    const proxyUrl = `${PROXY_URL}${encodeURIComponent(targetUrl)}`;
+    const targetUrl = `${API_URL}?text=${encodeURIComponent(query)}&per_page=30&order_by=relevance`;
+    const proxyUrl = PROXY_URL + encodeURIComponent(targetUrl);
     
     try {
         const resp = await fetch(proxyUrl);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const wrapper = await resp.json();
-        const data = wrapper.contents ? JSON.parse(wrapper.contents) : wrapper;
-        if (data.items && data.items.length) return data.items;
+        const data = await resp.json();
+        if (data.items && data.items.length) {
+            return data.items.map(item => ({
+                id: item.id,
+                title: item.name,
+                salary: formatSalary(item.salary),
+                company: item.employer?.name || 'Не указана',
+                city: item.area?.name || '',
+                experience: item.experience?.name || 'Не указан',
+                description: item.snippet?.responsibility || '',
+                requirements: item.snippet?.requirement || '',
+                link: item.alternate_url
+            }));
+        }
         return [];
     } catch (e) {
-        console.error("Ошибка:", e);
+        console.error("Ошибка загрузки вакансий:", e);
         return [];
     }
 }
+
+function formatSalary(s) {
+    if (!s) return 'з/п не указана';
+    let from = s.from ? `от ${s.from.toLocaleString()}` : '';
+    let to = s.to ? `до ${s.to.toLocaleString()}` : '';
+    let cur = s.currency === 'RUR' ? '₽' : (s.currency || '');
+    if (from && to) return `${from} ${to} ${cur}`;
+    if (from) return `${from} ${cur}`;
+    if (to) return `${to} ${cur}`;
+    return 'з/п не указана';
+        }
