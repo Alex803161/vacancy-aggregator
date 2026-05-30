@@ -1,5 +1,5 @@
-// ⚠️ ЗАМЕНИТЕ 'ВАШ_АДРЕС_VERCEL' на реальный адрес вашего прокси (см. инструкцию)
-// Пример: const CF_WORKER_PROXY = "https://vacancy-aggregator-seven.vercel.app/api/proxy?url=";
+// ⚠️ ЗАМЕНИТЕ 'ВАШ_АДРЕС_VERCEL' на реальный адрес вашего прокси (см. инструкцию ниже)
+// Пример: const CF_WORKER_PROXY = "https://vacancy-aggregator-61vwmsjtv-alex803161s-projects.vercel.app/api/proxy?url=";
 const CF_WORKER_PROXY = "https://ВАШ_АДРЕС_VERCEL.vercel.app/api/proxy?url=";
 const HH_API_URL = "https://api.hh.ru/vacancies";
 
@@ -12,7 +12,7 @@ async function fetchVacanciesFromAPI(query, signal) {
     const targetUrl = `${HH_API_URL}?${params.toString()}`;
     const proxyUrl = `${CF_WORKER_PROXY}${encodeURIComponent(targetUrl)}`;
     
-    console.log("🔗 Прокси URL:", proxyUrl);  // ← покажет адрес в консоли Eruda
+    console.log("🔗 Прокси URL:", proxyUrl);
 
     try {
         const resp = await fetch(proxyUrl, { signal });
@@ -29,7 +29,6 @@ async function fetchVacanciesFromAPI(query, signal) {
     } catch (e) {
         if (e.name !== 'AbortError') {
             console.error("❌ Ошибка загрузки вакансий:", e.message);
-            console.error("Стек ошибки:", e.stack);
         }
         return [];
     }
