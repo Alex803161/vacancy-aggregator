@@ -1,11 +1,11 @@
-const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+
 const API_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
 
 async function fetchVacanciesFromAPI(query) {
     const targetUrl = `${API_URL}?text=${encodeURIComponent(query)}&per_page=30&order_by=relevance`;
-    const proxyUrl = PROXY_URL + targetUrl;
+    
     try {
-        const resp = await fetch(proxyUrl);
+        const resp = await fetch(targetUrl);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         if (data.items && data.items.length) {
