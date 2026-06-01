@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансия — Ваканса</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6; color: #0f172a; padding: 20px; margin: 0;
+        }
+        body.dark { background: #0f172a; color: #e2e8f0; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        body.dark .container { background: #1e293b; }
+        .header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+        .header a { text-decoration: none; color: #0047cc; font-weight: bold; }
+        h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .salary { font-size: 1.4rem; font-weight: 700; color: #059669; margin-bottom: 16px; }
+        body.dark .salary { color: #34d399; }
+        .details p { margin: 8px 0; }
+        .actions { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 20px; border-radius: 20px; font-weight: 600; border: none; cursor: pointer;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-primary { background: #0047cc; color: white; }
+        .btn-call {
+            background: linear-gradient(180deg, #10b981 0%, #059669 100%); color: white;
+            box-shadow: 0 4px 10px rgba(16,185,129,0.4);
+        }
+        .btn-secondary { background: #e2e8f0; color: #334155; }
+        body.dark .btn-secondary { background: #334155; color: #e2e8f0; }
+        .map-container { height: 300px; border-radius: 16px; overflow: hidden; margin: 20px 0; }
+        .similar { margin-top: 30px; }
+        .similar h3 { margin-bottom: 12px; }
+        .similar-card {
+            background: #f8fafc; border-radius: 12px; padding: 12px; margin-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        body.dark .similar-card { background: #2d3a4e; }
+        .similar-card a { color: #0047cc; text-decoration: none; font-weight: 600; }
+        body.dark .similar-card a { color: #60a5fa; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> На главную</a>
+        <h1 style="font-size:1.5rem; margin:0;">Ваканса</h1>
+    </div>
+    <div id="vacancyContent">Загрузка...</div>
+    <div id="map" class="map-container" style="display:none;"></div>
+    <div class="similar">
+        <h3>Похожие вакансии</h3>
+        <div id="similarContainer"></div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="api.js?v=2"></script>
+<script>
+    const vacancy = JSON.parse(localStorage.getItem('selectedVacancy'));
+    if (!vacancy) {
+        document.getElementById('vacancyContent').innerHTML = '<p>Вакансия не найдена. <a href="index.html">Вернуться к поиску</a></p>';
+    } else {
+        displayVacancy(vacancy);
+        loadSimilar(vacancy.title || vacancy.name);
+        if (vacancy.lat && vacancy.lng) {
+            initMap(vacancy.lat, vacancy.lng, vacancy.title || vacancy.name);
+        }
+    }
+
+    function displayVacancy(v) {
+        const content = document.getElementById('vacancyContent');
+        content.innerHTML = `
+            <h2>${escapeHtml(v.title || v.name)}</h2>
+            <div class="salary">${v.salary || 'З/П не указана'}</div>
+            <p><strong>Компания:</strong> ${escapeHtml(v.company)}</p>
+            <p><strong>Город:</strong> ${escapeHtml(v.city)}</p>
+            <p><strong>Опыт:</strong> ${escapeHtml(v.experience)}</p>
+            ${v.employment ? `<p><strong>Тип занятости:</strong> ${escapeHtml(v.employment)}</p>` : ''}
+            ${v.schedule ? `<p><strong>График:</strong> ${escapeHtml(v.schedule)}</p>` : ''}
+            <hr>
+            <div>${v.description || ''}</div>
+            <div>${v.requirements || ''}</div>
+            ${v.phone ? `<p><strong>Телефон:</strong> <a href="tel:${v.phone}">${v.phone}</a></p>` : ''}
+            ${v.email ? `<p><strong>Email:</strong> <a href="mailto:${v.email}">${v.email}</a></p>` : ''}
+            <div class="actions">
+                <a href="${v.link}" target="_blank" class="btn btn-primary">Откликнуться на hh.ru</a>
+                ${v.phone ? `<a href="tel:${v.phone}" class="btn btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>` : `<button class="btn btn-call" onclick="alert('Телефон не указан')"><i class="fas fa-phone-alt"></i> Позвонить</button>`}
+                <button onclick="history.back()" class="btn btn-secondary">Назад</button>
+            </div>
+        `;
+    }
+
+    function initMap(lat, lng, title) {
+        document.getElementById('map').style.display = 'block';
+        const map = L.map('map').setView([lat, lng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([lat, lng]).addTo(map).bindPopup(title);
+    }
+
+    async function loadSimilar(query) {
+        try {
+            const items = await fetchVacanciesFromAPI(query);
+            const container = document.getElementById('similarContainer');
+            container.innerHTML = items.slice(0, 5).map(v => `
+                <div class="similar-card">
+                    <a href="${v.link}" target="_blank">${escapeHtml(v.title || v.name)}</a>
+                    <span style="color:#059669;">${v.salary || ''}</span>
+                </div>
+            `).join('');
+        } catch(e) {
+            document.getElementById('similarContainer').innerHTML = '<p>Не удалось загрузить похожие вакансии.</p>';
+        }
+    }
+
+    function escapeHtml(text) { if (!text) return ''; return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
