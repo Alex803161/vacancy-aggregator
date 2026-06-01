@@ -163,13 +163,18 @@
     const PAGE_SIZE=20;
     let savedVacancies=JSON.parse(localStorage.getItem('savedVacancies'))||[];
     let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];
-    let currentArea='';
+    // ВСЕГДА фильтруем по России (area=113)
+    let currentArea='113';
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),loadMoreBtn=document.getElementById('loadMoreBtn'),loadMoreWrapper=document.getElementById('loadMoreWrapper'),filterCity=document.getElementById('filterCity'),filterExperience=document.getElementById('filterExperience'),filterEmployment=document.getElementById('filterEmployment'),filterSalaryFrom=document.getElementById('filterSalaryFrom'),sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),resetButton=document.getElementById('resetButton'),themeToggle=document.getElementById('themeToggle'),historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),backToTopBtn=document.getElementById('backToTopBtn'),subscribeBtn=document.getElementById('subscribeBtn'),subscribeEmail=document.getElementById('subscribeEmail'),viewListBtn=document.getElementById('viewListBtn'),viewMapBtn=document.getElementById('viewMapBtn'),mapContainer=document.getElementById('mapContainer');
     renderHistory();loadTheme();performSearch(true);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
     searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch(true,true)});
     loadMoreBtn.addEventListener('click',loadMore);
-    filterCity.addEventListener('change',()=>{currentArea=filterCity.value;performSearch(true,false)});
+    filterCity.addEventListener('change',()=>{
+        // Если выбран конкретный город, используем его код, иначе код России
+        currentArea=filterCity.value || '113';
+        performSearch(true,false);
+    });
     filterExperience.addEventListener('change',applyFilters);
     filterEmployment.addEventListener('change',applyFilters);
     filterSalaryFrom.addEventListener('input',applyFilters);
@@ -291,7 +296,7 @@
     }
     window.goToVacancy=function(id){const vac=allVacancies.find(v=>v.id==id);if(vac){localStorage.setItem('selectedVacancy',JSON.stringify(vac));window.open('vacancy.html','_blank')}};
     function toggleSaved(id,btn){if(savedVacancies.includes(id)){savedVacancies=savedVacancies.filter(v=>v!==id);btn.classList.remove('saved')}else{savedVacancies.push(id);btn.classList.add('saved')}localStorage.setItem('savedVacancies',JSON.stringify(savedVacancies))}
-    function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';currentArea='';setSort('publication_time');performSearch(true,false)}
+    function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';currentArea='113';setSort('publication_time');performSearch(true,false)}
     function initMap(){
         map=L.map(mapContainer).setView([55.7558,37.6173],10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
