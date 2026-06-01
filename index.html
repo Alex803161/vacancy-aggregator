@@ -156,20 +156,20 @@
 </div>
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
 <button id="themeToggle" class="theme-switch"><i class="fas fa-moon"></i> Тёмная тема</button>
-<script src="api.js?v=3"></script>
+<script src="api.js?v=5"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     let allVacancies=[],filteredVacancies=[],displayedCount=0,currentSort='publication_time',map=null;
     const PAGE_SIZE=20;
     let savedVacancies=JSON.parse(localStorage.getItem('savedVacancies'))||[];
     let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];
-    let currentArea='';
+    let currentArea='113';
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),loadMoreBtn=document.getElementById('loadMoreBtn'),loadMoreWrapper=document.getElementById('loadMoreWrapper'),filterCity=document.getElementById('filterCity'),filterExperience=document.getElementById('filterExperience'),filterEmployment=document.getElementById('filterEmployment'),filterSalaryFrom=document.getElementById('filterSalaryFrom'),sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),resetButton=document.getElementById('resetButton'),themeToggle=document.getElementById('themeToggle'),historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),backToTopBtn=document.getElementById('backToTopBtn'),subscribeBtn=document.getElementById('subscribeBtn'),subscribeEmail=document.getElementById('subscribeEmail'),viewListBtn=document.getElementById('viewListBtn'),viewMapBtn=document.getElementById('viewMapBtn'),mapContainer=document.getElementById('mapContainer');
     renderHistory();loadTheme();performSearch(true);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
     searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch(true,true)});
     loadMoreBtn.addEventListener('click',loadMore);
-    filterCity.addEventListener('change',()=>{currentArea=filterCity.value;performSearch(true,false)});
+    filterCity.addEventListener('change',()=>{currentArea=filterCity.value||'113';performSearch(true,false)});
     filterExperience.addEventListener('change',applyFilters);
     filterEmployment.addEventListener('change',applyFilters);
     filterSalaryFrom.addEventListener('input',applyFilters);
@@ -291,7 +291,7 @@
     }
     window.goToVacancy=function(id){const vac=allVacancies.find(v=>v.id==id);if(vac){localStorage.setItem('selectedVacancy',JSON.stringify(vac));window.open('vacancy.html','_blank')}};
     function toggleSaved(id,btn){if(savedVacancies.includes(id)){savedVacancies=savedVacancies.filter(v=>v!==id);btn.classList.remove('saved')}else{savedVacancies.push(id);btn.classList.add('saved')}localStorage.setItem('savedVacancies',JSON.stringify(savedVacancies))}
-    function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';currentArea='';setSort('publication_time');performSearch(true,false)}
+    function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';currentArea='113';setSort('publication_time');performSearch(true,false)}
     function initMap(){
         map=L.map(mapContainer).setView([55.7558,37.6173],10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
@@ -299,13 +299,13 @@
     function updateMapMarkers(vacancies=[]){
         if(!map)return;
         map.eachLayer(layer=>{if(layer instanceof L.Marker)map.removeLayer(layer)});
-        const redIcon=L.icon({
-            iconUrl:'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl:'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-            iconSize:[25,41],
-            iconAnchor:[12,41],
-            popupAnchor:[1,-34],
-            shadowSize:[41,41]
+        // Создаём КРАСНУЮ ИКОНКУ, которая точно не похожа на флаг
+        const redIcon = L.divIcon({
+            className: 'custom-red-marker',
+            html: '<div style="background-color: #dc2626; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.5);"></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11],
+            popupAnchor: [0, -11]
         });
         const bounds=[];
         vacancies.forEach(v=>{
