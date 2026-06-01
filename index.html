@@ -24,10 +24,10 @@
         body.dark .logo-heart { background: repeating-linear-gradient(45deg, #60a5fa 0px, #60a5fa 6px, rgba(179,217,255,0.85) 6px, rgba(179,217,255,0.85) 12px); box-shadow: 0 6px 12px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4); }
         .search-section { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; border: 1px solid #e2e8f0; }
         body.dark .search-section { background: #1e293b; border-color: #334155; }
-        .search-row { display: flex; gap: 12px; margin-bottom: 16px; }
-        .search-input { flex: 1; padding: 12px 16px; font-size: 1rem; border: 1px solid #cbd5e1; border-radius: 40px; outline: none; background: white; color: inherit; box-shadow: inset 0 2px 4px rgba(0,0,0,0.04); }
+        .search-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; }
+        .search-input { flex: 1; padding: 12px 16px; font-size: 1rem; border: 1px solid #cbd5e1; border-radius: 40px; outline: none; background: white; color: inherit; box-shadow: inset 0 2px 4px rgba(0,0,0,0.04); min-width: 0; }
         body.dark .search-input { background: #0f172a; border-color: #475569; }
-        .search-btn { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 0 28px; border-radius: 40px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); white-space: nowrap; }
+        .search-btn { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 0 28px; border-radius: 40px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); white-space: nowrap; height: 46px; display: inline-flex; align-items: center; justify-content: center; }
         .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px; }
         .filter-group { min-width: 0; }
         .filter-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #64748b; margin-bottom: 4px; }
@@ -40,8 +40,8 @@
         .sort-btn.active { background: #0047cc; color: white; border-color: #0047cc; }
         body.dark .sort-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
         body.dark .sort-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
-        .subscription-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-        .subscription-row input[type="email"] { flex: 1; padding: 8px 12px; border-radius: 20px; border: 1px solid #cbd5e1; font-size: 0.85rem; outline: none; background: white; color: inherit; }
+        .subscription-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        .subscription-row input[type="email"] { flex: 1; padding: 8px 12px; border-radius: 20px; border: 1px solid #cbd5e1; font-size: 0.85rem; outline: none; background: white; color: inherit; min-width: 150px; }
         body.dark .subscription-row input[type="email"] { background: #0f172a; border-color: #475569; }
         .subscribe-btn { background: #e0e7ff; border: none; color: #0047cc; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
         body.dark .subscribe-btn { background: #334155; color: #93c5fd; }
@@ -70,12 +70,7 @@
         .salary { font-size: 1.15rem; font-weight: 700; color: #059669; margin-bottom: 6px; padding-right: 50px; }
         body.dark .salary { color: #34d399; }
         .company-block { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .logo-placeholder {
-            width: 40px; height: 40px; border-radius: 8px; background: #e0e7ff;
-            display: flex; align-items: center; justify-content: center; font-weight: 700;
-            font-size: 1.2rem; color: #0047cc; flex-shrink: 0; text-transform: uppercase;
-            overflow: hidden;
-        }
+        .logo-placeholder { width: 40px; height: 40px; border-radius: 8px; background: #e0e7ff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: #0047cc; flex-shrink: 0; text-transform: uppercase; overflow: hidden; }
         .logo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
         body.dark .logo-placeholder { background: #334155; color: #93c5fd; }
         .company-name { font-weight: 600; color: #334155; font-size: 0.9rem; }
@@ -111,6 +106,24 @@
         .footer-copy { color: #94a3b8; font-size: 0.8rem; }
         #backToTopBtn { display: none; position: fixed; bottom: 80px; right: 20px; z-index: 99; background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; }
         .theme-switch { position: fixed; bottom: 20px; right: 20px; background: #0047cc; color: white; border: none; border-radius: 40px; padding: 8px 16px; z-index: 100; cursor: pointer; font-size: 0.9rem; }
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .filters-grid { grid-template-columns: 1fr; }
+            .search-row { flex-direction: row; }
+            .search-input { font-size: 0.9rem; padding: 10px 14px; }
+            .search-btn { padding: 0 20px; font-size: 0.9rem; height: 42px; }
+            .subscription-row { flex-direction: column; align-items: stretch; }
+            .subscribe-btn { width: 100%; text-align: center; }
+            .theme-switch { bottom: 10px; right: 10px; padding: 6px 12px; font-size: 0.8rem; }
+            #backToTopBtn { bottom: 70px; right: 10px; width: 38px; height: 38px; font-size: 1.1rem; }
+            .vacancy-card { padding: 12px 14px; }
+            .job-title { font-size: 1rem; }
+            .salary { font-size: 1rem; }
+            .card-actions { flex-direction: column; align-items: stretch; }
+            .btn-respond, .btn-call, .btn-email, .btn-contact { justify-content: center; }
+            .save-btn { top: 8px; right: 8px; width: 30px; height: 30px; font-size: 0.9rem; }
+            .logo-placeholder { width: 34px; height: 34px; font-size: 1rem; }
+        }
     </style>
 </head>
 <body class="light">
