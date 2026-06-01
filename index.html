@@ -156,25 +156,20 @@
 </div>
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
 <button id="themeToggle" class="theme-switch"><i class="fas fa-moon"></i> Тёмная тема</button>
-<script src="api.js?v=3"></script>
+<script src="api.js?v=4"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     let allVacancies=[],filteredVacancies=[],displayedCount=0,currentSort='publication_time',map=null;
     const PAGE_SIZE=20;
     let savedVacancies=JSON.parse(localStorage.getItem('savedVacancies'))||[];
     let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];
-    // ВСЕГДА фильтруем по России (area=113)
     let currentArea='113';
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),loadMoreBtn=document.getElementById('loadMoreBtn'),loadMoreWrapper=document.getElementById('loadMoreWrapper'),filterCity=document.getElementById('filterCity'),filterExperience=document.getElementById('filterExperience'),filterEmployment=document.getElementById('filterEmployment'),filterSalaryFrom=document.getElementById('filterSalaryFrom'),sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),resetButton=document.getElementById('resetButton'),themeToggle=document.getElementById('themeToggle'),historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),backToTopBtn=document.getElementById('backToTopBtn'),subscribeBtn=document.getElementById('subscribeBtn'),subscribeEmail=document.getElementById('subscribeEmail'),viewListBtn=document.getElementById('viewListBtn'),viewMapBtn=document.getElementById('viewMapBtn'),mapContainer=document.getElementById('mapContainer');
     renderHistory();loadTheme();performSearch(true);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
     searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch(true,true)});
     loadMoreBtn.addEventListener('click',loadMore);
-    filterCity.addEventListener('change',()=>{
-        // Если выбран конкретный город, используем его код, иначе код России
-        currentArea=filterCity.value || '113';
-        performSearch(true,false);
-    });
+    filterCity.addEventListener('change',()=>{currentArea=filterCity.value||'113';performSearch(true,false)});
     filterExperience.addEventListener('change',applyFilters);
     filterEmployment.addEventListener('change',applyFilters);
     filterSalaryFrom.addEventListener('input',applyFilters);
