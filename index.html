@@ -7,6 +7,8 @@
     <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- PWA: ссылка на манифест -->
+    <link rel="manifest" href="manifest.json">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #f3f4f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; padding: 0 16px 24px; color: #0f172a; display: flex; flex-direction: column; min-height: 100vh; transition: background 0.2s, color 0.2s; }
@@ -51,7 +53,6 @@
         .search-btn:disabled { opacity: 0.7; cursor: wait; }
         .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 16px; }
         .filter-group { min-width: 0; }
-        /* 🔵 СИНИЕ ЛЕЙБЛЫ */
         .filter-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #0047cc; margin-bottom: 4px; }
         body.dark .filter-group label { color: #93c5fd; }
         .filter-select, .filter-input-small { width: 100%; padding: 8px 12px; border-radius: 12px; font-size: 0.85rem; border: 1px solid #cbd5e1; background: white; outline: none; color: inherit; }
@@ -223,6 +224,20 @@
 </div>
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
 <button id="themeToggle" class="theme-switch"><i class="fas fa-moon"></i> Тёмная тема</button>
+
+<!-- PWA: Регистрация сервис-воркера -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        console.log('ServiceWorker registered');
+      }).catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
+
 <script>
     // ⚙️ НАСТРОЙКА ПУТИ: измените эту переменную, если сайт переедет в корень домена или другую папку.
     // Например, для корня домена: const BASE_PATH = '';
@@ -506,7 +521,6 @@
             if(vac.phone){contactButton=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation()"><i class="fas fa-phone-alt"></i> Позвонить</a>`}
             else if(vac.email){contactButton=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation()"><i class="fas fa-envelope"></i> Написать</a>`}
             const logoSrc=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}">`:vac.logoLetter;
-            // Динамическая ссылка для кнопки "Поделиться"
             const shareUrl = `${window.location.origin}${BASE_PATH}/vacancy.html?id=${vac.id}`;
             card.innerHTML=`<button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation()">Откликнуться</button>${contactButton}<button class="btn-contact share-card-btn" data-link="${shareUrl}"><i class="fas fa-share-alt"></i> Поделиться</button></div>`;
             vacanciesContainer.appendChild(card);
