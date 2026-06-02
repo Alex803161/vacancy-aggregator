@@ -11,7 +11,6 @@
     <meta property="og:site_name" content="Ваканса" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- PWA: ссылка на манифест -->
     <link rel="manifest" href="manifest.json">
     <style>
         body {
@@ -71,10 +70,23 @@
             .map-container { height: 250px; }
         }
     </style>
-    <!-- Микроразметка вакансии (JSON-LD) -->
     <script type="application/ld+json" id="jobPostingSchema"></script>
 </head>
 <body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109600838', 'ym');
+
+    ym(109600838, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109600838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <div class="container">
     <div class="header">
         <a href="index.html"><i class="fas fa-arrow-left"></i> На главную</a>
@@ -88,7 +100,6 @@
     </div>
 </div>
 
-<!-- PWA: Регистрация сервис-воркера -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
