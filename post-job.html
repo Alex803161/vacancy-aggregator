@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить вакансию – Ваканса</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f7f9fc;
+            color: #1a2c3e;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .sub {
+            color: #5f7f92;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #e2edf2;
+            padding-bottom: 16px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cfdfe9;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .premium-option {
+            background: #fff6e5;
+            border: 1px solid #f5b042;
+            border-radius: 20px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .premium-option input {
+            width: auto;
+            transform: scale(1.2);
+            margin-right: 8px;
+        }
+        .btn-submit {
+            background: #2c6e9e;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background: #1f557d;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #2c6e9e;
+            text-decoration: none;
+        }
+        body.dark {
+            background: #0e141b;
+        }
+        body.dark .container {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+        body.dark input, body.dark textarea, body.dark select {
+            background: #2d3a4e;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c6e9e;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i> Тёмная</button>
+<div class="container">
+    <h1><i class="fas fa-plus-circle"></i> Добавить вакансию</h1>
+    <div class="sub">Разместите вакансию бесплатно или выберите премиум-размещение</div>
+
+    <form id="jobForm">
+        <div class="form-group">
+            <label>Название вакансии *</label>
+            <input type="text" id="title" required placeholder="Например: Веб-разработчик">
+        </div>
+        <div class="form-group">
+            <label>Компания *</label>
+            <input type="text" id="company" required placeholder="ООО Ромашка">
+        </div>
+        <div class="form-group">
+            <label>Город</label>
+            <input type="text" id="city" placeholder="Москва">
+        </div>
+        <div class="form-group">
+            <label>Зарплата</label>
+            <input type="text" id="salary" placeholder="от 100 000 ₽">
+        </div>
+        <div class="form-group">
+            <label>Описание вакансии</label>
+            <textarea id="description" placeholder="Обязанности, требования, условия..."></textarea>
+        </div>
+
+        <div class="premium-option">
+            <input type="checkbox" id="premiumCheckbox">
+            <label for="premiumCheckbox" style="margin:0; font-weight:600;">⭐ Премиум-размещение (выделение золотом)</label>
+            <span style="font-size:0.8rem; margin-left:auto;">+ будет видно на главной</span>
+        </div>
+
+        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Опубликовать вакансию</button>
+    </form>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+</div>
+
+<script>
+    // Тёмная тема (синхронизация)
+    function initTheme() {
+        const isDark = localStorage.getItem('theme_dark') === 'true';
+        if (isDark) document.body.classList.add('dark');
+        const btn = document.getElementById('themeToggle');
+        btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
+    }
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('theme_dark', isDark);
+        const btn = document.getElementById('themeToggle');
+        btn.innerHTML = isDark ? '<i class="fas fa-sun"></i> Светлая' : '<i class="fas fa-moon"></i> Тёмная';
+    }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    initTheme();
+
+    // Обработчик формы
+    const form = document.getElementById('jobForm');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const job = {
+            id: Date.now(),
+            title: document.getElementById('title').value.trim(),
+            company: document.getElementById('company').value.trim(),
+            city: document.getElementById('city').value.trim(),
+            salary: document.getElementById('salary').value.trim(),
+            description: document.getElementById('description').value.trim(),
+            isPremium: document.getElementById('premiumCheckbox').checked,
+            timestamp: new Date().toISOString()
+        };
+        if (!job.title || !job.company) {
+            alert('Заполните название вакансии и компанию');
+            return;
+        }
+        const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
+        existing.push(job);
+        localStorage.setItem('direct_jobs', JSON.stringify(existing));
+        alert('✅ Вакансия успешно добавлена! Она появится на главной странице после обновления.');
+        form.reset();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансия — Ваканса</title>
+    <!-- Статические OG-теги для краулеров без JS. При смене домена замените 'alex803161.github.io' на свой -->
+    <meta property="og:title" content="Вакансия на Вакансе" />
+    <meta property="og:image" content="https://alex803161.github.io/vacancy-aggregator/favicon.svg" />
+    <meta property="og:description" content="Удобный поиск работы. Найдите свою идеальную вакансию!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ваканса" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6; color: #0f172a; padding: 20px; margin: 0;
+        }
+        body.dark { background: #0f172a; color: #e2e8f0; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        body.dark .container { background: #1e293b; }
+        .header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
+        .header a { text-decoration: none; color: #0047cc; font-weight: bold; }
+        h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .salary { font-size: 1.4rem; font-weight: 700; color: #059669; margin-bottom: 16px; }
+        body.dark .salary { color: #34d399; }
+        .details p { margin: 8px 0; }
+        .actions { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; align-items: center; }
+        .btn {
+            padding: 10px 20px; border-radius: 20px; font-weight: 600; border: none; cursor: pointer;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #0047cc; color: white; }
+        .btn-call {
+            background: linear-gradient(180deg, #10b981 0%, #059669 100%); color: white;
+            box-shadow: 0 4px 10px rgba(16,185,129,0.4);
+        }
+        .btn-map {
+            background: #eef2ff; color: #0047cc; border: 1px solid #cbd5e1;
+        }
+        .btn-map:hover { background: #dbeafe; }
+        body.dark .btn-map { background: #334155; color: #93c5fd; border-color: #475569; }
+        .btn-secondary { background: #e2e8f0; color: #334155; }
+        body.dark .btn-secondary { background: #334155; color: #e2e8f0; }
+        .map-container {
+            height: 350px; border-radius: 16px; overflow: hidden; margin: 20px 0;
+            display: none; border: 1px solid #e2e8f0;
+        }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .map-actions { margin-top: 10px; font-size: 0.9rem; }
+        .similar { margin-top: 30px; }
+        .similar h3 { margin-bottom: 12px; }
+        .similar-card {
+            background: #f8fafc; border-radius: 12px; padding: 12px; margin-bottom: 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; transition: box-shadow 0.2s;
+        }
+        .similar-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        body.dark .similar-card { background: #2d3a4e; }
+        .similar-card span:first-child { color: #0047cc; font-weight: 600; }
+        body.dark .similar-card span:first-child { color: #60a5fa; }
+        .similar-card span:last-child { color: #059669; }
+        body.dark .similar-card span:last-child { color: #34d399; }
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            h2 { font-size: 1.4rem; }
+            .actions { flex-direction: column; align-items: stretch; }
+            .map-container { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> На главную</a>
+        <h1 style="font-size:1.5rem; margin:0;">Ваканса</h1>
+    </div>
+    <div id="vacancyContent">Загрузка...</div>
+    <div id="map" class="map-container"></div>
+    <div class="similar">
+        <h3>Похожие вакансии</h3>
+        <div id="similarContainer"></div>
+    </div>
+</div>
+
+<script>
+    // ⚙️ НАСТРОЙКА ПУТИ: измените эту переменную, если сайт переедет в корень домена или другую папку.
+    const BASE_PATH = '/vacancy-aggregator';
+
+    const API_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
+
+    async function fetchVacanciesFromAPI(query, filters = {}) {
+        const params = new URLSearchParams();
+        if (query) params.set('text', query);
+        if (filters.per_page) params.set('per_page', filters.per_page);
+        if (filters.page !== undefined) params.set('page', filters.page);
+        if (filters.area) params.set('area', filters.area);
+        const url = `${API_URL}?${params.toString()}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        if (data && Array.isArray(data.items)) return data.items;
+        if (Array.isArray(data)) return data;
+        return [];
+    }
+
+    function formatSalary(v) {
+        if (!v.salary_from && !v.salary_to) return 'З/П не указана';
+        let parts = [];
+        if (v.salary_from) parts.push('от ' + v.salary_from.toLocaleString());
+        if (v.salary_to) parts.push('до ' + v.salary_to.toLocaleString());
+        let result = parts.join(' ');
+        if (v.salary_currency) {
+            result += ' ' + (v.salary_currency === 'RUR' ? '₽' : v.salary_currency);
+        }
+        return result;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const vacancyId = urlParams.get('id');
+
+    async function loadVacancy() {
+        let vacancy = null;
+
+        const stored = localStorage.getItem('selectedVacancy');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                if (parsed.id == vacancyId || !vacancyId) {
+                    vacancy = parsed;
+                }
+            } catch (e) {}
+        }
+
+        if (!vacancy && vacancyId) {
+            try {
+                const items = await fetchVacanciesFromAPI('', { per_page: 100 });
+                vacancy = items.find(v => v.id == vacancyId);
+            } catch (e) {
+                console.error('Ошибка поиска вакансии по ID', e);
+            }
+        }
+
+        if (vacancy) {
+            // Динамически обновляем OG-теги для мессенджеров, которые выполняют JS
+            document.title = `${vacancy.name || vacancy.title} — Ваканса`;
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.setAttribute('content', `${vacancy.name || vacancy.title} — Ваканса`);
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc && vacancy.employer) {
+                ogDesc.setAttribute('content', `Компания: ${vacancy.employer}. Город: ${vacancy.area || ''}`);
+            }
+            // Устанавливаем динамический og:image на случай, если JS выполняется
+            const ogImage = document.querySelector('meta[property="og:image"]');
+            if (ogImage) {
+                ogImage.setAttribute('content', `${window.location.origin}${BASE_PATH}/favicon.svg`);
+            }
+
+            displayVacancy(vacancy);
+            loadSimilar(vacancy.name || vacancy.title);
+        } else {
+            document.getElementById('vacancyContent').innerHTML = '<p>Вакансия не найдена. <a href="index.html">Вернуться к поиску</a></p>';
+        }
+    }
+
+    function displayVacancy(v) {
+        const content = document.getElementById('vacancyContent');
+        const salary = formatSalary(v);
+        const phone = v.phone || '';
+        const email = v.email || '';
+        const hasCoords = v.lat && v.lng;
+
+        let mapButtonsHTML = '';
+        if (hasCoords) {
+            mapButtonsHTML = `
+                <button class="btn btn-map" onclick="showMap(${v.lat}, ${v.lng})"><i class="fas fa-map-marker-alt"></i> Показать на карте</button>
+                <a href="https://yandex.ru/maps/?ll=${v.lng},${v.lat}&z=15&pt=${v.lng},${v.lat},pm2rdl" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size:0.9rem;">Открыть в Яндекс.Картах</a>
+            `;
+        }
+
+        content.innerHTML = `
+            <h2>${escapeHtml(v.name || v.title || 'Без названия')}</h2>
+            <div class="salary">${salary}</div>
+            <p><strong>Компания:</strong> ${escapeHtml(v.employer || v.company || 'Не указана')}</p>
+            <p><strong>Город:</strong> ${escapeHtml(v.area || v.city || 'Не указан')}</p>
+            <p><strong>Опыт:</strong> ${escapeHtml(v.experience || 'Не указан')}</p>
+            ${v.employment ? `<p><strong>Тип занятости:</strong> ${escapeHtml(v.employment)}</p>` : ''}
+            ${v.schedule ? `<p><strong>График:</strong> ${escapeHtml(v.schedule)}</p>` : ''}
+            <hr>
+            <div>${v.snippet || v.description || ''}</div>
+            ${phone ? `<p><strong>Телефон:</strong> <a href="tel:${phone}">${phone}</a></p>` : ''}
+            ${email ? `<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>` : ''}
+            <div class="actions">
+                <a href="${v.url || v.link || '#'}" target="_blank" class="btn btn-primary">Откликнуться на hh.ru</a>
+                ${phone ? `<a href="tel:${phone}" class="btn btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>` : ''}
+                ${mapButtonsHTML}
+                <button onclick="history.back()" class="btn btn-secondary">Назад</button>
+            </div>
+        `;
+    }
+
+    window.showMap = function(lat, lng) {
+        const mapDiv = document.getElementById('map');
+        mapDiv.style.display = 'block';
+        mapDiv.innerHTML = `<iframe src="https://yandex.ru/map-widget/v1/?ll=${lng},${lat}&z=15&pt=${lng},${lat},pm2rdl" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>`;
+        mapDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    async function loadSimilar(query) {
+        try {
+            const items = await fetchVacanciesFromAPI(query, { per_page: 5 });
+            const container = document.getElementById('similarContainer');
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p>Похожие вакансии не найдены</p>';
+                return;
+            }
+            container.innerHTML = items.map(v => {
+                const title = v.name || v.title || 'Без названия';
+                const salary = formatSalary(v);
+                const link = `${BASE_PATH}/vacancy.html?id=${v.id}`;
+                return `
+                    <div class="similar-card" onclick="window.location.href='${link}'">
+                        <span>${escapeHtml(title)}</span>
+                        <span>${salary}</span>
+                    </div>
+                `;
+            }).join('');
+        } catch(e) {
+            document.getElementById('similarContainer').innerHTML = '<p>Не удалось загрузить похожие вакансии.</p>';
+        }
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    loadVacancy();
+</script>
+</body>
+</html>

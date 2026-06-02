@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Test API</title>
+</head>
+<body>
+    <h2>Результаты поиска "кладовщик"</h2>
+    <div id="output"></div>
+    <script src="api.js?v=<?php echo time(); ?>"></script>
+    <script>
+        setTimeout(async () => {
+            const res = await fetchVacanciesFromAPI('кладовщик');
+            document.getElementById('output').innerHTML = res.length
+                ? res.slice(0,5).map(v => `<p><b>${v.title}</b> - ${v.salary} (${v.city})</p>`).join('')
+                : '<p>Ничего не найдено (демо не используется)</p>';
+        }, 1000);
+    </script>
+</body>
+</html>

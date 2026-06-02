@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alex803161.github.io/vacancy-aggregator/sitemap.xml
