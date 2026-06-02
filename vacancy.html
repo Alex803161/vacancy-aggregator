@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вакансия — Ваканса</title>
-    <!-- Статические OG-теги для краулеров без JS. При смене домена замените 'alex803161.github.io' на свой -->
     <meta property="og:title" content="Вакансия на Вакансе" />
     <meta property="og:image" content="https://alex803161.github.io/vacancy-aggregator/favicon.svg" />
     <meta property="og:description" content="Удобный поиск работы. Найдите свою идеальную вакансию!" />
@@ -12,6 +11,8 @@
     <meta property="og:site_name" content="Ваканса" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- PWA: ссылка на манифест -->
+    <link rel="manifest" href="manifest.json">
     <style>
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -70,6 +71,8 @@
             .map-container { height: 250px; }
         }
     </style>
+    <!-- Микроразметка вакансии (JSON-LD) -->
+    <script type="application/ld+json" id="jobPostingSchema"></script>
 </head>
 <body>
 <div class="container">
@@ -85,10 +88,21 @@
     </div>
 </div>
 
+<!-- PWA: Регистрация сервис-воркера -->
 <script>
-    // ⚙️ НАСТРОЙКА ПУТИ: измените эту переменную, если сайт переедет в корень домена или другую папку.
-    const BASE_PATH = '/vacancy-aggregator';
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        console.log('ServiceWorker registered');
+      }).catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
 
+<script>
+    const BASE_PATH = '/vacancy-aggregator';
     const API_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
 
     async function fetchVacanciesFromAPI(query, filters = {}) {
@@ -144,7 +158,6 @@
         }
 
         if (vacancy) {
-            // Динамически обновляем OG-теги для мессенджеров, которые выполняют JS
             document.title = `${vacancy.name || vacancy.title} — Ваканса`;
             const ogTitle = document.querySelector('meta[property="og:title"]');
             if (ogTitle) ogTitle.setAttribute('content', `${vacancy.name || vacancy.title} — Ваканса`);
@@ -152,13 +165,13 @@
             if (ogDesc && vacancy.employer) {
                 ogDesc.setAttribute('content', `Компания: ${vacancy.employer}. Город: ${vacancy.area || ''}`);
             }
-            // Устанавливаем динамический og:image на случай, если JS выполняется
             const ogImage = document.querySelector('meta[property="og:image"]');
             if (ogImage) {
                 ogImage.setAttribute('content', `${window.location.origin}${BASE_PATH}/favicon.svg`);
             }
 
             displayVacancy(vacancy);
+            addJobPostingSchema(vacancy);
             loadSimilar(vacancy.name || vacancy.title);
         } else {
             document.getElementById('vacancyContent').innerHTML = '<p>Вакансия не найдена. <a href="index.html">Вернуться к поиску</a></p>';
@@ -230,6 +243,40 @@
         } catch(e) {
             document.getElementById('similarContainer').innerHTML = '<p>Не удалось загрузить похожие вакансии.</p>';
         }
+    }
+
+    function addJobPostingSchema(v) {
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "JobPosting",
+            "title": v.name || v.title,
+            "description": v.snippet || v.description || "",
+            "datePosted": v.published_at,
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": v.employer || v.company
+            },
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": v.area || v.city
+                }
+            }
+        };
+        if (v.salary_from || v.salary_to) {
+            schema.baseSalary = {
+                "@type": "MonetaryAmount",
+                "currency": v.salary_currency || "RUR",
+                "value": {
+                    "@type": "QuantitativeValue",
+                    "minValue": v.salary_from,
+                    "maxValue": v.salary_to,
+                    "unitText": "MONTH"
+                }
+            };
+        }
+        document.getElementById('jobPostingSchema').textContent = JSON.stringify(schema, null, 2);
     }
 
     function escapeHtml(text) {
