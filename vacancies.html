@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Все вакансии — Ваканса</title>
+    <meta name="description" content="Полный список вакансий России. Поиск работы, просмотр всех предложений.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f3f4f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; padding: 0 16px 24px; color: #0f172a; display: flex; flex-direction: column; min-height: 100vh; transition: background 0.2s, color 0.2s; }
+        body.dark { background: #0f172a; color: #e2e8f0; }
+        .container { max-width: 1280px; margin: 0 auto; width: 100%; flex: 1; }
+        .header { text-align: center; margin: 28px 0 20px; }
+        .header h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #0047cc, #3b82f6); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 6px; }
+        body.dark .header h1 { background: linear-gradient(135deg, #60a5fa, #3b82f6); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; }
+        body.dark .page-title { color: #f1f5f9; }
+        .breadcrumbs { margin-bottom: 16px; font-size: 0.9rem; color: #64748b; }
+        .breadcrumbs a { color: #0047cc; text-decoration: none; }
+        body.dark .breadcrumbs { color: #9ca3af; }
+        .vacancy-card { background: white; border-radius: 16px; padding: 16px 20px; border: 1px solid #edf2f7; position: relative; cursor: pointer; transition: box-shadow 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.03); margin-bottom: 12px; }
+        body.dark .vacancy-card { background: #1e293b; border-color: #334155; }
+        .job-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .salary { font-size: 1rem; font-weight: 700; color: #059669; }
+        body.dark .salary { color: #34d399; }
+        .company { color: #334155; font-size: 0.9rem; }
+        body.dark .company { color: #f1f5f9; }
+        .load-more { text-align: center; margin-top: 20px; }
+        .load-more-btn { background: white; border: 2px solid #0047cc; color: #0047cc; padding: 12px 32px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .load-more-btn:disabled { background: #f1f5f9; color: #94a3b8; border-color: #cbd5e1; }
+        body.dark .load-more-btn { background: #1e293b; border-color: #475569; color: #e2e8f0; }
+        @media (max-width: 768px) { .vacancy-card { padding: 12px 14px; } }
+    </style>
+    <script type="application/ld+json" id="itemListSchema"></script>
+    <script type="application/ld+json" id="breadcrumbSchema"></script>
+</head>
+<body class="light">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109600838', 'ym');
+
+    ym(109600838, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109600838" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<div class="container">
+    <div class="header"><h1>💙 Ваканса</h1></div>
+    <div class="page-title">Все вакансии</div>
+    <div class="breadcrumbs">
+        <a href="index.html">Главная</a> &rsaquo; Все вакансии
+    </div>
+    <div id="vacanciesContainer"></div>
+    <div class="load-more" id="loadMoreWrapper" style="display:none;">
+        <button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button>
+    </div>
+</div>
+
+<script>
+    const BASE_PATH = '/vacancy-aggregator';
+    const API_URL = "https://functions.yandexcloud.net/d4enif5klq871kh78jdp";
+    const PAGE_SIZE = 20;
+    let allItems = [];
+    let displayedCount = 0;
+
+    async function fetchVacancies(page = 0) {
+        const params = new URLSearchParams({
+            area: '113',
+            per_page: PAGE_SIZE,
+            page: page,
+            order_by: 'publication_time'
+        });
+        const url = `${API_URL}?${params.toString()}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
+        return data.items || [];
+    }
+
+    function renderVacancy(v) {
+        const salary = formatSalary(v);
+        const title = v.name || 'Без названия';
+        const employer = v.employer || 'Не указана';
+        const area = v.area || '';
+        const link = `${BASE_PATH}/vacancy.html?id=${v.id}`;
+        return `
+            <div class="vacancy-card" onclick="window.open('${link}', '_blank')">
+                <div class="job-title">${escapeHtml(title)}</div>
+                <div class="salary">${salary}</div>
+                <div class="company">${escapeHtml(employer)} — ${escapeHtml(area)}</div>
+            </div>
+        `;
+    }
+
+    function formatSalary(v) {
+        if (!v.salary_from && !v.salary_to) return 'З/П не указана';
+        let parts = [];
+        if (v.salary_from) parts.push('от ' + v.salary_from.toLocaleString());
+        if (v.salary_to) parts.push('до ' + v.salary_to.toLocaleString());
+        let result = parts.join(' ');
+        if (v.salary_currency) result += ' ' + (v.salary_currency === 'RUR' ? '₽' : v.salary_currency);
+        return result;
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    let currentPage = 0;
+    const container = document.getElementById('vacanciesContainer');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const loadMoreWrapper = document.getElementById('loadMoreWrapper');
+
+    async function loadMore() {
+        const items = await fetchVacancies(currentPage);
+        if (items.length === 0) {
+            loadMoreBtn.textContent = 'Больше нет вакансий';
+            loadMoreBtn.disabled = true;
+            return;
+        }
+        allItems.push(...items);
+        container.innerHTML += items.map(renderVacancy).join('');
+        displayedCount += items.length;
+        currentPage++;
+        loadMoreWrapper.style.display = 'block';
+        if (items.length < PAGE_SIZE) {
+            loadMoreBtn.textContent = 'Больше нет вакансий';
+            loadMoreBtn.disabled = true;
+        }
+        updateItemListSchema();
+    }
+
+    loadMoreBtn.addEventListener('click', loadMore);
+
+    (async () => {
+        await loadMore();
+        addBreadcrumbSchema();
+    })();
+
+    function updateItemListSchema() {
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": allItems.map((v, i) => ({
+                "@type": "ListItem",
+                "position": i + 1,
+                "url": `${window.location.origin}${BASE_PATH}/vacancy.html?id=${v.id}`
+            }))
+        };
+        document.getElementById('itemListSchema').textContent = JSON.stringify(schema, null, 2);
+    }
+
+    function addBreadcrumbSchema() {
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Главная",
+                    "item": `${window.location.origin}${BASE_PATH}/index.html`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Все вакансии",
+                    "item": window.location.href
+                }
+            ]
+        };
+        document.getElementById('breadcrumbSchema').textContent = JSON.stringify(schema, null, 2);
+    }
+</script>
+</body>
+</html>

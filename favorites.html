@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное — Ваканса</title>
+    <meta name="description" content="Сохранённые вакансии на Вакансе.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f3f4f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; padding: 0 16px 24px; color: #0f172a; min-height: 100vh; transition: background 0.2s, color 0.2s; }
+        body.dark { background: #0f172a; color: #e2e8f0; }
+        .container { max-width: 1280px; margin: 0 auto; width: 100%; }
+        .header { text-align: center; margin: 28px 0 20px; }
+        .header h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #0047cc, #3b82f6); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; }
+        body.dark .page-title { color: #f1f5f9; }
+        .back-link { display: inline-block; margin-bottom: 16px; color: #0047cc; text-decoration: none; font-weight: bold; }
+        .vacancy-card { background: white; border-radius: 16px; padding: 16px 20px; border: 1px solid #edf2f7; position: relative; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); display: flex; justify-content: space-between; align-items: center; }
+        body.dark .vacancy-card { background: #1e293b; border-color: #334155; }
+        .vacancy-info { flex: 1; cursor: pointer; }
+        .job-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .salary { font-size: 1rem; font-weight: 700; color: #059669; }
+        body.dark .salary { color: #34d399; }
+        .company { color: #334155; font-size: 0.9rem; }
+        body.dark .company { color: #f1f5f9; }
+        .remove-btn { background: none; border: none; color: #ff6b6b; font-size: 1.5rem; cursor: pointer; padding: 8px; }
+        .empty { text-align: center; padding: 40px; color: #64748b; }
+    </style>
+</head>
+<body class="light">
+<div class="container">
+    <div class="header"><h1>💙 Ваканса</h1></div>
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+    <div class="page-title">Избранные вакансии</div>
+    <div id="favoritesContainer"></div>
+</div>
+
+<script>
+    const BASE_PATH = '/vacancy-aggregator';
+    // Загружаем сохранённые вакансии (массив объектов)
+    let savedVacancies = JSON.parse(localStorage.getItem('savedVacancies')) || [];
+    const container = document.getElementById('favoritesContainer');
+
+    function formatSalary(v) {
+        if (!v.salary_from && !v.salary_to) return 'З/П не указана';
+        let parts = [];
+        if (v.salary_from) parts.push('от ' + v.salary_from.toLocaleString());
+        if (v.salary_to) parts.push('до ' + v.salary_to.toLocaleString());
+        let result = parts.join(' ');
+        if (v.salary_currency) result += ' ' + (v.salary_currency === 'RUR' ? '₽' : v.salary_currency);
+        return result;
+    }
+
+    function renderFavorites() {
+        if (savedVacancies.length === 0) {
+            container.innerHTML = '<div class="empty">У вас пока нет избранных вакансий. <a href="index.html">Найти вакансии</a></div>';
+            return;
+        }
+        container.innerHTML = savedVacancies.map(v => {
+            const title = v.title || v.name || 'Без названия';
+            const company = v.company || v.employer || 'Не указана';
+            const salary = v.salary || formatSalary(v);
+            const link = v.link || v.url || '#';
+            return `
+                <div class="vacancy-card" data-id="${v.id}">
+                    <div class="vacancy-info" onclick="window.open('${link}', '_blank')">
+                        <div class="job-title">${escapeHtml(title)}</div>
+                        <div class="salary">${salary}</div>
+                        <div class="company">${escapeHtml(company)}</div>
+                    </div>
+                    <button class="remove-btn" data-id="${v.id}" title="Удалить из избранного"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `;
+        }).join('');
+
+        // Обработчики удаления
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.dataset.id;
+                savedVacancies = savedVacancies.filter(v => v.id != id);
+                localStorage.setItem('savedVacancies', JSON.stringify(savedVacancies));
+                renderFavorites();
+            });
+        });
+    }
+
+    function escapeHtml(text) {
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Автоматическая тёмная тема
+    function applyAutoTheme() {
+        const hour = new Date().getHours();
+        const isDark = hour >= 20 || hour < 7; // тёмная с 20:00 до 07:00
+        if (isDark) {
+            document.body.classList.add('dark');
+            document.body.classList.remove('light');
+        } else {
+            document.body.classList.add('light');
+            document.body.classList.remove('dark');
+        }
+    }
+    applyAutoTheme();
+
+    renderFavorites();
+</script>
+</body>
+</html>
