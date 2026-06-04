@@ -100,9 +100,11 @@
         <h1 style="font-size:1.5rem; margin:0;">Ваканса</h1>
     </div>
     <div class="breadcrumbs" id="breadcrumbs">
-        <a href="index.html">Главная</a> &rsaquo; <a href="vacancies.html">Все вакансии</a> &rsaquo; <span id="breadcrumbTitle">Вакансия</span>
+        <a href="index.html">Главная</a> &rsaquo; <a href="vacancies.html">Все вакансии</a> &rsaquo; <span id="breadcrumbTitle">Загрузка...</span>
     </div>
-    <div id="vacancyContent">Загрузка...</div>
+    <div id="vacancyContent">
+        <p style="text-align:center;padding:40px;">Загрузка...</p>
+    </div>
     <div id="map" class="map-container"></div>
     <div class="similar">
         <h3>Похожие вакансии</h3>
@@ -141,6 +143,16 @@
         return [];
     }
 
+    async function fetchVacancyById(id) {
+        // Прямой запрос к API HH через прокси (прокси умеет принимать параметр id)
+        // Используем общий запрос с текстом id (это костыль, но работает)
+        const items = await fetchVacanciesFromAPI(id, { per_page: 1 });
+        if (items.length > 0 && items[0].id == id) {
+            return items[0];
+        }
+        return null;
+    }
+
     function formatSalary(v) {
         if (!v.salary_from && !v.salary_to) return 'З/П не указана';
         let parts = [];
@@ -159,6 +171,7 @@
     async function loadVacancy() {
         let vacancy = null;
 
+        // Сначала пробуем localStorage
         const stored = localStorage.getItem('selectedVacancy');
         if (stored) {
             try {
@@ -169,13 +182,15 @@
             } catch (e) {}
         }
 
+        // Если нет – ищем прямым запросом по ID
         if (!vacancy && vacancyId) {
-            try {
-                const items = await fetchVacanciesFromAPI('', { per_page: 100 });
-                vacancy = items.find(v => v.id == vacancyId);
-            } catch (e) {
-                console.error('Ошибка поиска вакансии по ID', e);
-            }
+            vacancy = await fetchVacancyById(vacancyId);
+        }
+
+        // Запасной вариант: поиск среди 100 вакансий
+        if (!vacancy && vacancyId) {
+            const items = await fetchVacanciesFromAPI('', { per_page: 100 });
+            vacancy = items.find(v => v.id == vacancyId);
         }
 
         if (vacancy) {
@@ -198,6 +213,7 @@
             loadSimilar(vacancy.name || vacancy.title);
         } else {
             document.getElementById('vacancyContent').innerHTML = '<p>Вакансия не найдена. <a href="index.html">Вернуться к поиску</a></p>';
+            document.getElementById('breadcrumbTitle').textContent = 'Не найдена';
         }
     }
 
