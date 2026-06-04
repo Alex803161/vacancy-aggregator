@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Google Analytics 4 (ID: G-Y3LEHS2D4G) -->
+    <!-- Google Analytics 4 (ваш ID G-Y3LEHS2D4G) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -232,15 +232,6 @@
 
     const cityNameMap = { '1': 'Москва', '2': 'Санкт-Петербург' };
 
-    // ========== ОТПРАВКА СОБЫТИЙ В GA4 ==========
-    function sendGAEvent(eventName, params = {}) {
-        if (typeof gtag === "function") {
-            gtag("event", eventName, params);
-            console.log("GA4 event sent:", eventName, params);
-        }
-    }
-    // ============================================
-
     async function fetchVacanciesFromAPI(query,filters={}){
         const params=new URLSearchParams();
         if(query)params.set('text',query);
@@ -272,6 +263,13 @@
     const subscribeEmailInput = document.getElementById('subscribeEmailInput');
     const subscribeSubmitBtn = document.getElementById('subscribeSubmitBtn');
     const subscribeStatus = document.getElementById('subscribeStatus');
+
+    function sendGAEvent(eventName, params = {}) {
+        if (typeof gtag === "function") {
+            gtag("event", eventName, params);
+            console.log("GA4 event sent:", eventName, params);
+        }
+    }
 
     renderHistory();loadTheme();performSearch(true);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
@@ -344,10 +342,7 @@
             const filters={employment:filterEmployment.value,order_by:currentSort,area:currentArea,per_page:100,page:0};
             allVacancies=await fetchVacanciesFromAPI(query,filters);
             applyFilters();
-            
-            // Отправка события поиска в GA4
-            if (reset && query) sendGAEvent("search", { search_term: query });
-            
+            // Автопрокрутка к результатам на мобильных
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
                     vacanciesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
