@@ -19,15 +19,25 @@
         body.dark .header h1 { background: linear-gradient(135deg, #60a5fa, #3b82f6); background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: 0 8px 16px rgba(96,165,250,0.4), 0 4px 8px rgba(0,0,0,0.5); }
         .header p { color: #6b7280; font-size: 1rem; font-style: italic; }
         body.dark .header p { color: #9ca3af; }
+        
+        /* === УВЕЛИЧЕННОЕ СЕРДЕЧКО === */
         .logo-heart {
-            display: inline-block; width: 90px; height: 90px;
+            display: inline-block;
+            width: 140px;
+            height: 140px;
             background: repeating-linear-gradient(45deg, #0047cc 0px, #0047cc 6px, rgba(179,217,255,0.85) 6px, rgba(179,217,255,0.85) 12px);
             clip-path: path("M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z");
-            transform: scale(1.2); transform-origin: center;
+            transform-origin: center;
             box-shadow: 0 6px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.15);
-            flex-shrink: 0; vertical-align: middle; margin-top: 0;
+            flex-shrink: 0;
+            vertical-align: middle;
+            margin-top: 0;
         }
-        body.dark .logo-heart { background: repeating-linear-gradient(45deg, #60a5fa 0px, #60a5fa 6px, rgba(179,217,255,0.85) 6px, rgba(179,217,255,0.85) 12px); box-shadow: 0 6px 12px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4); }
+        body.dark .logo-heart {
+            background: repeating-linear-gradient(45deg, #60a5fa 0px, #60a5fa 6px, rgba(179,217,255,0.85) 6px, rgba(179,217,255,0.85) 12px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
+        }
+
         .search-section { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; border: 1px solid #e2e8f0; }
         body.dark .search-section { background: #1e293b; border-color: #334155; }
         .search-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; }
@@ -87,7 +97,7 @@
         .btn-contact { background: #f1f5f9; border: 1px solid #d1d5db; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
         body.dark .btn-contact { background: #334155; border-color: #475569; color: #e2e8f0; }
 
-        /* -- НОВАЯ СЕКЦИЯ ПОДПИСКИ -- */
+        /* -- СЕКЦИЯ ПОДПИСКИ -- */
         .subscribe-section { margin: 40px 0 20px; }
         .subscribe-card {
             background: white; border-radius: 24px; padding: 32px 28px;
@@ -182,7 +192,7 @@
     <div id="vacanciesContainer" class="vacancies-list"></div>
     <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
 
-    <!-- НОВАЯ СЕКЦИЯ ПОДПИСКИ -->
+    <!-- СЕКЦИЯ ПОДПИСКИ -->
     <div class="subscribe-section">
         <div class="subscribe-card">
             <div class="subscribe-icon"><i class="fas fa-heart"></i></div>
@@ -278,7 +288,6 @@
         goToVacancy(id);
     });
 
-    // Подписка
     subscribeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = subscribeEmailInput.value.trim();
@@ -317,7 +326,6 @@
         if(recordHistory)addToHistory(query);
         if(reset){vacanciesContainer.innerHTML='<div class="vacancy-card" style="height:100px; background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size:200% 100%; animation: shimmer 1.2s infinite;"></div>'.repeat(8);counterSpan.textContent='0'}
 
-        // UI-индикация загрузки на кнопке
         const originalHTML = searchBtn.innerHTML;
         searchBtn.disabled = true;
         searchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Поиск...';
@@ -326,7 +334,6 @@
             const filters={employment:filterEmployment.value,order_by:currentSort,area:currentArea,per_page:100,page:0};
             allVacancies=await fetchVacanciesFromAPI(query,filters);
             applyFilters();
-            // Автопрокрутка к результатам на мобильных
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
                     vacanciesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
