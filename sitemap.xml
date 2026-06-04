@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alex803161.github.io/vacancy-aggregator/</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>1.0</priority>
+    <loc>https://alex803161.github.io/vacancy-aggregator/index.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://alex803161.github.io/vacancy-aggregator/vacancy.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://alex803161.github.io/vacancy-aggregator/vacancies.html</loc>
+    <lastmod>2026-06-04</lastmod>
   </url>
   <url>
     <loc>https://alex803161.github.io/vacancy-aggregator/privacy.html</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-06-04</lastmod>
   </url>
   <url>
     <loc>https://alex803161.github.io/vacancy-aggregator/terms.html</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-06-04</lastmod>
   </url>
   <url>
     <loc>https://alex803161.github.io/vacancy-aggregator/contacts.html</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-06-04</lastmod>
   </url>
 </urlset>
