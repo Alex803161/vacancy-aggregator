@@ -63,6 +63,15 @@
         body.dark .similar-card span:first-child { color: #60a5fa; }
         .similar-card span:last-child { color: #059669; }
         body.dark .similar-card span:last-child { color: #34d399; }
+
+        /* Хлебные крошки */
+        .breadcrumbs {
+            margin-bottom: 16px; font-size: 0.9rem; color: #64748b;
+        }
+        .breadcrumbs a { color: #0047cc; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        body.dark .breadcrumbs { color: #9ca3af; }
+
         @media (max-width: 600px) {
             .container { padding: 20px; }
             h2 { font-size: 1.4rem; }
@@ -70,7 +79,9 @@
             .map-container { height: 250px; }
         }
     </style>
+    <!-- Микроразметка: вакансия (JobPosting) и хлебные крошки (BreadcrumbList) -->
     <script type="application/ld+json" id="jobPostingSchema"></script>
+    <script type="application/ld+json" id="breadcrumbSchema"></script>
 </head>
 <body>
 <!-- Yandex.Metrika counter -->
@@ -91,6 +102,10 @@
     <div class="header">
         <a href="index.html"><i class="fas fa-arrow-left"></i> На главную</a>
         <h1 style="font-size:1.5rem; margin:0;">Ваканса</h1>
+    </div>
+    <!-- Хлебные крошки -->
+    <div class="breadcrumbs" id="breadcrumbs">
+        <a href="index.html">Главная</a> &rsaquo; <a href="vacancies.html">Все вакансии</a> &rsaquo; <span id="breadcrumbTitle">Вакансия</span>
     </div>
     <div id="vacancyContent">Загрузка...</div>
     <div id="map" class="map-container"></div>
@@ -170,6 +185,7 @@
 
         if (vacancy) {
             document.title = `${vacancy.name || vacancy.title} — Ваканса`;
+            document.getElementById('breadcrumbTitle').textContent = vacancy.name || vacancy.title || 'Вакансия';
             const ogTitle = document.querySelector('meta[property="og:title"]');
             if (ogTitle) ogTitle.setAttribute('content', `${vacancy.name || vacancy.title} — Ваканса`);
             const ogDesc = document.querySelector('meta[property="og:description"]');
@@ -183,6 +199,7 @@
 
             displayVacancy(vacancy);
             addJobPostingSchema(vacancy);
+            addBreadcrumbSchema(vacancy);
             loadSimilar(vacancy.name || vacancy.title);
         } else {
             document.getElementById('vacancyContent').innerHTML = '<p>Вакансия не найдена. <a href="index.html">Вернуться к поиску</a></p>';
@@ -217,7 +234,7 @@
             ${phone ? `<p><strong>Телефон:</strong> <a href="tel:${phone}">${phone}</a></p>` : ''}
             ${email ? `<p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>` : ''}
             <div class="actions">
-                <a href="${v.url || v.link || '#'}" target="_blank" class="btn btn-primary">Откликнуться на hh.ru</a>
+                <a href="${v.url || v.link || '#'}" target="_blank" class="btn btn-primary" onclick="ym(109600838, 'reachGoal', 'respond_click');">Откликнуться на hh.ru</a>
                 ${phone ? `<a href="tel:${phone}" class="btn btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>` : ''}
                 ${mapButtonsHTML}
                 <button onclick="history.back()" class="btn btn-secondary">Назад</button>
@@ -288,6 +305,35 @@
             };
         }
         document.getElementById('jobPostingSchema').textContent = JSON.stringify(schema, null, 2);
+    }
+
+    function addBreadcrumbSchema(v) {
+        const title = v.name || v.title || 'Вакансия';
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Главная",
+                    "item": `${window.location.origin}${BASE_PATH}/index.html`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Все вакансии",
+                    "item": `${window.location.origin}${BASE_PATH}/vacancies.html`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": title,
+                    "item": window.location.href
+                }
+            ]
+        };
+        document.getElementById('breadcrumbSchema').textContent = JSON.stringify(schema, null, 2);
     }
 
     function escapeHtml(text) {
