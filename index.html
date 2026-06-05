@@ -233,7 +233,7 @@
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
 <button id="themeToggle" class="theme-switch"><i class="fas fa-moon"></i> Тёмная тема</button>
 <script>
-   const API_URL="https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
+    const API_URL="https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
     let allVacancies=[], filteredVacancies=[], displayedCount=0, currentSort='publication_time';
     const PAGE_SIZE=20;
     let savedVacancies=JSON.parse(localStorage.getItem('savedVacancies'))||[];
@@ -257,23 +257,24 @@
 
     const cityNameMap = { '1': 'Москва', '2': 'Санкт-Петербург' };
 
-   async function fetchVacanciesFromAPI(query, filters={}){
-    const params=new URLSearchParams();
-    if(query)params.set('text',query);
-    if(filters.area)params.set('area',filters.area);
-    if(filters.employment)params.set('employment',filters.employment);
-    if(filters.order_by)params.set('order_by',filters.order_by);
-    const perPage = filters.per_page || 30;
-    params.set('per_page', perPage);
-    if(filters.page!==undefined)params.set('page',filters.page);
-    const url=`${API_URL}?${params.toString()}`;
-    const response=await fetch(url);
-    if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    const data=await response.json();
-    if(data&&data.items&&Array.isArray(data.items))return data.items;
-    if(data&&Array.isArray(data))return data;
-    return[];
-}
+    async function fetchVacanciesFromAPI(query, filters={}){
+        const params=new URLSearchParams();
+        if(query)params.set('text',query);
+        if(filters.area)params.set('area',filters.area);
+        if(filters.employment)params.set('employment',filters.employment);
+        if(filters.order_by)params.set('order_by',filters.order_by);
+        const perPage = filters.per_page || 30;
+        params.set('per_page', perPage);
+        if(filters.page!==undefined)params.set('page',filters.page);
+        const url=`${API_URL}?${params.toString()}`;
+        const response=await fetch(url);
+        if(!response.ok)throw new Error(`HTTP ${response.status}`);
+        const data=await response.json();
+        if(data&&data.items&&Array.isArray(data.items))return data.items;
+        if(data&&Array.isArray(data))return data;
+        return[];
+    }
+
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),
         vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),
         loadMoreBtn=document.getElementById('loadMoreBtn'),loadMoreWrapper=document.getElementById('loadMoreWrapper'),
@@ -472,7 +473,9 @@
     }
 
     function enrich(v){
-        return{...v,title:v.name||'Без названия',company:v.employer||'Компания не указана',city:v.area||'',link:v.url||'#',experience:v.experience||'Не указан',employment:v.employment||'',schedule:v.schedule||'',salary:formatSalary(v),rating:v.employer_rating||(Math.random()*2+3).toFixed(1),reviews:v.employer_reviews||Math.floor(Math.random()*5000)+100,logoLetter:(v.employer||'А').charAt(0).toUpperCase(),logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(v.employer||'А').charCodeAt(0)%6],phone:v.phone||null,email:v.email||null,logoUrl:v.logo_url||null,publishedDate:formatPublishedDate(v.published_at)};
+        const employerName = typeof v.employer === 'object' ? (v.employer?.name || 'Компания не указана') : (v.employer || 'Компания не указана');
+        const employerLogo = v.employer?.logo_urls?.['90'] || v.employer?.logo_urls?.original || v.logo_url || null;
+        return {...v, title:v.name||'Без названия', company:employerName, city:v.area?.name||v.area||'', link:v.url||'#', experience:v.experience?.name||v.experience||'Не указан', employment:v.employment?.name||v.employment||'', schedule:v.schedule?.name||v.schedule||'', salary:formatSalary(v), rating:v.employer_rating||(Math.random()*2+3).toFixed(1), reviews:v.employer_reviews||Math.floor(Math.random()*5000)+100, logoLetter:(employerName||'А').charAt(0).toUpperCase(), logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(employerName||'А').charCodeAt(0)%6], phone:v.phone||null, email:v.email||null, logoUrl:employerLogo, publishedDate:formatPublishedDate(v.published_at)};
     }
 
     function formatPublishedDate(dateString){
