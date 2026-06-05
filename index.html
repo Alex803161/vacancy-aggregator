@@ -61,33 +61,30 @@
             .header-inner { flex-direction: column; align-items: stretch; }
             .search-box { flex-direction: column; }
         }
-        /* Блоки теперь вне main, стилизуем только их */
-        .employer-section, .contact-section {
+        /* Блоки-помощники — статичный футер */
+        .static-blocks {
             max-width: 1200px;
             margin: 20px auto;
-            padding: 30px;
+            padding: 0 20px;
+        }
+        .static-blocks .employer-section,
+        .static-blocks .contact-section {
+            background: #fff;
             border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .employer-section {
-            background: #fff;
-            border: 2px solid #1a73e8;
             text-align: center;
         }
-        .contact-section {
-            background: #fff;
-            border: 2px solid #ddd;
-            text-align: center;
-        }
-        body.dark .employer-section,
-        body.dark .contact-section {
+        .static-blocks .employer-section { border: 2px solid #1a73e8; }
+        .static-blocks .contact-section { border: 2px solid #ddd; }
+        body.dark .static-blocks .employer-section,
+        body.dark .static-blocks .contact-section {
             background: #2c2c2c !important;
             border-color: #555 !important;
         }
-        body.dark .employer-section h3,
-        body.dark .contact-section h3 { color: #8ab4f8 !important; }
-        body.dark .employer-section p,
-        body.dark .contact-section p { color: #ccc !important; }
+        body.dark .static-blocks h3 { color: #8ab4f8 !important; }
+        body.dark .static-blocks p { color: #ccc !important; }
     </style>
 </head>
 <body>
@@ -143,20 +140,22 @@
         </div>
     </main>
 
-    <!-- Блоки вынесены ЗА main — теперь они статичны -->
-    <div class="employer-section">
-        <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Для работодателей</h3>
-        <p style="margin-bottom:20px; color:#333; font-size:16px;">Разместите вакансию на hh.ru и получите доступ к тысячам соискателей.</p>
-        <a href="https://hh.ru/employer" target="_blank" rel="noopener" style="display:inline-block; padding:12px 24px; background:#1a73e8; color:#fff; border-radius:8px; text-decoration:none; font-weight:bold; font-size:16px;">Зарегистрироваться на hh.ru</a>
-    </div>
-    <div class="contact-section">
-        <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Написать нам</h3>
-        <p style="margin-bottom:20px; color:#666;">Есть вопросы или предложения? Мы ответим на вашу почту.</p>
-        <form action="https://formsubmit.co/visitaeff.a@yandex.ru" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto;">
-            <input type="email" name="email" placeholder="Ваш email" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
-            <textarea name="message" rows="4" placeholder="Ваше сообщение" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
-            <button type="submit" style="padding: 12px 24px; background: #1a73e8; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Отправить</button>
-        </form>
+    <!-- Статичные блоки, которые никогда не меняются -->
+    <div class="static-blocks">
+        <div class="employer-section">
+            <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Для работодателей</h3>
+            <p style="margin-bottom:20px; color:#333; font-size:16px;">Разместите вакансию на hh.ru и получите доступ к тысячам соискателей.</p>
+            <a href="https://hh.ru/employer" target="_blank" rel="noopener" style="display:inline-block; padding:12px 24px; background:#1a73e8; color:#fff; border-radius:8px; text-decoration:none; font-weight:bold; font-size:16px;">Зарегистрироваться на hh.ru</a>
+        </div>
+        <div class="contact-section">
+            <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Написать нам</h3>
+            <p style="margin-bottom:20px; color:#666;">Есть вопросы или предложения? Мы ответим на вашу почту.</p>
+            <form action="https://formsubmit.co/visitaeff.a@yandex.ru" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto;">
+                <input type="email" name="email" placeholder="Ваш email" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <textarea name="message" rows="4" placeholder="Ваше сообщение" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
+                <button type="submit" style="padding: 12px 24px; background: #1a73e8; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Отправить</button>
+            </form>
+        </div>
     </div>
 
     <script>
