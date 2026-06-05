@@ -2,156 +2,244 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Ваканса — детали вакансии</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансия - Ваканса</title>
     <style>
-        body { font-family: system-ui; background: #f3f4f6; margin: 0; padding: 20px; color: #0f172a; }
-        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 24px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1 { font-size: 1.8rem; margin-bottom: 8px; }
-        .salary { font-size: 1.5rem; color: #059669; font-weight: bold; margin: 12px 0; }
-        .company { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .logo { width: 48px; height: 48px; background: #e0e7ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; overflow: hidden; }
-        .logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-        .map-link { display: inline-block; margin-top: 8px; background: #0047cc; color: white; padding: 8px 16px; border-radius: 40px; text-decoration: none; font-weight: 600; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #0047cc; text-decoration: none; font-weight: 600; }
-        .description-block { margin: 20px 0; line-height: 1.7; }
-        .description-block ul { padding-left: 20px; }
-        .description-block li { margin-bottom: 6px; }
-        .skills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-        .skill-tag { background: #eef2ff; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; color: #0047cc; }
-        .contact-btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
-        .btn-call { background: #10b981; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
-        .btn-email { background: #3b82f6; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
-        .hh-link { display: block; margin-top: 24px; font-size: 0.8rem; color: #94a3b8; text-align: center; }
-        .hh-link a { color: #94a3b8; }
-        .info-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 0.9rem; color: #64748b; }
-        .info-row i { width: 18px; color: #0047cc; }
-        .loading { text-align: center; padding: 40px; color: #64748b; }
-        .error { text-align: center; padding: 40px; color: #dc2626; }
+        :root {
+            --bg: #f5f7fa;
+            --card-bg: #fff;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --link: #1a73e8;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --btn-bg: #1a73e8;
+            --btn-text: #fff;
+        }
+        .dark {
+            --bg: #121212;
+            --card-bg: #1e1e2f;
+            --text: #e0e0e0;
+            --text-secondary: #aaa;
+            --link: #8ab4f8;
+            --border: #2a2a3c;
+            --shadow: 0 4px 12px rgba(0,0,0,0.4);
+            --btn-bg: #8ab4f8;
+            --btn-text: #121212;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 4px 4px 4px 0;
+        }
+        .dark .badge { background: #2a3a5c; color: #8ab4f8; }
+        .btn {
+            display: inline-block;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 10px 24px;
+            border-radius: 24px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; text-decoration: none; }
+        .similar-list { display: flex; flex-direction: column; gap: 10px; }
+        .similar-item {
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+            transition: 0.2s;
+        }
+        .similar-item:hover { border-color: var(--link); }
+        #map { width: 100%; height: 250px; margin: 20px 0; border-radius: 12px; }
+        @media (max-width: 600px) {
+            .card { padding: 20px; }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к поиску</a>
-    <div id="vacancy-detail"><div class="loading"><i class="fas fa-spinner fa-pulse"></i> Загрузка...</div></div>
-</div>
-<script>
-    const API_URL = "https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
-    
-    function escapeHtml(str) {
-        if (!str) return '';
-        if (typeof str !== 'string') str = String(str);
-        return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m]);
-    }
-    
-    function formatSalary(v) {
-        const s = v.salary || v;
-        const from = s.from || s.salary_from || 0;
-        const to = s.to || s.salary_to || 0;
-        if (!from && !to) return 'Зарплата не указана';
-        let parts = [];
-        if (from) parts.push('от ' + from.toLocaleString());
-        if (to) parts.push('до ' + to.toLocaleString());
-        let result = parts.join(' ');
-        const curr = s.currency || s.salary_currency || '';
-        if (curr) result += ' ' + (curr === 'RUR' ? '₽' : curr);
-        return result;
-    }
-    
-    function formatDate(dateStr) {
-        if (!dateStr) return '—';
-        const d = new Date(dateStr);
-        return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-    
-    function showFallback(vacancy) {
-        const address = typeof vacancy.area === 'object' ? (vacancy.area?.name || '') : (vacancy.area || '');
-        const employerName = typeof vacancy.employer === 'object' ? (vacancy.employer?.name || 'Не указана') : (vacancy.employer || 'Не указана');
-        let mapLink = '';
-        if (address) {
-            mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
+    <div class="container">
+        <nav style="margin-bottom:20px;">
+            <a href="index.html">← Назад к поиску</a>
+        </nav>
+        <div id="vacancy-card" class="card">
+            <div id="loader" style="text-align:center; padding:40px;">Загрузка...</div>
+        </div>
+        <div id="map-card" class="card" style="display:none;">
+            <h3>Местоположение</h3>
+            <div id="map"></div>
+        </div>
+        <div id="similar-card" class="card">
+            <h3>Похожие вакансии</h3>
+            <div id="similar-list" class="similar-list">Загрузка...</div>
+        </div>
+        <div style="text-align:center; margin-top:20px; font-size:0.85rem; color:var(--text-secondary);">
+            <a href="https://hh.ru" target="_blank">Вакансии с hh.ru</a>
+        </div>
+    </div>
+
+    <script>
+        // Тёмная тема
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
         }
-        document.getElementById('vacancy-detail').innerHTML = `
-            <h1>${escapeHtml(vacancy.name || 'Без названия')}</h1>
-            <div class="salary">${formatSalary(vacancy)}</div>
-            <div class="company">
-                <div class="logo">${escapeHtml(employerName)[0]}</div>
-                <div><strong>${escapeHtml(employerName)}</strong></div>
-            </div>
-            <p><i class="fas fa-map-pin"></i> <strong>Адрес:</strong> ${escapeHtml(address) || 'Не указан'}</p>
-            ${mapLink ? `<p>${mapLink}</p>` : ''}
-            <p><i class="fas fa-briefcase"></i> <strong>Опыт:</strong> ${escapeHtml(vacancy.experience?.name || vacancy.experience || 'Не указан')}</p>
-            <p><i class="fas fa-clock"></i> <strong>Занятость:</strong> ${escapeHtml(vacancy.employment?.name || vacancy.employment || 'Не указана')}</p>
-            <p><i class="fas fa-calendar"></i> <strong>Опубликовано:</strong> ${formatDate(vacancy.published_at)}</p>
-            <button onclick="window.open('${vacancy.alternate_url || vacancy.url || '#'}', '_blank')" style="background:#059669; color:white; border:none; padding:10px 20px; border-radius:40px; cursor:pointer; font-weight:600;">Откликнуться</button>
-            <div class="hh-link">Источник: <a href="${vacancy.alternate_url || vacancy.url || '#'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
-        `;
-    }
-    
-    async function loadVacancy() {
-        const vacancy = JSON.parse(localStorage.getItem('selectedVacancy'));
-        if (!vacancy || !vacancy.id) {
-            document.getElementById('vacancy-detail').innerHTML = '<div class="error">Вакансия не найдена. <a href="index.html">Вернуться на главную</a></div>';
-            return;
+
+        const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+        const params = new URLSearchParams(window.location.search);
+        const vacancyId = params.get('id');
+        if (!vacancyId) {
+            document.getElementById('vacancy-card').innerHTML = '<p style="color:red;">Не указан ID вакансии</p>';
+            throw new Error('No ID');
         }
-        
-        try {
-            const response = await fetch(`${API_URL}?id=${vacancy.id}`);
-            if (!response.ok) throw new Error('Ошибка загрузки');
-            const full = await response.json();
-            
-            if (full.errors) {
-                showFallback(vacancy);
+
+        let currentVacancy = null;
+
+        async function fetchVacancy(id) {
+            const resp = await fetch(`${API_URL}?id=${id}`);
+            if (!resp.ok) throw new Error('Ошибка загрузки');
+            return resp.json();
+        }
+
+        async function loadSimilar(vacancy) {
+            const container = document.getElementById('similar-list');
+            if (!vacancy || !vacancy.name) {
+                container.innerHTML = '<p>Нет данных для поиска похожих</p>';
                 return;
             }
-            
-            const address = full.address ? (full.address.raw || full.address.city || '') : (full.area?.name || '');
-            let mapLink = '';
-            if (address) {
-                mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
+            try {
+                const resp = await fetch(`${API_URL}?text=${encodeURIComponent(vacancy.name)}&per_page=6&order_by=relevance`);
+                const data = await resp.json();
+                const items = (data.items || []).filter(v => v.id !== vacancy.id).slice(0, 5);
+                if (items.length === 0) {
+                    container.innerHTML = '<p>Похожих вакансий не найдено</p>';
+                    return;
+                }
+                container.innerHTML = items.map(v => {
+                    const salary = v.salary ?
+                        (v.salary.from ? `от ${v.salary.from}` : '') +
+                        (v.salary.to ? ` до ${v.salary.to}` : '') +
+                        ` ${v.salary.currency || ''}` : 'З/П не указана';
+                    return `
+                        <div class="similar-item">
+                            <a href="vacancy.html?id=${v.id}" style="font-weight:500;">${v.name}</a>
+                            <div style="font-size:0.9rem; color:var(--text-secondary);">${salary}</div>
+                            <small>${v.employer?.name || ''}</small>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                container.innerHTML = '<p>Ошибка загрузки похожих вакансий</p>';
+                console.error(e);
             }
-            
-            const employerName = full.employer?.name || 'Не указана';
-            const logoUrl = full.employer?.logo_urls ? (full.employer.logo_urls[90] || full.employer.logo_urls.original) : null;
-            const logoSrc = logoUrl ? `<img src="${logoUrl}" alt="${escapeHtml(employerName)}">` : employerName[0];
-            
-            const skills = full.key_skills || [];
-            const skillsHtml = skills.length ? `<div class="skills">${skills.map(s => `<span class="skill-tag">${escapeHtml(s.name)}</span>`).join('')}</div>` : '';
-            
-            const contacts = full.contacts || {};
-            let contactBtns = '';
-            if (contacts.phones && contacts.phones.length > 0) {
-                contactBtns += `<a href="tel:${contacts.phones[0]}" class="btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
-            }
-            if (contacts.email) {
-                contactBtns += `<a href="mailto:${contacts.email}" class="btn-email"><i class="fas fa-envelope"></i> Написать</a>`;
-            }
-            
-            document.getElementById('vacancy-detail').innerHTML = `
-                <h1>${escapeHtml(full.name || 'Без названия')}</h1>
-                <div class="salary">${formatSalary(full)}</div>
-                <div class="company">
-                    <div class="logo">${logoSrc}</div>
-                    <div><strong>${escapeHtml(employerName)}</strong></div>
-                </div>
-                ${address ? `<div class="info-row"><i class="fas fa-map-pin"></i> <span>${escapeHtml(address)}</span></div>` : ''}
-                ${mapLink ? mapLink : ''}
-                <div class="info-row"><i class="fas fa-briefcase"></i> <span>${escapeHtml(full.experience?.name || 'Не указан')}</span></div>
-                <div class="info-row"><i class="fas fa-clock"></i> <span>${escapeHtml(full.employment?.name || full.employment_form?.name || 'Не указана')}</span></div>
-                <div class="info-row"><i class="fas fa-calendar"></i> <span>${formatDate(full.published_at)}</span></div>
-                ${skillsHtml}
-                ${contactBtns ? `<div class="contact-btns">${contactBtns}</div>` : ''}
-                <div class="description-block">${full.description || '<p>Описание отсутствует</p>'}</div>
-                <div class="hh-link">Источник: <a href="${full.alternate_url || 'https://hh.ru'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
-            `;
-        } catch (e) {
-            console.error(e);
-            showFallback(vacancy);
         }
-    }
-    
-    loadVacancy();
-</script>
+
+        function renderVacancy(v) {
+            currentVacancy = v;
+            const card = document.getElementById('vacancy-card');
+            const salary = v.salary ?
+                (v.salary.from ? `от ${v.salary.from}` : '') +
+                (v.salary.to ? ` до ${v.salary.to}` : '') +
+                ` ${v.salary.currency || ''}` : 'З/П не указана';
+            const address = v.address?.raw || v.area?.name || '';
+            const experience = v.experience?.name || 'Не указан';
+            const employment = v.employment?.name || '';
+            const published = v.published_at ? new Date(v.published_at).toLocaleDateString('ru-RU') : '';
+            const skills = (v.key_skills || []).map(s => s.name).join(', ');
+            const description = v.description || '';
+
+            card.innerHTML = `
+                <h1 style="margin-bottom:10px;">${v.name}</h1>
+                <div style="font-size:1.5rem; font-weight:600; color:var(--link); margin-bottom:15px;">${salary}</div>
+                <div style="color:var(--text-secondary); margin-bottom:15px;">
+                    <div><strong>Компания:</strong> ${v.employer?.name || 'Не указана'}</div>
+                    <div><strong>Город:</strong> ${address}</div>
+                    <div><strong>Опыт:</strong> ${experience}</div>
+                    <div><strong>Занятость:</strong> ${employment}</div>
+                    <div><strong>Дата:</strong> ${published}</div>
+                </div>
+                ${skills ? `<div style="margin-bottom:15px;"><strong>Навыки:</strong> ${skills}</div>` : ''}
+                <div style="margin-bottom:20px; white-space:pre-wrap;">${description}</div>
+                <a href="https://hh.ru/vacancy/${v.id}" target="_blank" class="btn">Откликнуться на hh.ru</a>
+                <button id="shareBtn" class="btn" style="background: #5f6368;">Поделиться</button>
+            `;
+
+            document.getElementById('shareBtn').addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Ссылка скопирована!');
+            });
+
+            // Инициализация карты, если есть координаты
+            if (v.address?.lat && v.address?.lng) {
+                document.getElementById('map-card').style.display = 'block';
+                initMap(v.address.lat, v.address.lng);
+            }
+        }
+
+        function initMap(lat, lng) {
+            if (typeof ymaps === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
+                script.onload = () => {
+                    ymaps.ready(() => {
+                        new ymaps.Map('map', {
+                            center: [lat, lng],
+                            zoom: 14,
+                            controls: ['zoomControl']
+                        }).geoObjects.add(new ymaps.Placemark([lat, lng]));
+                    });
+                };
+                document.head.appendChild(script);
+            } else {
+                ymaps.ready(() => {
+                    new ymaps.Map('map', {
+                        center: [lat, lng],
+                        zoom: 14,
+                        controls: ['zoomControl']
+                    }).geoObjects.add(new ymaps.Placemark([lat, lng]));
+                });
+            }
+        }
+
+        // Основной запуск
+        (async () => {
+            try {
+                const vacancy = await fetchVacancy(vacancyId);
+                renderVacancy(vacancy);
+                loadSimilar(vacancy);
+            } catch (err) {
+                document.getElementById('vacancy-card').innerHTML = `<p style="color:red;">Ошибка: ${err.message}</p>`;
+                console.error(err);
+            }
+        })();
+    </script>
 </body>
 </html>
