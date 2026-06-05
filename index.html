@@ -34,6 +34,24 @@
         }
         .controls select, .controls input { padding: 10px; border-radius: 6px; border: 1px solid #ddd; background: #fff; }
         body.dark .controls select, body.dark .controls input { background: #333; border-color: #555; color: #eee; }
+        /* Стили для выпадающего списка городов */
+        .city-autocomplete { position: relative; }
+        .city-autocomplete input { padding: 10px; border-radius: 6px; border: 1px solid #ddd; background: #fff; width: 200px; }
+        body.dark .city-autocomplete input { background: #333; border-color: #555; color: #eee; }
+        .city-dropdown {
+            position: absolute; top: 100%; left: 0; right: 0; max-height: 250px;
+            overflow-y: auto; background: #fff; border: 1px solid #ddd; border-radius: 0 0 8px 8px;
+            z-index: 20; display: none; list-style: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        body.dark .city-dropdown { background: #2c2c2c; border-color: #555; }
+        .city-dropdown li {
+            padding: 10px 12px; cursor: pointer; font-size: 14px; border-bottom: 1px solid #eee;
+        }
+        body.dark .city-dropdown li { border-bottom: 1px solid #444; }
+        .city-dropdown li:hover { background: #f0f0f0; }
+        body.dark .city-dropdown li:hover { background: #3a3a3a; }
+        .city-dropdown li.active { background: #e8f0fe; }
+        body.dark .city-dropdown li.active { background: #3a4a5a; }
         .vacancy-list { display: grid; gap: 20px; }
         .vacancy-card {
             background: #fff; border-radius: 12px; padding: 20px;
@@ -75,7 +93,10 @@
     </header>
     <main class="container">
         <div class="controls">
-            <input type="text" id="filterCity" placeholder="Город (начните ввод)">
+            <div class="city-autocomplete">
+                <input type="text" id="filterCity" placeholder="Город (начните ввод)" autocomplete="off">
+                <ul class="city-dropdown" id="cityDropdown"></ul>
+            </div>
             <select id="filterExperience">
                 <option value="">Опыт (любой)</option>
                 <option value="noExperience">Без опыта</option>
@@ -130,6 +151,7 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const filterCity = document.getElementById('filterCity');
+        const cityDropdown = document.getElementById('cityDropdown');
         const filterExperience = document.getElementById('filterExperience');
         const filterEmployment = document.getElementById('filterEmployment');
         const filterSalary = document.getElementById('filterSalary');
@@ -166,7 +188,6 @@
         async function searchCities(text) {
             const resp = await fetch(`https://api.hh.ru/areas`);
             const areas = await resp.json();
-            // простой поиск по дереву
             function find(node, term) {
                 let results = [];
                 if (node.name && node.name.toLowerCase().includes(term.toLowerCase())) {
@@ -179,10 +200,10 @@
             }
             let allResults = [];
             areas.forEach(country => { allResults = allResults.concat(find(country, text)); });
-            return allResults.slice(0, 10);
+            return allResults.slice(0, 15);
         }
 
-        // ==================== ОТРИСОВКА ====================
+        // ==================== ОТРИСОВКА ВАКАНСИЙ ====================
         function renderVacancies(vacancies, append = false) {
             if (!append) vacancyList.innerHTML = '';
             vacancies.forEach(vac => {
@@ -239,7 +260,6 @@
             currentQuery.order_by = sortOrder.value;
             vacancyList.innerHTML = '';
             await loadMore();
-            // история
             if (currentQuery.text) {
                 searchHistory.unshift(currentQuery.text);
                 localStorage.setItem('searchHistory', JSON.stringify(searchHistory.slice(0, 10)));
@@ -261,20 +281,70 @@
         // ==================== АВТОДОПОЛНЕНИЕ ГОРОДА ====================
         filterCity.addEventListener('input', debounce(async (e) => {
             const val = e.target.value.trim();
-            if (val.length < 2) return;
-            const cities = await searchCities(val);
-            // показать подсказки (упрощённо — выводим в консоль, можно сделать выпадающий список)
-            console.log(cities);
-            // Для простоты: можно добавить datalist (но он уже есть в HTML? добавим)
-            let datalist = document.getElementById('cityList');
-            if (!datalist) {
-                datalist = document.createElement('datalist');
-                datalist.id = 'cityList';
-                document.body.appendChild(datalist);
-                filterCity.setAttribute('list', 'cityList');
+            if (val.length < 2) {
+                cityDropdown.style.display = 'none';
+                return;
             }
-            datalist.innerHTML = cities.map(c => `<option value="${c.name}" data-id="${c.id}">`).join('');
+            const cities = await searchCities(val);
+            renderCityDropdown(cities);
         }, 300));
+
+        function renderCityDropdown(cities) {
+            cityDropdown.innerHTML = '';
+            if (cities.length === 0) {
+                cityDropdown.style.display = 'none';
+                return;
+            }
+            cities.forEach(city => {
+                const li = document.createElement('li');
+                li.textContent = city.name;
+                li.dataset.id = city.id;
+                li.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    selectCity(city);
+                });
+                cityDropdown.appendChild(li);
+            });
+            cityDropdown.style.display = 'block';
+        }
+
+        function selectCity(city) {
+            filterCity.value = city.name;
+            cityDropdown.style.display = 'none';
+            currentQuery.area = city.id;
+            search();
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.city-autocomplete')) {
+                cityDropdown.style.display = 'none';
+            }
+        });
+
+        filterCity.addEventListener('keydown', (e) => {
+            const items = cityDropdown.querySelectorAll('li');
+            if (!items.length || cityDropdown.style.display === 'none') return;
+            const active = cityDropdown.querySelector('li.active');
+            let idx = Array.from(items).indexOf(active);
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                idx = (idx + 1) % items.length;
+                items.forEach(i => i.classList.remove('active'));
+                items[idx].classList.add('active');
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                idx = (idx - 1 + items.length) % items.length;
+                items.forEach(i => i.classList.remove('active'));
+                items[idx].classList.add('active');
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (active) {
+                    const id = active.dataset.id;
+                    const name = active.textContent;
+                    selectCity({ id, name });
+                }
+            }
+        });
 
         function debounce(fn, delay) {
             let timer;
@@ -283,20 +353,6 @@
                 timer = setTimeout(() => fn.apply(this, args), delay);
             };
         }
-
-        // При выборе города из подсказок (упрощённо — по имени ищем id)
-        filterCity.addEventListener('change', async () => {
-            const name = filterCity.value.trim();
-            if (!name) { currentQuery.area = '113'; search(); return; }
-            const cities = await searchCities(name);
-            const found = cities.find(c => c.name.toLowerCase() === name.toLowerCase());
-            if (found) {
-                currentQuery.area = found.id;
-            } else {
-                currentQuery.area = '113'; // Россия по умолчанию
-            }
-            search();
-        });
 
         // ==================== ПОПУЛЯРНЫЕ КОМПАНИИ ====================
         const popularEmployers = ['Яндекс', 'Сбер', 'VK', 'Тинькофф', 'Ozon', 'МТС'];
@@ -314,9 +370,7 @@
                 alert('Нет избранных вакансий');
                 return;
             }
-            // упрощённо покажем в консоли, в реальности — рендерим карточки из localStorage
             console.log('Избранные ID:', favorites);
-            // здесь можно загрузить вакансии по ID из кэша или API, но для простоты опустим
         });
 
         // ==================== ПОДПИСКА ====================
@@ -358,7 +412,7 @@
         }
 
         // ==================== СТАРТ ====================
-        search(); // первая загрузка
+        search();
     </script>
 </body>
 </html>
