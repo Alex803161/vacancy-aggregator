@@ -402,6 +402,23 @@
             }
         })();
         // ==================== СТАРТ ====================
+                // Принудительный показ блоков после полной загрузки
+        setTimeout(function() {
+            const blocks = document.querySelectorAll('.employer-section, .contact-section');
+            blocks.forEach(function(block) {
+                block.style.setProperty('display', 'block', 'important');
+                block.style.setProperty('visibility', 'visible', 'important');
+                block.style.setProperty('opacity', '1', 'important');
+            });
+        }, 2000);
+        setTimeout(function() {
+            const blocks = document.querySelectorAll('.employer-section, .contact-section');
+            blocks.forEach(function(block) {
+                block.style.setProperty('display', 'block', 'important');
+                block.style.setProperty('visibility', 'visible', 'important');
+                block.style.setProperty('opacity', '1', 'important');
+            });
+        }, 4000);
         search();
     </script>
 </body>
