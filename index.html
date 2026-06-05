@@ -61,7 +61,7 @@
             .header-inner { flex-direction: column; align-items: stretch; }
             .search-box { flex-direction: column; }
         }
-        /* Блоки-помощники — статичный футер */
+        /* Статичные блоки ВНЕ main, не зависят от скролла */
         .static-blocks {
             max-width: 1200px;
             margin: 20px auto;
@@ -140,7 +140,7 @@
         </div>
     </main>
 
-    <!-- Статичные блоки, которые никогда не меняются -->
+    <!-- Блоки намертво после main, бесконечный скролл их не трогает -->
     <div class="static-blocks">
         <div class="employer-section">
             <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Для работодателей</h3>
