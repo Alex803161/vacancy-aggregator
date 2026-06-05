@@ -3,251 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вакансия — ВКАНСА</title>
+    <title>Вакансия — Ваканса</title>
     <style>
         :root {
-            --bg: #f2f4f8;
-            --card-bg: #ffffff;
+            --bg: #f5f7fa;
+            --card-bg: #fff;
             --text: #1a1a2e;
-            --text-secondary: #4a4a5a;
+            --text-secondary: #555;
             --link: #1a73e8;
-            --border: #e0e4ea;
-            --shadow: 0 6px 20px rgba(0,0,0,0.06);
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
             --btn-bg: #1a73e8;
             --btn-text: #fff;
             --badge-bg: #e8f0fe;
             --badge-color: #1a73e8;
-            --highlight: #1a73e8;
-            --salary-color: #2e7d32;
         }
         .dark {
-            --bg: #0f0f1a;
-            --card-bg: #1a1a2e;
+            --bg: #121212;
+            --card-bg: #1e1e2f;
             --text: #e0e0e0;
             --text-secondary: #aaa;
             --link: #8ab4f8;
             --border: #2a2a3c;
-            --shadow: 0 6px 20px rgba(0,0,0,0.5);
+            --shadow: 0 4px 12px rgba(0,0,0,0.4);
             --btn-bg: #8ab4f8;
-            --btn-text: #0f0f1a;
+            --btn-text: #121212;
             --badge-bg: #2a3a5c;
             --badge-color: #8ab4f8;
-            --salary-color: #81c784;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             transition: background 0.3s, color 0.3s;
-            padding: 0;
-            margin: 0;
+            padding: 20px;
         }
-        .container {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 24px 20px 40px;
-        }
-        nav {
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        nav a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--link);
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-        nav a:hover { opacity: 0.7; }
+        .container { max-width: 1200px; margin: 0 auto; }
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 24px;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            transition: background 0.3s, border 0.3s;
         }
-        .vacancy-header {
-            margin-bottom: 24px;
-        }
-        .vacancy-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-        .salary {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--salary-color);
-            margin-bottom: 16px;
-        }
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px 20px;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-        }
-        .meta-item strong {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 16px 0 20px;
-        }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
         .badge {
             display: inline-block;
             background: var(--badge-bg);
             color: var(--badge-color);
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .description {
-            white-space: pre-wrap;
-            line-height: 1.7;
-            margin: 24px 0;
-            color: var(--text);
-        }
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
+            margin: 4px 4px 4px 0;
         }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            display: inline-block;
             background: var(--btn-bg);
             color: var(--btn-text);
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 24px;
             border: none;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             text-decoration: none;
+            margin-right: 10px;
+            transition: opacity 0.2s;
         }
+        .btn:hover { opacity: 0.85; text-decoration: none; }
         .btn-outline {
             background: transparent;
             border: 2px solid var(--btn-bg);
             color: var(--btn-bg);
         }
-        .btn-outline:hover {
-            background: var(--btn-bg);
-            color: var(--btn-text);
-        }
-        .map-container {
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin: 20px 0;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
         }
-        #map {
-            width: 100%;
-            height: 280px;
+        @media (min-width: 768px) {
+            .content-layout {
+                display: grid;
+                grid-template-columns: 1fr 300px;
+                gap: 30px;
+            }
+            .main-info { grid-column: 1; }
+            .side-info { grid-column: 2; }
         }
-        .similar-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .side-info .card {
+            padding: 20px;
         }
+        .similar-list { display: flex; flex-direction: column; gap: 10px; }
         .similar-item {
-            padding: 18px 20px;
+            padding: 15px;
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             background: var(--bg);
-            transition: all 0.2s;
-            cursor: pointer;
+            transition: 0.2s;
         }
-        .similar-item:hover {
-            border-color: var(--link);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .similar-item a {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--link);
-        }
-        .similar-item .salary-sm {
-            font-size: 0.9rem;
-            color: var(--salary-color);
-            margin: 4px 0;
-        }
-        .similar-item .employer {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        footer {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        footer a {
-            color: var(--link);
-        }
-        @media (max-width: 600px) {
-            .card { padding: 20px; }
-            .vacancy-header h1 { font-size: 1.4rem; }
-            .salary { font-size: 1.3rem; }
+        .similar-item:hover { border-color: var(--link); }
+        #map { width: 100%; height: 250px; margin: 20px 0; border-radius: 12px; }
+        @media (max-width: 767px) {
+            .content-layout { display: block; }
+            .side-info { margin-top: 20px; }
+            .details-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav>
+        <nav style="margin-bottom:20px;">
             <a href="index.html">← Назад к поиску</a>
         </nav>
-
         <div id="vacancy-card" class="card">
-            <div id="loader" style="text-align:center; padding:40px; font-size:1.2rem;">Загрузка...</div>
+            <div id="loader" style="text-align:center; padding:40px;">Загрузка...</div>
         </div>
-
-        <div id="map-card" class="card" style="display:none;">
-            <h3 style="margin-bottom:16px;">Местоположение</h3>
-            <div class="map-container">
-                <div id="map"></div>
+        <div class="content-layout">
+            <div class="main-info">
+                <div id="similar-card" class="card">
+                    <h3>Похожие вакансии</h3>
+                    <div id="similar-list" class="similar-list">Загрузка...</div>
+                </div>
+            </div>
+            <div class="side-info">
+                <div id="map-card" class="card" style="display:none;">
+                    <h3>Местоположение</h3>
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
-
-        <div id="similar-card" class="card">
-            <h3 style="margin-bottom:16px;">Похожие вакансии</h3>
-            <div id="similar-list" class="similar-list">Загрузка...</div>
-        </div>
-
-        <footer>
+        <div style="text-align:center; margin-top:20px; font-size:0.85rem; color:var(--text-secondary);">
             <a href="https://hh.ru" target="_blank">Вакансии с hh.ru</a>
-        </footer>
+        </div>
     </div>
 
     <script>
@@ -292,10 +183,10 @@
                         (v.salary.to ? ` до ${v.salary.to}` : '') +
                         ` ${v.salary.currency || ''}` : 'З/П не указана';
                     return `
-                        <div class="similar-item" onclick="window.location.href='vacancy.html?id=${v.id}'">
-                            <a href="vacancy.html?id=${v.id}" onclick="event.stopPropagation();">${v.name}</a>
-                            <div class="salary-sm">${salary}</div>
-                            <div class="employer">${v.employer?.name || ''}</div>
+                        <div class="similar-item">
+                            <a href="vacancy.html?id=${v.id}" style="font-weight:500;">${v.name}</a>
+                            <div style="font-size:0.9rem; color:var(--text-secondary);">${salary}</div>
+                            <small>${v.employer?.name || ''} — ${v.area?.name || ''}</small>
                         </div>
                     `;
                 }).join('');
@@ -309,8 +200,8 @@
             currentVacancy = v;
             const card = document.getElementById('vacancy-card');
             const salary = v.salary ?
-                (v.salary.from ? `от ${v.salary.from}` : '') +
-                (v.salary.to ? ` до ${v.salary.to}` : '') +
+                (v.salary.from ? `от ${v.salary.from.toLocaleString()}` : '') +
+                (v.salary.to ? ` до ${v.salary.to.toLocaleString()}` : '') +
                 ` ${v.salary.currency || ''}` : 'З/П не указана';
             const address = v.address?.raw || v.area?.name || '';
             const experience = v.experience?.name || 'Не указан';
@@ -320,29 +211,26 @@
             const description = v.description || '';
 
             card.innerHTML = `
-                <div class="vacancy-header">
-                    <h1>${v.name}</h1>
-                    <div class="salary">${salary}</div>
-                    <div class="meta-grid">
-                        <div class="meta-item"><strong>Компания</strong> ${v.employer?.name || 'Не указана'}</div>
-                        <div class="meta-item"><strong>Город</strong> ${address}</div>
-                        <div class="meta-item"><strong>Опыт</strong> ${experience}</div>
-                        <div class="meta-item"><strong>Занятость</strong> ${employment}</div>
-                        <div class="meta-item"><strong>Дата публикации</strong> ${published}</div>
-                    </div>
-                    ${skills.length ? `<div class="skills">${skills.map(s => `<span class="badge">${s}</span>`).join('')}</div>` : ''}
+                <h1 style="font-size:2rem; margin-bottom:10px;">${v.name}</h1>
+                <div style="font-size:2rem; font-weight:600; color:var(--link); margin-bottom:20px;">${salary}</div>
+                <div class="details-grid">
+                    <div><strong>Компания:</strong> ${v.employer?.name || 'Не указана'}</div>
+                    <div><strong>Город:</strong> ${address}</div>
+                    <div><strong>Опыт:</strong> ${experience}</div>
+                    <div><strong>Занятость:</strong> ${employment}</div>
+                    <div><strong>Дата публикации:</strong> ${published}</div>
                 </div>
-                <div class="description">${description}</div>
-                <div class="actions">
+                ${skills.length > 0 ? `<div style="margin:15px 0;">${skills.map(s => `<span class="badge">${s}</span>`).join(' ')}</div>` : ''}
+                <div style="margin:20px 0; line-height:1.8;">${description}</div>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;">
                     <a href="https://hh.ru/vacancy/${v.id}" target="_blank" class="btn">Откликнуться на hh.ru</a>
                     <button id="shareBtn" class="btn btn-outline">Поделиться</button>
                 </div>
             `;
 
             document.getElementById('shareBtn').addEventListener('click', () => {
-                navigator.clipboard.writeText(window.location.href)
-                    .then(() => alert('Ссылка скопирована!'))
-                    .catch(() => prompt('Скопируйте ссылку:', window.location.href));
+                navigator.clipboard.writeText(window.location.href);
+                alert('Ссылка скопирована!');
             });
 
             if (v.address?.lat && v.address?.lng) {
@@ -376,6 +264,7 @@
             }
         }
 
+        // Основной запуск
         (async () => {
             try {
                 const vacancy = await fetchVacancy(vacancyId);
