@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вакансия — Ваканса</title>
+    <!-- Скрипт темы должен быть первым, до стилей -->
+    <script>
+        (function() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
     <style>
         :root {
             --bg: #f5f7fa;
@@ -94,9 +102,7 @@
             .main-info { grid-column: 1; }
             .side-info { grid-column: 2; }
         }
-        .side-info .card {
-            padding: 20px;
-        }
+        .side-info .card { padding: 20px; }
         .similar-list { display: flex; flex-direction: column; gap: 10px; }
         .similar-item {
             padding: 15px;
@@ -142,11 +148,6 @@
     </div>
 
     <script>
-        // Тёмная тема
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
         const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
         const params = new URLSearchParams(window.location.search);
         const vacancyId = params.get('id');
@@ -264,7 +265,6 @@
             }
         }
 
-        // Основной запуск
         (async () => {
             try {
                 const vacancy = await fetchVacancy(vacancyId);
