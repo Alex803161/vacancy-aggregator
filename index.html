@@ -386,7 +386,21 @@
                     });
             });
         }
-
+        // ==================== ПРИНУДИТЕЛЬНЫЙ ПОКАЗ БЛОКОВ ====================
+        (function forceShowBlocks() {
+            const employer = document.querySelector('.employer-section');
+            const contact = document.querySelector('.contact-section');
+            if (employer) {
+                employer.style.setProperty('display', 'block', 'important');
+                employer.style.setProperty('visibility', 'visible', 'important');
+                employer.style.setProperty('opacity', '1', 'important');
+            }
+            if (contact) {
+                contact.style.setProperty('display', 'block', 'important');
+                contact.style.setProperty('visibility', 'visible', 'important');
+                contact.style.setProperty('opacity', '1', 'important');
+            }
+        })();
         // ==================== СТАРТ ====================
         search();
     </script>
