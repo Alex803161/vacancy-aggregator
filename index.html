@@ -504,7 +504,7 @@
         });
     }
 
-    window.goToVacancy=function(id){const vac=allVacancies.find(v=>v.id==id);if(vac){localStorage.setItem('selectedVacancy',JSON.stringify(vac));window.open('vacancy.html','_blank')}};
+    window.goToVacancy=function(id){const vac=allVacancies.find(v=>v.id==id);if(vac){localStorage.setItem('selectedVacancy',JSON.stringify(vac));window.location.href='vacancy.html'}};
     function toggleSaved(id,btn){if(savedVacancies.includes(id)){savedVacancies=savedVacancies.filter(v=>v!==id);btn.classList.remove('saved')}else{savedVacancies.push(id);btn.classList.add('saved')}localStorage.setItem('savedVacancies',JSON.stringify(savedVacancies))}
     function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';currentArea='113';setSort('publication_time');performSearch(true,false)}
     function toggleTheme(){document.body.classList.toggle('dark');document.body.classList.toggle('light');const isDark=document.body.classList.contains('dark');themeToggle.innerHTML=isDark?'<i class="fas fa-sun"></i> Светлая тема':'<i class="fas fa-moon"></i> Тёмная тема';localStorage.setItem('theme',isDark?'dark':'light')}
