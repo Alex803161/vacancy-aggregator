@@ -73,7 +73,6 @@
         body.dark .contact-section p { color: #ccc !important; }
         body.dark .employer-section h3,
         body.dark .contact-section h3 { color: #8ab4f8 !important; }
-        /* Дополнительное правило для прямых детей main */
         main > .employer-section,
         main > .contact-section {
             display: block !important;
@@ -386,40 +385,19 @@
                     });
             });
         }
-        // ==================== ПРИНУДИТЕЛЬНЫЙ ПОКАЗ БЛОКОВ ====================
-        (function forceShowBlocks() {
-            const employer = document.querySelector('.employer-section');
-            const contact = document.querySelector('.contact-section');
-            if (employer) {
-                employer.style.setProperty('display', 'block', 'important');
-                employer.style.setProperty('visibility', 'visible', 'important');
-                employer.style.setProperty('opacity', '1', 'important');
-            }
-            if (contact) {
-                contact.style.setProperty('display', 'block', 'important');
-                contact.style.setProperty('visibility', 'visible', 'important');
-                contact.style.setProperty('opacity', '1', 'important');
-            }
-        })();
+
         // ==================== СТАРТ ====================
-                // Принудительный показ блоков после полной загрузки
-        setTimeout(function() {
-            const blocks = document.querySelectorAll('.employer-section, .contact-section');
-            blocks.forEach(function(block) {
-                block.style.setProperty('display', 'block', 'important');
-                block.style.setProperty('visibility', 'visible', 'important');
-                block.style.setProperty('opacity', '1', 'important');
-            });
-        }, 2000);
-        setTimeout(function() {
-            const blocks = document.querySelectorAll('.employer-section, .contact-section');
-            blocks.forEach(function(block) {
-                block.style.setProperty('display', 'block', 'important');
-                block.style.setProperty('visibility', 'visible', 'important');
-                block.style.setProperty('opacity', '1', 'important');
-            });
-        }, 4000);
         search();
+
+        // Принудительный показ блоков после полной загрузки страницы
+        window.addEventListener('load', function() {
+            const blocks = document.querySelectorAll('.employer-section, .contact-section');
+            blocks.forEach(function(block) {
+                block.style.setProperty('display', 'block', 'important');
+                block.style.setProperty('visibility', 'visible', 'important');
+                block.style.setProperty('opacity', '1', 'important');
+            });
+        });
     </script>
 </body>
 </html>
