@@ -61,10 +61,7 @@
             .header-inner { flex-direction: column; align-items: stretch; }
             .search-box { flex-direction: column; }
         }
-        /* Дополнительные стили для новых блоков (чтобы они точно отображались) */
-        .employer-section, .contact-section {
-            display: block !important;
-        }
+        .employer-section, .contact-section { display: block !important; }
         body.dark .employer-section,
         body.dark .contact-section {
             background: #2c2c2c !important;
@@ -72,13 +69,9 @@
             border-color: #555 !important;
         }
         body.dark .employer-section p,
-        body.dark .contact-section p {
-            color: #ccc !important;
-        }
+        body.dark .contact-section p { color: #ccc !important; }
         body.dark .employer-section h3,
-        body.dark .contact-section h3 {
-            color: #8ab4f8 !important;
-        }
+        body.dark .contact-section h3 { color: #8ab4f8 !important; }
     </style>
 </head>
 <body>
@@ -144,7 +137,7 @@
         <div class="contact-section" style="background:#fff; border-radius:12px; padding:30px; margin:20px 0; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); border:2px solid #ddd;">
             <h3 style="margin-bottom:10px; color:#1a73e8; font-size:20px;">Написать нам</h3>
             <p style="margin-bottom:20px; color:#666;">Есть вопросы или предложения? Мы ответим на вашу почту.</p>
-            <form action="https://formspree.io/f/ЗДЕСЬ_ВАШ_ID" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto;">
+            <form action="https://formsubmit.co/visitaeff.a@yandex.ru" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto;">
                 <input type="email" name="email" placeholder="Ваш email" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
                 <textarea name="message" rows="4" placeholder="Ваше сообщение" required="" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
                 <button type="submit" style="padding: 12px 24px; background: #1a73e8; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Отправить</button>
