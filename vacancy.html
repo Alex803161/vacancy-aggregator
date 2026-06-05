@@ -11,7 +11,7 @@
         h1 { font-size: 1.8rem; margin-bottom: 8px; }
         .salary { font-size: 1.5rem; color: #059669; font-weight: bold; margin: 12px 0; }
         .company { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .logo { width: 48px; height: 48px; background: #e0e7ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .logo { width: 48px; height: 48px; background: #e0e7ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; overflow: hidden; }
         .logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
         .map-link { display: inline-block; margin-top: 8px; background: #0047cc; color: white; padding: 8px 16px; border-radius: 40px; text-decoration: none; font-weight: 600; }
         .back-link { display: inline-block; margin-bottom: 20px; color: #0047cc; text-decoration: none; font-weight: 600; }
@@ -25,7 +25,7 @@
         .btn-email { background: #3b82f6; color: white; padding: 10px 20px; border-radius: 40px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
         .hh-link { display: block; margin-top: 24px; font-size: 0.8rem; color: #94a3b8; text-align: center; }
         .hh-link a { color: #94a3b8; }
-        .info-row { display: flex; gap: 20px; flex-wrap: wrap; margin: 8px 0; font-size: 0.9rem; color: #64748b; }
+        .info-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; font-size: 0.9rem; color: #64748b; }
         .info-row i { width: 18px; color: #0047cc; }
         .loading { text-align: center; padding: 40px; color: #64748b; }
         .error { text-align: center; padding: 40px; color: #dc2626; }
@@ -39,98 +39,13 @@
 <script>
     const API_URL = "https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
     
-    async function loadVacancy() {
-        const vacancy = JSON.parse(localStorage.getItem('selectedVacancy'));
-        if (!vacancy || !vacancy.id) {
-            document.getElementById('vacancy-detail').innerHTML = '<div class="error">Вакансия не найдена. <a href="index.html">Вернуться на главную</a></div>';
-            return;
-        }
-        
-        try {
-            const response = await fetch(`${API_URL}?id=${vacancy.id}`);
-            if (!response.ok) throw new Error('Ошибка загрузки');
-            const full = await response.json();
-            
-            if (full.errors) {
-                showFallback(vacancy);
-                return;
-            }
-            
-            renderFullVacancy(full);
-        } catch (e) {
-            console.error(e);
-            showFallback(vacancy);
-        }
-    }
-    
-    function renderFullVacancy(v) {
-        const address = v.address ? v.address.raw || v.address.city || '' : (v.area ? v.area.name || '' : '');
-        let mapLink = '';
-        if (address) {
-            mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
-        }
-        
-        const logoUrl = v.employer && v.employer.logo_urls ? (v.employer.logo_urls[90] || v.employer.logo_urls.original) : null;
-        const logoSrc = logoUrl ? `<img src="${logoUrl}" alt="${escapeHtml(v.employer?.name || '')}" style="width:100%;height:100%;object-fit:cover;">` : (v.employer?.name || '?')[0];
-        
-        const skills = v.key_skills || [];
-        const skillsHtml = skills.length ? `<div class="skills">${skills.map(s => `<span class="skill-tag">${escapeHtml(s.name)}</span>`).join('')}</div>` : '';
-        
-        const contacts = v.contacts || {};
-        let contactBtns = '';
-        if (contacts.phones && contacts.phones.length > 0) {
-            contactBtns += `<a href="tel:${contacts.phones[0]}" class="btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
-        }
-        if (contacts.email) {
-            contactBtns += `<a href="mailto:${contacts.email}" class="btn-email"><i class="fas fa-envelope"></i> Написать</a>`;
-        }
-        
-        document.getElementById('vacancy-detail').innerHTML = `
-            <h1>${escapeHtml(v.name || 'Без названия')}</h1>
-            <div class="salary">${formatSalary(v)}</div>
-            <div class="company">
-                <div class="logo">${logoSrc}</div>
-                <div><strong>${escapeHtml(v.employer?.name || 'Не указана')}</strong></div>
-            </div>
-            <div class="info-row"><i class="fas fa-map-pin"></i> <span>${escapeHtml(address) || 'Адрес не указан'}</span></div>
-            ${mapLink ? `<div class="info-row">${mapLink}</div>` : ''}
-            <div class="info-row"><i class="fas fa-briefcase"></i> <span>${escapeHtml(v.experience?.name || 'Не указан')}</span></div>
-            <div class="info-row"><i class="fas fa-clock"></i> <span>${escapeHtml(v.employment?.name || v.employment_form?.name || 'Не указана')}</span></div>
-            <div class="info-row"><i class="fas fa-calendar"></i> <span>${formatDate(v.published_at)}</span></div>
-            ${skillsHtml}
-            ${contactBtns ? `<div class="contact-btns">${contactBtns}</div>` : ''}
-            <div class="description-block">${v.description || '<p>Описание отсутствует</p>'}</div>
-            <div class="hh-link">Источник: <a href="${v.alternate_url || 'https://hh.ru'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
-        `;
-    }
-    
-    function showFallback(vacancy) {
-        const address = vacancy.area || '';
-        let mapLink = '';
-        if (address) {
-            mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
-        }
-        document.getElementById('vacancy-detail').innerHTML = `
-            <h1>${escapeHtml(vacancy.name || 'Без названия')}</h1>
-            <div class="salary">${formatSalary(vacancy)}</div>
-            <div class="company">
-                <div class="logo">${(vacancy.employer || '?')[0]}</div>
-                <div><strong>${escapeHtml(vacancy.employer || 'Не указана')}</strong></div>
-            </div>
-            <p><i class="fas fa-map-pin"></i> <strong>Адрес:</strong> ${escapeHtml(address) || 'Не указан'}</p>
-            ${mapLink ? `<p>${mapLink}</p>` : ''}
-            <p><i class="fas fa-briefcase"></i> <strong>Опыт:</strong> ${escapeHtml(vacancy.experience || 'Не указан')}</p>
-            <p><i class="fas fa-clock"></i> <strong>Занятость:</strong> ${escapeHtml(vacancy.employment || 'Не указана')}</p>
-            <p><i class="fas fa-calendar"></i> <strong>Опубликовано:</strong> ${formatDate(vacancy.published_at)}</p>
-            <button onclick="window.open('${vacancy.url || '#'}', '_blank')" style="background:#059669; color:white; border:none; padding:10px 20px; border-radius:40px; cursor:pointer; font-weight:600;">Откликнуться</button>
-            <div class="hh-link">Источник: <a href="${vacancy.url || '#'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
-        `;
+    function escapeHtml(str) {
+        if (!str) return '';
+        if (typeof str !== 'string') str = String(str);
+        return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m]);
     }
     
     function formatSalary(v) {
-        if (!v.salary && !v.salary_from && !v.salary_to) {
-            if (!v.salary) return 'Зарплата не указана';
-        }
         const s = v.salary || v;
         const from = s.from || s.salary_from || 0;
         const to = s.to || s.salary_to || 0;
@@ -150,9 +65,90 @@
         return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
     }
     
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[m]);
+    function showFallback(vacancy) {
+        const address = typeof vacancy.area === 'object' ? (vacancy.area?.name || '') : (vacancy.area || '');
+        const employerName = typeof vacancy.employer === 'object' ? (vacancy.employer?.name || 'Не указана') : (vacancy.employer || 'Не указана');
+        let mapLink = '';
+        if (address) {
+            mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
+        }
+        document.getElementById('vacancy-detail').innerHTML = `
+            <h1>${escapeHtml(vacancy.name || 'Без названия')}</h1>
+            <div class="salary">${formatSalary(vacancy)}</div>
+            <div class="company">
+                <div class="logo">${escapeHtml(employerName)[0]}</div>
+                <div><strong>${escapeHtml(employerName)}</strong></div>
+            </div>
+            <p><i class="fas fa-map-pin"></i> <strong>Адрес:</strong> ${escapeHtml(address) || 'Не указан'}</p>
+            ${mapLink ? `<p>${mapLink}</p>` : ''}
+            <p><i class="fas fa-briefcase"></i> <strong>Опыт:</strong> ${escapeHtml(vacancy.experience?.name || vacancy.experience || 'Не указан')}</p>
+            <p><i class="fas fa-clock"></i> <strong>Занятость:</strong> ${escapeHtml(vacancy.employment?.name || vacancy.employment || 'Не указана')}</p>
+            <p><i class="fas fa-calendar"></i> <strong>Опубликовано:</strong> ${formatDate(vacancy.published_at)}</p>
+            <button onclick="window.open('${vacancy.alternate_url || vacancy.url || '#'}', '_blank')" style="background:#059669; color:white; border:none; padding:10px 20px; border-radius:40px; cursor:pointer; font-weight:600;">Откликнуться</button>
+            <div class="hh-link">Источник: <a href="${vacancy.alternate_url || vacancy.url || '#'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
+        `;
+    }
+    
+    async function loadVacancy() {
+        const vacancy = JSON.parse(localStorage.getItem('selectedVacancy'));
+        if (!vacancy || !vacancy.id) {
+            document.getElementById('vacancy-detail').innerHTML = '<div class="error">Вакансия не найдена. <a href="index.html">Вернуться на главную</a></div>';
+            return;
+        }
+        
+        try {
+            const response = await fetch(`${API_URL}?id=${vacancy.id}`);
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const full = await response.json();
+            
+            if (full.errors) {
+                showFallback(vacancy);
+                return;
+            }
+            
+            const address = full.address ? (full.address.raw || full.address.city || '') : (full.area?.name || '');
+            let mapLink = '';
+            if (address) {
+                mapLink = `<a href="https://yandex.ru/maps/?text=${encodeURIComponent(address)}" target="_blank" class="map-link" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Показать на карте</a>`;
+            }
+            
+            const employerName = full.employer?.name || 'Не указана';
+            const logoUrl = full.employer?.logo_urls ? (full.employer.logo_urls[90] || full.employer.logo_urls.original) : null;
+            const logoSrc = logoUrl ? `<img src="${logoUrl}" alt="${escapeHtml(employerName)}">` : employerName[0];
+            
+            const skills = full.key_skills || [];
+            const skillsHtml = skills.length ? `<div class="skills">${skills.map(s => `<span class="skill-tag">${escapeHtml(s.name)}</span>`).join('')}</div>` : '';
+            
+            const contacts = full.contacts || {};
+            let contactBtns = '';
+            if (contacts.phones && contacts.phones.length > 0) {
+                contactBtns += `<a href="tel:${contacts.phones[0]}" class="btn-call"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
+            }
+            if (contacts.email) {
+                contactBtns += `<a href="mailto:${contacts.email}" class="btn-email"><i class="fas fa-envelope"></i> Написать</a>`;
+            }
+            
+            document.getElementById('vacancy-detail').innerHTML = `
+                <h1>${escapeHtml(full.name || 'Без названия')}</h1>
+                <div class="salary">${formatSalary(full)}</div>
+                <div class="company">
+                    <div class="logo">${logoSrc}</div>
+                    <div><strong>${escapeHtml(employerName)}</strong></div>
+                </div>
+                ${address ? `<div class="info-row"><i class="fas fa-map-pin"></i> <span>${escapeHtml(address)}</span></div>` : ''}
+                ${mapLink ? mapLink : ''}
+                <div class="info-row"><i class="fas fa-briefcase"></i> <span>${escapeHtml(full.experience?.name || 'Не указан')}</span></div>
+                <div class="info-row"><i class="fas fa-clock"></i> <span>${escapeHtml(full.employment?.name || full.employment_form?.name || 'Не указана')}</span></div>
+                <div class="info-row"><i class="fas fa-calendar"></i> <span>${formatDate(full.published_at)}</span></div>
+                ${skillsHtml}
+                ${contactBtns ? `<div class="contact-btns">${contactBtns}</div>` : ''}
+                <div class="description-block">${full.description || '<p>Описание отсутствует</p>'}</div>
+                <div class="hh-link">Источник: <a href="${full.alternate_url || 'https://hh.ru'}" target="_blank" rel="noopener noreferrer">hh.ru</a></div>
+            `;
+        } catch (e) {
+            console.error(e);
+            showFallback(vacancy);
+        }
     }
     
     loadVacancy();
