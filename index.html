@@ -315,6 +315,29 @@
             margin-left: 8px;
             white-space: nowrap;
         }
+        /* Тост-уведомление */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #059669;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast-notification.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
         .filter-checkbox-option {
             display: flex;
             align-items: center;
@@ -379,6 +402,7 @@
             .site-footer { padding-bottom: 120px; }
             .recent-card, .saved-search-card { min-width: 180px; }
             .save-search-btn { font-size: 0.8rem; padding: 6px 12px; }
+            .toast-notification { font-size: 0.85rem; padding: 10px 20px; }
         }
     </style>
 </head>
@@ -422,7 +446,6 @@
     <div class="results-header"><div class="counter" id="counterDisplay">Найдено: <span>0</span></div><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
     <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
-    <!-- Сенсор для бесконечного скролла -->
     <div id="scrollSentinel" style="height: 1px;"></div>
 
     <div class="subscribe-section">
@@ -469,6 +492,8 @@
 </div>
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
 <button id="themeToggle" class="theme-switch">🌙</button>
+<!-- Тост-уведомление -->
+<div id="toastNotification" class="toast-notification">🔔 Новые вакансии по сохранённым поискам!</div>
 <script>
     const API_URL="https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
     let allVacancies=[], filteredVacancies=[], displayedCount=0, currentSort='publication_time';
@@ -530,7 +555,8 @@
         historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),
         backToTopBtn=document.getElementById('backToTopBtn'),
         citySuggestions=document.getElementById('citySuggestions'),
-        scrollSentinel=document.getElementById('scrollSentinel');
+        scrollSentinel=document.getElementById('scrollSentinel'),
+        toastNotification=document.getElementById('toastNotification');
 
     const subscribeForm = document.getElementById('subscribeForm');
     const subscribeEmailInput = document.getElementById('subscribeEmailInput');
@@ -548,7 +574,7 @@
     const filterWithSalary = document.getElementById('filterWithSalary');
     const filterShowHidden = document.getElementById('filterShowHidden');
 
-    // Intersection Observer для бесконечного скролла
+    // Observer для бесконечного скролла
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !isLoadingMore && displayedCount < filteredVacancies.length) {
@@ -557,6 +583,19 @@
         });
     }, { rootMargin: '200px' });
     observer.observe(scrollSentinel);
+
+    // Закрытие тоста по клику
+    toastNotification.addEventListener('click', () => {
+        toastNotification.classList.remove('show');
+    });
+
+    function showToast(message) {
+        toastNotification.textContent = message;
+        toastNotification.classList.add('show');
+        setTimeout(() => {
+            toastNotification.classList.remove('show');
+        }, 5000);
+    }
 
     function sendGAEvent(eventName, params = {}) {
         if (typeof gtag === "function") {
@@ -733,8 +772,34 @@
             }
         }));
 
+        // Проверяем, есть ли новые вакансии по сравнению с последним просмотром
+        let totalNew = 0;
+        const lastSeenCounts = JSON.parse(localStorage.getItem('lastSeenCounts')) || {};
+        updatedSearches.forEach(s => {
+            const key = `${s.query}_${s.areaId}_${s.employment}`;
+            const lastSeen = lastSeenCounts[key] || s.lastCount || 0;
+            if (s.currentFound > lastSeen) {
+                totalNew += (s.currentFound - lastSeen);
+            }
+        });
+
+        // Показываем тост, если есть новые
+        if (totalNew > 0) {
+            showToast(`🔔 ${totalNew} новых вакансий по сохранённым поискам!`);
+        }
+
+        // Обновляем lastSeenCounts после того, как показали уведомление
+        const newLastSeen = {};
+        updatedSearches.forEach(s => {
+            const key = `${s.query}_${s.areaId}_${s.employment}`;
+            newLastSeen[key] = s.currentFound;
+        });
+        localStorage.setItem('lastSeenCounts', JSON.stringify(newLastSeen));
+
         savedSearchesContainer.innerHTML = updatedSearches.map((s, i) => {
-            const newCount = s.currentFound - (s.lastCount || 0);
+            const lastSeenKey = `${s.query}_${s.areaId}_${s.employment}`;
+            const lastSeen = (JSON.parse(localStorage.getItem('lastSeenCounts')) || {})[lastSeenKey] || s.lastCount || 0;
+            const newCount = s.currentFound - lastSeen;
             const badge = newCount > 0 ? `<span class="new-badge">+${newCount} новых</span>` : '';
             return `
                 <div class="saved-search-card">
@@ -910,7 +975,6 @@
             updateLoadMoreButton();
         }
         isLoadingMore = false;
-        // После добавления элементов снова наблюдаем за сенсором
         observer.observe(scrollSentinel);
     }
 
