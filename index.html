@@ -305,6 +305,16 @@
             background: #334155;
             border-color: #475569;
         }
+        .new-badge {
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
         .filter-checkbox-option {
             display: flex;
             align-items: center;
@@ -466,6 +476,7 @@
     let currentArea='113';
     let selectedCityId = null;
     let allAreas = [];
+    let lastSearchFound = 0; // общее количество найденных вакансий
 
     let hiddenVacancies = JSON.parse(localStorage.getItem('hiddenVacancies')) || [];
 
@@ -497,9 +508,13 @@
         const response=await fetch(url);
         if(!response.ok)throw new Error(`HTTP ${response.status}`);
         const data=await response.json();
-        if(data&&data.items&&Array.isArray(data.items))return data.items;
-        if(data&&Array.isArray(data))return data;
-        return[];
+        if(data&&data.items&&Array.isArray(data.items)) {
+            return { items: data.items, found: data.found || data.items.length };
+        }
+        if(data&&Array.isArray(data)) {
+            return { items: data, found: data.length };
+        }
+        return { items: [], found: 0 };
     }
 
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),
@@ -640,7 +655,7 @@
             return;
         }
 
-        existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort });
+        existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort, lastCount: 0 });
         localStorage.setItem('savedSearches', JSON.stringify(existing));
         renderSavedSearches();
     }
@@ -652,7 +667,7 @@
         renderSavedSearches();
     }
 
-    function applySavedSearch(search) {
+    async function applySavedSearch(search) {
         searchInput.value = search.query;
         filterCity.value = search.areaName;
         currentArea = search.areaId;
@@ -660,29 +675,67 @@
         filterSalaryFrom.value = search.salaryFrom;
         filterEmployment.value = search.employment;
         filterExperience.value = search.experience;
-
         setSort(search.sort);
-        performSearch(true, false);
+        await performSearch(true, false);
     }
 
-    function renderSavedSearches() {
+    // Обновление счетчиков сохранённых поисков после получения found
+    function updateSavedSearchCounts(query, areaId, employment, found) {
+        const saved = getSavedSearches();
+        let updated = false;
+        const newSaved = saved.map(s => {
+            if (s.query === query && s.areaId === areaId && s.employment === employment) {
+                if (s.lastCount !== found) {
+                    updated = true;
+                    return { ...s, lastCount: found };
+                }
+            }
+            return s;
+        });
+        if (updated) {
+            localStorage.setItem('savedSearches', JSON.stringify(newSaved));
+            renderSavedSearches();
+        }
+    }
+
+    async function renderSavedSearches() {
         const saved = getSavedSearches();
         if (saved.length === 0) {
             savedSearchesSection.style.display = 'none';
             return;
         }
         savedSearchesSection.style.display = 'block';
-        savedSearchesContainer.innerHTML = saved.map((s, i) => `
-            <div class="saved-search-card">
-                <h4>${escapeHtml(s.query) || 'Поиск'}</h4>
-                <div class="search-detail">${s.areaName ? 'Город: ' + escapeHtml(s.areaName) : 'Город не выбран'}</div>
-                ${s.salaryFrom ? `<div class="salary">от ${s.salaryFrom}</div>` : ''}
-                <div class="saved-search-actions">
-                    <button class="saved-search-apply" data-index="${i}"><i class="fas fa-play"></i> Применить</button>
-                    <button class="saved-search-delete" data-index="${i}"><i class="fas fa-trash"></i> Удалить</button>
+
+        // Асинхронно получаем актуальные found для бейджей
+        const updatedSearches = await Promise.all(saved.map(async (s) => {
+            try {
+                const { found } = await fetchVacanciesFromAPI(s.query, {
+                    area: s.areaId,
+                    employment: s.employment,
+                    order_by: s.sort,
+                    per_page: 1
+                });
+                return { ...s, currentFound: found };
+            } catch (e) {
+                return { ...s, currentFound: s.lastCount || 0 };
+            }
+        }));
+
+        savedSearchesContainer.innerHTML = updatedSearches.map((s, i) => {
+            const newCount = s.currentFound - (s.lastCount || 0);
+            const badge = newCount > 0 ? `<span class="new-badge">+${newCount} новых</span>` : '';
+            return `
+                <div class="saved-search-card">
+                    <h4>${escapeHtml(s.query) || 'Поиск'} ${badge}</h4>
+                    <div class="search-detail">${s.areaName ? 'Город: ' + escapeHtml(s.areaName) : 'Город не выбран'}</div>
+                    ${s.salaryFrom ? `<div class="salary">от ${s.salaryFrom}</div>` : ''}
+                    <div class="saved-search-actions">
+                        <button class="saved-search-apply" data-index="${i}"><i class="fas fa-play"></i> Применить</button>
+                        <button class="saved-search-delete" data-index="${i}"><i class="fas fa-trash"></i> Удалить</button>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         document.querySelectorAll('.saved-search-apply').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -805,16 +858,22 @@
             const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}`;
             const cachedData = getCachedResult(cacheKey);
             if (cachedData) {
-                allVacancies = cachedData;
+                allVacancies = cachedData.items;
+                lastSearchFound = cachedData.found;
                 applyFilters();
                 searchBtn.disabled = false;
                 searchBtn.innerHTML = originalHTML;
+                // Обновляем счетчики сохранённых поисков
+                updateSavedSearchCounts(query, currentArea, filterEmployment.value, cachedData.found);
                 return;
             }
             const filters={employment:filterEmployment.value,order_by:currentSort,area:currentArea,per_page:30,page:0};
-            allVacancies=await fetchVacanciesFromAPI(query,filters);
-            setCachedResult(cacheKey, allVacancies);
+            const { items, found } = await fetchVacanciesFromAPI(query,filters);
+            allVacancies = items;
+            lastSearchFound = found;
+            setCachedResult(cacheKey, { items, found });
             applyFilters();
+            updateSavedSearchCounts(query, currentArea, filterEmployment.value, found);
             sendGAEvent("search", { search_term: query });
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
