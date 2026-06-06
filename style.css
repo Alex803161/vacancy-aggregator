@@ -277,16 +277,20 @@ html.dark header {
 }
 
 html.dark .card,
-html.dark .subscription {
+html.dark .subscription,
+html.dark .similar-section,
+html.dark .post-job-container {
     background-color: #2a2a2a;
     box-shadow: 0 2px 8px rgba(255,255,255,0.05);
 }
 
-html.dark .card h3 {
+html.dark .card h3,
+html.dark .similar-card h4 {
     color: #8ab4f8;
 }
 
-html.dark .card .company {
+html.dark .card .company,
+html.dark .similar-card .company {
     color: #ddd;
 }
 
@@ -326,6 +330,50 @@ html.dark .autocomplete-dropdown {
 
 html.dark .autocomplete-item:hover {
     background-color: #444;
+}
+
+/* Дополнительные переопределения для страницы вакансии */
+html.dark .vacancy-full {
+    background-color: #1e293b !important;
+    color: #e2e8f0;
+}
+
+html.dark .vacancy-full h2 {
+    color: #f1f5f9;
+}
+
+html.dark .vacancy-full .company {
+    color: #cbd5e1;
+}
+
+html.dark .vacancy-full .description {
+    color: #e2e8f0;
+}
+
+html.dark .vacancy-full .skills,
+html.dark .vacancy-full .published {
+    color: #94a3b8;
+}
+
+html.dark .similar-card {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+html.dark .similar-card h4 {
+    color: #60a5fa;
+}
+
+html.dark .similar-card .company {
+    color: #94a3b8;
+}
+
+html.dark .similar-card .salary {
+    color: #34d399;
+}
+
+html.dark .similar-card .city {
+    color: #94a3b8;
 }
 
 /* === Остальные общие элементы === */
