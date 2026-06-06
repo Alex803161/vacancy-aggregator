@@ -98,6 +98,37 @@
         html.dark .similar-card .salary {
             color: #34d399;
         }
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn-share {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        .btn-whatsapp:hover {
+            background: #128C7E;
+        }
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+        }
+        .btn-telegram:hover {
+            background: #006699;
+        }
     </style>
 </head>
 <body>
@@ -159,9 +190,7 @@
 
         function saveRecentVacancy(vacancy) {
             let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
-            // Удаляем дубликат
             recent = recent.filter(v => v.id !== vacancy.id);
-            // Добавляем в начало
             recent.unshift({
                 id: vacancy.id,
                 name: vacancy.name,
@@ -169,13 +198,17 @@
                 salary: formatSalary(vacancy.salary),
                 area: vacancy.area?.name || '',
             });
-            // Ограничиваем 10 элементами
             if (recent.length > 10) recent.pop();
             localStorage.setItem('recentVacancies', JSON.stringify(recent));
         }
 
         function renderVacancy(vacancy) {
             const employerName = getEmployerName(vacancy.employer);
+            const vacancyUrl = window.location.href;
+            const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`);
+            const whatsappLink = `https://wa.me/?text=${shareText}`;
+            const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
+
             let html = `
                 <div class="vacancy-full" style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
                     <h2>${vacancy.name || 'Без названия'}</h2>
@@ -189,6 +222,10 @@
                         <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>
                         <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
                     </div>
+                    <div class="share-buttons">
+                        <a href="${whatsappLink}" target="_blank" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="${telegramLink}" target="_blank" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    </div>
                 </div>
             `;
             detailContainer.innerHTML = html;
@@ -201,7 +238,6 @@
             });
 
             loadSimilar(vacancy.name, vacancy.id);
-            // Сохраняем в недавно просмотренные
             saveRecentVacancy(vacancy);
         }
 
