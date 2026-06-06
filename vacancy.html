@@ -6,7 +6,6 @@
     <title>Вакансия — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Мгновенное применение темы до отрисовки
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -14,7 +13,6 @@
             } else if (theme === 'light') {
                 document.documentElement.classList.remove('dark');
             } else {
-                // Авто по времени
                 const hour = new Date().getHours();
                 if (hour >= 20 || hour < 6) {
                     document.documentElement.classList.add('dark');
@@ -27,7 +25,6 @@
         })();
     </script>
     <style>
-        /* Стили для блока похожих вакансий */
         .similar-section {
             margin-top: 40px;
             padding: 20px;
@@ -36,7 +33,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
         }
-        body.dark .similar-section {
+        html.dark .similar-section {
             background: #1e293b;
             border-color: #334155;
         }
@@ -46,7 +43,7 @@
             margin-bottom: 16px;
             color: #0f172a;
         }
-        body.dark .similar-title {
+        html.dark .similar-title {
             color: #f1f5f9;
         }
         .similar-grid {
@@ -65,7 +62,7 @@
             color: inherit;
             display: block;
         }
-        body.dark .similar-card {
+        html.dark .similar-card {
             background: #0f172a;
             border-color: #334155;
         }
@@ -94,11 +91,11 @@
             color: #64748b;
             margin-top: 4px;
         }
-        body.dark .similar-card .company,
-        body.dark .similar-card .city {
+        html.dark .similar-card .company,
+        html.dark .similar-card .city {
             color: #94a3b8;
         }
-        body.dark .similar-card .salary {
+        html.dark .similar-card .salary {
             color: #34d399;
         }
     </style>
@@ -108,15 +105,13 @@
         <div class="container">
             <h1><a href="/">ВКАНСА</a></h1>
             <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌓</span>
+                <span class="icon">🌙</span>
             </button>
         </div>
     </header>
 
     <main class="container">
-        <div id="vacancyDetail">
-            <!-- Основная вакансия -->
-        </div>
+        <div id="vacancyDetail"></div>
         <div id="similarContainer"></div>
         <div id="loading" style="display:none;">Загрузка...</div>
         <div id="error" style="display:none;"></div>
@@ -129,7 +124,6 @@
     <script>
         const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 
-        // Тёмная тема
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -141,7 +135,6 @@
         }
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // ID из URL
         const urlParams = new URLSearchParams(window.location.search);
         const vacancyId = urlParams.get('id');
 
@@ -166,7 +159,6 @@
 
         function renderVacancy(vacancy) {
             const employerName = getEmployerName(vacancy.employer);
-
             let html = `
                 <div class="vacancy-full" style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
                     <h2>${vacancy.name || 'Без названия'}</h2>
@@ -191,7 +183,6 @@
                 updateFavButton(favBtn, vacancy);
             });
 
-            // Загружаем похожие вакансии
             loadSimilar(vacancy.name, vacancy.id);
         }
 
@@ -264,7 +255,6 @@
                 similarContainer.innerHTML = html;
             } catch (e) {
                 console.error('Ошибка загрузки похожих вакансий', e);
-                // Блок просто не отображается
             }
         }
 
