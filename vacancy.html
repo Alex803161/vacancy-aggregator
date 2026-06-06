@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вакансия — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
@@ -25,10 +26,95 @@
         })();
     </script>
     <style>
+        /* Уникальные стили страницы вакансии */
+        .vacancy-full {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid #edf2f7;
+        }
+        html.dark .vacancy-full {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .vacancy-full h2 {
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+        html.dark .vacancy-full h2 {
+            color: #f1f5f9;
+        }
+        .vacancy-full .company {
+            color: #334155;
+            font-weight: 600;
+        }
+        html.dark .vacancy-full .company {
+            color: #f1f5f9;
+        }
+        .vacancy-full .salary {
+            color: #059669;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        html.dark .vacancy-full .salary {
+            color: #34d399;
+        }
+        .vacancy-full .description {
+            color: #1f2937;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+        html.dark .vacancy-full .description {
+            color: #e2e8f0;
+        }
+        .vacancy-full .skills,
+        .vacancy-full .published {
+            color: #64748b;
+            margin-top: 10px;
+        }
+        html.dark .vacancy-full .skills,
+        html.dark .vacancy-full .published {
+            color: #94a3b8;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn-report {
+            background: none;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-report:hover {
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        html.dark .btn-report {
+            border-color: #475569;
+            color: #94a3b8;
+        }
+
         .similar-section {
             margin-top: 40px;
             padding: 20px;
-            background: #fff;
+            background: white;
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
@@ -98,6 +184,7 @@
         html.dark .similar-card .salary {
             color: #34d399;
         }
+
         .share-buttons {
             display: flex;
             gap: 10px;
@@ -115,234 +202,216 @@
             gap: 6px;
             transition: all 0.2s;
         }
-        .btn-whatsapp {
-            background: #25D366;
-            color: white;
-        }
-        .btn-whatsapp:hover {
-            background: #128C7E;
-        }
-        .btn-telegram {
-            background: #0088cc;
-            color: white;
-        }
-        .btn-telegram:hover {
-            background: #006699;
-        }
-        .btn-report {
-            background: none;
-            border: 1px solid #cbd5e1;
-            color: #64748b;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .btn-report:hover {
-            color: #dc2626;
-            border-color: #dc2626;
-        }
-        html.dark .btn-report {
-            border-color: #475569;
-            color: #94a3b8;
-        }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #128C7E; }
+        .btn-telegram { background: #0088cc; color: white; }
+        .btn-telegram:hover { background: #006699; }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1><a href="/">ВКАНСА</a></h1>
-            <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌙</span>
-            </button>
-        </div>
-    </header>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
-    <main class="container">
+<div class="container">
+    <!-- Шапка как на главной -->
+    <div class="header">
+        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
+
+    <main>
         <div id="vacancyDetail"></div>
         <div id="similarContainer"></div>
         <div id="loading" style="display:none;">Загрузка...</div>
         <div id="error" style="display:none;"></div>
     </main>
+</div>
 
-    <footer>
-        <p>&copy; 2025 ВКАНСА</p>
-    </footer>
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2025 ВКАНСА</div>
+</footer>
 
-    <script>
-        const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+<button id="themeToggle" class="theme-switch">🌙</button>
 
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon(isDark);
+<script>
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+
+    // Тема
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    // Инициализация иконки
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
+
+    // Кнопка "Наверх"
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const vacancyId = urlParams.get('id');
+
+    const detailContainer = document.getElementById('vacancyDetail');
+    const similarContainer = document.getElementById('similarContainer');
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error');
+
+    function getEmployerName(employer) {
+        if (!employer) return 'Компания не указана';
+        return typeof employer === 'object' ? employer.name : employer;
+    }
+
+    function formatSalary(salary) {
+        if (!salary) return 'Зарплата не указана';
+        let parts = [];
+        if (salary.from) parts.push(`от ${salary.from}`);
+        if (salary.to) parts.push(`до ${salary.to}`);
+        if (salary.currency) parts.push(salary.currency);
+        return parts.join(' ') || 'Зарплата не указана';
+    }
+
+    function saveRecentVacancy(vacancy) {
+        let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
+        recent = recent.filter(v => v.id !== vacancy.id);
+        recent.unshift({
+            id: vacancy.id,
+            name: vacancy.name,
+            employer: getEmployerName(vacancy.employer),
+            salary: formatSalary(vacancy.salary),
+            area: vacancy.area?.name || '',
         });
-        function updateThemeIcon(isDark) {
-            themeToggle.querySelector('.icon').textContent = isDark ? '☀️' : '🌙';
-        }
-        updateThemeIcon(document.documentElement.classList.contains('dark'));
+        if (recent.length > 10) recent.pop();
+        localStorage.setItem('recentVacancies', JSON.stringify(recent));
+    }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const vacancyId = urlParams.get('id');
+    function renderVacancy(vacancy) {
+        const employerName = getEmployerName(vacancy.employer);
+        const vacancyUrl = window.location.href;
+        const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`);
+        const whatsappLink = `https://wa.me/?text=${shareText}`;
+        const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`) }`;
+        const reportMailto = `mailto:abuse@vakansa.ru?subject=Жалоба на вакансию ID ${vacancy.id}&body=Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
 
-        const detailContainer = document.getElementById('vacancyDetail');
-        const similarContainer = document.getElementById('similarContainer');
-        const loadingEl = document.getElementById('loading');
-        const errorEl = document.getElementById('error');
-
-        function getEmployerName(employer) {
-            if (!employer) return 'Компания не указана';
-            return typeof employer === 'object' ? employer.name : employer;
-        }
-
-        function formatSalary(salary) {
-            if (!salary) return 'Зарплата не указана';
-            let parts = [];
-            if (salary.from) parts.push(`от ${salary.from}`);
-            if (salary.to) parts.push(`до ${salary.to}`);
-            if (salary.currency) parts.push(salary.currency);
-            return parts.join(' ') || 'Зарплата не указана';
-        }
-
-        function saveRecentVacancy(vacancy) {
-            let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
-            recent = recent.filter(v => v.id !== vacancy.id);
-            recent.unshift({
-                id: vacancy.id,
-                name: vacancy.name,
-                employer: getEmployerName(vacancy.employer),
-                salary: formatSalary(vacancy.salary),
-                area: vacancy.area?.name || '',
-            });
-            if (recent.length > 10) recent.pop();
-            localStorage.setItem('recentVacancies', JSON.stringify(recent));
-        }
-
-        function renderVacancy(vacancy) {
-            const employerName = getEmployerName(vacancy.employer);
-            const vacancyUrl = window.location.href;
-            const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`);
-            const whatsappLink = `https://wa.me/?text=${shareText}`;
-            const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
-            const reportMailto = `mailto:abuse@vakansa.ru?subject=Жалоба на вакансию ID ${vacancy.id}&body=Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
-
-            let html = `
-                <div class="vacancy-full" style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
-                    <h2>${vacancy.name || 'Без названия'}</h2>
-                    <p class="company">${employerName}</p>
-                    <p class="salary">${formatSalary(vacancy.salary)}</p>
-                    <div class="description">${vacancy.description || 'Описание отсутствует'}</div>
-                    <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => s.name).join(', ') || 'Не указаны'}</p>
-                    <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU') : 'Неизвестно'}</p>
-                    <div class="actions" style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-                        <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
-                        <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>
-                        <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
-                        <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
-                    </div>
-                    <div class="share-buttons">
-                        <a href="${whatsappLink}" target="_blank" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <a href="${telegramLink}" target="_blank" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
-                    </div>
+        let html = `
+            <div class="vacancy-full">
+                <h2>${vacancy.name || 'Без названия'}</h2>
+                <p class="company">${employerName}</p>
+                <p class="salary">${formatSalary(vacancy.salary)}</p>
+                <div class="description">${vacancy.description || 'Описание отсутствует'}</div>
+                <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => s.name).join(', ') || 'Не указаны'}</p>
+                <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU') : 'Неизвестно'}</p>
+                <div class="actions">
+                    <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
+                    <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>
+                    <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
+                    <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
                 </div>
-            `;
-            detailContainer.innerHTML = html;
+                <div class="share-buttons">
+                    <a href="${whatsappLink}" target="_blank" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="${telegramLink}" target="_blank" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                </div>
+            </div>
+        `;
+        detailContainer.innerHTML = html;
 
-            const favBtn = document.getElementById('favButton');
+        const favBtn = document.getElementById('favButton');
+        updateFavButton(favBtn, vacancy);
+        favBtn.addEventListener('click', () => {
+            toggleFavorite(vacancy);
             updateFavButton(favBtn, vacancy);
-            favBtn.addEventListener('click', () => {
-                toggleFavorite(vacancy);
-                updateFavButton(favBtn, vacancy);
-            });
+        });
 
-            loadSimilar(vacancy.name, vacancy.id);
-            saveRecentVacancy(vacancy);
-        }
+        loadSimilar(vacancy.name, vacancy.id);
+        saveRecentVacancy(vacancy);
+    }
 
-        function updateFavButton(btn, vacancy) {
-            const isFav = isFavorite(vacancy.id);
-            btn.textContent = isFav ? '★ В избранном' : '☆ В избранное';
-            btn.classList.toggle('active', isFav);
-        }
+    function updateFavButton(btn, vacancy) {
+        const isFav = isFavorite(vacancy.id);
+        btn.textContent = isFav ? '★ В избранном' : '☆ В избранное';
+        btn.classList.toggle('active', isFav);
+    }
 
-        function getFavorites() {
-            return JSON.parse(localStorage.getItem('favorites') || '[]');
-        }
+    function getFavorites() {
+        return JSON.parse(localStorage.getItem('favorites') || '[]');
+    }
 
-        function isFavorite(id) {
-            return getFavorites().some(v => v.id === id);
-        }
+    function isFavorite(id) {
+        return getFavorites().some(v => v.id === id);
+    }
 
-        function toggleFavorite(vacancy) {
-            let favs = getFavorites();
-            const index = favs.findIndex(v => v.id === vacancy.id);
-            if (index > -1) {
-                favs.splice(index, 1);
-            } else {
-                favs.push(vacancy);
-            }
-            localStorage.setItem('favorites', JSON.stringify(favs));
-        }
-
-        async function loadVacancy(id) {
-            loadingEl.style.display = 'block';
-            errorEl.style.display = 'none';
-            detailContainer.innerHTML = '';
-            try {
-                const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
-                if (!res.ok) throw new Error(`Ошибка ${res.status}`);
-                const vacancy = await res.json();
-                if (vacancy.errors) throw new Error(vacancy.errors[0]?.value || 'Ошибка данных');
-                renderVacancy(vacancy);
-            } catch (e) {
-                errorEl.textContent = 'Не удалось загрузить вакансию. ' + e.message;
-                errorEl.style.display = 'block';
-            } finally {
-                loadingEl.style.display = 'none';
-            }
-        }
-
-        async function loadSimilar(title, currentId) {
-            try {
-                const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title)}&per_page=5`);
-                const data = await res.json();
-                const items = data.items || [];
-                const filtered = items.filter(v => v.id != currentId).slice(0, 4);
-                if (filtered.length === 0) return;
-
-                let html = `<div class="similar-section"><h3 class="similar-title">Похожие вакансии</h3><div class="similar-grid">`;
-                filtered.forEach(v => {
-                    const emp = typeof v.employer === 'object' ? v.employer?.name : v.employer;
-                    const salary = v.salary ? formatSalary(v.salary) : '';
-                    const area = v.area?.name || '';
-                    html += `
-                        <a href="vacancy.html?id=${v.id}" class="similar-card">
-                            <h4>${v.name || 'Без названия'}</h4>
-                            <div class="company">${emp || 'Компания не указана'}</div>
-                            ${salary ? `<div class="salary">${salary}</div>` : ''}
-                            ${area ? `<div class="city">${area}</div>` : ''}
-                        </a>
-                    `;
-                });
-                html += `</div></div>`;
-                similarContainer.innerHTML = html;
-            } catch (e) {
-                console.error('Ошибка загрузки похожих вакансий', e);
-            }
-        }
-
-        if (vacancyId) {
-            loadVacancy(vacancyId);
+    function toggleFavorite(vacancy) {
+        let favs = getFavorites();
+        const index = favs.findIndex(v => v.id === vacancy.id);
+        if (index > -1) {
+            favs.splice(index, 1);
         } else {
-            errorEl.textContent = 'Идентификатор вакансии не указан.';
-            errorEl.style.display = 'block';
+            favs.push(vacancy);
         }
-    </script>
+        localStorage.setItem('favorites', JSON.stringify(favs));
+    }
+
+    async function loadVacancy(id) {
+        loadingEl.style.display = 'block';
+        errorEl.style.display = 'none';
+        detailContainer.innerHTML = '';
+        try {
+            const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
+            if (!res.ok) throw new Error(`Ошибка ${res.status}`);
+            const vacancy = await res.json();
+            if (vacancy.errors) throw new Error(vacancy.errors[0]?.value || 'Ошибка данных');
+            renderVacancy(vacancy);
+        } catch (e) {
+            errorEl.textContent = 'Не удалось загрузить вакансию. ' + e.message;
+            errorEl.style.display = 'block';
+        } finally {
+            loadingEl.style.display = 'none';
+        }
+    }
+
+    async function loadSimilar(title, currentId) {
+        try {
+            const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title)}&per_page=5`);
+            const data = await res.json();
+            const items = data.items || [];
+            const filtered = items.filter(v => v.id != currentId).slice(0, 4);
+            if (filtered.length === 0) return;
+
+            let html = `<div class="similar-section"><h3 class="similar-title">Похожие вакансии</h3><div class="similar-grid">`;
+            filtered.forEach(v => {
+                const emp = typeof v.employer === 'object' ? v.employer?.name : v.employer;
+                const salary = v.salary ? formatSalary(v.salary) : '';
+                const area = v.area?.name || '';
+                html += `
+                    <a href="vacancy.html?id=${v.id}" class="similar-card">
+                        <h4>${v.name || 'Без названия'}</h4>
+                        <div class="company">${emp || 'Компания не указана'}</div>
+                        ${salary ? `<div class="salary">${salary}</div>` : ''}
+                        ${area ? `<div class="city">${area}</div>` : ''}
+                    </a>
+                `;
+            });
+            html += `</div></div>`;
+            similarContainer.innerHTML = html;
+        } catch (e) {
+            console.error('Ошибка загрузки похожих вакансий', e);
+        }
+    }
+
+    if (vacancyId) {
+        loadVacancy(vacancyId);
+    } else {
+        errorEl.textContent = 'Идентификатор вакансии не указан.';
+        errorEl.style.display = 'block';
+    }
+</script>
 </body>
 </html>
