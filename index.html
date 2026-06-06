@@ -422,6 +422,8 @@
     <div class="results-header"><div class="counter" id="counterDisplay">Найдено: <span>0</span></div><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
     <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
+    <!-- Сенсор для бесконечного скролла -->
+    <div id="scrollSentinel" style="height: 1px;"></div>
 
     <div class="subscribe-section">
         <div class="subscribe-card">
@@ -476,9 +478,10 @@
     let currentArea='113';
     let selectedCityId = null;
     let allAreas = [];
-    let lastSearchFound = 0; // общее количество найденных вакансий
+    let lastSearchFound = 0;
 
     let hiddenVacancies = JSON.parse(localStorage.getItem('hiddenVacancies')) || [];
+    let isLoadingMore = false;
 
     const CACHE_TTL = 5 * 60 * 1000;
     const searchCache = new Map();
@@ -526,7 +529,8 @@
         resetButton=document.getElementById('resetButton'),themeToggle=document.getElementById('themeToggle'),
         historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),
         backToTopBtn=document.getElementById('backToTopBtn'),
-        citySuggestions=document.getElementById('citySuggestions');
+        citySuggestions=document.getElementById('citySuggestions'),
+        scrollSentinel=document.getElementById('scrollSentinel');
 
     const subscribeForm = document.getElementById('subscribeForm');
     const subscribeEmailInput = document.getElementById('subscribeEmailInput');
@@ -543,6 +547,16 @@
 
     const filterWithSalary = document.getElementById('filterWithSalary');
     const filterShowHidden = document.getElementById('filterShowHidden');
+
+    // Intersection Observer для бесконечного скролла
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !isLoadingMore && displayedCount < filteredVacancies.length) {
+                loadMore();
+            }
+        });
+    }, { rootMargin: '200px' });
+    observer.observe(scrollSentinel);
 
     function sendGAEvent(eventName, params = {}) {
         if (typeof gtag === "function") {
@@ -679,7 +693,6 @@
         await performSearch(true, false);
     }
 
-    // Обновление счетчиков сохранённых поисков после получения found
     function updateSavedSearchCounts(query, areaId, employment, found) {
         const saved = getSavedSearches();
         let updated = false;
@@ -706,7 +719,6 @@
         }
         savedSearchesSection.style.display = 'block';
 
-        // Асинхронно получаем актуальные found для бейджей
         const updatedSearches = await Promise.all(saved.map(async (s) => {
             try {
                 const { found } = await fetchVacanciesFromAPI(s.query, {
@@ -863,7 +875,6 @@
                 applyFilters();
                 searchBtn.disabled = false;
                 searchBtn.innerHTML = originalHTML;
-                // Обновляем счетчики сохранённых поисков
                 updateSavedSearchCounts(query, currentArea, filterEmployment.value, cachedData.found);
                 return;
             }
@@ -890,14 +901,17 @@
     }
 
     function loadMore(){
+        if (isLoadingMore) return;
+        isLoadingMore = true;
         if(displayedCount<filteredVacancies.length){
             const nextItems=filteredVacancies.slice(displayedCount,displayedCount+PAGE_SIZE);
             renderVacancies(nextItems);
             displayedCount+=nextItems.length;
             updateLoadMoreButton();
-        }else{
-            updateLoadMoreButton();
         }
+        isLoadingMore = false;
+        // После добавления элементов снова наблюдаем за сенсором
+        observer.observe(scrollSentinel);
     }
 
     function setSort(sort){
