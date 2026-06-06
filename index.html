@@ -436,6 +436,10 @@
                 <label for="filterWithSalary">Только с зарплатой</label>
             </div>
             <div class="filter-checkbox-option">
+                <input type="checkbox" id="filterRemote">
+                <label for="filterRemote">Удалённая работа</label>
+            </div>
+            <div class="filter-checkbox-option">
                 <input type="checkbox" id="filterShowHidden">
                 <label for="filterShowHidden">Показывать скрытые</label>
             </div>
@@ -528,6 +532,7 @@
         if(query)params.set('text',query);
         if(filters.area)params.set('area',filters.area);
         if(filters.employment)params.set('employment',filters.employment);
+        if(filters.schedule)params.set('schedule',filters.schedule);
         if(filters.order_by)params.set('order_by',filters.order_by);
         const perPage = filters.per_page || 30;
         params.set('per_page', perPage);
@@ -572,6 +577,7 @@
     const saveSearchBtn = document.getElementById('saveSearchBtn');
 
     const filterWithSalary = document.getElementById('filterWithSalary');
+    const filterRemote = document.getElementById('filterRemote');
     const filterShowHidden = document.getElementById('filterShowHidden');
 
     // Observer для бесконечного скролла
@@ -700,15 +706,16 @@
         const employment = filterEmployment.value;
         const experience = filterExperience.value;
         const sort = currentSort;
+        const remote = filterRemote.checked;
 
         const existing = getSavedSearches();
-        const duplicate = existing.some(s => s.query === query && s.areaId === areaId);
+        const duplicate = existing.some(s => s.query === query && s.areaId === areaId && s.remote === remote);
         if (duplicate) {
             alert('Такой поиск уже сохранён');
             return;
         }
 
-        existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort, lastCount: 0 });
+        existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort, remote, lastCount: 0 });
         localStorage.setItem('savedSearches', JSON.stringify(existing));
         renderSavedSearches();
     }
@@ -728,15 +735,16 @@
         filterSalaryFrom.value = search.salaryFrom;
         filterEmployment.value = search.employment;
         filterExperience.value = search.experience;
+        filterRemote.checked = search.remote || false;
         setSort(search.sort);
         await performSearch(true, false);
     }
 
-    function updateSavedSearchCounts(query, areaId, employment, found) {
+    function updateSavedSearchCounts(query, areaId, employment, schedule, found) {
         const saved = getSavedSearches();
         let updated = false;
         const newSaved = saved.map(s => {
-            if (s.query === query && s.areaId === areaId && s.employment === employment) {
+            if (s.query === query && s.areaId === areaId && s.employment === employment && s.remote === schedule) {
                 if (s.lastCount !== found) {
                     updated = true;
                     return { ...s, lastCount: found };
@@ -763,6 +771,7 @@
                 const { found } = await fetchVacanciesFromAPI(s.query, {
                     area: s.areaId,
                     employment: s.employment,
+                    schedule: s.remote ? 'remote' : undefined,
                     order_by: s.sort,
                     per_page: 1
                 });
@@ -776,7 +785,7 @@
         let totalNew = 0;
         const lastSeenCounts = JSON.parse(localStorage.getItem('lastSeenCounts')) || {};
         updatedSearches.forEach(s => {
-            const key = `${s.query}_${s.areaId}_${s.employment}`;
+            const key = `${s.query}_${s.areaId}_${s.employment}_${s.remote || false}`;
             const lastSeen = lastSeenCounts[key] || s.lastCount || 0;
             if (s.currentFound > lastSeen) {
                 totalNew += (s.currentFound - lastSeen);
@@ -791,13 +800,13 @@
         // Обновляем lastSeenCounts после того, как показали уведомление
         const newLastSeen = {};
         updatedSearches.forEach(s => {
-            const key = `${s.query}_${s.areaId}_${s.employment}`;
+            const key = `${s.query}_${s.areaId}_${s.employment}_${s.remote || false}`;
             newLastSeen[key] = s.currentFound;
         });
         localStorage.setItem('lastSeenCounts', JSON.stringify(newLastSeen));
 
         savedSearchesContainer.innerHTML = updatedSearches.map((s, i) => {
-            const lastSeenKey = `${s.query}_${s.areaId}_${s.employment}`;
+            const lastSeenKey = `${s.query}_${s.areaId}_${s.employment}_${s.remote || false}`;
             const lastSeen = (JSON.parse(localStorage.getItem('lastSeenCounts')) || {})[lastSeenKey] || s.lastCount || 0;
             const newCount = s.currentFound - lastSeen;
             const badge = newCount > 0 ? `<span class="new-badge">+${newCount} новых</span>` : '';
@@ -862,6 +871,7 @@
     filterEmployment.addEventListener('change', applyFilters);
     filterSalaryFrom.addEventListener('input', applyFilters);
     filterWithSalary.addEventListener('change', applyFilters);
+    filterRemote.addEventListener('change', applyFilters);
     filterShowHidden.addEventListener('change', applyFilters);
 
     sortByDateBtn.addEventListener('click',()=>{setSort('publication_time');applyFilters()});
@@ -932,7 +942,7 @@
         searchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Поиск...';
 
         try{
-            const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}`;
+            const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;
             const cachedData = getCachedResult(cacheKey);
             if (cachedData) {
                 allVacancies = cachedData.items;
@@ -940,16 +950,23 @@
                 applyFilters();
                 searchBtn.disabled = false;
                 searchBtn.innerHTML = originalHTML;
-                updateSavedSearchCounts(query, currentArea, filterEmployment.value, cachedData.found);
+                updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, cachedData.found);
                 return;
             }
-            const filters={employment:filterEmployment.value,order_by:currentSort,area:currentArea,per_page:30,page:0};
+            const filters={
+                employment:filterEmployment.value,
+                schedule: filterRemote.checked ? 'remote' : undefined,
+                order_by:currentSort,
+                area:currentArea,
+                per_page:30,
+                page:0
+            };
             const { items, found } = await fetchVacanciesFromAPI(query,filters);
             allVacancies = items;
             lastSearchFound = found;
             setCachedResult(cacheKey, { items, found });
             applyFilters();
-            updateSavedSearchCounts(query, currentArea, filterEmployment.value, found);
+            updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, found);
             sendGAEvent("search", { search_term: query });
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
@@ -994,6 +1011,9 @@
         if(salaryFrom) filtered=filtered.filter(v=>v.salary?.from && v.salary.from>=salaryFrom);
         if(filterWithSalary.checked) {
             filtered = filtered.filter(v => (v.salary?.from || v.salary?.to));
+        }
+        if(filterRemote.checked) {
+            filtered = filtered.filter(v => v.schedule?.id === 'remote');
         }
         if (!filterShowHidden.checked) {
             const hiddenSet = new Set(hiddenVacancies);
@@ -1113,6 +1133,7 @@
         filterEmployment.value='';
         filterSalaryFrom.value='';
         filterWithSalary.checked = false;
+        filterRemote.checked = false;
         filterShowHidden.checked = false;
         currentArea='113';
         selectedCityId=null;
