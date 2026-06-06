@@ -86,11 +86,11 @@
         }
         @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
         html.dark .vacancy-card { background: #1e293b; border-color: #334155; }
-        .job-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; padding-right: 50px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .job-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; padding-right: 90px; display: flex; justify-content: space-between; align-items: flex-start; }
         html.dark .job-title { color: #f1f5f9; }
         .job-title .date-badge { font-size: 0.85rem; font-weight: 500; color: #64748b; white-space: nowrap; margin-left: 12px; }
         html.dark .job-title .date-badge { color: #9ca3af; }
-        .salary { font-size: 1.15rem; font-weight: 700; color: #059669; margin-bottom: 6px; padding-right: 50px; }
+        .salary { font-size: 1.15rem; font-weight: 700; color: #059669; margin-bottom: 6px; padding-right: 90px; }
         html.dark .salary { color: #34d399; }
         .company-block { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
         .logo-placeholder { width: 40px; height: 40px; border-radius: 8px; background: #e0e7ff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: #0047cc; flex-shrink: 0; text-transform: uppercase; overflow: hidden; }
@@ -120,7 +120,7 @@
         .hide-btn {
             position: absolute;
             top: 10px;
-            right: 48px;
+            right: 50px;
             width: 34px;
             height: 34px;
             border-radius: 50%;
@@ -356,8 +356,8 @@
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
             .vacancy-card { padding: 12px 14px; } 
-            .job-title { font-size: 1rem; } 
-            .salary { font-size: 1rem; } 
+            .job-title { font-size: 1rem; padding-right: 70px; } 
+            .salary { font-size: 1rem; padding-right: 70px; } 
             .card-actions { flex-direction: column; align-items: stretch; } 
             .btn-respond, .btn-call, .btn-email, .btn-contact, .btn-share { justify-content: center; } 
             .save-btn, .hide-btn { top: 8px; width: 30px; height: 30px; font-size: 0.9rem; }
@@ -467,7 +467,6 @@
     let selectedCityId = null;
     let allAreas = [];
 
-    // Скрытые вакансии
     let hiddenVacancies = JSON.parse(localStorage.getItem('hiddenVacancies')) || [];
 
     const CACHE_TTL = 5 * 60 * 1000;
@@ -613,17 +612,14 @@
         performSearch(true, false);
     });
 
-    // Скрыть вакансию
     function hideVacancy(id) {
         if (!hiddenVacancies.includes(id)) {
             hiddenVacancies.push(id);
             localStorage.setItem('hiddenVacancies', JSON.stringify(hiddenVacancies));
         }
-        // Просто применяем фильтры, чтобы она исчезла
         applyFilters();
     }
 
-    // Сохранённые поиски
     function getSavedSearches() {
         return JSON.parse(localStorage.getItem('savedSearches')) || [];
     }
@@ -862,7 +858,6 @@
         if(filterWithSalary.checked) {
             filtered = filtered.filter(v => (v.salary?.from || v.salary?.to));
         }
-        // Фильтр скрытых
         if (!filterShowHidden.checked) {
             const hiddenSet = new Set(hiddenVacancies);
             filtered = filtered.filter(v => !hiddenSet.has(String(v.id)));
@@ -981,7 +976,7 @@
         filterEmployment.value='';
         filterSalaryFrom.value='';
         filterWithSalary.checked = false;
-        filterShowHidden.checked = false; // сбрасываем показ скрытых
+        filterShowHidden.checked = false;
         currentArea='113';
         selectedCityId=null;
         setSort('publication_time');
