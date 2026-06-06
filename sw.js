@@ -9,7 +9,6 @@ const urlsToCache = [
   '/style.css'
 ];
 
-// Установка: кеширование основных файлов
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -19,7 +18,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Активация: удаление старых кешей
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -35,7 +33,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Перехват запросов: кеш первый, если нет — сеть
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -43,11 +40,9 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
       return fetch(event.request).then((response) => {
-        // Не кешируем динамические запросы к API
         if (event.request.url.includes('functions.yandexcloud.net')) {
           return response;
         }
-        // Кешируем только GET-запросы
         if (event.request.method === 'GET') {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
@@ -56,7 +51,6 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       }).catch(() => {
-        // Можно вернуть офлайн-страницу, если понадобится
         return new Response('Нет сети', { status: 503 });
       });
     })
