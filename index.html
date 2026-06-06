@@ -108,6 +108,13 @@
         .btn-respond { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; text-decoration: none; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: inline-flex; align-items: center; gap: 4px; border: none; cursor: pointer; }
         .btn-call { background: linear-gradient(180deg, #10b981 0%, #059669 100%); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; border: 1px solid #047857; box-shadow: 0 4px 10px rgba(16,185,129,0.4), 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
         .btn-email { background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; border: 1px solid #1d4ed8; box-shadow: 0 4px 10px rgba(59,130,246,0.4), 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
+        .btn-share {
+            padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s; border: none; text-decoration: none;
+        }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #128C7E; }
+        .btn-telegram { background: #0088cc; color: white; }
+        .btn-telegram:hover { background: #006699; }
         .save-btn { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #94a3b8; font-size: 1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 0; }
         .save-btn.saved { background: #ff6b6b; color: white; border-color: #dc2626; }
         .btn-contact { background: #f1f5f9; border: 1px solid #d1d5db; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
@@ -326,7 +333,7 @@
             .job-title { font-size: 1rem; } 
             .salary { font-size: 1rem; } 
             .card-actions { flex-direction: column; align-items: stretch; } 
-            .btn-respond, .btn-call, .btn-email, .btn-contact { justify-content: center; } 
+            .btn-respond, .btn-call, .btn-email, .btn-contact, .btn-share { justify-content: center; } 
             .save-btn { top: 8px; right: 8px; width: 30px; height: 30px; font-size: 0.9rem; } 
             .logo-placeholder { width: 34px; height: 34px; font-size: 1rem; } 
             .logo-heart { width: 100px; height: 100px; }
@@ -589,7 +596,6 @@
         const experience = filterExperience.value;
         const sort = currentSort;
 
-        // Проверяем, есть ли уже такой поиск (по тексту и городу)
         const existing = getSavedSearches();
         const duplicate = existing.some(s => s.query === query && s.areaId === areaId);
         if (duplicate) {
@@ -618,9 +624,7 @@
         filterEmployment.value = search.employment;
         filterExperience.value = search.experience;
 
-        // Установка сортировки
         setSort(search.sort);
-        // Запуск поиска
         performSearch(true, false);
     }
 
@@ -643,7 +647,6 @@
             </div>
         `).join('');
 
-        // Обработчики кнопок
         document.querySelectorAll('.saved-search-apply').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const index = e.target.closest('button').dataset.index;
@@ -712,7 +715,6 @@
     vacanciesContainer.addEventListener('click',e=>{
         const card=e.target.closest('.vacancy-card');if(!card)return;const id=card.dataset.id;
         if(e.target.closest('.save-btn')){toggleSaved(id,e.target.closest('.save-btn'));return}
-        if(e.target.closest('.share-card-btn')){const link=e.target.closest('.share-card-btn').dataset.link;if(link)navigator.clipboard.writeText(link).then(()=>alert('Ссылка скопирована!'));return}
         if(e.target.closest('.btn-respond')){goToVacancy(id);return}
         goToVacancy(id);
     });
@@ -818,7 +820,6 @@
         if(emp) filtered=filtered.filter(v=>v.employment===emp);
         const salaryFrom=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;
         if(salaryFrom) filtered=filtered.filter(v=>v.salary?.from && v.salary.from>=salaryFrom);
-        // Фильтр "Только с зарплатой"
         if(filterWithSalary.checked) {
             filtered = filtered.filter(v => (v.salary?.from || v.salary?.to));
         }
@@ -902,7 +903,13 @@
                 contactButton=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation(); sendGAEvent('click_contact', { contact_type: 'email', vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' });"><i class="fas fa-envelope"></i> Написать</a>`;
             }
             const logoSrc=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">`:vac.logoLetter;
-            card.innerHTML=`<button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<button class="btn-contact share-card-btn" data-link="${vac.link}"><i class="fas fa-share-alt"></i> Поделиться</button></div>`;
+            // Формирование ссылки на нашу страницу вакансии
+            const vacancyUrl = `https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=${vac.id}`;
+            const shareText = encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}. Подробнее: ${vacancyUrl}`);
+            const whatsappLink = `https://wa.me/?text=${shareText}`;
+            const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
+
+            card.innerHTML=`<button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<a href="${whatsappLink}" target="_blank" class="btn-share btn-whatsapp" onclick="event.stopPropagation();" title="Поделиться в WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a><a href="${telegramLink}" target="_blank" class="btn-share btn-telegram" onclick="event.stopPropagation();" title="Поделиться в Telegram"><i class="fab fa-telegram-plane"></i> Telegram</a></div>`;
             vacanciesContainer.appendChild(card);
         });
     }
