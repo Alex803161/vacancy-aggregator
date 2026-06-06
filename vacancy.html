@@ -157,6 +157,23 @@
             return parts.join(' ') || 'Зарплата не указана';
         }
 
+        function saveRecentVacancy(vacancy) {
+            let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
+            // Удаляем дубликат
+            recent = recent.filter(v => v.id !== vacancy.id);
+            // Добавляем в начало
+            recent.unshift({
+                id: vacancy.id,
+                name: vacancy.name,
+                employer: getEmployerName(vacancy.employer),
+                salary: formatSalary(vacancy.salary),
+                area: vacancy.area?.name || '',
+            });
+            // Ограничиваем 10 элементами
+            if (recent.length > 10) recent.pop();
+            localStorage.setItem('recentVacancies', JSON.stringify(recent));
+        }
+
         function renderVacancy(vacancy) {
             const employerName = getEmployerName(vacancy.employer);
             let html = `
@@ -184,6 +201,8 @@
             });
 
             loadSimilar(vacancy.name, vacancy.id);
+            // Сохраняем в недавно просмотренные
+            saveRecentVacancy(vacancy);
         }
 
         function updateFavButton(btn, vacancy) {
