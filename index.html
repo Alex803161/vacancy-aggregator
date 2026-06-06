@@ -145,16 +145,19 @@
         .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
         .footer-links a { color: #64748b; text-decoration: none; font-size: 0.85rem; }
         .footer-copy { color: #94a3b8; font-size: 0.8rem; }
-        #backToTopBtn { display: none; position: fixed; bottom: 150px; right: 20px; z-index: 99; background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; align-items: center; justify-content: center; }
-        .theme-switch { position: fixed; bottom: 90px; right: 20px; background: #0047cc; color: white; border: none; border-radius: 50%; width: 44px; height: 44px; z-index: 100; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        #backToTopBtn { display: none; position: fixed; bottom: 160px; right: 20px; z-index: 99; background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; align-items: center; justify-content: center; }
+        /* Обновлённая кнопка темы */
+        .theme-switch { position: fixed; bottom: 90px; right: 20px; background: #0047cc; color: white; border: 3px solid white; border-radius: 50%; width: 50px; height: 50px; z-index: 100; cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(0,0,0,0.4); transition: all 0.2s; }
+        .theme-switch:hover { transform: scale(1.1); }
+        body.dark .theme-switch { border-color: #475569; box-shadow: 0 6px 14px rgba(255,255,255,0.1); }
         @media (max-width: 768px) { 
             .filters-grid { grid-template-columns: 1fr; } 
             .search-row { flex-direction: row; } 
             .search-input { font-size: 0.9rem; padding: 10px 14px; } 
             .search-btn { padding: 0 20px; font-size: 0.9rem; height: 42px; } 
             .subscribe-btn { padding: 12px 20px; } 
-            .theme-switch { bottom: 80px; right: 10px; width: 40px; height: 40px; font-size: 1.1rem; }
-            #backToTopBtn { bottom: 135px; right: 10px; width: 40px; height: 40px; font-size: 1.1rem; }
+            .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
+            #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
             .vacancy-card { padding: 12px 14px; } 
             .job-title { font-size: 1rem; } 
             .salary { font-size: 1rem; } 
