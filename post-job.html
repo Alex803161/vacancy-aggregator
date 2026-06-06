@@ -5,96 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить вакансию — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Специфичные стили формы, привязанные к теме -->
-    <style>
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: inherit;
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-family: inherit;
-            background: white;
-            color: #0f172a;
-            box-sizing: border-box;
-        }
-        html.dark .form-group input,
-        html.dark .form-group textarea,
-        html.dark .form-group select {
-            background: #1e293b;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        .premium-option {
-            background: #fff6e5;
-            border: 1px solid #f5b042;
-            border-radius: 20px;
-            padding: 16px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        html.dark .premium-option {
-            background: #2d2a1c;
-            border-color: #b7791f;
-        }
-        .premium-option input {
-            width: auto;
-            transform: scale(1.2);
-            margin-right: 8px;
-        }
-        .btn-submit {
-            background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-        }
-        .btn-submit:hover {
-            background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
-        }
-        html.dark .btn-submit {
-            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 24px;
-            color: #2c6e9e;
-            text-decoration: none;
-        }
-        html.dark .back-link {
-            color: #93c5fd;
-        }
-        #formMessage {
-            margin-top: 16px;
-            font-weight: 500;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
-        // Мгновенное применение темы до отрисовки страницы
+        // Мгновенное применение темы
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -113,53 +26,162 @@
             }
         })();
     </script>
+    <style>
+        /* Стили, специфичные для формы (остальное в style.css) */
+        .post-job-container {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .post-job-container {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .post-job-container h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+        html.dark .post-job-container h2 {
+            color: #f1f5f9;
+        }
+        .post-job-container .sub {
+            color: #64748b;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        html.dark .post-job-container .sub {
+            color: #9ca3af;
+            border-color: #334155;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        html.dark .form-group label {
+            color: #e2e8f0;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: white;
+            color: #0f172a;
+        }
+        html.dark .form-group input,
+        html.dark .form-group textarea,
+        html.dark .form-group select {
+            background: #0f172a;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .premium-option {
+            background: #fff6e5;
+            border: 1px solid #f5b042;
+            border-radius: 20px;
+            padding: 16px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        html.dark .premium-option {
+            background: #2d3a4e;
+            border-color: #f5b042;
+        }
+        .premium-option input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+            margin-right: 8px;
+        }
+        .btn-submit {
+            background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1><a href="/">ВКАНСА</a> — Добавить вакансию</h1>
             <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌓</span>
+                <span class="icon">🌙</span>
             </button>
         </div>
     </header>
 
     <main class="container">
-        <h2>Разместить прямую вакансию</h2>
-        <p>Заполните форму, и ваша вакансия появится в общем списке после проверки.</p>
+        <div class="post-job-container">
+            <h2><i class="fas fa-plus-circle"></i> Новая вакансия</h2>
+            <div class="sub">Разместите вакансию бесплатно или с премиум-выделением</div>
 
-        <form id="jobForm">
-            <div class="form-group">
-                <label for="title">Название должности *</label>
-                <input type="text" id="title" name="title" required placeholder="Например: Веб-разработчик">
-            </div>
-            <div class="form-group">
-                <label for="company">Компания *</label>
-                <input type="text" id="company" name="company" required placeholder="ООО Ромашка">
-            </div>
-            <div class="form-group">
-                <label for="city">Город</label>
-                <input type="text" id="city" name="city" placeholder="Москва">
-            </div>
-            <div class="form-group">
-                <label for="salary">Зарплата</label>
-                <input type="text" id="salary" name="salary" placeholder="от 100 000 ₽">
-            </div>
-            <div class="form-group">
-                <label for="description">Описание вакансии</label>
-                <textarea id="description" name="description" placeholder="Обязанности, требования, условия..."></textarea>
-            </div>
+            <form id="jobForm">
+                <div class="form-group">
+                    <label for="title">Название должности *</label>
+                    <input type="text" id="title" required placeholder="Например: Веб-разработчик">
+                </div>
+                <div class="form-group">
+                    <label for="company">Компания *</label>
+                    <input type="text" id="company" required placeholder="ООО Ромашка">
+                </div>
+                <div class="form-group">
+                    <label for="city">Город</label>
+                    <input type="text" id="city" placeholder="Москва">
+                </div>
+                <div class="form-group">
+                    <label for="salary">Зарплата</label>
+                    <input type="text" id="salary" placeholder="от 100 000 ₽">
+                </div>
+                <div class="form-group">
+                    <label for="description">Описание вакансии</label>
+                    <textarea id="description" rows="5" placeholder="Обязанности, требования, условия..."></textarea>
+                </div>
 
-            <div class="premium-option">
-                <input type="checkbox" id="premiumCheckbox">
-                <label for="premiumCheckbox" style="margin:0; font-weight:600;">⭐ Премиум-размещение (выделение золотом)</label>
-                <span style="font-size:0.8rem; margin-left:auto;">+ будет видно на главной</span>
-            </div>
+                <div class="premium-option">
+                    <input type="checkbox" id="premiumCheckbox">
+                    <label for="premiumCheckbox" style="margin:0; font-weight:600;">⭐ Премиум-размещение</label>
+                    <span style="font-size:0.8rem; margin-left:auto;">Будет видно на главной</span>
+                </div>
 
-            <button type="submit" class="btn-submit">Опубликовать вакансию</button>
-        </form>
-        <p id="formMessage"></p>
-        <a href="index.html" class="back-link">← На главную</a>
+                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Опубликовать вакансию</button>
+            </form>
+            <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+        </div>
+        <p id="formMessage" style="text-align:center; margin: 16px 0; font-weight:500;"></p>
     </main>
 
     <footer>
@@ -167,7 +189,7 @@
     </footer>
 
     <script>
-        // Тема
+        // Тёмная тема
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -177,17 +199,17 @@
         function updateThemeIcon(isDark) {
             themeToggle.querySelector('.icon').textContent = isDark ? '☀️' : '🌙';
         }
+        // Инициализация иконки при загрузке
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Работа с формой
+        // Обработчик формы
         const form = document.getElementById('jobForm');
         const formMessage = document.getElementById('formMessage');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-
             const job = {
-                id: Date.now().toString(),
+                id: Date.now(),
                 title: document.getElementById('title').value.trim(),
                 company: document.getElementById('company').value.trim(),
                 city: document.getElementById('city').value.trim(),
@@ -196,19 +218,16 @@
                 isPremium: document.getElementById('premiumCheckbox').checked,
                 timestamp: new Date().toISOString()
             };
-
             if (!job.title || !job.company) {
-                formMessage.textContent = '❌ Заполните обязательные поля (название и компания).';
-                formMessage.style.color = 'red';
+                formMessage.textContent = '❌ Заполните название вакансии и компанию';
+                formMessage.style.color = '#dc2626';
                 return;
             }
-
             const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
             existing.push(job);
             localStorage.setItem('direct_jobs', JSON.stringify(existing));
-
-            formMessage.textContent = '✅ Вакансия успешно добавлена! Она появится в общем списке.';
-            formMessage.style.color = 'green';
+            formMessage.textContent = '✅ Вакансия успешно добавлена!';
+            formMessage.style.color = '#059669';
             form.reset();
         });
     </script>
