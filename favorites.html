@@ -6,7 +6,6 @@
     <title>Избранное — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Мгновенное применение темы
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -25,6 +24,43 @@
             }
         })();
     </script>
+    <style>
+        /* Стили для панели сортировки */
+        .sort-panel {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .sort-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: #eef2ff;
+            border: 1px solid #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .sort-btn.active {
+            background: #0047cc;
+            color: white;
+            border-color: #0047cc;
+        }
+        html.dark .sort-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        html.dark .sort-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -35,15 +71,23 @@
                 <a href="/favorites.html" class="active">Избранное</a>
             </nav>
             <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌓</span>
+                <span class="icon">🌙</span>
             </button>
         </div>
     </header>
 
     <main class="container">
         <h2>Избранные вакансии</h2>
+
+        <!-- Панель сортировки -->
+        <div class="sort-panel">
+            <button id="sortByDate" class="sort-btn active" data-sort="date">📅 По дате публикации</button>
+            <button id="sortBySalary" class="sort-btn" data-sort="salary">💰 По зарплате</button>
+            <button id="sortByName" class="sort-btn" data-sort="name">🔤 По названию</button>
+        </div>
+
         <div id="favoritesList" class="cards">
-            <!-- Карточки избранных вакансий -->
+            <!-- Карточки будут добавлены динамически -->
         </div>
         <p id="emptyMessage" style="display:none;">В избранном пока ничего нет.</p>
     </main>
@@ -53,7 +97,6 @@
     </footer>
 
     <script>
-        // Тёмная тема
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -67,6 +110,13 @@
 
         const favoritesList = document.getElementById('favoritesList');
         const emptyMessage = document.getElementById('emptyMessage');
+
+        // Кнопки сортировки
+        const sortByDateBtn = document.getElementById('sortByDate');
+        const sortBySalaryBtn = document.getElementById('sortBySalary');
+        const sortByNameBtn = document.getElementById('sortByName');
+
+        let currentSort = 'date'; // по умолчанию
 
         function getEmployerName(employer) {
             if (!employer) return 'Компания не указана';
@@ -88,17 +138,48 @@
             renderFavorites();
         }
 
+        // Сортировка
+        function sortFavorites(favorites, sortType) {
+            const sorted = [...favorites];
+            switch (sortType) {
+                case 'salary':
+                    sorted.sort((a, b) => {
+                        const aSal = a.salary?.from || a.salary?.to || 0;
+                        const bSal = b.salary?.from || b.salary?.to || 0;
+                        return bSal - aSal; // по убыванию
+                    });
+                    break;
+                case 'name':
+                    sorted.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ru'));
+                    break;
+                case 'date':
+                default:
+                    sorted.sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0));
+                    break;
+            }
+            return sorted;
+        }
+
+        function setActiveSortButton(sortType) {
+            [sortByDateBtn, sortBySalaryBtn, sortByNameBtn].forEach(btn => btn.classList.remove('active'));
+            if (sortType === 'salary') sortBySalaryBtn.classList.add('active');
+            else if (sortType === 'name') sortByNameBtn.classList.add('active');
+            else sortByDateBtn.classList.add('active');
+        }
+
         function renderFavorites() {
             const favorites = getFavorites();
-            favoritesList.innerHTML = '';
-
             if (favorites.length === 0) {
+                favoritesList.innerHTML = '';
                 emptyMessage.style.display = 'block';
                 return;
             }
             emptyMessage.style.display = 'none';
 
-            favorites.forEach(vacancy => {
+            const sorted = sortFavorites(favorites, currentSort);
+
+            favoritesList.innerHTML = '';
+            sorted.forEach(vacancy => {
                 const card = document.createElement('div');
                 card.className = 'card';
 
@@ -119,6 +200,13 @@
                     const currency = vacancy.salary.currency || '';
                     salary.textContent = [from, to, currency].filter(Boolean).join(' ') || 'З/П не указана';
                     card.appendChild(salary);
+                }
+
+                if (vacancy.published_at) {
+                    const date = document.createElement('p');
+                    date.className = 'published';
+                    date.textContent = new Date(vacancy.published_at).toLocaleDateString('ru-RU');
+                    card.appendChild(date);
                 }
 
                 const actions = document.createElement('div');
@@ -143,7 +231,6 @@
 
                 card.appendChild(actions);
 
-                // Переход по клику на карточку
                 card.addEventListener('click', () => {
                     window.location.href = `vacancy.html?id=${vacancy.id}`;
                 });
@@ -151,6 +238,23 @@
                 favoritesList.appendChild(card);
             });
         }
+
+        // Обработчики сортировки
+        sortByDateBtn.addEventListener('click', () => {
+            currentSort = 'date';
+            setActiveSortButton('date');
+            renderFavorites();
+        });
+        sortBySalaryBtn.addEventListener('click', () => {
+            currentSort = 'salary';
+            setActiveSortButton('salary');
+            renderFavorites();
+        });
+        sortByNameBtn.addEventListener('click', () => {
+            currentSort = 'name';
+            setActiveSortButton('name');
+            renderFavorites();
+        });
 
         renderFavorites();
     </script>
