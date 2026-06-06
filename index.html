@@ -6,7 +6,6 @@
     <title>ВКАНСА — поиск вакансий</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Мгновенное применение темы до отрисовки страницы
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -14,7 +13,6 @@
             } else if (theme === 'light') {
                 document.documentElement.classList.remove('dark');
             } else {
-                // Авто по времени
                 const hour = new Date().getHours();
                 if (hour >= 20 || hour < 6) {
                     document.documentElement.classList.add('dark');
@@ -50,9 +48,7 @@
         </section>
 
         <section class="results">
-            <div id="vacanciesContainer" class="cards">
-                <!-- Карточки будут вставлены динамически -->
-            </div>
+            <div id="vacanciesContainer" class="cards"></div>
             <div id="loading" style="display:none;">Загрузка...</div>
             <button id="loadMore" style="display:none;">Загрузить ещё</button>
         </section>
@@ -74,7 +70,7 @@
     <script>
         const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 
-        // --- Работа с темами ---
+        // Тема
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -86,18 +82,18 @@
         }
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // --- Автодополнение городов ---
+        // Автодополнение городов
         let areas = [];
         const cityInput = document.getElementById('cityInput');
         const cityDropdown = document.getElementById('cityDropdown');
-        let selectedArea = null; // { id, name }
+        let selectedArea = null;
 
         async function loadAreas() {
             try {
                 const res = await fetch(`${API_URL}?action=areas`);
                 areas = await res.json();
             } catch (e) {
-                console.error('Ошибка загрузки справочника городов', e);
+                console.error('Ошибка загрузки городов', e);
             }
         }
 
@@ -117,7 +113,7 @@
                 }
             }
             search(areas);
-            return result.slice(0, 10); // ограничим вывод
+            return result.slice(0, 10);
         }
 
         function showDropdown(matches) {
@@ -152,11 +148,9 @@
             }
         });
 
-        // --- Поиск вакансий ---
+        // Поиск вакансий
         let currentPage = 0;
         let totalPages = 0;
-        let currentQuery = {};
-
         const vacanciesContainer = document.getElementById('vacanciesContainer');
         const loadMoreBtn = document.getElementById('loadMore');
         const searchBtn = document.getElementById('searchBtn');
@@ -174,7 +168,6 @@
 
         async function fetchVacancies() {
             const queryString = buildQuery();
-            currentQuery = queryString;
             try {
                 const res = await fetch(`${API_URL}?${queryString}`);
                 const data = await res.json();
@@ -194,8 +187,6 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.onclick = () => {
-                // Сохраняем полный объект в избранное? Нет, только при явном действии.
-                // Но переход на страницу вакансии с id
                 window.location.href = `vacancy.html?id=${vacancy.id}`;
             };
 
@@ -262,7 +253,7 @@
             }
         });
 
-        // --- Избранное ---
+        // Избранное
         function getFavorites() {
             return JSON.parse(localStorage.getItem('favorites') || '[]');
         }
@@ -282,7 +273,7 @@
             localStorage.setItem('favorites', JSON.stringify(favs));
         }
 
-        // --- Подписка ---
+        // Подписка
         const subscribeForm = document.getElementById('subscribeForm');
         const subscribeMessage = document.getElementById('subscribeMessage');
         subscribeForm.addEventListener('submit', async (e) => {
@@ -310,10 +301,8 @@
 
         // Инициализация
         loadAreas().then(() => {
-            // Можно выполнить первый поиск, если нужно, но оставим пустым
+            search();
         });
-        // Первоначальный пустой поиск или по умолчанию
-        search();
     </script>
 </body>
 </html>
