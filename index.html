@@ -150,7 +150,7 @@
         .theme-switch:hover { transform: scale(1.1); }
         html.dark .theme-switch { border-color: #475569; box-shadow: 0 6px 14px rgba(255,255,255,0.1); }
         /* Стили для недавно просмотренных */
-        .recent-section {
+        .recent-section, .saved-searches-section {
             margin: 30px 0;
             padding: 20px;
             background: white;
@@ -158,22 +158,22 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
         }
-        html.dark .recent-section {
+        html.dark .recent-section, html.dark .saved-searches-section {
             background: #1e293b;
             border-color: #334155;
         }
-        .recent-header {
+        .recent-header, .saved-searches-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
-        .recent-title {
+        .recent-title, .saved-searches-title {
             font-size: 1.2rem;
             font-weight: 700;
             color: #0f172a;
         }
-        html.dark .recent-title { color: #f1f5f9; }
+        html.dark .recent-title, html.dark .saved-searches-title { color: #f1f5f9; }
         .recent-clear-btn {
             background: none;
             border: none;
@@ -182,14 +182,14 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
-        .recent-scroll {
+        .recent-scroll, .saved-searches-scroll {
             display: flex;
             gap: 12px;
             overflow-x: auto;
             padding-bottom: 8px;
             scroll-snap-type: x proximity;
         }
-        .recent-card {
+        .recent-card, .saved-search-card {
             min-width: 220px;
             background: #f8fafc;
             border-radius: 12px;
@@ -203,41 +203,73 @@
             scroll-snap-align: start;
             flex-shrink: 0;
         }
-        html.dark .recent-card {
+        html.dark .recent-card, html.dark .saved-search-card {
             background: #0f172a;
             border-color: #334155;
         }
-        .recent-card:hover {
+        .recent-card:hover, .saved-search-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.08);
         }
-        .recent-card h4 {
+        .recent-card h4, .saved-search-card h4 {
             font-size: 0.95rem;
             font-weight: 600;
             color: #1a73e8;
             margin-bottom: 4px;
         }
-        .recent-card .company {
+        .recent-card .company, .saved-search-card .search-detail {
             font-size: 0.85rem;
             color: #475569;
+            margin-bottom: 4px;
         }
-        .recent-card .salary {
+        .recent-card .salary, .saved-search-card .salary {
             font-weight: 700;
             color: #059669;
             font-size: 0.9rem;
             margin-top: 4px;
         }
-        .recent-card .city {
+        .recent-card .city, .saved-search-card .city {
             font-size: 0.8rem;
             color: #64748b;
             margin-top: 2px;
         }
-        html.dark .recent-card .company,
-        html.dark .recent-card .city {
+        html.dark .recent-card .company, html.dark .saved-search-card .search-detail,
+        html.dark .recent-card .city, html.dark .saved-search-card .city {
             color: #94a3b8;
         }
-        html.dark .recent-card .salary {
+        html.dark .recent-card .salary, html.dark .saved-search-card .salary {
             color: #34d399;
+        }
+        .saved-search-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .saved-search-apply, .saved-search-delete {
+            flex: 1;
+            padding: 6px 0;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .saved-search-apply {
+            background: #0047cc;
+            color: white;
+        }
+        .saved-search-delete {
+            background: #f1f5f9;
+            color: #dc2626;
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .saved-search-delete {
+            background: #334155;
+            border-color: #475569;
         }
         /* Новый чекбокс фильтра */
         .filter-checkbox-option {
@@ -257,6 +289,31 @@
             height: 18px;
             accent-color: #0047cc;
         }
+        .save-search-btn {
+            background: #eef2ff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        html.dark .save-search-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .save-search-btn:hover {
+            background: #0047cc;
+            color: white;
+            border-color: #0047cc;
+        }
         @media (max-width: 768px) { 
             .filters-grid { grid-template-columns: 1fr; } 
             .search-row { flex-direction: row; } 
@@ -275,7 +332,8 @@
             .logo-heart { width: 100px; height: 100px; }
             .header h1 { font-size: 2.2rem; gap: 12px; }
             .site-footer { padding-bottom: 120px; }
-            .recent-card { min-width: 180px; }
+            .recent-card, .saved-search-card { min-width: 180px; }
+            .save-search-btn { font-size: 0.8rem; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -308,6 +366,7 @@
                 <input type="checkbox" id="filterWithSalary">
                 <label for="filterWithSalary">Только с зарплатой</label>
             </div>
+            <button id="saveSearchBtn" class="save-search-btn"><i class="fas fa-save"></i> Сохранить поиск</button>
         </div>
         <div class="history-badges" id="historyContainer"><button id="clearHistoryBtn" class="clear-history">Очистить историю</button></div>
     </div>
@@ -340,6 +399,14 @@
             <div class="company-card" data-search="Ozon">Ozon</div>
             <div class="company-card" data-search="МТС">МТС</div>
         </div>
+    </div>
+
+    <!-- Сохранённые поиски -->
+    <div id="savedSearchesSection" class="saved-searches-section" style="display:none;">
+        <div class="saved-searches-header">
+            <h3 class="saved-searches-title">Мои поиски</h3>
+        </div>
+        <div class="saved-searches-scroll" id="savedSearchesContainer"></div>
     </div>
 
     <div id="recentSection" class="recent-section" style="display:none;">
@@ -415,6 +482,11 @@
     const recentSection = document.getElementById('recentSection');
     const recentContainer = document.getElementById('recentContainer');
     const clearRecentBtn = document.getElementById('clearRecentBtn');
+
+    // Сохранённые поиски
+    const savedSearchesSection = document.getElementById('savedSearchesSection');
+    const savedSearchesContainer = document.getElementById('savedSearchesContainer');
+    const saveSearchBtn = document.getElementById('saveSearchBtn');
 
     // Новый чекбокс "Только с зарплатой"
     const filterWithSalary = document.getElementById('filterWithSalary');
@@ -503,6 +575,94 @@
         performSearch(true, false);
     });
 
+    // Сохранённые поиски
+    function getSavedSearches() {
+        return JSON.parse(localStorage.getItem('savedSearches')) || [];
+    }
+
+    function saveCurrentSearch() {
+        const query = searchInput.value.trim();
+        const areaId = currentArea;
+        const areaName = filterCity.value.trim();
+        const salaryFrom = filterSalaryFrom.value.trim();
+        const employment = filterEmployment.value;
+        const experience = filterExperience.value;
+        const sort = currentSort;
+
+        // Проверяем, есть ли уже такой поиск (по тексту и городу)
+        const existing = getSavedSearches();
+        const duplicate = existing.some(s => s.query === query && s.areaId === areaId);
+        if (duplicate) {
+            alert('Такой поиск уже сохранён');
+            return;
+        }
+
+        existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort });
+        localStorage.setItem('savedSearches', JSON.stringify(existing));
+        renderSavedSearches();
+    }
+
+    function deleteSavedSearch(index) {
+        const saved = getSavedSearches();
+        saved.splice(index, 1);
+        localStorage.setItem('savedSearches', JSON.stringify(saved));
+        renderSavedSearches();
+    }
+
+    function applySavedSearch(search) {
+        searchInput.value = search.query;
+        filterCity.value = search.areaName;
+        currentArea = search.areaId;
+        selectedCityId = search.areaId !== '113' ? search.areaId : null;
+        filterSalaryFrom.value = search.salaryFrom;
+        filterEmployment.value = search.employment;
+        filterExperience.value = search.experience;
+
+        // Установка сортировки
+        setSort(search.sort);
+        // Запуск поиска
+        performSearch(true, false);
+    }
+
+    function renderSavedSearches() {
+        const saved = getSavedSearches();
+        if (saved.length === 0) {
+            savedSearchesSection.style.display = 'none';
+            return;
+        }
+        savedSearchesSection.style.display = 'block';
+        savedSearchesContainer.innerHTML = saved.map((s, i) => `
+            <div class="saved-search-card">
+                <h4>${escapeHtml(s.query) || 'Поиск'}</h4>
+                <div class="search-detail">${s.areaName ? 'Город: ' + escapeHtml(s.areaName) : 'Город не выбран'}</div>
+                ${s.salaryFrom ? `<div class="salary">от ${s.salaryFrom}</div>` : ''}
+                <div class="saved-search-actions">
+                    <button class="saved-search-apply" data-index="${i}"><i class="fas fa-play"></i> Применить</button>
+                    <button class="saved-search-delete" data-index="${i}"><i class="fas fa-trash"></i> Удалить</button>
+                </div>
+            </div>
+        `).join('');
+
+        // Обработчики кнопок
+        document.querySelectorAll('.saved-search-apply').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.closest('button').dataset.index;
+                const searches = getSavedSearches();
+                if (searches[index]) {
+                    applySavedSearch(searches[index]);
+                }
+            });
+        });
+        document.querySelectorAll('.saved-search-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.closest('button').dataset.index;
+                deleteSavedSearch(parseInt(index));
+            });
+        });
+    }
+
+    saveSearchBtn.addEventListener('click', saveCurrentSearch);
+
     // Рендер недавно просмотренных
     function renderRecentVacancies() {
         const recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
@@ -528,6 +688,7 @@
 
     // Вызываем после загрузки страницы
     renderRecentVacancies();
+    renderSavedSearches();
 
     // Обработчики фильтров
     filterExperience.addEventListener('change', applyFilters);
@@ -786,6 +947,7 @@
     // Инициализация
     loadTheme();
     renderRecentVacancies();
+    renderSavedSearches();
     loadAllAreas().then(() => console.log('Areas loaded')).catch(() => {});
     performSearch(true);
 </script>
