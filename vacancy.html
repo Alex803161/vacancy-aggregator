@@ -26,6 +26,82 @@
             }
         })();
     </script>
+    <style>
+        /* Стили для блока похожих вакансий */
+        .similar-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        body.dark .similar-section {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .similar-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+        body.dark .similar-title {
+            color: #f1f5f9;
+        }
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .similar-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #edf2f7;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        body.dark .similar-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+        .similar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .similar-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a73e8;
+        }
+        .similar-card .company {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .similar-card .salary {
+            font-weight: 700;
+            color: #059669;
+            font-size: 0.95rem;
+        }
+        .similar-card .city {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        body.dark .similar-card .company,
+        body.dark .similar-card .city {
+            color: #94a3b8;
+        }
+        body.dark .similar-card .salary {
+            color: #34d399;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -39,8 +115,9 @@
 
     <main class="container">
         <div id="vacancyDetail">
-            <!-- Динамическое содержимое -->
+            <!-- Основная вакансия -->
         </div>
+        <div id="similarContainer"></div>
         <div id="loading" style="display:none;">Загрузка...</div>
         <div id="error" style="display:none;"></div>
     </main>
@@ -64,11 +141,12 @@
         }
         updateThemeIcon(document.documentElement.classList.contains('dark'));
 
-        // Получение ID из URL
+        // ID из URL
         const urlParams = new URLSearchParams(window.location.search);
         const vacancyId = urlParams.get('id');
 
         const detailContainer = document.getElementById('vacancyDetail');
+        const similarContainer = document.getElementById('similarContainer');
         const loadingEl = document.getElementById('loading');
         const errorEl = document.getElementById('error');
 
@@ -90,29 +168,31 @@
             const employerName = getEmployerName(vacancy.employer);
 
             let html = `
-                <div class="vacancy-full">
+                <div class="vacancy-full" style="background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
                     <h2>${vacancy.name || 'Без названия'}</h2>
                     <p class="company">${employerName}</p>
                     <p class="salary">${formatSalary(vacancy.salary)}</p>
                     <div class="description">${vacancy.description || 'Описание отсутствует'}</div>
                     <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => s.name).join(', ') || 'Не указаны'}</p>
                     <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU') : 'Неизвестно'}</p>
-                    <div class="actions">
-                        <button id="favButton" class="fav-btn">★ В избранное</button>
-                        <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener">Открыть на hh.ru</a>
-                        <a href="javascript:history.back()" class="back-link">← Назад</a>
+                    <div class="actions" style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                        <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
+                        <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>
+                        <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
                     </div>
                 </div>
             `;
             detailContainer.innerHTML = html;
 
-            // Обработчик кнопки избранного
             const favBtn = document.getElementById('favButton');
             updateFavButton(favBtn, vacancy);
             favBtn.addEventListener('click', () => {
                 toggleFavorite(vacancy);
                 updateFavButton(favBtn, vacancy);
             });
+
+            // Загружаем похожие вакансии
+            loadSimilar(vacancy.name, vacancy.id);
         }
 
         function updateFavButton(btn, vacancy) {
@@ -121,7 +201,6 @@
             btn.classList.toggle('active', isFav);
         }
 
-        // Работа с избранным (localStorage)
         function getFavorites() {
             return JSON.parse(localStorage.getItem('favorites') || '[]');
         }
@@ -147,19 +226,45 @@
             detailContainer.innerHTML = '';
             try {
                 const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
-                if (!res.ok) {
-                    throw new Error(`Ошибка ${res.status}`);
-                }
+                if (!res.ok) throw new Error(`Ошибка ${res.status}`);
                 const vacancy = await res.json();
-                if (vacancy.errors) {
-                    throw new Error(vacancy.errors[0]?.value || 'Ошибка данных');
-                }
+                if (vacancy.errors) throw new Error(vacancy.errors[0]?.value || 'Ошибка данных');
                 renderVacancy(vacancy);
             } catch (e) {
                 errorEl.textContent = 'Не удалось загрузить вакансию. ' + e.message;
                 errorEl.style.display = 'block';
             } finally {
                 loadingEl.style.display = 'none';
+            }
+        }
+
+        async function loadSimilar(title, currentId) {
+            try {
+                const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title)}&per_page=5`);
+                const data = await res.json();
+                const items = data.items || [];
+                const filtered = items.filter(v => v.id != currentId).slice(0, 4);
+                if (filtered.length === 0) return;
+
+                let html = `<div class="similar-section"><h3 class="similar-title">Похожие вакансии</h3><div class="similar-grid">`;
+                filtered.forEach(v => {
+                    const emp = typeof v.employer === 'object' ? v.employer?.name : v.employer;
+                    const salary = v.salary ? formatSalary(v.salary) : '';
+                    const area = v.area?.name || '';
+                    html += `
+                        <a href="vacancy.html?id=${v.id}" class="similar-card">
+                            <h4>${v.name || 'Без названия'}</h4>
+                            <div class="company">${emp || 'Компания не указана'}</div>
+                            ${salary ? `<div class="salary">${salary}</div>` : ''}
+                            ${area ? `<div class="city">${area}</div>` : ''}
+                        </a>
+                    `;
+                });
+                html += `</div></div>`;
+                similarContainer.innerHTML = html;
+            } catch (e) {
+                console.error('Ошибка загрузки похожих вакансий', e);
+                // Блок просто не отображается
             }
         }
 
