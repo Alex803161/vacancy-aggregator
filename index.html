@@ -21,7 +21,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #f3f4f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; padding: 0 16px 24px; color: #0f172a; display: flex; flex-direction: column; min-height: 100vh; transition: background 0.2s, color 0.2s; }
-        /* Тёмная тема – теперь html.dark */
         html.dark body { background: #0f172a; color: #e2e8f0; }
         .container { max-width: 1280px; margin: 0 auto; width: 100%; flex: 1; }
         .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; display: flex; align-items: center; gap: 8px; }
@@ -150,6 +149,96 @@
         .theme-switch { position: fixed; bottom: 90px; right: 20px; background: #0047cc; color: white; border: 3px solid white; border-radius: 50%; width: 50px; height: 50px; z-index: 100; cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(0,0,0,0.4); transition: all 0.2s; }
         .theme-switch:hover { transform: scale(1.1); }
         html.dark .theme-switch { border-color: #475569; box-shadow: 0 6px 14px rgba(255,255,255,0.1); }
+        /* Стили для недавно просмотренных */
+        .recent-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .recent-section {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .recent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .recent-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        html.dark .recent-title { color: #f1f5f9; }
+        .recent-clear-btn {
+            background: none;
+            border: none;
+            color: #dc2626;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .recent-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scroll-snap-type: x proximity;
+        }
+        .recent-card {
+            min-width: 220px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #edf2f7;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+        html.dark .recent-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+        .recent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .recent-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a73e8;
+            margin-bottom: 4px;
+        }
+        .recent-card .company {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+        .recent-card .salary {
+            font-weight: 700;
+            color: #059669;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        .recent-card .city {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        html.dark .recent-card .company,
+        html.dark .recent-card .city {
+            color: #94a3b8;
+        }
+        html.dark .recent-card .salary {
+            color: #34d399;
+        }
         @media (max-width: 768px) { 
             .filters-grid { grid-template-columns: 1fr; } 
             .search-row { flex-direction: row; } 
@@ -168,6 +257,7 @@
             .logo-heart { width: 100px; height: 100px; }
             .header h1 { font-size: 2.2rem; gap: 12px; }
             .site-footer { padding-bottom: 120px; }
+            .recent-card { min-width: 180px; }
         }
     </style>
 </head>
@@ -177,6 +267,7 @@
     <div class="header"><h1><span class="logo-heart"></span> Ваканса</h1><p>Работа найдётся — и не одна</p></div>
     <div class="page-title">Поиск вакансий</div>
     <div class="search-section">
+        <!-- ... вся поисковая форма без изменений ... -->
         <div class="search-row">
             <input type="text" id="searchInput" class="search-input" placeholder="Должность, компания, город..." autocomplete="off">
             <button id="searchButton" class="search-btn"><span>Найти</span></button>
@@ -204,6 +295,7 @@
     <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
 
     <div class="subscribe-section">
+        <!-- ... форма подписки без изменений ... -->
         <div class="subscribe-card">
             <div class="subscribe-icon"><i class="fas fa-heart"></i></div>
             <h3 class="subscribe-title">Подпишитесь на вакансии</h3>
@@ -228,6 +320,15 @@
             <div class="company-card" data-search="Ozon">Ozon</div>
             <div class="company-card" data-search="МТС">МТС</div>
         </div>
+    </div>
+
+    <!-- Новый блок недавно просмотренных -->
+    <div id="recentSection" class="recent-section" style="display:none;">
+        <div class="recent-header">
+            <h3 class="recent-title">Недавно просмотренные</h3>
+            <button id="clearRecentBtn" class="recent-clear-btn"><i class="fas fa-trash-alt"></i> Очистить</button>
+        </div>
+        <div class="recent-scroll" id="recentContainer"></div>
     </div>
 </div>
 <footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
@@ -290,6 +391,11 @@
     const subscribeEmailInput = document.getElementById('subscribeEmailInput');
     const subscribeSubmitBtn = document.getElementById('subscribeSubmitBtn');
     const subscribeStatus = document.getElementById('subscribeStatus');
+
+    // Недавно просмотренные
+    const recentSection = document.getElementById('recentSection');
+    const recentContainer = document.getElementById('recentContainer');
+    const clearRecentBtn = document.getElementById('clearRecentBtn');
 
     function sendGAEvent(eventName, params = {}) {
         if (typeof gtag === "function") {
@@ -374,6 +480,32 @@
         citySuggestions.style.display = 'none';
         performSearch(true, false);
     });
+
+    // Рендер недавно просмотренных
+    function renderRecentVacancies() {
+        const recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
+        if (recent.length === 0) {
+            recentSection.style.display = 'none';
+            return;
+        }
+        recentSection.style.display = 'block';
+        recentContainer.innerHTML = recent.map(v => `
+            <a href="vacancy.html?id=${v.id}" class="recent-card">
+                <h4>${escapeHtml(v.name) || 'Без названия'}</h4>
+                <div class="company">${escapeHtml(v.employer) || 'Компания не указана'}</div>
+                ${v.salary ? `<div class="salary">${escapeHtml(v.salary)}</div>` : ''}
+                ${v.area ? `<div class="city">${escapeHtml(v.area)}</div>` : ''}
+            </a>
+        `).join('');
+    }
+
+    clearRecentBtn.addEventListener('click', () => {
+        localStorage.removeItem('recentVacancies');
+        renderRecentVacancies();
+    });
+
+    // Вызываем после загрузки страницы
+    renderRecentVacancies();
 
     renderHistory();loadTheme();loadAllAreas().then(() => console.log('Areas loaded')).catch(() => {}); performSearch(true);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
