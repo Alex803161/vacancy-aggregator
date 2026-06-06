@@ -25,7 +25,6 @@
         })();
     </script>
     <style>
-        /* Стили для панели сортировки */
         .sort-panel {
             display: flex;
             gap: 8px;
@@ -60,6 +59,50 @@
             color: white;
             border-color: #3b82f6;
         }
+        .export-panel {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        .export-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .export-btn:hover {
+            background: #e2e8f0;
+        }
+        html.dark .export-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #059669;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .copy-notification.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -79,17 +122,20 @@
     <main class="container">
         <h2>Избранные вакансии</h2>
 
-        <!-- Панель сортировки -->
         <div class="sort-panel">
             <button id="sortByDate" class="sort-btn active" data-sort="date">📅 По дате публикации</button>
             <button id="sortBySalary" class="sort-btn" data-sort="salary">💰 По зарплате</button>
             <button id="sortByName" class="sort-btn" data-sort="name">🔤 По названию</button>
+        </div>
+        <div class="export-panel">
+            <button id="exportBtn" class="export-btn"><i class="fas fa-copy"></i> Скопировать список</button>
         </div>
 
         <div id="favoritesList" class="cards">
             <!-- Карточки будут добавлены динамически -->
         </div>
         <p id="emptyMessage" style="display:none;">В избранном пока ничего нет.</p>
+        <div id="copyNotification" class="copy-notification">Список скопирован!</div>
     </main>
 
     <footer>
@@ -111,12 +157,13 @@
         const favoritesList = document.getElementById('favoritesList');
         const emptyMessage = document.getElementById('emptyMessage');
 
-        // Кнопки сортировки
         const sortByDateBtn = document.getElementById('sortByDate');
         const sortBySalaryBtn = document.getElementById('sortBySalary');
         const sortByNameBtn = document.getElementById('sortByName');
+        const exportBtn = document.getElementById('exportBtn');
+        const copyNotification = document.getElementById('copyNotification');
 
-        let currentSort = 'date'; // по умолчанию
+        let currentSort = 'date';
 
         function getEmployerName(employer) {
             if (!employer) return 'Компания не указана';
@@ -138,7 +185,6 @@
             renderFavorites();
         }
 
-        // Сортировка
         function sortFavorites(favorites, sortType) {
             const sorted = [...favorites];
             switch (sortType) {
@@ -146,7 +192,7 @@
                     sorted.sort((a, b) => {
                         const aSal = a.salary?.from || a.salary?.to || 0;
                         const bSal = b.salary?.from || b.salary?.to || 0;
-                        return bSal - aSal; // по убыванию
+                        return bSal - aSal;
                     });
                     break;
                 case 'name':
@@ -165,6 +211,37 @@
             if (sortType === 'salary') sortBySalaryBtn.classList.add('active');
             else if (sortType === 'name') sortByNameBtn.classList.add('active');
             else sortByDateBtn.classList.add('active');
+        }
+
+        function formatSalary(salary) {
+            if (!salary) return 'З/П не указана';
+            let parts = [];
+            if (salary.from) parts.push(`от ${salary.from}`);
+            if (salary.to) parts.push(`до ${salary.to}`);
+            if (salary.currency) parts.push(salary.currency);
+            return parts.join(' ') || 'З/П не указана';
+        }
+
+        function exportFavorites() {
+            const favorites = getFavorites();
+            if (favorites.length === 0) {
+                alert('Нет вакансий для экспорта');
+                return;
+            }
+            const sorted = sortFavorites(favorites, currentSort);
+            const baseUrl = 'https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=';
+            const text = sorted.map(v => {
+                const emp = getEmployerName(v.employer);
+                const sal = formatSalary(v.salary);
+                return `${v.name || 'Без названия'} | ${emp} | ${sal} | ${baseUrl}${v.id}`;
+            }).join('\n');
+
+            navigator.clipboard.writeText(text).then(() => {
+                copyNotification.classList.add('show');
+                setTimeout(() => copyNotification.classList.remove('show'), 2000);
+            }).catch(() => {
+                alert('Не удалось скопировать текст. Пожалуйста, скопируйте вручную.');
+            });
         }
 
         function renderFavorites() {
@@ -239,7 +316,6 @@
             });
         }
 
-        // Обработчики сортировки
         sortByDateBtn.addEventListener('click', () => {
             currentSort = 'date';
             setActiveSortButton('date');
@@ -255,6 +331,8 @@
             setActiveSortButton('name');
             renderFavorites();
         });
+
+        exportBtn.addEventListener('click', exportFavorites);
 
         renderFavorites();
     </script>
