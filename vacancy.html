@@ -1,14 +1,13 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- SEO -->
-    <title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <!-- Динамические SEO-теги -->
     <title id="seoTitle">Загрузка вакансии — ВКАНСА</title>
     <meta name="description" id="seoDescription" content="Подробная информация о вакансии. Актуальные предложения работы на сайте ВКАНСА.">
@@ -24,7 +23,6 @@
     <script type="application/ld+json" id="jsonLd"></script>
     
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <script>
         (function() {
@@ -382,7 +380,6 @@
         document.getElementById('jsonLd').textContent = JSON.stringify(jsonLd);
     }
 
-    // НОВОЕ: сохраняем историю с timestamp
     function saveRecentVacancy(vacancy) {
         let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
         recent = recent.filter(v => v.id !== vacancy.id);
