@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История просмотров — ВКАНСА</title>
+    <meta name="description" content="История просмотренных вакансий. Вернитесь к ранее изученным предложениям.">
+    <meta property="og:title" content="История просмотров — ВКАНСА">
+    <meta property="og:description" content="Все вакансии, которые вы смотрели.">
+    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/history.html">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                const hour = new Date().getHours();
+                if (hour >= 20 || hour < 6) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+        })();
+    </script>
+    <style>
+        .history-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .history-search {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            background: white;
+            color: #0f172a;
+            font-size: 0.95rem;
+        }
+        html.dark .history-search {
+            background: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .history-clear-btn {
+            background: none;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .history-clear-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+        .date-group {
+            margin-bottom: 24px;
+        }
+        .date-group-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        html.dark .date-group-title {
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #edf2f7;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        html.dark .history-item {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .history-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .history-item-info {
+            flex: 1;
+        }
+        .history-item-title {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 1rem;
+        }
+        html.dark .history-item-title {
+            color: #f1f5f9;
+        }
+        .history-item-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        html.dark .history-item-meta {
+            color: #94a3b8;
+        }
+        .history-item-salary {
+            font-weight: 700;
+            color: #059669;
+            margin-left: 16px;
+            white-space: nowrap;
+        }
+        html.dark .history-item-salary {
+            color: #34d399;
+        }
+        .history-item-delete {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .history-item-delete:hover {
+            color: #dc2626;
+            background: #fee2e2;
+        }
+        .empty-history {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+        @media (max-width: 600px) {
+            .history-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .history-item-salary {
+                margin-left: 0;
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
+        </div>
+        <h1 class="page-title">История просмотров</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
+
+    <div class="history-controls">
+        <input type="text" id="historySearch" class="history-search" placeholder="Поиск по названию или компании...">
+        <button id="clearHistoryBtn" class="history-clear-btn"><i class="fas fa-trash-alt"></i> Очистить историю</button>
+    </div>
+
+    <div id="historyContainer"></div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="history.html">История просмотров</a>
+    </div>
+    <div class="footer-copy">© 2025 ВКАНСА</div>
+</footer>
+
+<button id="themeToggle" class="theme-switch">🌙</button>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
+
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const historyContainer = document.getElementById('historyContainer');
+    const historySearch = document.getElementById('historySearch');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+    function getHistory() {
+        return JSON.parse(localStorage.getItem('recentVacancies')) || [];
+    }
+
+    function saveHistory(data) {
+        localStorage.setItem('recentVacancies', JSON.stringify(data));
+    }
+
+    function deleteHistoryItem(id) {
+        let history = getHistory();
+        history = history.filter(v => v.id !== id);
+        saveHistory(history);
+        renderHistory();
+    }
+
+    function clearAllHistory() {
+        if (confirm('Удалить всю историю просмотров?')) {
+            localStorage.removeItem('recentVacancies');
+            renderHistory();
+        }
+    }
+
+    function formatTimestamp(ts) {
+        if (!ts) return '';
+        const date = new Date(ts);
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const diffDays = Math.floor((today - target) / (1000 * 60 * 60 * 24));
+        if (diffDays === 0) return 'Сегодня';
+        if (diffDays === 1) return 'Вчера';
+        if (diffDays <= 7) return 'На этой неделе';
+        return 'Ранее';
+    }
+
+    function renderHistory() {
+        const history = getHistory();
+        if (history.length === 0) {
+            historyContainer.innerHTML = '<div class="empty-history">Вы ещё не просмотрели ни одной вакансии. <a href="index.html">Найти вакансии</a></div>';
+            return;
+        }
+
+        const query = historySearch.value.trim().toLowerCase();
+        let filtered = history;
+        if (query) {
+            filtered = history.filter(v => 
+                (v.name && v.name.toLowerCase().includes(query)) ||
+                (v.employer && v.employer.toLowerCase().includes(query))
+            );
+        }
+
+        if (filtered.length === 0) {
+            historyContainer.innerHTML = '<div class="empty-history">Ничего не найдено по вашему запросу.</div>';
+            return;
+        }
+
+        // Группировка
+        const groups = {};
+        filtered.forEach(v => {
+            const groupKey = formatTimestamp(v.timestamp);
+            if (!groups[groupKey]) groups[groupKey] = [];
+            groups[groupKey].push(v);
+        });
+
+        let html = '';
+        for (const [group, items] of Object.entries(groups)) {
+            html += `<div class="date-group"><div class="date-group-title">${group}</div><div class="history-list">`;
+            items.forEach(v => {
+                const salary = v.salary || 'З/П не указана';
+                const city = v.area || '';
+                const employer = v.employer || 'Компания не указана';
+                html += `
+                    <div class="history-item" onclick="window.location.href='vacancy.html?id=${v.id}'">
+                        <div class="history-item-info">
+                            <div class="history-item-title">${escapeHtml(v.name) || 'Без названия'}</div>
+                            <div class="history-item-meta">${escapeHtml(employer)}${city ? ' • ' + escapeHtml(city) : ''}</div>
+                        </div>
+                        <div class="history-item-salary">${escapeHtml(salary)}</div>
+                        <button class="history-item-delete" onclick="event.stopPropagation(); deleteHistoryItem('${v.id}')" title="Удалить из истории"><i class="fas fa-times"></i></button>
+                    </div>
+                `;
+            });
+            html += '</div></div>';
+        }
+        historyContainer.innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    historySearch.addEventListener('input', renderHistory);
+    clearHistoryBtn.addEventListener('click', clearAllHistory);
+    window.deleteHistoryItem = deleteHistoryItem; // для onclick
+
+    renderHistory();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
+      .then(registration => {
+        console.log('SW зарегистрирован:', registration.scope);
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              const toast = document.createElement('div');
+              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
+              toast.textContent = 'Доступна новая версия. Обновите страницу.';
+              toast.onclick = () => window.location.reload();
+              document.body.appendChild(toast);
+            }
+          };
+        };
+      })
+      .catch(err => console.log('Ошибка регистрации SW:', err));
+  });
+}
+</script>
+</body>
+</html>
