@@ -1041,3 +1041,30 @@ html.dark .saved-search-card {
     background: #0f172a;
     border-color: #334155;
 }
+
+/* === Кнопка удаления === */
+.remove-btn {
+    background: #dc2626 !important;
+    color: white !important;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+/* === Кнопка избранного на странице вакансии === */
+.fav-btn {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.fav-btn.active {
+    background: #ff6b6b;
+}
