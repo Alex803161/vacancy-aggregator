@@ -601,7 +601,7 @@ html.dark .tag {
 
 .card-actions {
     display: flex;
-    gap: 10px;   /* увеличен отступ */
+    gap: 10px;
     align-items: center;
     margin-top: 8px;
     flex-wrap: wrap;
@@ -659,10 +659,10 @@ html.dark .tag {
 
 /* === Крупные кнопки мессенджеров === */
 .btn-share {
-    padding: 10px 22px;   /* увеличено */
+    padding: 10px 22px;
     border-radius: 20px;
     font-weight: 600;
-    font-size: 0.95rem;   /* увеличено */
+    font-size: 0.95rem;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -673,13 +673,13 @@ html.dark .tag {
 }
 
 .btn-share-round {
-    width: 44px;          /* увеличено */
-    height: 44px;         /* увеличено */
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;    /* увеличено */
+    font-size: 1.2rem;
     transition: all 0.2s;
     text-decoration: none;
     flex-shrink: 0;
@@ -693,7 +693,7 @@ html.dark .tag {
 /* Отступы для групп кнопок */
 .share-buttons {
     display: flex;
-    gap: 14px;   /* увеличено */
+    gap: 14px;
     margin-top: 15px;
     flex-wrap: wrap;
 }
@@ -1089,4 +1089,169 @@ html.dark .saved-search-card {
 }
 .fav-btn.active {
     background: #ff6b6b;
+}
+
+/* ========== АДАПТИВНОСТЬ ========== */
+
+/* Планшеты и небольшие ноутбуки */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 12px;
+    }
+    .search-section {
+        padding: 16px;
+    }
+}
+
+/* Мобильные устройства (ширина до 768px) */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 2.2rem;
+    }
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .search-row {
+        flex-direction: column;
+    }
+    .search-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+    .sort-btns {
+        justify-content: center;
+        width: 100%;
+    }
+    .card-actions {
+        justify-content: center;
+    }
+    .btn-share-round {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+    .recent-card,
+    .saved-search-card {
+        min-width: 180px;
+    }
+    .share-buttons {
+        justify-content: center;
+    }
+    .subscribe-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .subscribe-input {
+        width: 100%;
+    }
+    .subscribe-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .site-footer {
+        padding-bottom: 120px;
+    }
+    .theme-switch {
+        bottom: 80px;
+        right: 10px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.2rem;
+        border-width: 2px;
+    }
+    #backToTopBtn {
+        bottom: 145px;
+        right: 10px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Очень маленькие экраны (до 480px) */
+@media (max-width: 480px) {
+    body {
+        padding: 0 8px 16px;
+    }
+    .header {
+        margin: 20px 0 12px;
+    }
+    .logo-heart {
+        width: 100px;
+        height: 100px;
+    }
+    .logo-text {
+        font-size: 1.8rem;
+    }
+    .page-title {
+        font-size: 1.3rem;
+    }
+    .search-section {
+        padding: 12px;
+        border-radius: 16px;
+    }
+    .search-input {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+    .search-btn {
+        font-size: 0.9rem;
+        height: 42px;
+    }
+    .filter-select,
+    .filter-input-small {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+    .sort-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    .job-title {
+        font-size: 1rem;
+        padding-right: 70px;
+    }
+    .salary {
+        font-size: 1rem;
+    }
+    .btn-respond,
+    .btn-call,
+    .btn-email {
+        font-size: 0.8rem;
+        padding: 6px 14px;
+    }
+    .vacancy-card,
+    .card {
+        padding: 12px 14px;
+    }
+    .share-buttons {
+        gap: 10px;
+    }
+    .subscribe-title {
+        font-size: 1.2rem;
+    }
+    .subscribe-desc {
+        font-size: 0.85rem;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .theme-switch {
+        bottom: 70px;
+        right: 8px;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+    #backToTopBtn {
+        bottom: 130px;
+        right: 8px;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
 }
