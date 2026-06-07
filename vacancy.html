@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вакансия — ВКАНСА</title>
+    
+    <!-- Динамические SEO-теги -->
+    <title id="seoTitle">Загрузка вакансии — ВКАНСА</title>
+    <meta name="description" id="seoDescription" content="Подробная информация о вакансии. Актуальные предложения работы на сайте ВКАНСА.">
+    <link rel="canonical" id="seoCanonical" href="">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" id="ogTitle" content="Вакансия на ВКАНСА">
+    <meta property="og:description" id="ogDescription" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
+    <meta property="og:url" id="ogUrl" content="">
+    <meta property="og:type" content="website">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" id="jsonLd"></script>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
@@ -26,7 +41,6 @@
         })();
     </script>
     <style>
-        /* Уникальные стили страницы вакансии */
         .vacancy-full {
             background: white;
             border-radius: 16px;
@@ -79,7 +93,6 @@
         html.dark .vacancy-full .published {
             color: #94a3b8;
         }
-
         .actions {
             display: flex;
             gap: 12px;
@@ -87,7 +100,6 @@
             align-items: center;
             margin-top: 20px;
         }
-
         .btn-report {
             background: none;
             border: 1px solid #cbd5e1;
@@ -110,7 +122,6 @@
             border-color: #475569;
             color: #94a3b8;
         }
-
         .similar-section {
             margin-top: 40px;
             padding: 20px;
@@ -184,7 +195,6 @@
         html.dark .similar-card .salary {
             color: #34d399;
         }
-
         .share-buttons {
             display: flex;
             gap: 10px;
@@ -212,9 +222,12 @@
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
 <div class="container">
-    <!-- Шапка как на главной -->
     <div class="header">
-        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
+        </div>
+        <h1 class="page-title" id="vacancyTitle">Загрузка вакансии...</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
 
@@ -240,17 +253,14 @@
 <script>
     const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 
-    // Тема
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         themeToggle.textContent = isDark ? '☀️' : '🌙';
     });
-    // Инициализация иконки
     if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
 
-    // Кнопка "Наверх"
     const backToTopBtn = document.getElementById('backToTopBtn');
     window.addEventListener('scroll', () => {
         backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
@@ -273,26 +283,31 @@
     function formatSalary(salary) {
         if (!salary) return 'Зарплата не указана';
         let parts = [];
-        if (salary.from) parts.push(`от ${salary.from}`);
-        if (salary.to) parts.push(`до ${salary.to}`);
-        if (salary.currency) parts.push(salary.currency);
+        if (salary.from) parts.push(`от ${salary.from.toLocaleString()}`);
+        if (salary.to) parts.push(`до ${salary.to.toLocaleString()}`);
+        if (salary.currency) parts.push(salary.currency === 'RUR' ? '₽' : salary.currency);
         return parts.join(' ') || 'Зарплата не указана';
     }
 
-    // Парсинг зарплатной строки из прямых вакансий
     function parseSalaryString(str) {
         if (!str) return null;
         const fromMatch = str.match(/от\s*([\d\s]+)/);
         const toMatch = str.match(/до\s*([\d\s]+)/);
-        const currencyMatch = str.match(/[₽$€]/);
+        const currencyMatch = str.match(/[₽$€р]/);
+        let currency = '₽';
+        if (currencyMatch) {
+            if (currencyMatch[0] === 'р') currency = '₽';
+            else if (currencyMatch[0] === '$') currency = 'USD';
+            else if (currencyMatch[0] === '€') currency = 'EUR';
+            else currency = currencyMatch[0];
+        }
         return {
             from: fromMatch ? parseInt(fromMatch[1].replace(/\s/g, '')) : null,
             to: toMatch ? parseInt(toMatch[1].replace(/\s/g, '')) : null,
-            currency: currencyMatch ? currencyMatch[0] : '₽'
+            currency: currency
         };
     }
 
-    // Преобразование прямой вакансии в формат, понятный renderVacancy
     function mapDirectJobToVacancy(job) {
         return {
             id: job.id,
@@ -306,6 +321,60 @@
             alternate_url: null,
             source: 'direct'
         };
+    }
+
+    function updateSEOTags(vacancy, isDirect) {
+        const empName = getEmployerName(vacancy.employer);
+        const salaryText = formatSalary(vacancy.salary);
+        const cityText = vacancy.area?.name || '';
+        const title = `${vacancy.name} — вакансия в компании ${empName} — ВКАНСА`;
+        const description = `Вакансия: ${vacancy.name} (${empName}). ${salaryText}. ${cityText}. Подробности, зарплата, требования — на ВКАНСА.`.substring(0, 160);
+        const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + vacancy.id;
+
+        document.getElementById('seoTitle').textContent = title;
+        document.title = title;
+        document.getElementById('seoDescription').setAttribute('content', description);
+        document.getElementById('seoCanonical').setAttribute('href', canonicalUrl);
+        document.getElementById('ogTitle').setAttribute('content', title);
+        document.getElementById('ogDescription').setAttribute('content', description);
+        document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
+        document.getElementById('vacancyTitle').textContent = vacancy.name;
+
+        const jsonLd = {
+            "@context": "https://schema.org",
+            "@type": "JobPosting",
+            "title": vacancy.name,
+            "description": vacancy.description || description,
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": empName
+            },
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": cityText || 'Не указан'
+                }
+            },
+            "datePosted": vacancy.published_at ? new Date(vacancy.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+        };
+
+        if (vacancy.salary) {
+            jsonLd.baseSalary = {
+                "@type": "MonetaryAmount",
+                "currency": vacancy.salary.currency === '₽' ? 'RUB' : (vacancy.salary.currency || 'RUB'),
+                "value": {
+                    "@type": "QuantitativeValue",
+                    "minValue": vacancy.salary.from || undefined,
+                    "maxValue": vacancy.salary.to || undefined,
+                    "unitText": "MONTH"
+                }
+            };
+            if (!jsonLd.baseSalary.value.minValue) delete jsonLd.baseSalary.value.minValue;
+            if (!jsonLd.baseSalary.value.maxValue) delete jsonLd.baseSalary.value.maxValue;
+        }
+
+        document.getElementById('jsonLd').textContent = JSON.stringify(jsonLd);
     }
 
     function saveRecentVacancy(vacancy) {
@@ -330,7 +399,6 @@
         const whatsappLink = `https://wa.me/?text=${shareText}`;
         const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
 
-        // Формируем mailto в зависимости от источника
         const reportSubject = isDirect
             ? 'Жалоба на прямое объявление'
             : `Жалоба на вакансию ID ${vacancy.id}`;
@@ -346,20 +414,23 @@
                 <p class="salary">${formatSalary(vacancy.salary)}</p>
                 <div class="description">${vacancy.description || 'Описание отсутствует'}</div>
                 <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => typeof s === 'object' ? s.name : s).join(', ') || 'Не указаны'}</p>
-                <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU') : 'Неизвестно'}</p>
+                <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Неизвестно'}</p>
+                ${vacancy.area?.name ? `<p class="address">📍 ${vacancy.area.name}</p>` : ''}
                 <div class="actions">
                     <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
-                    ${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">Прямое объявление</span>'}
+                    ${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener noreferrer" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">🏠 Прямое объявление</span>'}
                     <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
                     <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
                 </div>
                 <div class="share-buttons">
-                    <a href="${whatsappLink}" target="_blank" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="${telegramLink}" target="_blank" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="${telegramLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
                 </div>
             </div>
         `;
         detailContainer.innerHTML = html;
+
+        updateSEOTags(vacancy, isDirect);
 
         const favBtn = document.getElementById('favButton');
         updateFavButton(favBtn, vacancy);
@@ -392,7 +463,15 @@
         if (index > -1) {
             favs.splice(index, 1);
         } else {
-            favs.push(vacancy);
+            favs.push({
+                id: vacancy.id,
+                name: vacancy.name,
+                employer: getEmployerName(vacancy.employer),
+                salary: formatSalary(vacancy.salary),
+                area: vacancy.area?.name || '',
+                alternate_url: vacancy.alternate_url,
+                source: vacancy.source
+            });
         }
         localStorage.setItem('favorites', JSON.stringify(favs));
     }
@@ -402,22 +481,20 @@
         errorEl.style.display = 'none';
         detailContainer.innerHTML = '';
 
-        // 1. Пробуем API
         try {
             const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
             if (res.ok) {
                 const vacancy = await res.json();
-                if (vacancy && !vacancy.errors) {
+                if (vacancy && !vacancy.errors && vacancy.id) {
                     renderVacancy(vacancy);
                     loadingEl.style.display = 'none';
                     return;
                 }
             }
         } catch (e) {
-            console.warn('API не ответил, пробуем localStorage');
+            console.warn('API не ответил, ищем в localStorage');
         }
 
-        // 2. Fallback — ищем в прямых вакансиях
         try {
             const directJobs = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
             const job = directJobs.find(j => String(j.id) === String(id));
@@ -431,15 +508,15 @@
             console.error('Ошибка чтения localStorage', e);
         }
 
-        // 3. Не найдено
-        errorEl.textContent = 'Вакансия не найдена.';
+        document.getElementById('vacancyTitle').textContent = 'Вакансия не найдена';
+        errorEl.textContent = 'Вакансия не найдена. Возможно, она была удалена или ID указан неверно.';
         errorEl.style.display = 'block';
         loadingEl.style.display = 'none';
     }
 
     async function loadSimilar(title, currentId) {
         try {
-            const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title)}&per_page=5`);
+            const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title.split(' ')[0])}&per_page=5`);
             const data = await res.json();
             const items = data.items || [];
             const filtered = items.filter(v => v.id != currentId).slice(0, 4);
@@ -469,7 +546,8 @@
     if (vacancyId) {
         loadVacancy(vacancyId);
     } else {
-        errorEl.textContent = 'Идентификатор вакансии не указан.';
+        document.getElementById('vacancyTitle').textContent = 'Вакансия не указана';
+        errorEl.textContent = 'Идентификатор вакансии не указан. Пожалуйста, выберите вакансию из списка.';
         errorEl.style.display = 'block';
     }
 </script>
