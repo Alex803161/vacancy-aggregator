@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- SEO -->
-    <title>Ваканса — поиск работы | свежие вакансии</title>
-    <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний. Фильтры по зарплате, городу, опыту и занятости.">
+    <title>Ваканса — поиск работы | свежие вакансии во всех городах России</title>
+    <meta name="description" content="Агрегатор вакансий Ваканса — найдите работу своей мечты. Тысячи предложений от ведущих компаний: работа в Москве, удалённая работа, вакансии без опыта и для студентов. Удобный поиск и фильтры.">
     <link rel="canonical" href="https://alex803161.github.io/vacancy-aggregator/">
     
     <!-- Open Graph -->
@@ -821,7 +821,6 @@
         window.location.href = 'vacancy.html?id=' + id;
     };
 
-    // ИЗМЕНЁННАЯ ФУНКЦИЯ ДЛЯ ЗАМЕТОК
     function toggleSaved(id, btn) {
         const vac = allVacancies.find(v => v.id == id);
         if (!vac) return;
@@ -832,7 +831,7 @@
         } else {
             favorites.push({
                 ...vac,
-                note: ''   // пустая заметка по умолчанию
+                note: ''
             });
             btn.classList.add('saved');
         }
