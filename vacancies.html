@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Избранное — ВКАНСА</title>
+    
+    <!-- SEO -->
+    <title>Все вакансии — ВКАНСА</title>
+    <meta name="description" content="Полный список актуальных вакансий с удобным поиском и фильтрами. Найдите работу по городу, зарплате и типу занятости.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Все вакансии — ВКАНСА">
+    <meta property="og:description" content="Полный список актуальных вакансий с возможностью фильтрации.">
+    <meta property="og:url" content="https://vkansa.ru/vacancies.html">
+    <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
@@ -25,110 +35,36 @@
             }
         })();
     </script>
-    <style>
-        .sort-panel {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .sort-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            background: #eef2ff;
-            border: 1px solid #cbd5e1;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .sort-btn.active {
-            background: #0047cc;
-            color: white;
-            border-color: #0047cc;
-        }
-        html.dark .sort-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        html.dark .sort-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-        .export-panel {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-        .export-btn {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            color: #334155;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .export-btn:hover {
-            background: #e2e8f0;
-        }
-        html.dark .export-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        .copy-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #059669;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .copy-notification.show {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
 <div class="container">
     <div class="header">
-        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
+        </div>
+        <h1 class="page-title">Все вакансии</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
 
-    <div class="page-title">Избранные вакансии</div>
-
-    <div class="sort-panel">
-        <button id="sortByDate" class="sort-btn active" data-sort="date">📅 По дате публикации</button>
-        <button id="sortBySalary" class="sort-btn" data-sort="salary">💰 По зарплате</button>
-        <button id="sortByName" class="sort-btn" data-sort="name">🔤 По названию</button>
-    </div>
-    <div class="export-panel">
-        <button id="exportBtn" class="export-btn"><i class="fas fa-copy"></i> Скопировать список</button>
+    <div class="search-section">
+        <div class="search-row">
+            <input type="text" id="searchInput" class="search-input" placeholder="Должность или ключевое слово">
+            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Найти</button>
+        </div>
     </div>
 
-    <div id="favoritesList" class="cards"></div>
-    <p id="emptyMessage" style="display:none;">В избранном пока ничего нет.</p>
-    <div id="copyNotification" class="copy-notification">Список скопирован!</div>
+    <div class="results-header">
+        <span id="counter" class="counter">Загрузка...</span>
+    </div>
+
+    <div id="vacanciesContainer" class="vacancies-list"></div>
+    <div id="loadingIndicator" style="text-align:center; padding: 20px; display:none;">Загрузка...</div>
+    <div style="text-align:center; margin-top: 20px;">
+        <button id="loadMoreBtn" class="load-more-btn" style="display:none;">Загрузить ещё</button>
+    </div>
 </div>
 
 <footer class="site-footer">
@@ -143,6 +79,8 @@
 <button id="themeToggle" class="theme-switch">🌙</button>
 
 <script>
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
@@ -157,185 +95,129 @@
     });
     backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    const favoritesList = document.getElementById('favoritesList');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const sortByDateBtn = document.getElementById('sortByDate');
-    const sortBySalaryBtn = document.getElementById('sortBySalary');
-    const sortByNameBtn = document.getElementById('sortByName');
-    const exportBtn = document.getElementById('exportBtn');
-    const copyNotification = document.getElementById('copyNotification');
-    let currentSort = 'date';
+    let currentPage = 0;
+    let totalPages = 1;
+    let isLoading = false;
 
-    function getEmployerName(employer) {
-        if (!employer) return 'Компания не указана';
-        return typeof employer === 'object' ? employer.name : employer;
-    }
-
-    function getFavorites() {
-        return JSON.parse(localStorage.getItem('favorites') || '[]');
-    }
-
-    function saveFavorites(favorites) {
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-    }
-
-    function removeFavorite(id) {
-        let favorites = getFavorites();
-        favorites = favorites.filter(v => v.id !== id);
-        saveFavorites(favorites);
-        renderFavorites();
-    }
-
-    function sortFavorites(favorites, sortType) {
-        const sorted = [...favorites];
-        switch (sortType) {
-            case 'salary':
-                sorted.sort((a, b) => {
-                    const aSal = a.salary?.from || a.salary?.to || 0;
-                    const bSal = b.salary?.from || b.salary?.to || 0;
-                    return bSal - aSal;
-                });
-                break;
-            case 'name':
-                sorted.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ru'));
-                break;
-            case 'date':
-            default:
-                sorted.sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0));
-                break;
-        }
-        return sorted;
-    }
-
-    function setActiveSortButton(sortType) {
-        [sortByDateBtn, sortBySalaryBtn, sortByNameBtn].forEach(btn => btn.classList.remove('active'));
-        if (sortType === 'salary') sortBySalaryBtn.classList.add('active');
-        else if (sortType === 'name') sortByNameBtn.classList.add('active');
-        else sortByDateBtn.classList.add('active');
-    }
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const counter = document.getElementById('counter');
+    const vacanciesContainer = document.getElementById('vacanciesContainer');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const loadingIndicator = document.getElementById('loadingIndicator');
 
     function formatSalary(salary) {
-        if (!salary) return 'З/П не указана';
+        if (!salary) return '';
         let parts = [];
-        if (salary.from) parts.push(`от ${salary.from}`);
-        if (salary.to) parts.push(`до ${salary.to}`);
-        if (salary.currency) parts.push(salary.currency);
-        return parts.join(' ') || 'З/П не указана';
+        if (salary.from) parts.push(`от ${salary.from.toLocaleString()}`);
+        if (salary.to) parts.push(`до ${salary.to.toLocaleString()}`);
+        if (salary.currency) parts.push(salary.currency === 'RUR' ? '₽' : salary.currency);
+        return parts.join(' ');
     }
 
-    function exportFavorites() {
-        const favorites = getFavorites();
-        if (favorites.length === 0) {
-            alert('Нет вакансий для экспорта');
-            return;
-        }
-        const sorted = sortFavorites(favorites, currentSort);
-        const baseUrl = 'https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=';
-        const text = sorted.map(v => {
-            const emp = getEmployerName(v.employer);
-            const sal = formatSalary(v.salary);
-            return `${v.name || 'Без названия'} | ${emp} | ${sal} | ${baseUrl}${v.id}`;
-        }).join('\n');
+    function timeAgo(dateStr) {
+        const now = new Date();
+        const date = new Date(dateStr);
+        const diff = Math.floor((now - date) / 1000);
+        if (diff < 3600) return `${Math.floor(diff / 60)} мин. назад`;
+        if (diff < 86400) return `${Math.floor(diff / 3600)} ч. назад`;
+        if (diff < 604800) return `${Math.floor(diff / 86400)} дн. назад`;
+        return date.toLocaleDateString('ru-RU');
+    }
 
-        navigator.clipboard.writeText(text).then(() => {
-            copyNotification.classList.add('show');
-            setTimeout(() => copyNotification.classList.remove('show'), 2000);
-        }).catch(() => {
-            alert('Не удалось скопировать текст. Пожалуйста, скопируйте вручную.');
+    function createCard(v) {
+        const emp = typeof v.employer === 'object' ? v.employer?.name : v.employer;
+        const empLogo = v.employer?.logo_urls?.original || v.employer?.logo_urls?.['90'];
+        const salary = formatSalary(v.salary);
+        const area = v.area?.name || '';
+        const published = v.published_at ? timeAgo(v.published_at) : '';
+
+        return `
+            <div class="vacancy-card" onclick="window.location.href='vacancy.html?id=${v.id}'">
+                <div class="job-title">
+                    <span>${v.name || 'Без названия'}</span>
+                    ${published ? `<span class="date-badge">${published}</span>` : ''}
+                </div>
+                ${salary ? `<div class="salary">${salary}</div>` : ''}
+                <div class="company-block">
+                    <div class="logo-placeholder">
+                        ${empLogo ? `<img src="${empLogo}" alt="${emp || ''}" loading="lazy">` : (emp || '?').charAt(0).toUpperCase()}
+                    </div>
+                    <span class="company-name">${emp || 'Компания не указана'}</span>
+                </div>
+                ${area ? `<div class="address">📍 ${area}</div>` : ''}
+                <div class="card-actions" onclick="event.stopPropagation();">
+                    <a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a>
+                </div>
+            </div>
+        `;
+    }
+
+    async function loadVacancies(page = 0, append = false) {
+        if (isLoading) return;
+        isLoading = true;
+        loadingIndicator.style.display = 'block';
+        loadMoreBtn.style.display = 'none';
+
+        const query = searchInput.value.trim();
+        const params = new URLSearchParams({
+            action: 'vacancies',
+            text: query,
+            per_page: 20,
+            page: page,
+            order_by: 'publication_time'
         });
-    }
 
-    function renderFavorites() {
-        const favorites = getFavorites();
-        if (favorites.length === 0) {
-            favoritesList.innerHTML = '';
-            emptyMessage.style.display = 'block';
-            return;
-        }
-        emptyMessage.style.display = 'none';
+        try {
+            const res = await fetch(`${API_URL}?${params.toString()}`);
+            const data = await res.json();
+            const items = data.items || [];
 
-        const sorted = sortFavorites(favorites, currentSort);
-
-        favoritesList.innerHTML = '';
-        sorted.forEach(vacancy => {
-            const card = document.createElement('div');
-            card.className = 'card';
-
-            const title = document.createElement('h3');
-            title.textContent = vacancy.name || 'Без названия';
-            card.appendChild(title);
-
-            const company = document.createElement('p');
-            company.className = 'company';
-            company.textContent = getEmployerName(vacancy.employer);
-            card.appendChild(company);
-
-            if (vacancy.salary) {
-                const salary = document.createElement('p');
-                salary.className = 'salary';
-                const from = vacancy.salary.from ? `от ${vacancy.salary.from}` : '';
-                const to = vacancy.salary.to ? `до ${vacancy.salary.to}` : '';
-                const currency = vacancy.salary.currency || '';
-                salary.textContent = [from, to, currency].filter(Boolean).join(' ') || 'З/П не указана';
-                card.appendChild(salary);
+            if (!append) {
+                vacanciesContainer.innerHTML = '';
             }
 
-            if (vacancy.published_at) {
-                const date = document.createElement('p');
-                date.className = 'published';
-                date.textContent = new Date(vacancy.published_at).toLocaleDateString('ru-RU');
-                card.appendChild(date);
+            items.forEach(v => {
+                vacanciesContainer.innerHTML += createCard(v);
+            });
+
+            totalPages = data.pages || 1;
+            currentPage = page;
+            counter.textContent = `Найдено: ${data.found || items.length}`;
+
+            if (currentPage < totalPages - 1) {
+                loadMoreBtn.style.display = 'inline-flex';
+                loadMoreBtn.textContent = 'Загрузить ещё';
+                loadMoreBtn.disabled = false;
+            } else {
+                loadMoreBtn.style.display = 'none';
             }
 
-            const actions = document.createElement('div');
-            actions.className = 'card-actions';
-
-            const viewBtn = document.createElement('button');
-            viewBtn.textContent = 'Подробнее';
-            viewBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.location.href = `vacancy.html?id=${vacancy.id}`;
-            });
-            actions.appendChild(viewBtn);
-
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'Удалить';
-            removeBtn.className = 'remove-btn';
-            removeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                removeFavorite(vacancy.id);
-            });
-            actions.appendChild(removeBtn);
-
-            card.appendChild(actions);
-
-            card.addEventListener('click', () => {
-                window.location.href = `vacancy.html?id=${vacancy.id}`;
-            });
-
-            favoritesList.appendChild(card);
-        });
+            if (items.length === 0 && !append) {
+                vacanciesContainer.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">Ничего не найдено</div>';
+            }
+        } catch (e) {
+            console.error('Ошибка загрузки', e);
+            if (!append) {
+                vacanciesContainer.innerHTML = '<div style="text-align:center; padding:40px; color:#dc2626;">Ошибка загрузки</div>';
+            }
+        } finally {
+            isLoading = false;
+            loadingIndicator.style.display = 'none';
+        }
     }
 
-    sortByDateBtn.addEventListener('click', () => {
-        currentSort = 'date';
-        setActiveSortButton('date');
-        renderFavorites();
-    });
-    sortBySalaryBtn.addEventListener('click', () => {
-        currentSort = 'salary';
-        setActiveSortButton('salary');
-        renderFavorites();
-    });
-    sortByNameBtn.addEventListener('click', () => {
-        currentSort = 'name';
-        setActiveSortButton('name');
-        renderFavorites();
+    searchBtn.addEventListener('click', () => loadVacancies(0, false));
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') loadVacancies(0, false);
     });
 
-    exportBtn.addEventListener('click', exportFavorites);
+    loadMoreBtn.addEventListener('click', () => {
+        loadVacancies(currentPage + 1, true);
+    });
 
-    renderFavorites();
+    // Загрузка при открытии
+    loadVacancies(0, false);
 </script>
 </body>
 </html>
