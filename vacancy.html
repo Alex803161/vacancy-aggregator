@@ -377,6 +377,7 @@
         document.getElementById('jsonLd').textContent = JSON.stringify(jsonLd);
     }
 
+    // НОВОЕ: сохраняем историю с timestamp
     function saveRecentVacancy(vacancy) {
         let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
         recent = recent.filter(v => v.id !== vacancy.id);
@@ -386,8 +387,9 @@
             employer: getEmployerName(vacancy.employer),
             salary: formatSalary(vacancy.salary),
             area: vacancy.area?.name || '',
+            timestamp: Date.now()
         });
-        if (recent.length > 10) recent.pop();
+        if (recent.length > 200) recent = recent.slice(0, 200);
         localStorage.setItem('recentVacancies', JSON.stringify(recent));
     }
 
