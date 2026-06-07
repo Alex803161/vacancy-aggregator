@@ -279,6 +279,35 @@
         return parts.join(' ') || 'Зарплата не указана';
     }
 
+    // Парсинг зарплатной строки из прямых вакансий
+    function parseSalaryString(str) {
+        if (!str) return null;
+        const fromMatch = str.match(/от\s*([\d\s]+)/);
+        const toMatch = str.match(/до\s*([\d\s]+)/);
+        const currencyMatch = str.match(/[₽$€]/);
+        return {
+            from: fromMatch ? parseInt(fromMatch[1].replace(/\s/g, '')) : null,
+            to: toMatch ? parseInt(toMatch[1].replace(/\s/g, '')) : null,
+            currency: currencyMatch ? currencyMatch[0] : '₽'
+        };
+    }
+
+    // Преобразование прямой вакансии в формат, понятный renderVacancy
+    function mapDirectJobToVacancy(job) {
+        return {
+            id: job.id,
+            name: job.title,
+            employer: job.company,
+            salary: parseSalaryString(job.salary),
+            description: job.description || 'Описание отсутствует',
+            area: { name: job.city || '' },
+            key_skills: [],
+            published_at: job.timestamp,
+            alternate_url: null,
+            source: 'direct'
+        };
+    }
+
     function saveRecentVacancy(vacancy) {
         let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
         recent = recent.filter(v => v.id !== vacancy.id);
@@ -296,10 +325,19 @@
     function renderVacancy(vacancy) {
         const employerName = getEmployerName(vacancy.employer);
         const vacancyUrl = window.location.href;
+        const isDirect = vacancy.source === 'direct';
         const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`);
         const whatsappLink = `https://wa.me/?text=${shareText}`;
-        const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`) }`;
-        const reportMailto = `mailto:abuse@vakansa.ru?subject=Жалоба на вакансию ID ${vacancy.id}&body=Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
+        const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
+
+        // Формируем mailto в зависимости от источника
+        const reportSubject = isDirect
+            ? 'Жалоба на прямое объявление'
+            : `Жалоба на вакансию ID ${vacancy.id}`;
+        const reportBody = isDirect
+            ? `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AID: ${vacancy.id}%0D%0AСсылка: ${vacancyUrl}`
+            : `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
+        const reportMailto = `mailto:abuse@vakansa.ru?subject=${encodeURIComponent(reportSubject)}&body=${reportBody}`;
 
         let html = `
             <div class="vacancy-full">
@@ -307,11 +345,11 @@
                 <p class="company">${employerName}</p>
                 <p class="salary">${formatSalary(vacancy.salary)}</p>
                 <div class="description">${vacancy.description || 'Описание отсутствует'}</div>
-                <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => s.name).join(', ') || 'Не указаны'}</p>
+                <p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => typeof s === 'object' ? s.name : s).join(', ') || 'Не указаны'}</p>
                 <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU') : 'Неизвестно'}</p>
                 <div class="actions">
                     <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
-                    <a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>
+                    ${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">Прямое объявление</span>'}
                     <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
                     <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
                 </div>
@@ -363,18 +401,40 @@
         loadingEl.style.display = 'block';
         errorEl.style.display = 'none';
         detailContainer.innerHTML = '';
+
+        // 1. Пробуем API
         try {
             const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
-            if (!res.ok) throw new Error(`Ошибка ${res.status}`);
-            const vacancy = await res.json();
-            if (vacancy.errors) throw new Error(vacancy.errors[0]?.value || 'Ошибка данных');
-            renderVacancy(vacancy);
+            if (res.ok) {
+                const vacancy = await res.json();
+                if (vacancy && !vacancy.errors) {
+                    renderVacancy(vacancy);
+                    loadingEl.style.display = 'none';
+                    return;
+                }
+            }
         } catch (e) {
-            errorEl.textContent = 'Не удалось загрузить вакансию. ' + e.message;
-            errorEl.style.display = 'block';
-        } finally {
-            loadingEl.style.display = 'none';
+            console.warn('API не ответил, пробуем localStorage');
         }
+
+        // 2. Fallback — ищем в прямых вакансиях
+        try {
+            const directJobs = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
+            const job = directJobs.find(j => String(j.id) === String(id));
+            if (job) {
+                const mapped = mapDirectJobToVacancy(job);
+                renderVacancy(mapped);
+                loadingEl.style.display = 'none';
+                return;
+            }
+        } catch (e) {
+            console.error('Ошибка чтения localStorage', e);
+        }
+
+        // 3. Не найдено
+        errorEl.textContent = 'Вакансия не найдена.';
+        errorEl.style.display = 'block';
+        loadingEl.style.display = 'none';
     }
 
     async function loadSimilar(title, currentId) {
