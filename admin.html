@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админка — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
-        // Мгновенное применение темы
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -26,106 +26,113 @@
         })();
     </script>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1><a href="/">ВКАНСА</a> — Админка</h1>
-            <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌓</span>
-            </button>
-        </div>
-    </header>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
-    <main class="container">
-        <h2>Управление прямыми вакансиями</h2>
-        <p>Здесь отображаются вакансии, добавленные через форму. Данные хранятся в localStorage.</p>
-        <div id="jobsList" class="cards">
-            <!-- Карточки прямых вакансий -->
-        </div>
-        <p id="emptyMessage" style="display:none;">Нет добавленных вакансий.</p>
-    </main>
+<div class="container">
+    <div class="header">
+        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 ВКАНСА</p>
-    </footer>
+    <div class="page-title">Управление прямыми вакансиями</div>
+    <p style="color:#64748b; margin-bottom: 20px;">Вакансии, добавленные через форму, хранятся в localStorage.</p>
 
-    <script>
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon(isDark);
-        });
-        function updateThemeIcon(isDark) {
-            themeToggle.querySelector('.icon').textContent = isDark ? '☀️' : '🌙';
-        }
-        updateThemeIcon(document.documentElement.classList.contains('dark'));
+    <div id="jobsList" class="cards"></div>
+    <p id="emptyMessage" style="display:none; text-align:center; padding:40px;">Нет добавленных вакансий.</p>
+</div>
 
-        const jobsList = document.getElementById('jobsList');
-        const emptyMessage = document.getElementById('emptyMessage');
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2025 ВКАНСА</div>
+</footer>
 
-        function getDirectJobs() {
-            return JSON.parse(localStorage.getItem('direct_jobs') || '[]');
-        }
+<button id="themeToggle" class="theme-switch">🌙</button>
 
-        function deleteJob(id) {
-            let jobs = getDirectJobs();
-            jobs = jobs.filter(j => j.id !== id);
-            localStorage.setItem('direct_jobs', JSON.stringify(jobs));
-            renderJobs();
-        }
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
 
-        function renderJobs() {
-            const jobs = getDirectJobs();
-            jobsList.innerHTML = '';
-            if (jobs.length === 0) {
-                emptyMessage.style.display = 'block';
-                return;
-            }
-            emptyMessage.style.display = 'none';
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            jobs.forEach(job => {
-                const card = document.createElement('div');
-                card.className = 'card';
+    const jobsList = document.getElementById('jobsList');
+    const emptyMessage = document.getElementById('emptyMessage');
 
-                const title = document.createElement('h3');
-                title.textContent = job.title || 'Без названия';
-                card.appendChild(title);
+    function getDirectJobs() {
+        return JSON.parse(localStorage.getItem('direct_jobs') || '[]');
+    }
 
-                const company = document.createElement('p');
-                company.className = 'company';
-                company.textContent = job.company || 'Компания не указана';
-                card.appendChild(company);
-
-                if (job.salary) {
-                    const salary = document.createElement('p');
-                    salary.className = 'salary';
-                    salary.textContent = job.salary;
-                    card.appendChild(salary);
-                }
-
-                const desc = document.createElement('p');
-                desc.textContent = job.description || '';
-                card.appendChild(desc);
-
-                const actions = document.createElement('div');
-                actions.className = 'card-actions';
-
-                const delBtn = document.createElement('button');
-                delBtn.textContent = 'Удалить';
-                delBtn.className = 'remove-btn';
-                delBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    deleteJob(job.id);
-                });
-                actions.appendChild(delBtn);
-
-                card.appendChild(actions);
-                jobsList.appendChild(card);
-            });
-        }
-
+    function deleteJob(id) {
+        let jobs = getDirectJobs();
+        jobs = jobs.filter(j => j.id !== id);
+        localStorage.setItem('direct_jobs', JSON.stringify(jobs));
         renderJobs();
-    </script>
+    }
+
+    function renderJobs() {
+        const jobs = getDirectJobs();
+        jobsList.innerHTML = '';
+        if (jobs.length === 0) {
+            emptyMessage.style.display = 'block';
+            return;
+        }
+        emptyMessage.style.display = 'none';
+
+        jobs.forEach(job => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const title = document.createElement('h3');
+            title.textContent = job.title || 'Без названия';
+            card.appendChild(title);
+
+            const company = document.createElement('p');
+            company.className = 'company';
+            company.textContent = job.company || 'Компания не указана';
+            card.appendChild(company);
+
+            if (job.salary) {
+                const salary = document.createElement('p');
+                salary.className = 'salary';
+                salary.textContent = job.salary;
+                card.appendChild(salary);
+            }
+
+            const desc = document.createElement('p');
+            desc.textContent = job.description || '';
+            card.appendChild(desc);
+
+            const actions = document.createElement('div');
+            actions.className = 'card-actions';
+
+            const delBtn = document.createElement('button');
+            delBtn.textContent = 'Удалить';
+            delBtn.className = 'remove-btn';
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteJob(job.id);
+            });
+            actions.appendChild(delBtn);
+
+            card.appendChild(actions);
+            jobsList.appendChild(card);
+        });
+    }
+
+    renderJobs();
+</script>
 </body>
 </html>
