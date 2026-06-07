@@ -187,7 +187,6 @@
 
     async function fetchVacanciesFromAPI(query, filters={}){
         const params=new URLSearchParams();
-        // Добавляем уникальный параметр, если нужно избежать кеша браузера/SW
         if (filters._t) params.set('_t', filters._t);
         if(query)params.set('text',query);
         if(filters.area)params.set('area',filters.area);
@@ -526,7 +525,7 @@
     filterEmployment.addEventListener('change', applyFilters);
     filterSalaryFrom.addEventListener('input', applyFilters);
     filterWithSalary.addEventListener('change', () => {
-        searchCache.clear();   // Очищаем кеш результатов поиска при переключении фильтра
+        searchCache.clear();
         applyFilters();
     });
     filterRemote.addEventListener('change', applyFilters);
@@ -601,7 +600,6 @@
 
         try{
             const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;
-            // Не используем кеш, если включён фильтр "Только с зарплатой"
             if (!filterWithSalary.checked) {
                 const cachedData = getCachedResult(cacheKey);
                 if (cachedData) {
@@ -622,7 +620,6 @@
                 per_page:30,
                 page:0
             };
-            // Принудительно избегаем кеш браузера/SW, если включён фильтр зарплаты
             if (filterWithSalary.checked) {
                 filters._t = Date.now();
             }
@@ -728,7 +725,6 @@
         loadMoreWrapper.style.display='block';
     }
 
-    // ИСПРАВЛЕННАЯ ФУНКЦИЯ ФОРМАТИРОВАНИЯ ЗАРПЛАТЫ
     function formatSalary(salary) {
         if (!salary || (!salary.from && !salary.to)) return 'З/П не указана';
         let parts = [];
@@ -739,7 +735,6 @@
         return result;
     }
 
-    // ИСПРАВЛЕННАЯ ФУНКЦИЯ enrich
     function enrich(v){
         const employerName = typeof v.employer === 'object' ? (v.employer?.name || 'Компания не указана') : (v.employer || 'Компания не указана');
         const employerLogo = v.employer?.logo_urls?.['90'] || v.employer?.logo_urls?.original || v.logo_url || null;
@@ -836,12 +831,35 @@
     function renderHistory(){const cont=document.getElementById('historyContainer');if(!searchHistory.length){cont.innerHTML='<span style="font-size:0.8rem;color:#94a3b8;">Нет истории</span>';return}cont.innerHTML=searchHistory.map(q=>`<div class="history-item" data-query="${q}"><span>${q}</span><button class="delete-history" data-query="${q}">&times;</button></div>`).join('');document.querySelectorAll('.history-item span').forEach(el=>el.addEventListener('click',(e)=>{if(!e.target.classList.contains('delete-history')){searchInput.value=el.parentElement.dataset.query;performSearch(true,true)}}));document.querySelectorAll('.delete-history').forEach(btn=>btn.addEventListener('click',(e)=>{e.stopPropagation();searchHistory=searchHistory.filter(h=>h!==btn.dataset.query);localStorage.setItem('searchHistory',JSON.stringify(searchHistory));renderHistory()}))}
     function escapeHtml(text){if(!text)return'';return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-    // Инициализация
     loadTheme();
     renderRecentVacancies();
     renderSavedSearches();
     loadAllAreas().then(() => console.log('Areas loaded')).catch(() => {});
     performSearch(true);
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
+      .then(registration => {
+        console.log('SW зарегистрирован:', registration.scope);
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              const toast = document.createElement('div');
+              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
+              toast.textContent = 'Доступна новая версия. Обновите страницу.';
+              toast.onclick = () => window.location.reload();
+              document.body.appendChild(toast);
+            }
+          };
+        };
+      })
+      .catch(err => console.log('Ошибка регистрации SW:', err));
+  });
+}
 </script>
 </body>
 </html>
