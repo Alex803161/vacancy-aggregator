@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Пользовательское соглашение — ВКАНСА</title>
+    <meta name="description" content="Правила и условия использования сайта ВКАНСА.">
+    <meta property="og:title" content="Пользовательское соглашение — ВКАНСА">
+    <meta property="og:description" content="Правила использования сайта.">
+    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/terms.html">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
@@ -53,10 +58,13 @@
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
-
 <div class="container">
     <div class="header">
-        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
+        </div>
+        <h1 class="page-title">Пользовательское соглашение</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
 
@@ -78,7 +86,6 @@
 </footer>
 
 <button id="themeToggle" class="theme-switch">🌙</button>
-
 <script>
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
