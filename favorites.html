@@ -247,9 +247,18 @@
     const copyNotification = document.getElementById('copyNotification');
     let currentSort = 'date';
 
+    function escapeHtml(text) {
+        if (!text) return '';
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
     function getEmployerName(employer) {
         if (!employer) return 'Компания не указана';
-        return typeof employer === 'object' ? employer.name : employer;
+        return typeof employer === 'object' ? escapeHtml(employer.name) : escapeHtml(employer);
     }
 
     function getFavorites() {
