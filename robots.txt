@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Sitemap: https://alex803161.github.io/vacancy-aggregator/sitemap.xml
+Disallow: /test.html
+
+Sitemap: https://vkansa.ru/sitemap.xml
+Host: vkansa.ru
