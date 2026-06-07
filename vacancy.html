@@ -461,6 +461,7 @@
         return getFavorites().some(v => v.id === id);
     }
 
+    // ИЗМЕНЁННАЯ ФУНКЦИЯ ДЛЯ ЗАМЕТОК
     function toggleFavorite(vacancy) {
         let favs = getFavorites();
         const index = favs.findIndex(v => v.id === vacancy.id);
@@ -474,7 +475,8 @@
                 salary: formatSalary(vacancy.salary),
                 area: vacancy.area?.name || '',
                 alternate_url: vacancy.alternate_url,
-                source: vacancy.source
+                source: vacancy.source,
+                note: ''   // пустая заметка по умолчанию
             });
         }
         localStorage.setItem('favorites', JSON.stringify(favs));
