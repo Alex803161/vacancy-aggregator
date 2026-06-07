@@ -3,19 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Политика конфиденциальности — Ваканса</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <title>Политика конфиденциальности — ВКАНСА</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                const hour = new Date().getHours();
+                if (hour >= 20 || hour < 6) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+        })();
+    </script>
     <style>
-        body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #0f172a; }
-        h1 { color: #0047cc; }
-        a { color: #0047cc; text-decoration: none; }
+        .content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+            color: #0f172a;
+            line-height: 1.8;
+        }
+        html.dark .content {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+        html.dark .content h2 {
+            color: #f1f5f9;
+        }
     </style>
 </head>
-<body>
-    <h1>Политика конфиденциальности</h1>
-    <p><em>Дата вступления в силу: 1 января 2026 г.</em></p>
-    <p>Ваканса с уважением относится к вашей конфиденциальности. Мы не собираем и не храним персональные данные пользователей, за исключением информации, необходимой для функционирования сервиса (например, сохранённые избранные вакансии в localStorage вашего браузера).</p>
-    <p>Все запросы к сторонним API (hh.ru) выполняются в соответствии с их политикой конфиденциальности. Мы не передаём данные третьим лицам.</p>
-    <p><a href="index.html">← На главную</a></p>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+<div class="container">
+    <div class="header">
+        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
+
+    <div class="content">
+        <h2>Политика конфиденциальности</h2>
+        <p><em>Дата вступления в силу: 1 января 2026 г.</em></p>
+        <p>Ваканса с уважением относится к вашей конфиденциальности. Мы не собираем и не храним персональные данные пользователей, за исключением информации, необходимой для функционирования сервиса (например, сохранённые избранные вакансии в localStorage вашего браузера).</p>
+        <p>Все запросы к сторонним API (hh.ru) выполняются в соответствии с их политикой конфиденциальности. Мы не передаём данные третьим лицам.</p>
+        <p>Если у вас есть вопросы, свяжитесь с нами через <a href="contacts.html">контакты</a>.</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2025 ВКАНСА</div>
+</footer>
+
+<button id="themeToggle" class="theme-switch">🌙</button>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
+
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
 </body>
 </html>
