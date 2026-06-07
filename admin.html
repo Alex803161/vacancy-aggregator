@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админка — ВКАНСА</title>
+    <title>Панель администратора — ВКАНСА</title>
+    <meta name="description" content="Управление прямыми вакансиями ВКАНСА.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Панель администратора — ВКАНСА">
+    <meta property="og:description" content="Управление прямыми вакансиями.">
+    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/admin.html">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
@@ -25,17 +31,28 @@
             }
         })();
     </script>
+    <style>
+        .cards { display: flex; flex-direction: column; gap: 12px; }
+        .card h3 { color: #0f172a; margin-bottom: 4px; }
+        html.dark .card h3 { color: #f1f5f9; }
+        .card .company { color: #334155; font-weight: 600; }
+        html.dark .card .company { color: #f1f5f9; }
+        .card .salary { color: #059669; font-weight: 700; }
+        html.dark .card .salary { color: #34d399; }
+    </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
-
 <div class="container">
     <div class="header">
-        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
+        </div>
+        <h1 class="page-title">Панель администратора</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
 
-    <div class="page-title">Управление прямыми вакансиями</div>
     <p style="color:#64748b; margin-bottom: 20px;">Вакансии, добавленные через форму, хранятся в localStorage.</p>
 
     <div id="jobsList" class="cards"></div>
