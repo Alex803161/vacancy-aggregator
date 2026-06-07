@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <!-- SEO -->
     <title>Ваканса — поиск работы | свежие вакансии</title>
     <meta name="description" content="Агрегатор вакансий Ваканса — удобный поиск работы. Найдите свою идеальную вакансию среди тысяч предложений от ведущих компаний. Фильтры по зарплате, городу, опыту и занятости.">
@@ -19,7 +20,6 @@
     <meta property="og:type" content="website">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     
@@ -63,7 +63,6 @@
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 <div class="container">
-    <!-- Шапка: логотип отдельно от H1 -->
     <div class="header">
         <div class="logo-container">
             <span class="logo-heart"></span>
@@ -499,17 +498,13 @@
 
     saveSearchBtn.addEventListener('click', saveCurrentSearch);
 
-    // НОВОЕ: сохранение истории просмотров с датой
     function saveRecentVacancy(vacancyData) {
         let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
-        // Удаляем дубликат
         recent = recent.filter(v => v.id !== vacancyData.id);
-        // Добавляем в начало с timestamp
         recent.unshift({
             ...vacancyData,
             timestamp: Date.now()
         });
-        // Ограничиваем 200 записями
         if (recent.length > 200) recent = recent.slice(0, 200);
         localStorage.setItem('recentVacancies', JSON.stringify(recent));
         renderRecentVacancies();
@@ -522,7 +517,6 @@
             return;
         }
         recentSection.style.display = 'block';
-        // Показываем только последние 10 в боковой прокрутке
         const recentToShow = recent.slice(0, 10);
         recentContainer.innerHTML = recentToShow.map(v => `
             <a href="vacancy.html?id=${v.id}" class="recent-card">
@@ -694,7 +688,6 @@
         if(emp) filtered=filtered.filter(v=>v.employment===emp);
         const salaryFrom=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;
         if(salaryFrom) filtered=filtered.filter(v=>v.salary?.from && v.salary.from>=salaryFrom);
-        // ИСПРАВЛЕННАЯ ПРОВЕРКА НАЛИЧИЯ ЗАРПЛАТЫ
         if (filterWithSalary.checked) {
             filtered = filtered.filter(v => v.salary && (v.salary.from != null || v.salary.to != null));
         }
@@ -814,7 +807,6 @@
     }
 
     window.goToVacancy=function(id){
-        // Сохраняем в историю просмотров
         const vac = allVacancies.find(v => v.id == id);
         if (vac) {
             const employer = typeof vac.employer === 'object' ? vac.employer?.name : vac.employer;
