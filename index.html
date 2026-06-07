@@ -187,6 +187,8 @@
 
     async function fetchVacanciesFromAPI(query, filters={}){
         const params=new URLSearchParams();
+        // Добавляем уникальный параметр, если нужно избежать кеша браузера/SW
+        if (filters._t) params.set('_t', filters._t);
         if(query)params.set('text',query);
         if(filters.area)params.set('area',filters.area);
         if(filters.employment)params.set('employment',filters.employment);
@@ -523,7 +525,10 @@
     filterExperience.addEventListener('change', applyFilters);
     filterEmployment.addEventListener('change', applyFilters);
     filterSalaryFrom.addEventListener('input', applyFilters);
-    filterWithSalary.addEventListener('change', applyFilters);
+    filterWithSalary.addEventListener('change', () => {
+        searchCache.clear();   // Очищаем кеш результатов поиска при переключении фильтра
+        applyFilters();
+    });
     filterRemote.addEventListener('change', applyFilters);
     filterShowHidden.addEventListener('change', applyFilters);
 
@@ -596,15 +601,18 @@
 
         try{
             const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;
-            const cachedData = getCachedResult(cacheKey);
-            if (cachedData) {
-                allVacancies = cachedData.items;
-                lastSearchFound = cachedData.found;
-                applyFilters();
-                searchBtn.disabled = false;
-                searchBtn.innerHTML = originalHTML;
-                updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, cachedData.found);
-                return;
+            // Не используем кеш, если включён фильтр "Только с зарплатой"
+            if (!filterWithSalary.checked) {
+                const cachedData = getCachedResult(cacheKey);
+                if (cachedData) {
+                    allVacancies = cachedData.items;
+                    lastSearchFound = cachedData.found;
+                    applyFilters();
+                    searchBtn.disabled = false;
+                    searchBtn.innerHTML = originalHTML;
+                    updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, cachedData.found);
+                    return;
+                }
             }
             const filters={
                 employment:filterEmployment.value,
@@ -614,10 +622,16 @@
                 per_page:30,
                 page:0
             };
+            // Принудительно избегаем кеш браузера/SW, если включён фильтр зарплаты
+            if (filterWithSalary.checked) {
+                filters._t = Date.now();
+            }
             const { items, found } = await fetchVacanciesFromAPI(query,filters);
             allVacancies = items;
             lastSearchFound = found;
-            setCachedResult(cacheKey, { items, found });
+            if (!filterWithSalary.checked) {
+                setCachedResult(cacheKey, { items, found });
+            }
             applyFilters();
             updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, found);
             sendGAEvent("search", { search_term: query });
@@ -662,8 +676,9 @@
         if(emp) filtered=filtered.filter(v=>v.employment===emp);
         const salaryFrom=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;
         if(salaryFrom) filtered=filtered.filter(v=>v.salary?.from && v.salary.from>=salaryFrom);
-        if(filterWithSalary.checked) {
-            filtered = filtered.filter(v => (v.salary?.from || v.salary?.to));
+        // ИСПРАВЛЕННАЯ ПРОВЕРКА НАЛИЧИЯ ЗАРПЛАТЫ
+        if (filterWithSalary.checked) {
+            filtered = filtered.filter(v => v.salary && (v.salary.from != null || v.salary.to != null));
         }
         if(filterRemote.checked) {
             filtered = filtered.filter(v => v.schedule?.id === 'remote');
@@ -737,7 +752,7 @@
             experience: v.experience?.name || v.experience || 'Не указан',
             employment: v.employment?.name || v.employment || '',
             schedule: v.schedule?.name || v.schedule || '',
-            salary: formatSalary(v.salary),   // <-- ИСПРАВЛЕНО: передаём объект salary
+            salary: formatSalary(v.salary),
             rating: v.employer_rating || (Math.random() * 2 + 3).toFixed(1),
             reviews: v.employer_reviews || Math.floor(Math.random() * 5000) + 100,
             logoLetter: (employerName || 'А').charAt(0).toUpperCase(),
