@@ -821,15 +821,19 @@
         window.location.href = 'vacancy.html?id=' + id;
     };
 
-    function toggleSaved(id,btn){
-        const vac = allVacancies.find(v=>v.id==id);
-        if(!vac) return;
-        const index = favorites.findIndex(fav=>fav.id==id);
-        if(index > -1){
-            favorites.splice(index,1);
+    // ИЗМЕНЁННАЯ ФУНКЦИЯ ДЛЯ ЗАМЕТОК
+    function toggleSaved(id, btn) {
+        const vac = allVacancies.find(v => v.id == id);
+        if (!vac) return;
+        const index = favorites.findIndex(fav => fav.id == id);
+        if (index > -1) {
+            favorites.splice(index, 1);
             btn.classList.remove('saved');
         } else {
-            favorites.push(vac);
+            favorites.push({
+                ...vac,
+                note: ''   // пустая заметка по умолчанию
+            });
             btn.classList.add('saved');
         }
         localStorage.setItem('favorites', JSON.stringify(favorites));
