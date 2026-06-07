@@ -713,20 +713,40 @@
         loadMoreWrapper.style.display='block';
     }
 
-    function formatSalary(v){
-        if(!v.salary_from&&!v.salary_to)return'З/П не указана';
-        let parts=[];
-        if(v.salary_from)parts.push('от '+v.salary_from.toLocaleString());
-        if(v.salary_to)parts.push('до '+v.salary_to.toLocaleString());
-        let result=parts.join(' ');
-        if(v.salary_currency){result+=' '+(v.salary_currency==='RUR'?'₽':v.salary_currency)}
+    // ИСПРАВЛЕННАЯ ФУНКЦИЯ ФОРМАТИРОВАНИЯ ЗАРПЛАТЫ
+    function formatSalary(salary) {
+        if (!salary || (!salary.from && !salary.to)) return 'З/П не указана';
+        let parts = [];
+        if (salary.from) parts.push('от ' + salary.from.toLocaleString());
+        if (salary.to) parts.push('до ' + salary.to.toLocaleString());
+        let result = parts.join(' ');
+        if (salary.currency) result += ' ' + (salary.currency === 'RUR' ? '₽' : salary.currency);
         return result;
     }
 
+    // ИСПРАВЛЕННАЯ ФУНКЦИЯ enrich
     function enrich(v){
         const employerName = typeof v.employer === 'object' ? (v.employer?.name || 'Компания не указана') : (v.employer || 'Компания не указана');
         const employerLogo = v.employer?.logo_urls?.['90'] || v.employer?.logo_urls?.original || v.logo_url || null;
-        return {...v, title:v.name||'Без названия', company:employerName, city:v.area?.name||v.area||'', link:v.url||'#', experience:v.experience?.name||v.experience||'Не указан', employment:v.employment?.name||v.employment||'', schedule:v.schedule?.name||v.schedule||'', salary:formatSalary(v), rating:v.employer_rating||(Math.random()*2+3).toFixed(1), reviews:v.employer_reviews||Math.floor(Math.random()*5000)+100, logoLetter:(employerName||'А').charAt(0).toUpperCase(), logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(employerName||'А').charCodeAt(0)%6], phone:v.phone||null, email:v.email||null, logoUrl:employerLogo, publishedDate:formatPublishedDate(v.published_at)};
+        return {
+            ...v,
+            title: v.name || 'Без названия',
+            company: employerName,
+            city: v.area?.name || v.area || '',
+            link: v.url || '#',
+            experience: v.experience?.name || v.experience || 'Не указан',
+            employment: v.employment?.name || v.employment || '',
+            schedule: v.schedule?.name || v.schedule || '',
+            salary: formatSalary(v.salary),   // <-- ИСПРАВЛЕНО: передаём объект salary
+            rating: v.employer_rating || (Math.random() * 2 + 3).toFixed(1),
+            reviews: v.employer_reviews || Math.floor(Math.random() * 5000) + 100,
+            logoLetter: (employerName || 'А').charAt(0).toUpperCase(),
+            logoColor: ['#e0e7ff', '#dbeafe', '#ede9fe', '#fce7f3', '#ffedd5', '#dcfce7'][(employerName || 'А').charCodeAt(0) % 6],
+            phone: v.phone || null,
+            email: v.email || null,
+            logoUrl: employerLogo,
+            publishedDate: formatPublishedDate(v.published_at)
+        };
     }
 
     function formatPublishedDate(dateString){
