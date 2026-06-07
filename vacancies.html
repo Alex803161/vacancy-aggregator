@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Все вакансии — ВКАНСА</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
-        // Мгновенное применение темы
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
@@ -25,199 +25,276 @@
             }
         })();
     </script>
+    <style>
+        .page-description {
+            color: #6b7280;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        html.dark .page-description {
+            color: #9ca3af;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: white;
+            color: #0f172a;
+        }
+        html.dark .search-bar input {
+            background: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .search-bar button {
+            background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
+            color: white;
+            border: none;
+            padding: 0 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            height: 46px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .search-bar button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+        .pagination button {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background: #0047cc;
+            color: white;
+            border-color: #0047cc;
+        }
+        html.dark .pagination button {
+            background: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        html.dark .pagination button.active {
+            background: #3b82f6;
+            color: white;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1><a href="/">ВКАНСА</a></h1>
-            <nav>
-                <a href="/vacancies.html">Вакансии</a>
-                <a href="/favorites.html">Избранное</a>
-            </nav>
-            <button id="themeToggle" aria-label="Переключить тему">
-                <span class="icon">🌓</span>
-            </button>
-        </div>
-    </header>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 
-    <main class="container">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Поиск по названию вакансии...">
-            <button id="searchBtn">Найти</button>
-        </div>
+<div class="container">
+    <!-- Шапка как на главной -->
+    <div class="header">
+        <h1><span class="logo-heart"></span> Ваканса</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
 
-        <div id="vacanciesList" class="cards">
-            <!-- Карточки будут добавлены динамически -->
-        </div>
+    <div class="page-title">Все вакансии</div>
+    <p class="page-description">Поиск и просмотр вакансий с пагинацией.</p>
 
-        <div class="pagination" id="pagination">
-            <!-- Кнопки пагинации -->
-        </div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Поиск по названию вакансии...">
+        <button id="searchBtn">Найти</button>
+    </div>
 
-        <div id="loading" style="display:none; text-align:center;">Загрузка...</div>
-    </main>
+    <div id="vacanciesList" class="cards"></div>
 
-    <footer>
-        <p>&copy; 2025 ВКАНСА</p>
-    </footer>
+    <div class="pagination" id="pagination"></div>
 
-    <script>
-        const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
-        const PER_PAGE = 10;
+    <div id="loading" style="display:none; text-align:center;">Загрузка...</div>
+</div>
 
-        let currentPage = 0;
-        let totalPages = 0;
-        let searchText = '';
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2025 ВКАНСА</div>
+</footer>
 
-        // Тёмная тема
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon(isDark);
-        });
-        function updateThemeIcon(isDark) {
-            themeToggle.querySelector('.icon').textContent = isDark ? '☀️' : '🌙';
-        }
-        updateThemeIcon(document.documentElement.classList.contains('dark'));
+<button id="themeToggle" class="theme-switch">🌙</button>
 
-        const vacanciesList = document.getElementById('vacanciesList');
-        const paginationContainer = document.getElementById('pagination');
-        const loadingEl = document.getElementById('loading');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
+<script>
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+    const PER_PAGE = 10;
+    let currentPage = 0;
+    let totalPages = 0;
+    let searchText = '';
 
-        function getEmployerName(employer) {
-            if (!employer) return 'Компания не указана';
-            return typeof employer === 'object' ? employer.name : employer;
-        }
+    // Тема
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
 
-        function renderVacancyCard(vacancy) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.addEventListener('click', () => {
-                window.location.href = `vacancy.html?id=${vacancy.id}`;
-            });
+    // Кнопка "Наверх"
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            const title = document.createElement('h3');
-            title.textContent = vacancy.name;
-            card.appendChild(title);
+    const vacanciesList = document.getElementById('vacanciesList');
+    const paginationContainer = document.getElementById('pagination');
+    const loadingEl = document.getElementById('loading');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
 
-            const company = document.createElement('p');
-            company.className = 'company';
-            company.textContent = getEmployerName(vacancy.employer);
-            card.appendChild(company);
+    function getEmployerName(employer) {
+        if (!employer) return 'Компания не указана';
+        return typeof employer === 'object' ? employer.name : employer;
+    }
 
-            if (vacancy.salary) {
-                const salary = document.createElement('p');
-                salary.className = 'salary';
-                const from = vacancy.salary.from ? `от ${vacancy.salary.from}` : '';
-                const to = vacancy.salary.to ? `до ${vacancy.salary.to}` : '';
-                const currency = vacancy.salary.currency || '';
-                salary.textContent = [from, to, currency].filter(Boolean).join(' ') || 'З/П не указана';
-                card.appendChild(salary);
-            }
-
-            return card;
-        }
-
-        async function fetchVacancies(page = 0, text = '') {
-            const params = new URLSearchParams();
-            params.append('action', 'vacancies');
-            if (text.trim()) params.append('text', text.trim());
-            params.append('page', page);
-            params.append('per_page', PER_PAGE);
-
-            try {
-                const res = await fetch(`${API_URL}?${params.toString()}`);
-                if (!res.ok) throw new Error(`Ошибка ${res.status}`);
-                return await res.json();
-            } catch (e) {
-                console.error('Ошибка загрузки вакансий:', e);
-                return { items: [], pages: 0 };
-            }
-        }
-
-        function displayVacancies(vacancies) {
-            vacanciesList.innerHTML = '';
-            if (vacancies.length === 0) {
-                vacanciesList.innerHTML = '<p>Ничего не найдено.</p>';
-                return;
-            }
-            vacancies.forEach(v => {
-                vacanciesList.appendChild(renderVacancyCard(v));
-            });
-        }
-
-        function renderPagination() {
-            paginationContainer.innerHTML = '';
-            if (totalPages <= 1) return;
-
-            const maxButtons = 7;
-            const start = Math.max(0, currentPage - Math.floor(maxButtons / 2));
-            const end = Math.min(totalPages, start + maxButtons);
-
-            // Кнопка "Предыдущая"
-            if (currentPage > 0) {
-                const prevBtn = document.createElement('button');
-                prevBtn.textContent = '←';
-                prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
-                paginationContainer.appendChild(prevBtn);
-            }
-
-            // Номера страниц
-            for (let i = start; i < end; i++) {
-                const pageBtn = document.createElement('button');
-                pageBtn.textContent = i + 1;
-                if (i === currentPage) pageBtn.classList.add('active');
-                pageBtn.addEventListener('click', () => goToPage(i));
-                paginationContainer.appendChild(pageBtn);
-            }
-
-            // Кнопка "Следующая"
-            if (currentPage < totalPages - 1) {
-                const nextBtn = document.createElement('button');
-                nextBtn.textContent = '→';
-                nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
-                paginationContainer.appendChild(nextBtn);
-            }
-        }
-
-        async function goToPage(page) {
-            loadingEl.style.display = 'block';
-            currentPage = page;
-            const data = await fetchVacancies(page, searchText);
-            totalPages = data.pages || 0;
-            displayVacancies(data.items || []);
-            renderPagination();
-            loadingEl.style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-
-        searchBtn.addEventListener('click', async () => {
-            searchText = searchInput.value;
-            currentPage = 0;
-            loadingEl.style.display = 'block';
-            const data = await fetchVacancies(0, searchText);
-            totalPages = data.pages || 0;
-            displayVacancies(data.items || []);
-            renderPagination();
-            loadingEl.style.display = 'none';
+    function renderVacancyCard(vacancy) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.addEventListener('click', () => {
+            window.location.href = `vacancy.html?id=${vacancy.id}`;
         });
 
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') searchBtn.click();
-        });
+        const title = document.createElement('h3');
+        title.textContent = vacancy.name || 'Без названия';
+        card.appendChild(title);
 
-        // Первоначальная загрузка
-        (async () => {
-            loadingEl.style.display = 'block';
-            const data = await fetchVacancies(0);
-            totalPages = data.pages || 0;
-            displayVacancies(data.items || []);
-            renderPagination();
-            loadingEl.style.display = 'none';
-        })();
-    </script>
+        const company = document.createElement('p');
+        company.className = 'company';
+        company.textContent = getEmployerName(vacancy.employer);
+        card.appendChild(company);
+
+        if (vacancy.salary) {
+            const salary = document.createElement('p');
+            salary.className = 'salary';
+            const from = vacancy.salary.from ? `от ${vacancy.salary.from}` : '';
+            const to = vacancy.salary.to ? `до ${vacancy.salary.to}` : '';
+            const currency = vacancy.salary.currency || '';
+            salary.textContent = [from, to, currency].filter(Boolean).join(' ') || 'З/П не указана';
+            card.appendChild(salary);
+        }
+
+        return card;
+    }
+
+    async function fetchVacancies(page = 0, text = '') {
+        const params = new URLSearchParams();
+        params.append('action', 'vacancies');
+        if (text.trim()) params.append('text', text.trim());
+        params.append('page', page);
+        params.append('per_page', PER_PAGE);
+
+        try {
+            const res = await fetch(`${API_URL}?${params.toString()}`);
+            if (!res.ok) throw new Error(`Ошибка ${res.status}`);
+            return await res.json();
+        } catch (e) {
+            console.error('Ошибка загрузки вакансий:', e);
+            return { items: [], pages: 0 };
+        }
+    }
+
+    function displayVacancies(vacancies) {
+        vacanciesList.innerHTML = '';
+        if (!vacancies || vacancies.length === 0) {
+            vacanciesList.innerHTML = '<p style="text-align:center; padding:40px;">Ничего не найдено.</p>';
+            return;
+        }
+        vacancies.forEach(v => {
+            vacanciesList.appendChild(renderVacancyCard(v));
+        });
+    }
+
+    function renderPagination() {
+        paginationContainer.innerHTML = '';
+        if (totalPages <= 1) return;
+
+        const maxButtons = 7;
+        const start = Math.max(0, currentPage - Math.floor(maxButtons / 2));
+        const end = Math.min(totalPages, start + maxButtons);
+
+        if (currentPage > 0) {
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '←';
+            prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+            paginationContainer.appendChild(prevBtn);
+        }
+
+        for (let i = start; i < end; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.textContent = i + 1;
+            if (i === currentPage) pageBtn.classList.add('active');
+            pageBtn.addEventListener('click', () => goToPage(i));
+            paginationContainer.appendChild(pageBtn);
+        }
+
+        if (currentPage < totalPages - 1) {
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = '→';
+            nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+            paginationContainer.appendChild(nextBtn);
+        }
+    }
+
+    async function goToPage(page) {
+        loadingEl.style.display = 'block';
+        currentPage = page;
+        const data = await fetchVacancies(page, searchText);
+        totalPages = data.pages || 0;
+        displayVacancies(data.items || []);
+        renderPagination();
+        loadingEl.style.display = 'none';
+        window.scrollTo(0, 0);
+    }
+
+    searchBtn.addEventListener('click', async () => {
+        searchText = searchInput.value;
+        currentPage = 0;
+        loadingEl.style.display = 'block';
+        const data = await fetchVacancies(0, searchText);
+        totalPages = data.pages || 0;
+        displayVacancies(data.items || []);
+        renderPagination();
+        loadingEl.style.display = 'none';
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchBtn.click();
+    });
+
+    // Первоначальная загрузка
+    (async () => {
+        loadingEl.style.display = 'block';
+        const data = await fetchVacancies(0);
+        totalPages = data.pages || 0;
+        displayVacancies(data.items || []);
+        renderPagination();
+        loadingEl.style.display = 'none';
+    })();
+</script>
 </body>
 </html>
