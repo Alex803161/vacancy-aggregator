@@ -3,5 +3,5 @@ Allow: /
 Disallow: /admin.html
 Disallow: /test.html
 
-Sitemap: https://vkansa.ru/sitemap.xml
-Host: vkansa.ru
+Sitemap: https://alex803161.github.io/vacancy-aggregator/sitemap.xml
+Host: alex803161.github.io
