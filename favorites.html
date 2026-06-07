@@ -427,5 +427,29 @@
 
     renderFavorites();
 </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
+      .then(registration => {
+        console.log('SW зарегистрирован:', registration.scope);
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              const toast = document.createElement('div');
+              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
+              toast.textContent = 'Доступна новая версия. Обновите страницу.';
+              toast.onclick = () => window.location.reload();
+              document.body.appendChild(toast);
+            }
+          };
+        };
+      })
+      .catch(err => console.log('Ошибка регистрации SW:', err));
+  });
+}
+</script>
 </body>
 </html>
