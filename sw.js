@@ -1,13 +1,20 @@
 // sw.js
-const CACHE_NAME = 'vakansa-v2';
+const CACHE_NAME = 'vakansa-v3';
 const STATIC_ASSETS = [
   '/vacancy-aggregator/',
   '/vacancy-aggregator/index.html',
   '/vacancy-aggregator/style.css',
+  '/vacancy-aggregator/common.js',
   '/vacancy-aggregator/manifest.json',
+  '/vacancy-aggregator/icons/icon.svg',
   '/vacancy-aggregator/vacancy.html',
   '/vacancy-aggregator/favorites.html',
   '/vacancy-aggregator/vacancies.html',
+  '/vacancy-aggregator/admin.html',
+  '/vacancy-aggregator/post-job.html',
+  '/vacancy-aggregator/privacy.html',
+  '/vacancy-aggregator/terms.html',
+  '/vacancy-aggregator/contacts.html',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2'
@@ -17,7 +24,9 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('Кеширование статических ресурсов');
-      return cache.addAll(STATIC_ASSETS);
+      return cache.addAll(STATIC_ASSETS).catch(err => {
+        console.warn('Не удалось закешировать все ресурсы', err);
+      });
     })
   );
   self.skipWaiting();
@@ -38,16 +47,20 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // API-запросы пропускаем без кеширования (или networkFirst)
   if (url.href.includes('api.hh.ru') || url.href.includes('functions.yandexcloud.net')) {
     event.respondWith(networkFirst(request));
     return;
   }
 
+  // Навигация (HTML-страницы) — всегда пытаемся загрузить свежую версию,
+  // при неудаче отдаём закешированную.
   if (request.mode === 'navigate' || (request.headers.get('accept') && request.headers.get('accept').includes('text/html'))) {
     event.respondWith(networkFirst(request));
     return;
   }
 
+  // Статические ресурсы (стили, скрипты, шрифты) — cacheFirst.
   if (
     request.destination === 'style' ||
     request.destination === 'script' ||
@@ -58,11 +71,13 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Изображения — staleWhileRevalidate.
   if (request.destination === 'image') {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
+  // Всё остальное — networkFirst.
   event.respondWith(networkFirst(request));
 });
 
