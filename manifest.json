@@ -1,8 +1,20 @@
-"icons": [
-  {
-    "src": "/vacancy-aggregator/icons/icon.svg",
-    "sizes": "512x512",
-    "type": "image/svg+xml",
-    "purpose": "any maskable"
-  }
-]
+{
+  "name": "ВКАНСА — поиск работы",
+  "short_name": "ВКАНСА",
+  "start_url": "/vacancy-aggregator/index.html",
+  "scope": "/vacancy-aggregator/",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#0047cc",
+  "description": "Агрегатор вакансий ВКАНСА — найдите работу своей мечты.",
+  "icons": [
+    {
+      "src": "/vacancy-aggregator/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["jobs", "search", "employment"],
+  "prefer_related_applications": false
+}
