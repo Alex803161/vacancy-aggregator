@@ -91,8 +91,8 @@ function toggleFavorite(vacancy) {
         favs.push({
             id: vacancy.id,
             name: vacancy.name,
-            employer: getEmployerName(vacancy.employer),
-            salary: formatSalary(vacancy.salary),
+            employer: getEmployerName(vacancy.employer),   // сохраняем строку
+            salary: vacancy.salary || null,                // сырой объект или null
             area: vacancy.area?.name || '',
             alternate_url: vacancy.alternate_url || '',
             source: vacancy.source || '',
@@ -112,7 +112,6 @@ function setupThemeToggle(buttonId) {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         btn.textContent = isDark ? '☀️' : '🌙';
     });
-    // Установить начальную иконку
     if (localStorage.getItem('theme') === 'dark') {
         btn.textContent = '☀️';
     } else {
