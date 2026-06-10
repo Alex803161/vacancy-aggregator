@@ -2,194 +2,225 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Сравнение вакансий — ВКанса">
-    <meta name="theme-color" content="#1a1a2e">
-    <title>Сравнение вакансий — ВКанса</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Сравнение вакансий — ВКАНСА</title>
+    <meta name="description" content="Сравните выбранные вакансии по зарплате, навыкам, городу и другим параметрам.">
+    <meta property="og:title" content="Сравнение вакансий — ВКАНСА">
+    <meta property="og:description" content="Сравните выбранные вакансии.">
+    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/compare.html">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="manifest" href="manifest.json">
-    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <style>
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        html.dark .compare-table {
+            background: #1e293b;
+        }
+        .compare-table th, .compare-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        html.dark .compare-table th, html.dark .compare-table td {
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+        .compare-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #334155;
+            white-space: nowrap;
+        }
+        html.dark .compare-table th {
+            background: #0f172a;
+            color: #94a3b8;
+        }
+        .compare-table td a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .compare-table td .salary {
+            color: #059669;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        html.dark .compare-table td .salary {
+            color: #34d399;
+        }
+        .remove-from-compare {
+            background: none;
+            border: 1px solid #cbd5e1;
+            color: #dc2626;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        html.dark .remove-from-compare {
+            border-color: #475569;
+            color: #f87171;
+        }
+        .clear-all-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+        .clear-all-btn:hover {
+            background: #b91c1c;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 768px) {
+            .compare-table {
+                font-size: 0.8rem;
+            }
+            .compare-table th, .compare-table td {
+                padding: 8px 6px;
+            }
+        }
+    </style>
 </head>
-<body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="/vacancy-aggregator/" class="logo">ВКанса</a>
-            <nav class="main-nav">
-                <a href="/vacancy-aggregator/">Поиск</a>
-                <a href="/vacancy-aggregator/vacancies.html">Все вакансии</a>
-                <a href="/vacancy-aggregator/favorites.html">Избранное</a>
-                <a href="/vacancy-aggregator/history.html">История</a>
-                <a href="/vacancy-aggregator/compare.html" class="active">Сравнение</a>
-            </nav>
-            <div class="header-actions">
-                <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему" title="Переключить тему">🌓</button>
-            </div>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+<div class="container">
+    <div class="header">
+        <div class="logo-container">
+            <span class="logo-heart"></span>
+            <span class="logo-text">Ваканса</span>
         </div>
-    </header>
+        <h1 class="page-title">Сравнение вакансий</h1>
+        <p>Работа найдётся — и не одна</p>
+    </div>
 
-    <main class="container compare-page">
-        <h1>Сравнение вакансий</h1>
-        <div id="compareContainer">
-            <div class="loading">Загрузка списка сравнения...</div>
-        </div>
-        <div class="compare-actions" style="display:none;">
-            <button id="clearCompare" class="btn btn-outline-danger">Очистить всё</button>
-        </div>
-    </main>
+    <div id="controls" style="text-align: right; margin-bottom: 12px;">
+        <button id="clearAllBtn" class="clear-all-btn" style="display:none;"><i class="fas fa-trash-alt"></i> Очистить всё</button>
+    </div>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2026 ВКанса. Данные с hh.ru</p>
-            <p><a href="privacy.html">Политика конфиденциальности</a> | <a href="terms.html">Условия</a> | <a href="contacts.html">Контакты</a></p>
-        </div>
-    </footer>
+    <div id="compareContent"></div>
+</div>
 
-    <button id="scrollToTop" class="scroll-to-top" title="Наверх">↑</button>
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="history.html">История просмотров</a>
+    </div>
+    <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
+</footer>
 
-    <script src="common.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('compareContainer');
-            const actionsDiv = document.querySelector('.compare-actions');
-            const clearBtn = document.getElementById('clearCompare');
+<button id="themeToggle" class="theme-switch">🌙</button>
 
-            function renderCompare() {
-                const list = getCompareList();
-                if (!list || list.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <p>🔍 Вы пока не добавили вакансии для сравнения.</p>
-                            <p>Нажмите «К сравнению» на карточках вакансий в поиске или избранном.</p>
-                        </div>`;
-                    if (actionsDiv) actionsDiv.style.display = 'none';
-                    return;
-                }
+<script src="common.js"></script>
+<script>
+    const compareContent = document.getElementById('compareContent');
+    const clearAllBtn = document.getElementById('clearAllBtn');
 
-                if (actionsDiv) actionsDiv.style.display = 'block';
+    function renderCompareList() {
+        const list = getCompareList();
+        if (list.length === 0) {
+            compareContent.innerHTML = '<p class="empty-message">Нет вакансий для сравнения. Добавьте их из поиска.</p>';
+            clearAllBtn.style.display = 'none';
+            return;
+        }
 
-                const fields = [
-                    { key: 'name', label: 'Название' },
-                    { key: 'employer', label: 'Компания' },
-                    { key: 'salary', label: 'Зарплата' },
-                    { key: 'area', label: 'Город' },
-                    { key: 'skills', label: 'Навыки' },
-                    { key: 'experience', label: 'Опыт' },
-                    { key: 'employment', label: 'Занятость' },
-                    { key: 'schedule', label: 'График' },
-                    { key: 'published_at', label: 'Дата публикации' }
-                ];
+        clearAllBtn.style.display = 'inline-flex';
 
-                let tableHTML = '<div class="table-responsive"><table class="compare-table">';
-                tableHTML += '<thead><tr><th>Параметр</th>';
-                list.forEach((vac, idx) => {
-                    tableHTML += `<th>${escapeHtml(vac.name || 'Вакансия ' + (idx+1))}
-                        <button class="remove-compare" data-index="${idx}" title="Удалить из сравнения">✕</button></th>`;
-                });
-                tableHTML += '</tr></thead><tbody>';
+        let html = `
+            <div style="overflow-x: auto;">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Компания</th>
+                            <th>Зарплата</th>
+                            <th>Город</th>
+                            <th>Навыки</th>
+                            <th>Опыт</th>
+                            <th>Занятость</th>
+                            <th>Опубликована</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
 
-                fields.forEach(field => {
-                    tableHTML += '<tr>';
-                    tableHTML += `<td class="field-label">${field.label}</td>`;
-                    list.forEach((vac, idx) => {
-                        let value = '';
-                        switch (field.key) {
-                            case 'name':
-                                value = `<a href="${vac.alternate_url || '#'}" target="_blank">${escapeHtml(vac.name)}</a>`;
-                                break;
-                            case 'employer':
-                                value = vac.employer ? escapeHtml(vac.employer.name) : '—';
-                                break;
-                            case 'salary':
-                                value = vac.salary ? formatSalary(vac.salary) : '—';
-                                break;
-                            case 'area':
-                                value = vac.area ? escapeHtml(vac.area.name) : '—';
-                                break;
-                            case 'skills':
-                                if (vac.key_skills && vac.key_skills.length) {
-                                    value = vac.key_skills.map(s => escapeHtml(s.name)).join(', ');
-                                } else {
-                                    value = '—';
-                                }
-                                break;
-                            case 'experience':
-                                value = vac.experience ? escapeHtml(vac.experience.name) : '—';
-                                break;
-                            case 'employment':
-                                value = vac.employment ? escapeHtml(vac.employment.name) : '—';
-                                break;
-                            case 'schedule':
-                                value = vac.schedule ? escapeHtml(vac.schedule.name) : '—';
-                                break;
-                            case 'published_at':
-                                value = vac.published_at ? formatDate(vac.published_at) : '—';
-                                break;
-                            default:
-                                value = '—';
-                        }
-                        tableHTML += `<td>${value}</td>`;
-                    });
-                    tableHTML += '</tr>';
-                });
-
-                tableHTML += '</tbody></table></div>';
-                container.innerHTML = tableHTML;
-
-                document.querySelectorAll('.remove-compare').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const index = parseInt(btn.dataset.index, 10);
-                        const currentList = getCompareList();
-                        if (index >= 0 && index < currentList.length) {
-                            toggleCompare(currentList[index]);
-                            renderCompare();
-                        }
-                    });
-                });
-            }
-
-            if (clearBtn) {
-                clearBtn.addEventListener('click', () => {
-                    if (confirm('Удалить все вакансии из сравнения?')) {
-                        saveCompareList([]);
-                        renderCompare();
-                    }
-                });
-            }
-
-            renderCompare();
-
-            window.addEventListener('storage', (e) => {
-                if (e.key === 'compareList') {
-                    renderCompare();
-                }
-            });
-
-            if (typeof getCompareList === 'undefined') {
-                container.innerHTML = '<div class="error">Ошибка загрузки общих функций. Попробуйте обновить страницу.</div>';
-            }
+        list.forEach(v => {
+            const salary = formatSalary(v.salary);
+            const skills = (v.key_skills || []).join(', ') || '—';
+            const date = v.published_at ? timeAgo(v.published_at) : '—';
+            html += `
+                <tr>
+                    <td><a href="vacancy.html?id=${v.id}">${escapeHtml(v.name) || 'Без названия'}</a></td>
+                    <td>${escapeHtml(v.employer) || '—'}</td>
+                    <td class="salary">${salary}</td>
+                    <td>${escapeHtml(v.area) || '—'}</td>
+                    <td>${escapeHtml(skills)}</td>
+                    <td>${escapeHtml(v.experience) || '—'}</td>
+                    <td>${escapeHtml(v.employment) || '—'}</td>
+                    <td>${date}</td>
+                    <td><button class="remove-from-compare" data-id="${v.id}"><i class="fas fa-times"></i> Удалить</button></td>
+                </tr>
+            `;
         });
 
-        function formatDate(dateStr) {
-            if (!dateStr) return '—';
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-        }
-        if (typeof formatSalary === 'undefined') {
-            window.formatSalary = function(salary) {
-                if (!salary) return '—';
-                let result = '';
-                if (salary.from) result += 'от ' + salary.from.toLocaleString();
-                if (salary.to) result += (result ? ' до ' : 'до ') + salary.to.toLocaleString();
-                if (salary.currency) result += ' ' + salary.currency;
-                return result || '—';
-            };
-        }
+        html += '</tbody></table></div>';
+        compareContent.innerHTML = html;
 
-        if ('serviceWorker' in navigator && typeof registerSW === 'function') {
-            registerSW();
-        }
-    </script>
+        // Обработчики на кнопки удаления
+        document.querySelectorAll('.remove-from-compare').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.target.closest('button').dataset.id;
+                const list = getCompareList();
+                const item = list.find(v => v.id == id);
+                if (item) {
+                    toggleCompare(item);
+                    renderCompareList();
+                }
+            });
+        });
+    }
+
+    clearAllBtn.addEventListener('click', () => {
+        localStorage.removeItem('compareList');
+        renderCompareList();
+    });
+
+    renderCompareList();
+
+    setupThemeToggle('themeToggle');
+    setupBackToTop('backToTopBtn');
+    registerSW('/vacancy-aggregator/');
+</script>
 </body>
 </html>
