@@ -8,19 +8,21 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <!-- Динамические SEO-теги -->
     <title id="seoTitle">Загрузка вакансии — ВКАНСА</title>
     <meta name="description" id="seoDescription" content="Подробная информация о вакансии. Актуальные предложения работы на сайте ВКАНСА.">
     <link rel="canonical" id="seoCanonical" href="">
     
+    <!-- Open Graph -->
     <meta property="og:title" id="ogTitle" content="Вакансия на ВКАНСА">
     <meta property="og:description" id="ogDescription" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
     <meta property="og:url" id="ogUrl" content="">
     <meta property="og:type" content="website">
     
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" id="jsonLd"></script>
     
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     
     <script>
         (function() {
@@ -251,9 +253,63 @@
 
 <button id="themeToggle" class="theme-switch">🌙</button>
 
-<script src="common.js"></script>
 <script>
-    const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
+
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const vacancyId = urlParams.get('id');
+
+    const detailContainer = document.getElementById('vacancyDetail');
+    const similarContainer = document.getElementById('similarContainer');
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error');
+
+    function getEmployerName(employer) {
+        if (!employer) return 'Компания не указана';
+        return typeof employer === 'object' ? employer.name : employer;
+    }
+
+    function formatSalary(salary) {
+        if (!salary) return 'Зарплата не указана';
+        let parts = [];
+        if (salary.from) parts.push(`от ${salary.from.toLocaleString()}`);
+        if (salary.to) parts.push(`до ${salary.to.toLocaleString()}`);
+        if (salary.currency) parts.push(salary.currency === 'RUR' ? '₽' : salary.currency);
+        return parts.join(' ') || 'Зарплата не указана';
+    }
+
+    function parseSalaryString(str) {
+        if (!str) return null;
+        const fromMatch = str.match(/от\s*([\d\s]+)/);
+        const toMatch = str.match(/до\s*([\d\s]+)/);
+        const currencyMatch = str.match(/[₽$€р]/);
+        let currency = '₽';
+        if (currencyMatch) {
+            if (currencyMatch[0] === 'р') currency = '₽';
+            else if (currencyMatch[0] === '$') currency = 'USD';
+            else if (currencyMatch[0] === '€') currency = 'EUR';
+            else currency = currencyMatch[0];
+        }
+        return {
+            from: fromMatch ? parseInt(fromMatch[1].replace(/\s/g, '')) : null,
+            to: toMatch ? parseInt(toMatch[1].replace(/\s/g, '')) : null,
+            currency: currency
+        };
+    }
 
     function mapDirectJobToVacancy(job) {
         return {
@@ -397,6 +453,35 @@
         btn.classList.toggle('active', isFav);
     }
 
+    function getFavorites() {
+        return JSON.parse(localStorage.getItem('favorites') || '[]');
+    }
+
+    function isFavorite(id) {
+        return getFavorites().some(v => v.id === id);
+    }
+
+    // ИЗМЕНЁННАЯ ФУНКЦИЯ ДЛЯ ЗАМЕТОК
+    function toggleFavorite(vacancy) {
+        let favs = getFavorites();
+        const index = favs.findIndex(v => v.id === vacancy.id);
+        if (index > -1) {
+            favs.splice(index, 1);
+        } else {
+            favs.push({
+                id: vacancy.id,
+                name: vacancy.name,
+                employer: getEmployerName(vacancy.employer),
+                salary: formatSalary(vacancy.salary),
+                area: vacancy.area?.name || '',
+                alternate_url: vacancy.alternate_url,
+                source: vacancy.source,
+                note: ''   // пустая заметка по умолчанию
+            });
+        }
+        localStorage.setItem('favorites', JSON.stringify(favs));
+    }
+
     async function loadVacancy(id) {
         loadingEl.style.display = 'block';
         errorEl.style.display = 'none';
@@ -464,14 +549,6 @@
         }
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const vacancyId = urlParams.get('id');
-
-    const detailContainer = document.getElementById('vacancyDetail');
-    const similarContainer = document.getElementById('similarContainer');
-    const loadingEl = document.getElementById('loading');
-    const errorEl = document.getElementById('error');
-
     if (vacancyId) {
         loadVacancy(vacancyId);
     } else {
@@ -479,10 +556,30 @@
         errorEl.textContent = 'Идентификатор вакансии не указан. Пожалуйста, выберите вакансию из списка.';
         errorEl.style.display = 'block';
     }
+</script>
 
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
-    registerSW('/vacancy-aggregator/');
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
+      .then(registration => {
+        console.log('SW зарегистрирован:', registration.scope);
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              const toast = document.createElement('div');
+              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
+              toast.textContent = 'Доступна новая версия. Обновите страницу.';
+              toast.onclick = () => window.location.reload();
+              document.body.appendChild(toast);
+            }
+          };
+        };
+      })
+      .catch(err => console.log('Ошибка регистрации SW:', err));
+  });
+}
 </script>
 </body>
 </html>
