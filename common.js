@@ -188,12 +188,6 @@ function registerSW(scope) {
 
 /* ========== Индекс совпадения ========== */
 
-/**
- * Рассчитывает процент совпадения вакансии с поисковым запросом.
- * @param {Object} vacancy - объект вакансии (сырые данные от API)
- * @param {String} query - поисковый запрос (строка)
- * @returns {Number} - значение от 0 до 100
- */
 function calculateMatchScore(vacancy, query) {
     if (!query || query.trim().length < 2) return 0;
     const keyword = query.trim().toLowerCase();
@@ -211,7 +205,8 @@ function calculateMatchScore(vacancy, query) {
     }
 
     // Описание (30%)
-    const descMatches = (desc.match(new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+    const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const descMatches = (desc.match(new RegExp(escapedKeyword, 'g')) || []).length;
     if (descMatches >= 3) score += 30;
     else if (descMatches >= 1) score += 15;
 
