@@ -75,15 +75,21 @@ function isFavorite(id) {
     return getFavorites().some(v => v.id === id);
 }
 
+/**
+ * Добавляет/удаляет вакансию из избранного, сохраняя заметки.
+ * @param {Object} vacancy – сырой объект вакансии (как от API или из localStorage)
+ */
 function toggleFavorite(vacancy) {
     let favs = getFavorites();
     const index = favs.findIndex(v => v.id === vacancy.id);
     if (index > -1) {
+        // Сохраняем заметку перед удалением
         const deletedNotes = getDeletedNotes();
         deletedNotes[vacancy.id] = favs[index].note || '';
         saveDeletedNotes(deletedNotes);
         favs.splice(index, 1);
     } else {
+        // Восстанавливаем заметку, если была
         const deletedNotes = getDeletedNotes();
         const restoredNote = deletedNotes[vacancy.id] || '';
         favs.push({
@@ -100,44 +106,7 @@ function toggleFavorite(vacancy) {
     saveFavorites(favs);
 }
 
-/* ========== Список сравнения ========== */
-
-function getCompareList() {
-    return JSON.parse(localStorage.getItem('compareList') || '[]');
-}
-
-function saveCompareList(list) {
-    localStorage.setItem('compareList', JSON.stringify(list));
-}
-
-function isInCompare(id) {
-    return getCompareList().some(v => v.id === id);
-}
-
-function toggleCompare(vacancy) {
-    let list = getCompareList();
-    const index = list.findIndex(v => v.id === vacancy.id);
-    if (index > -1) {
-        list.splice(index, 1);
-    } else {
-        list.push({
-            id: vacancy.id,
-            name: vacancy.name,
-            employer: typeof vacancy.employer === 'object' ? vacancy.employer?.name : vacancy.employer,
-            salary: vacancy.salary || null,
-            area: vacancy.area?.name || '',
-            schedule: vacancy.schedule?.name || vacancy.schedule || '',
-            employment: vacancy.employment?.name || vacancy.employment || '',
-            experience: vacancy.experience?.name || vacancy.experience || '',
-            key_skills: (vacancy.key_skills || []).map(s => typeof s === 'object' ? s.name : s),
-            published_at: vacancy.published_at || null,
-            alternate_url: vacancy.alternate_url || ''
-        });
-    }
-    saveCompareList(list);
-}
-
-/* ========== Тема (с автосинхронизацией) ========== */
+/* ========== Тема ========== */
 
 function applyTheme(mode) {
     if (mode === 'dark') {
@@ -174,6 +143,7 @@ function setupThemeToggle(buttonId) {
         btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
+    // Автосмена при изменении системной темы
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
         const saved = localStorage.getItem('theme');
@@ -220,54 +190,5 @@ function registerSW(scope) {
                 })
                 .catch(err => console.log('Ошибка регистрации SW:', err));
         });
-    }
-}
-
-/* ========== Индекс совпадения ========== */
-
-function calculateMatchScore(vacancy, query) {
-    if (!query || query.trim().length < 2) return 0;
-    const keyword = query.trim().toLowerCase();
-    const title = (vacancy.name || '').toLowerCase();
-    const desc = (vacancy.description || '').toLowerCase();
-    const keywords = keyword.split(/\s+/);
-
-    let score = 0;
-
-    // Название (50%)
-    if (title.includes(keyword)) score += 50;
-    else {
-        const matchedWords = keywords.filter(w => title.includes(w)).length;
-        if (matchedWords > 0) score += 25;
-    }
-
-    // Описание (30%)
-    const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const descMatches = (desc.match(new RegExp(escapedKeyword, 'g')) || []).length;
-    if (descMatches >= 3) score += 30;
-    else if (descMatches >= 1) score += 15;
-
-    // Бонус за зарплату (20%)
-    if (vacancy.salary && (vacancy.salary.from || vacancy.salary.to)) score += 10;
-    if (vacancy.salary && vacancy.salary.from > 150000) score += 10;
-
-    return Math.min(score, 100);
-}
-
-/* ========== Загрузка популярных вакансий (для рекомендаций) ========== */
-
-async function fetchPopularVacancies(apiUrl, count = 5) {
-    try {
-        const params = new URLSearchParams({
-            per_page: count,
-            order_by: 'publication_time'
-        });
-        const res = await fetch(`${apiUrl}?${params.toString()}`);
-        if (!res.ok) throw new Error('Failed to load recommendations');
-        const data = await res.json();
-        return data.items || [];
-    } catch (e) {
-        console.warn('Не удалось загрузить рекомендации', e);
-        return [];
     }
 }
