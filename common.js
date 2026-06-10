@@ -141,7 +141,6 @@ function setupThemeToggle(buttonId) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
         const saved = localStorage.getItem('theme');
-        // Автосмена только если не зафиксирована явно
         if (saved !== 'dark' && saved !== 'light') {
             applyTheme(e.matches ? 'dark' : 'light');
             btn.textContent = e.matches ? '☀️' : '🌙';
@@ -186,4 +185,35 @@ function registerSW(scope) {
                 .catch(err => console.log('Ошибка регистрации SW:', err));
         });
     }
+}
+
+/* ========== Индекс совпадения ========== */
+
+function calculateMatchScore(vacancy, query) {
+    if (!query || query.trim().length < 2) return 0;
+    const keyword = query.trim().toLowerCase();
+    const title = (vacancy.name || '').toLowerCase();
+    const desc = (vacancy.description || '').toLowerCase();
+    const keywords = keyword.split(/\s+/);
+
+    let score = 0;
+
+    // Название (50%)
+    if (title.includes(keyword)) score += 50;
+    else {
+        const matchedWords = keywords.filter(w => title.includes(w)).length;
+        if (matchedWords > 0) score += 25;
+    }
+
+    // Описание (30%)
+    const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const descMatches = (desc.match(new RegExp(escapedKeyword, 'g')) || []).length;
+    if (descMatches >= 3) score += 30;
+    else if (descMatches >= 1) score += 15;
+
+    // Бонус за зарплату (20%)
+    if (vacancy.salary && (vacancy.salary.from || vacancy.salary.to)) score += 10;
+    if (vacancy.salary && vacancy.salary.from > 150000) score += 10;
+
+    return Math.min(score, 100);
 }
