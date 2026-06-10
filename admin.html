@@ -44,14 +44,6 @@
         .card .salary { color: #059669; font-weight: 700; }
         html.dark .card .salary { color: #34d399; }
     </style>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y3LEHS2D4G');
-    </script>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -93,12 +85,8 @@
 
     function deleteJob(id) {
         let jobs = getDirectJobs();
-        const job = jobs.find(j => j.id === id);
         jobs = jobs.filter(j => j.id !== id);
         localStorage.setItem('direct_jobs', JSON.stringify(jobs));
-        if (job) {
-            sendGAEvent('delete_direct_job', { event_category: 'engagement', event_label: job.title });
-        }
         renderJobs();
     }
 
