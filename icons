@@ -5,8 +5,6 @@
       <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <!-- Фон (белый круг) -->
   <circle cx="256" cy="256" r="240" fill="#ffffff" />
-  <!-- Сердце -->
   <path d="M256 420 C140 340 72 268 72 190 C72 140 108 104 152 104 C182 104 210 126 226 154 L256 192 L286 154 C302 126 330 104 360 104 C404 104 440 140 440 190 C440 268 372 340 256 420Z" fill="url(#grad)" />
 </svg>
