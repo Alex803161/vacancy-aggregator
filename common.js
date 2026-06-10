@@ -271,3 +271,10 @@ async function fetchPopularVacancies(apiUrl, count = 5) {
         return [];
     }
 }
+
+/* ========== GA4 события ========== */
+window.sendGAEvent = function(eventName, params = {}) {
+    if (typeof gtag === 'function') {
+        gtag('event', eventName, params);
+    }
+};
