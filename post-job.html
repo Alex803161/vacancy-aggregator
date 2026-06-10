@@ -201,6 +201,7 @@
         <a href="terms.html">Пользовательское соглашение</a>
         <a href="contacts.html">Контакты</a>
         <a href="compare.html">Сравнение</a>
+        <a href="dashboard.html">Дашборд</a>
     </div>
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
@@ -215,7 +216,6 @@
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // Экранируем HTML-теги в текстовых полях для безопасности
         const job = {
             id: Date.now(),
             title: escapeHtml(document.getElementById('title').value.trim()),
@@ -242,7 +242,6 @@
         form.reset();
     });
 
-    // Вызов функций из common.js
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
     registerSW('/vacancy-aggregator/');
