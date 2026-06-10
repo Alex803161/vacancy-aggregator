@@ -8,18 +8,19 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Динамические SEO-теги -->
-    <title id="seoTitle">Загрузка вакансии — ВКАНСА</title>
-    <meta name="description" id="seoDescription" content="Подробная информация о вакансии. Актуальные предложения работы на сайте ВКАНСА.">
+    <!-- Статические SEO-теги (видны без JavaScript) -->
+    <title>Вакансия — ВКАНСА | Поиск работы</title>
+    <meta name="description" content="Подробная информация о вакансии на сайте ВКАНСА. Актуальные предложения работы от проверенных работодателей.">
     <link rel="canonical" id="seoCanonical" href="">
+    <meta name="robots" content="index, follow">
     
-    <!-- Open Graph -->
-    <meta property="og:title" id="ogTitle" content="Вакансия на ВКАНСА">
-    <meta property="og:description" id="ogDescription" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
+    <!-- Open Graph (статика) -->
+    <meta property="og:title" content="Вакансия на ВКАНСА">
+    <meta property="og:description" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
     <meta property="og:url" id="ogUrl" content="">
     <meta property="og:type" content="website">
     
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD Structured Data (заполнится динамически) -->
     <script type="application/ld+json" id="jsonLd"></script>
     
     <link rel="stylesheet" href="style.css">
@@ -231,7 +232,8 @@
             <span class="logo-heart"></span>
             <span class="logo-text">Ваканса</span>
         </div>
-        <h1 class="page-title" id="vacancyTitle">Загрузка вакансии...</h1>
+        <!-- Заголовок по умолчанию, позже JS обновит -->
+        <h1 class="page-title" id="vacancyTitle">Вакансия</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
 
@@ -242,6 +244,14 @@
         <div id="error" style="display:none;"></div>
     </main>
 </div>
+
+<!-- Резервный контент для поисковиков (без JavaScript) -->
+<noscript>
+    <div style="padding:20px; text-align:center;">
+        <h2>Вакансия на ВКАНСА</h2>
+        <p>Для просмотра подробной информации включите JavaScript или перейдите на <a href="index.html">главную страницу</a>.</p>
+    </div>
+</noscript>
 
 <footer class="site-footer">
     <div class="footer-links">
@@ -283,12 +293,10 @@
         const description = `Вакансия: ${vacancy.name} (${empName}). ${salaryText}. ${cityText}. Подробности, зарплата, требования — на ВКАНСА.`.substring(0, 160);
         const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + vacancy.id;
 
-        document.getElementById('seoTitle').textContent = title;
         document.title = title;
-        document.getElementById('seoDescription').setAttribute('content', description);
         document.getElementById('seoCanonical').setAttribute('href', canonicalUrl);
-        document.getElementById('ogTitle').setAttribute('content', title);
-        document.getElementById('ogDescription').setAttribute('content', description);
+        document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+        document.querySelector('meta[property="og:description"]').setAttribute('content', description);
         document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
         document.getElementById('vacancyTitle').textContent = vacancy.name;
 
