@@ -253,49 +253,9 @@
 
 <button id="themeToggle" class="theme-switch">🌙</button>
 
+<script src="common.js"></script>
 <script>
-    // ---------- Общие утилиты (в будущем вынесем в common.js) ----------
-    function escapeHtml(text) {
-        if (!text) return '';
-        return String(text)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;');
-    }
-
-    function getEmployerName(employer) {
-        if (!employer) return 'Компания не указана';
-        return typeof employer === 'object' ? escapeHtml(employer.name) : escapeHtml(employer);
-    }
-
-    function formatSalary(salary) {
-        if (!salary) return 'Зарплата не указана';
-        let parts = [];
-        if (salary.from) parts.push(`от ${salary.from.toLocaleString()}`);
-        if (salary.to) parts.push(`до ${salary.to.toLocaleString()}`);
-        if (salary.currency) parts.push(salary.currency === 'RUR' ? '₽' : salary.currency);
-        return parts.join(' ') || 'Зарплата не указана';
-    }
-
-    function parseSalaryString(str) {
-        if (!str) return null;
-        const fromMatch = str.match(/от\s*([\d\s]+)/);
-        const toMatch = str.match(/до\s*([\d\s]+)/);
-        const currencyMatch = str.match(/[₽$€р]/);
-        let currency = '₽';
-        if (currencyMatch) {
-            if (currencyMatch[0] === 'р') currency = '₽';
-            else if (currencyMatch[0] === '$') currency = 'USD';
-            else if (currencyMatch[0] === '€') currency = 'EUR';
-            else currency = currencyMatch[0];
-        }
-        return {
-            from: fromMatch ? parseInt(fromMatch[1].replace(/\s/g, '')) : null,
-            to: toMatch ? parseInt(toMatch[1].replace(/\s/g, '')) : null,
-            currency: currency
-        };
-    }
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 
     function mapDirectJobToVacancy(job) {
         return {
@@ -312,55 +272,6 @@
         };
     }
 
-    // ---------- Работа с избранным ----------
-    function getFavorites() {
-        return JSON.parse(localStorage.getItem('favorites') || '[]');
-    }
-
-    function saveFavorites(favs) {
-        localStorage.setItem('favorites', JSON.stringify(favs));
-    }
-
-    function getDeletedNotes() {
-        return JSON.parse(localStorage.getItem('deletedNotes') || '{}');
-    }
-
-    function saveDeletedNotes(notes) {
-        localStorage.setItem('deletedNotes', JSON.stringify(notes));
-    }
-
-    function isFavorite(id) {
-        return getFavorites().some(v => v.id === id);
-    }
-
-    function toggleFavorite(vacancy) {
-        let favs = getFavorites();
-        const index = favs.findIndex(v => v.id === vacancy.id);
-        if (index > -1) {
-            // Удаляем из избранного, но запоминаем заметку
-            const deletedNotes = getDeletedNotes();
-            deletedNotes[vacancy.id] = favs[index].note || '';
-            saveDeletedNotes(deletedNotes);
-            favs.splice(index, 1);
-        } else {
-            // Добавляем в избранное, восстанавливая заметку, если была
-            const deletedNotes = getDeletedNotes();
-            const restoredNote = deletedNotes[vacancy.id] || '';
-            favs.push({
-                id: vacancy.id,
-                name: vacancy.name,
-                employer: getEmployerName(vacancy.employer),
-                salary: formatSalary(vacancy.salary),
-                area: vacancy.area?.name || '',
-                alternate_url: vacancy.alternate_url,
-                source: vacancy.source,
-                note: restoredNote   // заметка из истории удалений или пустая
-            });
-        }
-        saveFavorites(favs);
-    }
-
-    // ---------- SEO и рендеринг ----------
     function updateSEOTags(vacancy, isDirect) {
         const empName = getEmployerName(vacancy.employer);
         const salaryText = formatSalary(vacancy.salary);
@@ -488,16 +399,13 @@
         btn.classList.toggle('active', isFav);
     }
 
-    // ---------- Загрузка данных ----------
-    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';  // используем единый URL, позже заменим на hh-vacancy-proxy-node
-
     async function loadVacancy(id) {
         loadingEl.style.display = 'block';
         errorEl.style.display = 'none';
         detailContainer.innerHTML = '';
 
         try {
-            const res = await fetch(`${API_URL}?id=${encodeURIComponent(id)}`);
+            const res = await fetch(`${API_URL}?action=vacancy&id=${encodeURIComponent(id)}`);
             if (res.ok) {
                 const vacancy = await res.json();
                 if (vacancy && !vacancy.errors && vacancy.id) {
@@ -558,21 +466,6 @@
         }
     }
 
-    // ---------- Инициализация ----------
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️' : '🌙';
-    });
-    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
-
-    const backToTopBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-    });
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
     const urlParams = new URLSearchParams(window.location.search);
     const vacancyId = urlParams.get('id');
 
@@ -589,28 +482,9 @@
         errorEl.style.display = 'block';
     }
 
-    // Регистрация Service Worker
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
-                .then(registration => {
-                    console.log('SW зарегистрирован:', registration.scope);
-                    registration.onupdatefound = () => {
-                        const installingWorker = registration.installing;
-                        installingWorker.onstatechange = () => {
-                            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                const toast = document.createElement('div');
-                                toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
-                                toast.textContent = 'Доступна новая версия. Обновите страницу.';
-                                toast.onclick = () => window.location.reload();
-                                document.body.appendChild(toast);
-                            }
-                        };
-                    };
-                })
-                .catch(err => console.log('Ошибка регистрации SW:', err));
-        });
-    }
+    setupThemeToggle('themeToggle');
+    setupBackToTop('backToTopBtn');
+    registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
