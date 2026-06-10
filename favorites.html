@@ -308,12 +308,30 @@
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
+    // ====== НОВЫЕ ФУНКЦИИ ДЛЯ ЗАМЕТОК ======
+    function getDeletedNotes() {
+        return JSON.parse(localStorage.getItem('deletedNotes') || '{}');
+    }
+
+    function saveDeletedNotes(notes) {
+        localStorage.setItem('deletedNotes', JSON.stringify(notes));
+    }
+
     function removeFavorite(id) {
         let favorites = getFavorites();
-        favorites = favorites.filter(v => v.id !== id);
-        saveFavorites(favorites);
-        renderFavorites();
+        const index = favorites.findIndex(v => v.id === id);
+        if (index > -1) {
+            // Сохраняем заметку перед удалением
+            const deletedNotes = getDeletedNotes();
+            deletedNotes[id] = favorites[index].note || '';
+            saveDeletedNotes(deletedNotes);
+            // Удаляем
+            favorites.splice(index, 1);
+            saveFavorites(favorites);
+            renderFavorites();
+        }
     }
+    // ====== КОНЕЦ НОВЫХ ФУНКЦИЙ ======
 
     function saveNote(id, note) {
         let favorites = getFavorites();
