@@ -107,34 +107,29 @@
         html.dark .stat-value.salary { color: #34d399; }
         .stat-value.skills { color: #1e40af; }
         html.dark .stat-value.skills { color: #93c5fd; }
-        /* Кнопка сравнения */
-        .compare-btn {
-            position: absolute;
-            top: 10px;
-            right: 88px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Кнопка сравнения в строке действий */
+        .btn-compare {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            color: #94a3b8;
-            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            padding: 0;
-            z-index: 5;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }
-        .compare-btn.in-compare {
+        .btn-compare.in-compare {
             background: #1e40af;
             color: white;
             border-color: #1e40af;
         }
-        html.dark .compare-btn { background: #1e293b; border-color: #475569; }
-        html.dark .compare-btn.in-compare { background: #3b82f6; border-color: #3b82f6; }
+        html.dark .btn-compare { background: #334155; border-color: #475569; color: #e2e8f0; }
+        html.dark .btn-compare.in-compare { background: #3b82f6; border-color: #3b82f6; }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -144,7 +139,6 @@
             .logo-text { font-size: 2.2rem; }
             .btn-share-round { width: 38px; height: 38px; font-size: 1rem; }
             .stats-block { gap: 12px; }
-            .compare-btn { right: 75px; }
         }
     </style>
 </head>
@@ -655,7 +649,7 @@
         const card=e.target.closest('.vacancy-card');if(!card)return;const id=card.dataset.id;
         if(e.target.closest('.save-btn')){toggleSaved(id,e.target.closest('.save-btn'));return}
         if(e.target.closest('.hide-btn')){hideVacancy(id);return}
-        if(e.target.closest('.compare-btn')){toggleCompareFromCard(id,e.target.closest('.compare-btn'));return}
+        if(e.target.closest('.btn-compare')){toggleCompareFromCard(id,e.target.closest('.btn-compare'));return}
         if(e.target.closest('.btn-respond')){goToVacancy(id);return}
         goToVacancy(id);
     });
@@ -994,7 +988,7 @@
                 else matchBadge = `<span class="match-badge match--low">${vac.score}%</span>`;
             }
 
-            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><button class="compare-btn ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
+            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
             vacanciesContainer.appendChild(card);
         });
     }
