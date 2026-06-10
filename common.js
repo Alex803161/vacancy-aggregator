@@ -253,3 +253,21 @@ function calculateMatchScore(vacancy, query) {
 
     return Math.min(score, 100);
 }
+
+/* ========== Загрузка популярных вакансий (для рекомендаций) ========== */
+
+async function fetchPopularVacancies(apiUrl, count = 5) {
+    try {
+        const params = new URLSearchParams({
+            per_page: count,
+            order_by: 'publication_time'
+        });
+        const res = await fetch(`${apiUrl}?${params.toString()}`);
+        if (!res.ok) throw new Error('Failed to load recommendations');
+        const data = await res.json();
+        return data.items || [];
+    } catch (e) {
+        console.warn('Не удалось загрузить рекомендации', e);
+        return [];
+    }
+}
