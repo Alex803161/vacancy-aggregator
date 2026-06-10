@@ -8,11 +8,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- SEO -->
     <title>Вакансии во всех городах — поиск работы на ВКАНСЕ</title>
     <meta name="description" content="Полный список актуальных вакансий по всем городам России. Найдите работу по городу, зарплате и типу занятости на ВКАНСЕ.">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="Все вакансии — ВКАНСА">
     <meta property="og:description" content="Полный список актуальных вакансий с возможностью фильтрации.">
     <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/vacancies.html">
@@ -81,22 +79,9 @@
 
 <button id="themeToggle" class="theme-switch">🌙</button>
 
+<script src="common.js"></script>
 <script>
     const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
-
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️' : '🌙';
-    });
-    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
-
-    const backToTopBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-    });
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     let currentPage = 0;
     let totalPages = 1;
@@ -109,46 +94,27 @@
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     const loadingIndicator = document.getElementById('loadingIndicator');
 
-    function formatSalary(salary) {
-        if (!salary) return '';
-        let parts = [];
-        if (salary.from) parts.push(`от ${salary.from.toLocaleString()}`);
-        if (salary.to) parts.push(`до ${salary.to.toLocaleString()}`);
-        if (salary.currency) parts.push(salary.currency === 'RUR' ? '₽' : salary.currency);
-        return parts.join(' ');
-    }
-
-    function timeAgo(dateStr) {
-        const now = new Date();
-        const date = new Date(dateStr);
-        const diff = Math.floor((now - date) / 1000);
-        if (diff < 3600) return `${Math.floor(diff / 60)} мин. назад`;
-        if (diff < 86400) return `${Math.floor(diff / 3600)} ч. назад`;
-        if (diff < 604800) return `${Math.floor(diff / 86400)} дн. назад`;
-        return date.toLocaleDateString('ru-RU');
-    }
-
     function createCard(v) {
-        const emp = typeof v.employer === 'object' ? v.employer?.name : v.employer;
+        const emp = getEmployerName(v.employer);
         const empLogo = v.employer?.logo_urls?.original || v.employer?.logo_urls?.['90'];
         const salary = formatSalary(v.salary);
         const area = v.area?.name || '';
-        const published = v.published_at ? timeAgo(v.published_at) : '';
+        const published = timeAgo(v.published_at);
 
         return `
             <div class="vacancy-card" onclick="window.location.href='vacancy.html?id=${v.id}'">
                 <div class="job-title">
-                    <span>${v.name || 'Без названия'}</span>
+                    <span>${escapeHtml(v.name) || 'Без названия'}</span>
                     ${published ? `<span class="date-badge">${published}</span>` : ''}
                 </div>
                 ${salary ? `<div class="salary">${salary}</div>` : ''}
                 <div class="company-block">
                     <div class="logo-placeholder">
-                        ${empLogo ? `<img src="${empLogo}" alt="${emp || ''}" loading="lazy">` : (emp || '?').charAt(0).toUpperCase()}
+                        ${empLogo ? `<img src="${empLogo}" alt="${escapeHtml(emp)}" loading="lazy">` : (emp || '?').charAt(0).toUpperCase()}
                     </div>
-                    <span class="company-name">${emp || 'Компания не указана'}</span>
+                    <span class="company-name">${escapeHtml(emp) || 'Компания не указана'}</span>
                 </div>
-                ${area ? `<div class="address">📍 ${area}</div>` : ''}
+                ${area ? `<div class="address">📍 ${escapeHtml(area)}</div>` : ''}
                 <div class="card-actions" onclick="event.stopPropagation();">
                     <a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a>
                 </div>
@@ -216,34 +182,19 @@
     });
 
     loadMoreBtn.addEventListener('click', () => {
-        loadVacancies(currentPage + 1, true);
+        if (isLoading) return;
+        loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Загрузка...';
+        loadVacancies(currentPage + 1, true).finally(() => {
+            loadMoreBtn.innerHTML = 'Загрузить ещё';
+        });
     });
 
     loadVacancies(0, false);
-</script>
 
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
-      .then(registration => {
-        console.log('SW зарегистрирован:', registration.scope);
-        registration.onupdatefound = () => {
-          const installingWorker = registration.installing;
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              const toast = document.createElement('div');
-              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
-              toast.textContent = 'Доступна новая версия. Обновите страницу.';
-              toast.onclick = () => window.location.reload();
-              document.body.appendChild(toast);
-            }
-          };
-        };
-      })
-      .catch(err => console.log('Ошибка регистрации SW:', err));
-  });
-}
+    // Вызов функций из common.js
+    setupThemeToggle('themeToggle');
+    setupBackToTop('backToTopBtn');
+    registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
