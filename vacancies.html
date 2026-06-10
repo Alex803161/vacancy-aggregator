@@ -8,11 +8,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- SEO -->
     <title>Вакансии во всех городах — поиск работы на ВКАНСЕ</title>
     <meta name="description" content="Полный список актуальных вакансий по всем городам России. Найдите работу по городу, зарплате и типу занятости на ВКАНСЕ.">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="Все вакансии — ВКАНСА">
     <meta property="og:description" content="Полный список актуальных вакансий с возможностью фильтрации.">
     <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/vacancies.html">
@@ -83,7 +81,7 @@
 
 <script src="common.js"></script>
 <script>
-    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';  // единый прокси
+    const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 
     let currentPage = 0;
     let totalPages = 1;
@@ -132,6 +130,7 @@
 
         const query = searchInput.value.trim();
         const params = new URLSearchParams({
+            action: 'vacancies',
             text: query,
             per_page: 20,
             page: page,
@@ -190,10 +189,8 @@
         });
     });
 
-    // Стартовая загрузка
     loadVacancies(0, false);
 
-    // Вызов функций из common.js
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
     registerSW('/vacancy-aggregator/');
