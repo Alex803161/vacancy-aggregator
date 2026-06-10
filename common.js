@@ -118,33 +118,28 @@ function setupThemeToggle(buttonId) {
     const btn = document.getElementById(buttonId);
     if (!btn) return;
 
-    // Определяем начальную тему
     const savedTheme = localStorage.getItem('theme');
     let currentTheme;
     if (savedTheme === 'dark' || savedTheme === 'light') {
         currentTheme = savedTheme;
     } else {
-        // Если нет сохранённой или 'auto', следуем системе
         currentTheme = getSystemTheme();
-        localStorage.setItem('theme', 'auto'); // помечаем, что явный выбор не сделан
+        localStorage.setItem('theme', 'auto');
     }
     applyTheme(currentTheme);
     btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 
-    // Обработчик клика: переключение с запоминанием
     btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.contains('dark');
         const newTheme = isDark ? 'light' : 'dark';
         applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme); // фиксируем явный выбор
+        localStorage.setItem('theme', newTheme);
         btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
-    // Слушатель изменения системной темы
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
         const saved = localStorage.getItem('theme');
-        // Автосмена только если не зафиксирована явно
         if (saved !== 'dark' && saved !== 'light') {
             applyTheme(e.matches ? 'dark' : 'light');
             btn.textContent = e.matches ? '☀️' : '🌙';
@@ -189,4 +184,40 @@ function registerSW(scope) {
                 .catch(err => console.log('Ошибка регистрации SW:', err));
         });
     }
+}
+
+/* ========== Индекс совпадения ========== */
+
+/**
+ * Рассчитывает процент совпадения вакансии с поисковым запросом.
+ * @param {Object} vacancy - объект вакансии (сырые данные от API)
+ * @param {String} query - поисковый запрос (строка)
+ * @returns {Number} - значение от 0 до 100
+ */
+function calculateMatchScore(vacancy, query) {
+    if (!query || query.trim().length < 2) return 0;
+    const keyword = query.trim().toLowerCase();
+    const title = (vacancy.name || '').toLowerCase();
+    const desc = (vacancy.description || '').toLowerCase();
+    const keywords = keyword.split(/\s+/);
+
+    let score = 0;
+
+    // Название (50%)
+    if (title.includes(keyword)) score += 50;
+    else {
+        const matchedWords = keywords.filter(w => title.includes(w)).length;
+        if (matchedWords > 0) score += 25;
+    }
+
+    // Описание (30%)
+    const descMatches = (desc.match(new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+    if (descMatches >= 3) score += 30;
+    else if (descMatches >= 1) score += 15;
+
+    // Бонус за зарплату (20%)
+    if (vacancy.salary && (vacancy.salary.from || vacancy.salary.to)) score += 10;
+    if (vacancy.salary && vacancy.salary.from > 150000) score += 10;
+
+    return Math.min(score, 100);
 }
