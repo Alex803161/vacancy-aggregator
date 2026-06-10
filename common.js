@@ -100,6 +100,43 @@ function toggleFavorite(vacancy) {
     saveFavorites(favs);
 }
 
+/* ========== Список сравнения ========== */
+
+function getCompareList() {
+    return JSON.parse(localStorage.getItem('compareList') || '[]');
+}
+
+function saveCompareList(list) {
+    localStorage.setItem('compareList', JSON.stringify(list));
+}
+
+function isInCompare(id) {
+    return getCompareList().some(v => v.id === id);
+}
+
+function toggleCompare(vacancy) {
+    let list = getCompareList();
+    const index = list.findIndex(v => v.id === vacancy.id);
+    if (index > -1) {
+        list.splice(index, 1);
+    } else {
+        list.push({
+            id: vacancy.id,
+            name: vacancy.name,
+            employer: typeof vacancy.employer === 'object' ? vacancy.employer?.name : vacancy.employer,
+            salary: vacancy.salary || null,
+            area: vacancy.area?.name || '',
+            schedule: vacancy.schedule?.name || vacancy.schedule || '',
+            employment: vacancy.employment?.name || vacancy.employment || '',
+            experience: vacancy.experience?.name || vacancy.experience || '',
+            key_skills: (vacancy.key_skills || []).map(s => typeof s === 'object' ? s.name : s),
+            published_at: vacancy.published_at || null,
+            alternate_url: vacancy.alternate_url || ''
+        });
+    }
+    saveCompareList(list);
+}
+
 /* ========== Тема (с автосинхронизацией) ========== */
 
 function applyTheme(mode) {
