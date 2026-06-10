@@ -1,20 +1,13 @@
 // sw.js
-const CACHE_NAME = 'vakansa-v3';
+const CACHE_NAME = 'vakansa-v2';
 const STATIC_ASSETS = [
   '/vacancy-aggregator/',
   '/vacancy-aggregator/index.html',
   '/vacancy-aggregator/style.css',
-  '/vacancy-aggregator/common.js',
   '/vacancy-aggregator/manifest.json',
-  '/vacancy-aggregator/icons/icon.svg',
   '/vacancy-aggregator/vacancy.html',
   '/vacancy-aggregator/favorites.html',
   '/vacancy-aggregator/vacancies.html',
-  '/vacancy-aggregator/admin.html',
-  '/vacancy-aggregator/post-job.html',
-  '/vacancy-aggregator/privacy.html',
-  '/vacancy-aggregator/terms.html',
-  '/vacancy-aggregator/contacts.html',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2'
@@ -24,9 +17,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('Кеширование статических ресурсов');
-      return cache.addAll(STATIC_ASSETS).catch(err => {
-        console.warn('Не удалось закешировать все ресурсы', err);
-      });
+      return cache.addAll(STATIC_ASSETS);
     })
   );
   self.skipWaiting();
