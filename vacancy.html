@@ -439,7 +439,7 @@
 
     async function loadSimilar(title, currentId) {
         try {
-            const res = await fetch(`${API_URL}?text=${encodeURIComponent(title.split(' ')[0])}&per_page=5`);
+            const res = await fetch(`${API_URL}?action=vacancies&text=${encodeURIComponent(title.split(' ')[0])}&per_page=5`);
             const data = await res.json();
             const items = data.items || [];
             const filtered = items.filter(v => v.id != currentId).slice(0, 4);
