@@ -67,6 +67,46 @@
         html.dark .match--high { background: #14532d; color: #bbf7d0; }
         html.dark .match--medium { background: #713f12; color: #fde047; }
         html.dark .match--low { background: #1e293b; color: #94a3b8; }
+        /* Статистика поиска */
+        .stats-block {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        html.dark .stats-block {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .stat-label {
+            color: #64748b;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        html.dark .stat-label { color: #94a3b8; }
+        .stat-value {
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        html.dark .stat-value { color: #f1f5f9; }
+        .stat-value.salary { color: #059669; }
+        html.dark .stat-value.salary { color: #34d399; }
+        .stat-value.skills { color: #1e40af; }
+        html.dark .stat-value.skills { color: #93c5fd; }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -75,6 +115,7 @@
             .toast-notification { font-size: 0.85rem; padding: 10px 20px; }
             .logo-text { font-size: 2.2rem; }
             .btn-share-round { width: 38px; height: 38px; font-size: 1rem; }
+            .stats-block { gap: 12px; }
         }
     </style>
 </head>
@@ -128,6 +169,8 @@
         <div class="history-badges" id="historyContainer"><button id="clearHistoryBtn" class="clear-history">Очистить историю</button></div>
     </div>
     <div class="results-header"><div class="counter" id="counterDisplay">Найдено: <span>0</span></div><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button></div>
+    <!-- Статистика поиска -->
+    <div id="statsContainer" style="display:none;"></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
     <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
     <div id="scrollSentinel" style="height: 1px;"></div>
@@ -180,7 +223,6 @@
 
 <script src="common.js"></script>
 <script>
-    // Раздельные URL для поиска и подписки
     const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';   // Node (поиск, вакансии, города)
     const SUBSCRIBE_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8'; // Python (подписка)
 
@@ -290,7 +332,6 @@
             const whatsappLink = `https://wa.me/?text=${shareText}`;
             const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
 
-            // Плашка совпадения
             let matchBadge = '';
             if (currentSearchQuery && vac.score > 0) {
                 if (vac.score >= 85) matchBadge = `<span class="match-badge match--high">${vac.score}%</span>`;
@@ -340,6 +381,102 @@
         btn.classList.toggle('saved', isFav);
     }
 
+    // ---------- Статистика поиска ----------
+    function computeStats(vacancies) {
+        const stats = {
+            medianFrom: 0,
+            medianTo: 0,
+            salaryCount: 0,
+            topSkills: [],
+            topCities: [],
+            recentCount: 0
+        };
+
+        if (!vacancies.length) return stats;
+
+        // Зарплаты
+        const salariesFrom = [], salariesTo = [];
+        vacancies.forEach(v => {
+            if (v.salary && v.salary.from) salariesFrom.push(v.salary.from);
+            if (v.salary && v.salary.to) salariesTo.push(v.salary.to);
+        });
+        if (salariesFrom.length) {
+            salariesFrom.sort((a,b) => a-b);
+            const mid = Math.floor(salariesFrom.length / 2);
+            stats.medianFrom = salariesFrom.length % 2 ? salariesFrom[mid] : Math.round((salariesFrom[mid-1] + salariesFrom[mid]) / 2);
+        }
+        if (salariesTo.length) {
+            salariesTo.sort((a,b) => a-b);
+            const mid = Math.floor(salariesTo.length / 2);
+            stats.medianTo = salariesTo.length % 2 ? salariesTo[mid] : Math.round((salariesTo[mid-1] + salariesTo[mid]) / 2);
+        }
+        stats.salaryCount = salariesFrom.length + salariesTo.length > 0 ? Math.max(salariesFrom.length, salariesTo.length) : 0;
+
+        // Навыки
+        const skillFreq = new Map();
+        vacancies.forEach(v => {
+            (v.key_skills || []).forEach(s => {
+                const name = typeof s === 'object' ? s.name : s;
+                if (name) skillFreq.set(name, (skillFreq.get(name) || 0) + 1);
+            });
+        });
+        stats.topSkills = [...skillFreq.entries()]
+            .sort((a,b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([name, count]) => name);
+
+        // Города
+        const cityFreq = new Map();
+        vacancies.forEach(v => {
+            const city = v.area?.name || '';
+            if (city) cityFreq.set(city, (cityFreq.get(city) || 0) + 1);
+        });
+        stats.topCities = [...cityFreq.entries()]
+            .sort((a,b) => b[1] - a[1])
+            .slice(0, 3)
+            .map(([name, count]) => name);
+
+        // Вакансии за последние 7 дней
+        const now = new Date();
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        stats.recentCount = vacancies.filter(v => {
+            if (!v.published_at) return false;
+            return new Date(v.published_at) >= weekAgo;
+        }).length;
+
+        return stats;
+    }
+
+    function renderStats(stats) {
+        const container = document.getElementById('statsContainer');
+        if (!stats.medianFrom && !stats.medianTo && !stats.topSkills.length) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'block';
+        container.innerHTML = `
+            <div class="stats-block">
+                <div class="stat-item">
+                    <span class="stat-label">Медианная зарплата</span>
+                    <span class="stat-value salary">${stats.medianFrom ? 'от ' + stats.medianFrom.toLocaleString() : ''}${stats.medianTo ? ' до ' + stats.medianTo.toLocaleString() : ''} ₽</span>
+                    <span style="font-size:0.7rem;color:#94a3b8;">на основе ${stats.salaryCount} вакансий</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Топ навыков</span>
+                    <span class="stat-value skills">${stats.topSkills.join(', ') || '—'}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Популярные города</span>
+                    <span class="stat-value">${stats.topCities.join(', ') || '—'}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">За последнюю неделю</span>
+                    <span class="stat-value">${stats.recentCount} вакансий</span>
+                </div>
+            </div>
+        `;
+    }
+
     // ---------- Фильтрация и сортировка ----------
     function applyFilters(){
         let filtered = [...allVacancies];
@@ -379,6 +516,9 @@
         vacanciesContainer.innerHTML = '';
         displayedCount = 0;
         counterSpan.textContent = filtered.length;
+
+        // Статистика
+        renderStats(computeStats(filtered));
 
         if (filtered.length === 0) {
             vacanciesContainer.innerHTML = `
@@ -781,7 +921,7 @@
         goToVacancy(id);
     });
 
-    // Подписка теперь использует SUBSCRIBE_URL (Python-функция)
+    // Подписка
     subscribeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = subscribeEmailInput.value.trim();
