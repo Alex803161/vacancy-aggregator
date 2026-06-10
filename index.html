@@ -149,6 +149,22 @@
         }
         .compare-header-btn:hover { background: #0047cc; color: white; border-color: #0047cc; }
         html.dark .compare-header-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
+        /* Рекомендации */
+        .recommendations-block {
+            margin-bottom: 24px;
+        }
+        .recommendations-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+        html.dark .recommendations-title { color: #f1f5f9; }
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -171,6 +187,12 @@
         </div>
         <h1 class="page-title">Поиск работы — свежие вакансии</h1>
         <p>Работа найдётся — и не одна</p>
+    </div>
+
+    <!-- Блок рекомендаций -->
+    <div id="recommendationsBlock" class="recommendations-block" style="display:none;">
+        <div class="recommendations-title"><i class="fas fa-star" style="color: #f59e0b;"></i> Рекомендованные вакансии</div>
+        <div id="recommendationsContainer" class="recommendations-grid"></div>
     </div>
 
     <div class="search-section">
@@ -365,6 +387,9 @@
 
     const compareLinkBtn = document.getElementById('compareLinkBtn');
     const compareCountSpan = document.getElementById('compareCount');
+
+    const recommendationsBlock = document.getElementById('recommendationsBlock');
+    const recommendationsContainer = document.getElementById('recommendationsContainer');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -691,6 +716,18 @@
         goToVacancy(id);
     });
 
+    // Обработчик для карточек рекомендаций
+    recommendationsContainer.addEventListener('click', e => {
+        const card = e.target.closest('.vacancy-card');
+        if (!card) return;
+        const id = card.dataset.id;
+        if (e.target.closest('.save-btn')) { toggleSaved(id, e.target.closest('.save-btn')); return; }
+        if (e.target.closest('.hide-btn')) { hideVacancy(id); return; }
+        if (e.target.closest('.btn-compare')) { toggleCompareFromCard(id, e.target.closest('.btn-compare')); return; }
+        if (e.target.closest('.btn-respond')) { goToVacancy(id); return; }
+        goToVacancy(id);
+    });
+
     subscribeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = subscribeEmailInput.value.trim();
@@ -728,7 +765,11 @@
 
     async function performSearch(reset=true, recordHistory=true){
         searchInput.blur();
-        if(reset){allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none'}
+        if(reset){
+            allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none';
+            // Скрываем рекомендации
+            recommendationsBlock.style.display = 'none';
+        }
         currentSearchQuery = searchInput.value.trim();
         if(recordHistory)addToHistory(currentSearchQuery);
         if(reset){vacanciesContainer.innerHTML='<div class="vacancy-card" style="height:100px; background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size:200% 100%; animation: shimmer 1.2s infinite;"></div>'.repeat(8);counterSpan.textContent='0'}
@@ -1001,7 +1042,7 @@
         };
     }
 
-    function renderVacancies(vacancies){
+    function renderVacancies(vacancies, container = vacanciesContainer){
         vacancies.forEach(v=>{
             const vac=enrich(v),isSaved=favorites.some(fav=>fav.id===vac.id),inCompare=isInCompare(vac.id),card=document.createElement('div');
             card.className='vacancy-card';card.dataset.id=vac.id;
@@ -1026,8 +1067,48 @@
             }
 
             card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
-            vacanciesContainer.appendChild(card);
+            container.appendChild(card);
         });
+    }
+
+    // ====== РЕКОМЕНДАЦИИ ======
+    async function loadRecommendations() {
+        let recVacancies = [];
+
+        // Сначала пробуем взять из избранного
+        const favs = getFavorites();
+        if (favs.length > 0) {
+            recVacancies = favs.slice(0, 5).map(f => ({
+                id: f.id,
+                name: f.name,
+                employer: { name: f.employer },
+                salary: f.salary,
+                area: { name: f.area },
+                alternate_url: f.alternate_url
+            }));
+        } else {
+            // Затем из недавних
+            const recent = JSON.parse(localStorage.getItem('recentVacancies') || '[]');
+            if (recent.length > 0) {
+                recVacancies = recent.slice(0, 5).map(r => ({
+                    id: r.id,
+                    name: r.name,
+                    employer: { name: r.employer },
+                    salary: parseSalaryString(r.salary),
+                    area: { name: r.area },
+                    alternate_url: ''
+                }));
+            } else {
+                // Загружаем популярные с API
+                recVacancies = await fetchPopularVacancies(API_URL, 6);
+            }
+        }
+
+        if (recVacancies.length > 0) {
+            recommendationsContainer.innerHTML = '';
+            recommendationsBlock.style.display = 'block';
+            renderVacancies(recVacancies, recommendationsContainer);
+        }
     }
 
     window.goToVacancy=function(id){
@@ -1090,7 +1171,7 @@
     renderRecentVacancies();
     renderSavedSearches();
     updateCompareCount();
-    performSearch(true);
+    loadRecommendations(); // показываем рекомендации при загрузке
 
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
