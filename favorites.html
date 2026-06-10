@@ -255,6 +255,7 @@
         <a href="privacy.html">Политика конфиденциальности</a>
         <a href="terms.html">Пользовательское соглашение</a>
         <a href="contacts.html">Контакты</a>
+        <a href="compare.html">Сравнение</a>
     </div>
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
@@ -272,7 +273,6 @@
     const copyNotification = document.getElementById('copyNotification');
     let currentSort = 'date';
 
-    // Локальная функция сохранения заметки
     function saveNote(id, note) {
         let favorites = getFavorites();
         const index = favorites.findIndex(v => v.id === id);
@@ -282,7 +282,6 @@
         }
     }
 
-    // Удаление с сохранением заметки
     function removeFavorite(id) {
         let favorites = getFavorites();
         const index = favorites.findIndex(v => v.id === id);
