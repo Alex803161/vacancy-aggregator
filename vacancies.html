@@ -37,6 +37,28 @@
             }
         })();
     </script>
+    <style>
+        .match-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 22px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .match--high { background: #dcfce7; color: #166534; }
+        .match--medium { background: #fef9c3; color: #854d0e; }
+        .match--low { background: #f1f5f9; color: #475569; }
+        html.dark .match--high { background: #14532d; color: #bbf7d0; }
+        html.dark .match--medium { background: #713f12; color: #fde047; }
+        html.dark .match--low { background: #1e293b; color: #94a3b8; }
+        .sort-btns { display: flex; gap: 8px; margin-top: 10px; }
+    </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -55,6 +77,11 @@
         <div class="search-row">
             <input type="text" id="searchInput" class="search-input" placeholder="Должность или ключевое слово">
             <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Найти</button>
+        </div>
+        <div class="sort-btns">
+            <button id="sortByDateV" class="sort-btn active"><i class="fas fa-clock"></i> По дате</button>
+            <button id="sortBySalaryV" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button>
+            <button id="sortByMatchV" class="sort-btn"><i class="fas fa-bullseye"></i> По совпадению</button>
         </div>
     </div>
 
@@ -87,6 +114,8 @@
     let currentPage = 0;
     let totalPages = 1;
     let isLoading = false;
+    let currentSort = 'publication_time';
+    let currentSearchQuery = '';
 
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
@@ -94,6 +123,26 @@
     const vacanciesContainer = document.getElementById('vacanciesContainer');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     const loadingIndicator = document.getElementById('loadingIndicator');
+    const sortByDateV = document.getElementById('sortByDateV');
+    const sortBySalaryV = document.getElementById('sortBySalaryV');
+    const sortByMatchV = document.getElementById('sortByMatchV');
+
+    function setActiveSortButton(sort) {
+        [sortByDateV, sortBySalaryV, sortByMatchV].forEach(b => b.classList.remove('active'));
+        if (sort === 'publication_time') sortByDateV.classList.add('active');
+        else if (sort === 'salary_desc') sortBySalaryV.classList.add('active');
+        else if (sort === 'match_score') sortByMatchV.classList.add('active');
+    }
+
+    function sortVacancies(items) {
+        if (currentSort === 'match_score') {
+            items.sort((a, b) => (b._score || 0) - (a._score || 0));
+        } else if (currentSort === 'salary_desc') {
+            items.sort((a, b) => (b.salary?.from || 0) - (a.salary?.from || 0));
+        } else {
+            items.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+        }
+    }
 
     function createCard(v) {
         const emp = getEmployerName(v.employer);
@@ -101,11 +150,18 @@
         const salary = formatSalary(v.salary);
         const area = v.area?.name || '';
         const published = timeAgo(v.published_at);
+        const score = calculateMatchScore(v, currentSearchQuery);
+        let matchBadge = '';
+        if (currentSearchQuery && score > 0) {
+            if (score >= 85) matchBadge = `<span class="match-badge match--high">${score}%</span>`;
+            else if (score >= 60) matchBadge = `<span class="match-badge match--medium">${score}%</span>`;
+            else matchBadge = `<span class="match-badge match--low">${score}%</span>`;
+        }
 
         return `
             <div class="vacancy-card" onclick="window.location.href='vacancy.html?id=${v.id}'">
                 <div class="job-title">
-                    <span>${escapeHtml(v.name) || 'Без названия'}</span>
+                    <span>${escapeHtml(v.name) || 'Без названия'}</span>${matchBadge}
                     ${published ? `<span class="date-badge">${published}</span>` : ''}
                 </div>
                 ${salary ? `<div class="salary">${salary}</div>` : ''}
@@ -130,6 +186,8 @@
         loadMoreBtn.style.display = 'none';
 
         const query = searchInput.value.trim();
+        currentSearchQuery = query;
+
         const params = new URLSearchParams({
             action: 'vacancies',
             text: query,
@@ -142,6 +200,10 @@
             const res = await fetch(`${API_URL}?${params.toString()}`);
             const data = await res.json();
             const items = data.items || [];
+
+            // Вычисляем score и сохраняем для сортировки
+            items.forEach(v => { v._score = calculateMatchScore(v, query); });
+            sortVacancies(items);
 
             if (!append) {
                 vacanciesContainer.innerHTML = '';
@@ -188,6 +250,22 @@
         loadVacancies(currentPage + 1, true).finally(() => {
             loadMoreBtn.innerHTML = 'Загрузить ещё';
         });
+    });
+
+    sortByDateV.addEventListener('click', () => {
+        currentSort = 'publication_time';
+        setActiveSortButton(currentSort);
+        loadVacancies(0, false);
+    });
+    sortBySalaryV.addEventListener('click', () => {
+        currentSort = 'salary_desc';
+        setActiveSortButton(currentSort);
+        loadVacancies(0, false);
+    });
+    sortByMatchV.addEventListener('click', () => {
+        currentSort = 'match_score';
+        setActiveSortButton(currentSort);
+        loadVacancies(0, false);
     });
 
     loadVacancies(0, false);
