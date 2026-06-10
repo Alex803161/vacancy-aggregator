@@ -47,20 +47,16 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // API-запросы пропускаем без кеширования (или networkFirst)
   if (url.href.includes('api.hh.ru') || url.href.includes('functions.yandexcloud.net')) {
     event.respondWith(networkFirst(request));
     return;
   }
 
-  // Навигация (HTML-страницы) — всегда пытаемся загрузить свежую версию,
-  // при неудаче отдаём закешированную.
   if (request.mode === 'navigate' || (request.headers.get('accept') && request.headers.get('accept').includes('text/html'))) {
     event.respondWith(networkFirst(request));
     return;
   }
 
-  // Статические ресурсы (стили, скрипты, шрифты) — cacheFirst.
   if (
     request.destination === 'style' ||
     request.destination === 'script' ||
@@ -71,13 +67,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Изображения — staleWhileRevalidate.
   if (request.destination === 'image') {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
-  // Всё остальное — networkFirst.
   event.respondWith(networkFirst(request));
 });
 
