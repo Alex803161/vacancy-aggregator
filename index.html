@@ -232,11 +232,6 @@
             <h3 class="subscribe-title">Подпишитесь на вакансии</h3>
             <p class="subscribe-desc">Получайте лучшие предложения прямо на почту. Без спама, только то, что вам интересно.</p>
             <form id="subscribeForm" class="subscribe-form">
-                <!-- Honeypot: невидимое поле для ботов -->
-                <div style="position:absolute; left:-9999px;" aria-hidden="true">
-                    <input type="text" name="honeypot" id="honeypot" tabindex="-1" autocomplete="off">
-                </div>
-                <input type="hidden" id="formTimestamp" value="">
                 <input type="email" id="subscribeEmailInput" class="subscribe-input" placeholder="Введите ваш email" required autocomplete="email">
                 <button type="submit" class="subscribe-btn" id="subscribeSubmitBtn">
                     <span>Подписаться</span> <i class="fas fa-paper-plane"></i>
@@ -351,9 +346,9 @@
 
         let contactButton = '';
         if (vac.phone) {
-            contactButton = `<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation(); sendGAEvent('contact_click', { event_category: 'engagement', event_label: 'phone_${vac.id}' });"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
+            contactButton = `<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
         } else if (vac.email) {
-            contactButton = `<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation(); sendGAEvent('contact_click', { event_category: 'engagement', event_label: 'email_${vac.id}' });"><i class="fas fa-envelope"></i> Написать</a>`;
+            contactButton = `<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`;
         }
 
         const logoSrc = vac.logoUrl ? `<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">` : vac.logoLetter;
@@ -704,7 +699,7 @@
             }
             applyFilters();
             updateSavedSearchCounts(currentSearchQuery, currentArea, filterEmployment.value, filterRemote.checked, found);
-            sendGAEvent("search", { search_term: currentSearchQuery });
+            if (typeof gtag === 'function') gtag('event', 'search', { search_term: currentSearchQuery });
             if (window.innerWidth <= 768) {
                 setTimeout(() => vacanciesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
             }
@@ -740,7 +735,6 @@
         toggleFavorite(vac);
         const isFav = isFavorite(id);
         btn.classList.toggle('saved', isFav);
-        sendGAEvent('favorite', { event_category: 'engagement', event_label: vac.name });
     }
 
     function toggleCompareFromCard(id, btn) {
@@ -749,7 +743,6 @@
         toggleCompare(vac);
         const inCompare = isInCompare(id);
         btn.classList.toggle('in-compare', inCompare);
-        sendGAEvent('compare', { event_category: 'engagement', event_label: vac.name });
     }
 
     // ---------- История поиска ----------
@@ -822,7 +815,6 @@
         existing.push({ query, areaId, areaName, salaryFrom, employment, experience, sort, remote, lastCount: 0 });
         localStorage.setItem('savedSearches', JSON.stringify(existing));
         renderSavedSearches();
-        sendGAEvent('save_search', { event_category: 'engagement', event_label: query });
     }
 
     function deleteSavedSearch(index) {
@@ -913,8 +905,6 @@
         setTimeout(() => toastNotification.classList.remove('show'), 5000);
     }
 
-    function sendGAEvent(eventName, params = {}) { if (typeof gtag === "function") gtag("event", eventName, params); }
-
     // ---------- Недавние вакансии ----------
     function saveRecentVacancy(vacancyData) {
         let recent = JSON.parse(localStorage.getItem('recentVacancies')) || [];
@@ -947,7 +937,6 @@
             localStorage.setItem('hiddenVacancies', JSON.stringify(hiddenVacancies));
         }
         applyFilters();
-        sendGAEvent('hide_vacancy', { event_category: 'engagement', event_label: id });
     }
 
     // ---------- Сортировка ----------
@@ -972,40 +961,18 @@
         performSearch(true, false);
     }
 
-    // ---------- Подписка с защитой ----------
-    const pageLoadTime = Date.now();
-    document.getElementById('formTimestamp').value = pageLoadTime;
-    const MIN_FORM_TIME = 3000; // 3 секунды
-
+    // ---------- Подписка ----------
     subscribeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
-        // Проверка honeypot
-        const honeypotValue = document.getElementById('honeypot').value;
-        if (honeypotValue) {
-            console.log('Spam detected (honeypot)');
-            return;
-        }
-
-        // Проверка времени
-        const timestamp = parseInt(document.getElementById('formTimestamp').value);
-        if (isNaN(timestamp) || (Date.now() - timestamp) < MIN_FORM_TIME) {
-            subscribeStatus.textContent = 'Пожалуйста, не торопитесь. Форма доступна через несколько секунд.';
-            subscribeStatus.className = 'subscribe-status error';
-            return;
-        }
-
         const email = subscribeEmailInput.value.trim();
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             subscribeStatus.textContent = 'Пожалуйста, введите корректный email';
             subscribeStatus.className = 'subscribe-status error';
             return;
         }
-
         subscribeSubmitBtn.disabled = true;
         subscribeSubmitBtn.innerHTML = '<span>Отправка...</span> <i class="fas fa-spinner fa-pulse"></i>';
         subscribeStatus.textContent = '';
-
         try {
             const response = await fetch(SUBSCRIBE_URL, {
                 method: 'POST',
@@ -1013,11 +980,10 @@
                 body: JSON.stringify({ action: 'subscribe', email: email })
             });
             const data = await response.json();
-            if (data.success || data.message) {
+            if (data.success) {
                 subscribeStatus.textContent = '✅ Вы успешно подписались!';
                 subscribeStatus.className = 'subscribe-status success';
                 subscribeEmailInput.value = '';
-                sendGAEvent('subscribe', { event_category: 'engagement', event_label: email });
             } else {
                 subscribeStatus.textContent = '❌ Ошибка подписки. Попробуйте позже.';
                 subscribeStatus.className = 'subscribe-status error';
@@ -1104,7 +1070,6 @@
         goToVacancy(id);
     });
 
-    // Также делегирование для блока рекомендаций
     document.getElementById('recommendationsContainer').addEventListener('click', e => {
         const card = e.target.closest('.vacancy-card');
         if (!card) return;
@@ -1160,7 +1125,7 @@
     renderHistory();
     renderRecentVacancies();
     renderSavedSearches();
-    loadRecommendations(); // показываем рекомендации
+    loadRecommendations();
 
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
