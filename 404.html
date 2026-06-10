@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Страница не найдена — ВКАНСА</title>
     <meta http-equiv="refresh" content="5;url=/vacancy-aggregator/index.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <style>
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -37,7 +38,6 @@
             font-weight: 600;
             text-decoration: none;
         }
-        /* Тёмная тема по системным настройкам */
         @media (prefers-color-scheme: dark) {
             body { background: #0f172a; }
             .container { background: #1e293b; }
@@ -47,7 +47,6 @@
         }
     </style>
     <script>
-        // Принудительная тема, если пользователь уже выбрал тёмную
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
