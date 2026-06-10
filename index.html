@@ -8,12 +8,10 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- SEO -->
     <title>Ваканса — поиск работы | свежие вакансии во всех городах России</title>
     <meta name="description" content="Агрегатор вакансий Ваканса — найдите работу своей мечты. Тысячи предложений от ведущих компаний: работа в Москве, удалённая работа, вакансии без опыта и для студентов. Удобный поиск и фильтры.">
     <link rel="canonical" href="https://alex803161.github.io/vacancy-aggregator/">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="ВКАНСА — поиск работы">
     <meta property="og:description" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей с удобным поиском и фильтрами.">
     <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/">
@@ -49,6 +47,26 @@
         .saved-search-apply { background: #0047cc; color: white; }
         .saved-search-delete { background: #f1f5f9; color: #dc2626; border: 1px solid #e2e8f0; }
         html.dark .saved-search-delete { background: #334155; border-color: #475569; }
+        /* Индекс совпадения */
+        .match-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 22px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .match--high { background: #dcfce7; color: #166534; }
+        .match--medium { background: #fef9c3; color: #854d0e; }
+        .match--low { background: #f1f5f9; color: #475569; }
+        html.dark .match--high { background: #14532d; color: #bbf7d0; }
+        html.dark .match--medium { background: #713f12; color: #fde047; }
+        html.dark .match--low { background: #1e293b; color: #94a3b8; }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -91,6 +109,7 @@
             <div class="sort-btns">
                 <button id="sortByDate" class="sort-btn active"><i class="fas fa-clock"></i> По дате</button>
                 <button id="sortBySalary" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button>
+                <button id="sortByMatch" class="sort-btn"><i class="fas fa-bullseye"></i> По совпадению</button>
             </div>
             <div class="filter-checkbox-option">
                 <input type="checkbox" id="filterWithSalary">
@@ -170,6 +189,7 @@
     let selectedCityId = null;
     let allAreas = [];
     let lastSearchFound = 0;
+    let currentSearchQuery = '';
 
     let hiddenVacancies = JSON.parse(localStorage.getItem('hiddenVacancies')) || [];
     let isLoadingMore = false;
@@ -219,6 +239,7 @@
         filterCity=document.getElementById('filterCity'),filterExperience=document.getElementById('filterExperience'),
         filterEmployment=document.getElementById('filterEmployment'),filterSalaryFrom=document.getElementById('filterSalaryFrom'),
         sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),
+        sortByMatchBtn=document.getElementById('sortByMatch'),
         resetButton=document.getElementById('resetButton'),
         historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),
         citySuggestions=document.getElementById('citySuggestions'),
@@ -549,6 +570,7 @@
 
     sortByDateBtn.addEventListener('click',()=>{setSort('publication_time');applyFilters()});
     sortBySalaryBtn.addEventListener('click',()=>{setSort('salary_desc');applyFilters()});
+    sortByMatchBtn.addEventListener('click',()=>{setSort('match_score');applyFilters()});
     resetButton.addEventListener('click', resetFilters);
     clearHistoryBtn.addEventListener('click', clearHistory);
 
@@ -603,8 +625,8 @@
     async function performSearch(reset=true, recordHistory=true){
         searchInput.blur();
         if(reset){allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none'}
-        const query=searchInput.value.trim();
-        if(recordHistory)addToHistory(query);
+        currentSearchQuery = searchInput.value.trim();
+        if(recordHistory)addToHistory(currentSearchQuery);
         if(reset){vacanciesContainer.innerHTML='<div class="vacancy-card" style="height:100px; background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size:200% 100%; animation: shimmer 1.2s infinite;"></div>'.repeat(8);counterSpan.textContent='0'}
 
         const originalHTML = searchBtn.innerHTML;
@@ -612,7 +634,7 @@
         searchBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Поиск...';
 
         try{
-            const cacheKey = `${query}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;
+            const cacheKey = `${currentSearchQuery}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;
             if (!filterWithSalary.checked) {
                 const cachedData = getCachedResult(cacheKey);
                 if (cachedData) {
@@ -621,14 +643,14 @@
                     applyFilters();
                     searchBtn.disabled = false;
                     searchBtn.innerHTML = originalHTML;
-                    updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, cachedData.found);
+                    updateSavedSearchCounts(currentSearchQuery, currentArea, filterEmployment.value, filterRemote.checked, cachedData.found);
                     return;
                 }
             }
             const filters={
                 employment:filterEmployment.value,
                 schedule: filterRemote.checked ? 'remote' : undefined,
-                order_by:currentSort,
+                order_by:currentSort === 'match_score' ? 'publication_time' : currentSort,
                 area:currentArea,
                 per_page:30,
                 page:0
@@ -636,15 +658,15 @@
             if (filterWithSalary.checked) {
                 filters._t = Date.now();
             }
-            const { items, found } = await fetchVacanciesFromAPI(query,filters);
+            const { items, found } = await fetchVacanciesFromAPI(currentSearchQuery,filters);
             allVacancies = items;
             lastSearchFound = found;
             if (!filterWithSalary.checked) {
                 setCachedResult(cacheKey, { items, found });
             }
             applyFilters();
-            updateSavedSearchCounts(query, currentArea, filterEmployment.value, filterRemote.checked, found);
-            sendGAEvent("search", { search_term: query });
+            updateSavedSearchCounts(currentSearchQuery, currentArea, filterEmployment.value, filterRemote.checked, found);
+            sendGAEvent("search", { search_term: currentSearchQuery });
             if (window.innerWidth <= 768) {
                 setTimeout(() => {
                     vacanciesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -676,6 +698,7 @@
         currentSort=sort;
         sortByDateBtn.classList.toggle('active',sort==='publication_time');
         sortBySalaryBtn.classList.toggle('active',sort==='salary_desc');
+        sortByMatchBtn.classList.toggle('active',sort==='match_score');
     }
 
     function applyFilters(){
@@ -685,7 +708,13 @@
         const emp=filterEmployment.value;
         if(emp) filtered=filtered.filter(v=>v.employment===emp);
         const salaryFrom=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;
-        if(salaryFrom) filtered=filtered.filter(v=>v.salary?.from && v.salary.from>=salaryFrom);
+        if(salaryFrom) {
+            filtered = filtered.filter(v => {
+                if (v.salary?.from && v.salary.from >= salaryFrom) return true;
+                if (v.salary?.to && v.salary.to >= salaryFrom) return true;
+                return false;
+            });
+        }
         if (filterWithSalary.checked) {
             filtered = filtered.filter(v => v.salary && (v.salary.from != null || v.salary.to != null));
         }
@@ -696,9 +725,13 @@
             const hiddenSet = new Set(hiddenVacancies);
             filtered = filtered.filter(v => !hiddenSet.has(String(v.id)));
         }
-        if(currentSort==='salary_desc'){
+
+        // Сортировка
+        if (currentSort === 'match_score') {
+            filtered.sort((a, b) => (b._score || 0) - (a._score || 0));
+        } else if(currentSort==='salary_desc'){
             filtered.sort((a,b)=>(b.salary?.from||0)-(a.salary?.from||0));
-        } else if(currentSort==='publication_time'){
+        } else {
             filtered.sort((a,b)=>new Date(b.published_at)-new Date(a.published_at));
         }
 
@@ -740,6 +773,9 @@
     function enrich(v){
         const employerName = typeof v.employer === 'object' ? (v.employer?.name || 'Компания не указана') : (v.employer || 'Компания не указана');
         const employerLogo = v.employer?.logo_urls?.['90'] || v.employer?.logo_urls?.original || v.logo_url || null;
+        const score = calculateMatchScore(v, currentSearchQuery);
+        // Сохраняем _score для сортировки
+        v._score = score;
         return {
             ...v,
             title: v.name || 'Без названия',
@@ -757,7 +793,8 @@
             phone: v.phone || null,
             email: v.email || null,
             logoUrl: employerLogo,
-            publishedDate: timeAgo(v.published_at)
+            publishedDate: timeAgo(v.published_at),
+            score: score
         };
     }
 
@@ -777,7 +814,15 @@
             const whatsappLink = `https://wa.me/?text=${shareText}`;
             const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
 
-            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
+            // Плашка совпадения
+            let matchBadge = '';
+            if (currentSearchQuery && vac.score > 0) {
+                if (vac.score >= 85) matchBadge = `<span class="match-badge match--high">${vac.score}%</span>`;
+                else if (vac.score >= 60) matchBadge = `<span class="match-badge match--medium">${vac.score}%</span>`;
+                else matchBadge = `<span class="match-badge match--low">${vac.score}%</span>`;
+            }
+
+            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
             vacanciesContainer.appendChild(card);
         });
     }
@@ -828,7 +873,6 @@
     renderSavedSearches();
     performSearch(true);
 
-    // Вызов функций из common.js
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
     registerSW('/vacancy-aggregator/');
