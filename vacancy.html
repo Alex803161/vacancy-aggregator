@@ -461,13 +461,28 @@
         return getFavorites().some(v => v.id === id);
     }
 
-    // ИЗМЕНЁННАЯ ФУНКЦИЯ ДЛЯ ЗАМЕТОК
+    // ====== НОВЫЕ ФУНКЦИИ ДЛЯ ЗАМЕТОК ======
+    function getDeletedNotes() {
+        return JSON.parse(localStorage.getItem('deletedNotes') || '{}');
+    }
+
+    function saveDeletedNotes(notes) {
+        localStorage.setItem('deletedNotes', JSON.stringify(notes));
+    }
+
     function toggleFavorite(vacancy) {
         let favs = getFavorites();
         const index = favs.findIndex(v => v.id === vacancy.id);
         if (index > -1) {
+            // Сохраняем заметку перед удалением
+            const deletedNotes = getDeletedNotes();
+            deletedNotes[vacancy.id] = favs[index].note || '';
+            saveDeletedNotes(deletedNotes);
             favs.splice(index, 1);
         } else {
+            // Восстанавливаем заметку, если была
+            const deletedNotes = getDeletedNotes();
+            const restoredNote = deletedNotes[vacancy.id] || '';
             favs.push({
                 id: vacancy.id,
                 name: vacancy.name,
@@ -476,11 +491,12 @@
                 area: vacancy.area?.name || '',
                 alternate_url: vacancy.alternate_url,
                 source: vacancy.source,
-                note: ''   // пустая заметка по умолчанию
+                note: restoredNote
             });
         }
         localStorage.setItem('favorites', JSON.stringify(favs));
     }
+    // ====== КОНЕЦ НОВЫХ ФУНКЦИЙ ======
 
     async function loadVacancy(id) {
         loadingEl.style.display = 'block';
