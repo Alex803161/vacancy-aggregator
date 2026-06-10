@@ -8,27 +8,34 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <!-- Динамические SEO-теги -->
     <title id="seoTitle">Загрузка вакансии — ВКАНСА</title>
     <meta name="description" id="seoDescription" content="Подробная информация о вакансии. Актуальные предложения работы на сайте ВКАНСА.">
     <link rel="canonical" id="seoCanonical" href="">
     
+    <!-- Open Graph -->
     <meta property="og:title" id="ogTitle" content="Вакансия на ВКАНСА">
-    <meta property="og:description" id="ogDescription" content="Найдите работу своей мечты.">
+    <meta property="og:description" id="ogDescription" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
     <meta property="og:url" id="ogUrl" content="">
     <meta property="og:type" content="website">
     
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" id="jsonLd"></script>
     
     <link rel="stylesheet" href="style.css">
+    <!-- FAVICON -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
-            if (theme === 'dark') document.documentElement.classList.add('dark');
-            else if (theme === 'light') document.documentElement.classList.remove('dark');
-            else {
-                if (new Date().getHours() >= 20 || new Date().getHours() < 6) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                const hour = new Date().getHours();
+                if (hour >= 20 || hour < 6) {
                     document.documentElement.classList.add('dark');
                     localStorage.setItem('theme', 'dark');
                 } else {
@@ -215,14 +222,6 @@
         .btn-telegram { background: #0088cc; color: white; }
         .btn-telegram:hover { background: #006699; }
     </style>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y3LEHS2D4G');
-    </script>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -258,7 +257,7 @@
 
 <script src="common.js"></script>
 <script>
-    const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';
+    const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5'; // обновлённый URL
 
     function mapDirectJobToVacancy(job) {
         return {
@@ -297,10 +296,20 @@
             "@type": "JobPosting",
             "title": vacancy.name,
             "description": vacancy.description || description,
-            "hiringOrganization": { "@type": "Organization", "name": empName },
-            "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": cityText || 'Не указан' } },
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": empName
+            },
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": cityText || 'Не указан'
+                }
+            },
             "datePosted": vacancy.published_at ? new Date(vacancy.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
         };
+
         if (vacancy.salary) {
             jsonLd.baseSalary = {
                 "@type": "MonetaryAmount",
@@ -315,6 +324,7 @@
             if (!jsonLd.baseSalary.value.minValue) delete jsonLd.baseSalary.value.minValue;
             if (!jsonLd.baseSalary.value.maxValue) delete jsonLd.baseSalary.value.maxValue;
         }
+
         document.getElementById('jsonLd').textContent = JSON.stringify(jsonLd);
     }
 
@@ -341,7 +351,9 @@
         const whatsappLink = `https://wa.me/?text=${shareText}`;
         const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
 
-        const reportSubject = isDirect ? 'Жалоба на прямое объявление' : `Жалоба на вакансию ID ${vacancy.id}`;
+        const reportSubject = isDirect
+            ? 'Жалоба на прямое объявление'
+            : `Жалоба на вакансию ID ${vacancy.id}`;
         const reportBody = isDirect
             ? `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AID: ${vacancy.id}%0D%0AСсылка: ${vacancyUrl}`
             : `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
@@ -357,14 +369,14 @@
                 <p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Неизвестно'}</p>
                 ${vacancy.area?.name ? `<p class="address">📍 ${vacancy.area.name}</p>` : ''}
                 <div class="actions">
-                    <button id="favButton" class="fav-btn">★ В избранное</button>
+                    <button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>
                     ${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener noreferrer" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">🏠 Прямое объявление</span>'}
                     <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
-                    <a href="${reportMailto}" class="btn-report" id="reportButton"><i class="fas fa-flag"></i> Пожаловаться</a>
+                    <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
                 </div>
                 <div class="share-buttons">
-                    <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-whatsapp" id="shareWhatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="${telegramLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-telegram" id="shareTelegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="${telegramLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
                 </div>
             </div>
         `;
@@ -377,17 +389,6 @@
         favBtn.addEventListener('click', () => {
             toggleFavorite(vacancy);
             updateFavButton(favBtn, vacancy);
-            sendGAEvent('favorite', { event_category: 'engagement', event_label: vacancy.name });
-        });
-
-        document.getElementById('shareWhatsapp').addEventListener('click', () => {
-            sendGAEvent('share', { method: 'WhatsApp', content_type: 'vacancy', item_id: vacancy.id });
-        });
-        document.getElementById('shareTelegram').addEventListener('click', () => {
-            sendGAEvent('share', { method: 'Telegram', content_type: 'vacancy', item_id: vacancy.id });
-        });
-        document.getElementById('reportButton').addEventListener('click', () => {
-            sendGAEvent('report', { event_category: 'engagement', event_label: vacancy.id });
         });
 
         loadSimilar(vacancy.name, vacancy.id);
