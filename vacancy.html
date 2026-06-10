@@ -39,8 +39,190 @@
         })();
     </script>
     <style>
-        /* все стили как в предыдущей версии vacancy.html */
+        .vacancy-full {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border: 1px solid #edf2f7;
+        }
+        html.dark .vacancy-full {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .vacancy-full h2 {
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+        html.dark .vacancy-full h2 {
+            color: #f1f5f9;
+        }
+        .vacancy-full .company {
+            color: #334155;
+            font-weight: 600;
+        }
+        html.dark .vacancy-full .company {
+            color: #f1f5f9;
+        }
+        .vacancy-full .salary {
+            color: #059669;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        html.dark .vacancy-full .salary {
+            color: #34d399;
+        }
+        .vacancy-full .description {
+            color: #1f2937;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+        html.dark .vacancy-full .description {
+            color: #e2e8f0;
+        }
+        .vacancy-full .skills,
+        .vacancy-full .published {
+            color: #64748b;
+            margin-top: 10px;
+        }
+        html.dark .vacancy-full .skills,
+        html.dark .vacancy-full .published {
+            color: #94a3b8;
+        }
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .btn-report {
+            background: none;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-report:hover {
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+        html.dark .btn-report {
+            border-color: #475569;
+            color: #94a3b8;
+        }
+        .similar-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        html.dark .similar-section {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        .similar-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+        html.dark .similar-title {
+            color: #f1f5f9;
+        }
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .similar-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #edf2f7;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        html.dark .similar-card {
+            background: #0f172a;
+            border-color: #334155;
+        }
+        .similar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .similar-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a73e8;
+        }
+        .similar-card .company {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .similar-card .salary {
+            font-weight: 700;
+            color: #059669;
+            font-size: 0.95rem;
+        }
+        .similar-card .city {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        html.dark .similar-card .company,
+        html.dark .similar-card .city {
+            color: #94a3b8;
+        }
+        html.dark .similar-card .salary {
+            color: #34d399;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn-share {
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-whatsapp:hover { background: #128C7E; }
+        .btn-telegram { background: #0088cc; color: white; }
+        .btn-telegram:hover { background: #006699; }
     </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y3LEHS2D4G');
+    </script>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -73,15 +255,6 @@
 </footer>
 
 <button id="themeToggle" class="theme-switch">🌙</button>
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-Y3LEHS2D4G');
-</script>
 
 <script src="common.js"></script>
 <script>
@@ -207,15 +380,12 @@
             sendGAEvent('favorite', { event_category: 'engagement', event_label: vacancy.name });
         });
 
-        // GA4 для шеринга
         document.getElementById('shareWhatsapp').addEventListener('click', () => {
             sendGAEvent('share', { method: 'WhatsApp', content_type: 'vacancy', item_id: vacancy.id });
         });
         document.getElementById('shareTelegram').addEventListener('click', () => {
             sendGAEvent('share', { method: 'Telegram', content_type: 'vacancy', item_id: vacancy.id });
         });
-
-        // GA4 для жалобы
         document.getElementById('reportButton').addEventListener('click', () => {
             sendGAEvent('report', { event_category: 'engagement', event_label: vacancy.id });
         });
