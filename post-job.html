@@ -8,11 +8,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- SEO -->
     <title>Разместить вакансию — ВКАНСА</title>
     <meta name="description" content="Бесплатное размещение вакансий для прямых работодателей. Найдите сотрудников быстро и просто на сайте ВКАНСА.">
     
-    <!-- Open Graph -->
     <meta property="og:title" content="Разместить вакансию — ВКАНСА">
     <meta property="og:description" content="Бесплатное размещение вакансий для прямых работодателей.">
     <meta property="og:url" content="https://vkansa.ru/post-job.html">
@@ -207,72 +205,45 @@
 
 <button id="themeToggle" class="theme-switch">🌙</button>
 
+<script src="common.js"></script>
 <script>
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️' : '🌙';
-    });
-    if (localStorage.getItem('theme') === 'dark') themeToggle.textContent = '☀️';
-
-    const backToTopBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-        backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-    });
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
     const form = document.getElementById('jobForm');
     const formMessage = document.getElementById('formMessage');
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        
+        // Экранируем HTML-теги в текстовых полях для безопасности
         const job = {
             id: Date.now(),
-            title: document.getElementById('title').value.trim(),
-            company: document.getElementById('company').value.trim(),
-            city: document.getElementById('city').value.trim(),
-            salary: document.getElementById('salary').value.trim(),
-            description: document.getElementById('description').value.trim(),
+            title: escapeHtml(document.getElementById('title').value.trim()),
+            company: escapeHtml(document.getElementById('company').value.trim()),
+            city: escapeHtml(document.getElementById('city').value.trim()),
+            salary: escapeHtml(document.getElementById('salary').value.trim()),
+            description: escapeHtml(document.getElementById('description').value.trim()),
             isPremium: document.getElementById('premiumCheckbox').checked,
             timestamp: new Date().toISOString()
         };
+        
         if (!job.title || !job.company) {
             formMessage.textContent = '❌ Заполните название вакансии и компанию';
             formMessage.style.color = '#dc2626';
             return;
         }
+        
         const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
         existing.push(job);
         localStorage.setItem('direct_jobs', JSON.stringify(existing));
+        
         formMessage.textContent = '✅ Вакансия успешно добавлена!';
         formMessage.style.color = '#059669';
         form.reset();
     });
-</script>
 
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/vacancy-aggregator/sw.js')
-      .then(registration => {
-        console.log('SW зарегистрирован:', registration.scope);
-        registration.onupdatefound = () => {
-          const installingWorker = registration.installing;
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              const toast = document.createElement('div');
-              toast.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0047cc; color:white; padding:12px 24px; border-radius:40px; cursor:pointer; z-index:9999;';
-              toast.textContent = 'Доступна новая версия. Обновите страницу.';
-              toast.onclick = () => window.location.reload();
-              document.body.appendChild(toast);
-            }
-          };
-        };
-      })
-      .catch(err => console.log('Ошибка регистрации SW:', err));
-  });
-}
+    // Вызов функций из common.js
+    setupThemeToggle('themeToggle');
+    setupBackToTop('backToTopBtn');
+    registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
