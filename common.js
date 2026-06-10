@@ -75,21 +75,15 @@ function isFavorite(id) {
     return getFavorites().some(v => v.id === id);
 }
 
-/**
- * Добавляет/удаляет вакансию из избранного, сохраняя заметки.
- * @param {Object} vacancy – сырой объект вакансии (как от API или из localStorage)
- */
 function toggleFavorite(vacancy) {
     let favs = getFavorites();
     const index = favs.findIndex(v => v.id === vacancy.id);
     if (index > -1) {
-        // Сохраняем заметку перед удалением
         const deletedNotes = getDeletedNotes();
         deletedNotes[vacancy.id] = favs[index].note || '';
         saveDeletedNotes(deletedNotes);
         favs.splice(index, 1);
     } else {
-        // Восстанавливаем заметку, если была
         const deletedNotes = getDeletedNotes();
         const restoredNote = deletedNotes[vacancy.id] || '';
         favs.push({
@@ -106,7 +100,7 @@ function toggleFavorite(vacancy) {
     saveFavorites(favs);
 }
 
-/* ========== Тема ========== */
+/* ========== Тема (с автосинхронизацией) ========== */
 
 function applyTheme(mode) {
     if (mode === 'dark') {
@@ -143,10 +137,11 @@ function setupThemeToggle(buttonId) {
         btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
-    // Автосмена при изменении системной темы
+    // Слушатель изменения системной темы
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
         const saved = localStorage.getItem('theme');
+        // Автосмена только если не зафиксирована явно
         if (saved !== 'dark' && saved !== 'light') {
             applyTheme(e.matches ? 'dark' : 'light');
             btn.textContent = e.matches ? '☀️' : '🌙';
