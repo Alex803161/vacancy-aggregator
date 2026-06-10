@@ -135,6 +135,7 @@
         <a href="terms.html">Пользовательское соглашение</a>
         <a href="contacts.html">Контакты</a>
         <a href="history.html">История просмотров</a>
+        <a href="dashboard.html">Дашборд</a>
     </div>
     <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
 </footer>
@@ -197,7 +198,6 @@
         html += '</tbody></table></div>';
         compareContent.innerHTML = html;
 
-        // Обработчики на кнопки удаления
         document.querySelectorAll('.remove-from-compare').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const id = e.target.closest('button').dataset.id;
