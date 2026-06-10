@@ -79,20 +79,18 @@ function toggleFavorite(vacancy) {
     let favs = getFavorites();
     const index = favs.findIndex(v => v.id === vacancy.id);
     if (index > -1) {
-        // Сохраняем заметку перед удалением
         const deletedNotes = getDeletedNotes();
         deletedNotes[vacancy.id] = favs[index].note || '';
         saveDeletedNotes(deletedNotes);
         favs.splice(index, 1);
     } else {
-        // Восстанавливаем заметку, если была
         const deletedNotes = getDeletedNotes();
         const restoredNote = deletedNotes[vacancy.id] || '';
         favs.push({
             id: vacancy.id,
             name: vacancy.name,
-            employer: getEmployerName(vacancy.employer),   // сохраняем строку
-            salary: vacancy.salary || null,                // сырой объект или null
+            employer: getEmployerName(vacancy.employer),
+            salary: vacancy.salary || null,
             area: vacancy.area?.name || '',
             alternate_url: vacancy.alternate_url || '',
             source: vacancy.source || '',
@@ -102,21 +100,56 @@ function toggleFavorite(vacancy) {
     saveFavorites(favs);
 }
 
-/* ========== Тема ========== */
+/* ========== Тема (с автосинхронизацией) ========== */
+
+function applyTheme(mode) {
+    if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+}
+
+function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
 function setupThemeToggle(buttonId) {
     const btn = document.getElementById(buttonId);
     if (!btn) return;
-    btn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        btn.textContent = isDark ? '☀️' : '🌙';
-    });
-    if (localStorage.getItem('theme') === 'dark') {
-        btn.textContent = '☀️';
+
+    // Определяем начальную тему
+    const savedTheme = localStorage.getItem('theme');
+    let currentTheme;
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+        currentTheme = savedTheme;
     } else {
-        btn.textContent = '🌙';
+        // Если нет сохранённой или 'auto', следуем системе
+        currentTheme = getSystemTheme();
+        localStorage.setItem('theme', 'auto'); // помечаем, что явный выбор не сделан
     }
+    applyTheme(currentTheme);
+    btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+    // Обработчик клика: переключение с запоминанием
+    btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        const newTheme = isDark ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme); // фиксируем явный выбор
+        btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Слушатель изменения системной темы
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', (e) => {
+        const saved = localStorage.getItem('theme');
+        // Автосмена только если не зафиксирована явно
+        if (saved !== 'dark' && saved !== 'light') {
+            applyTheme(e.matches ? 'dark' : 'light');
+            btn.textContent = e.matches ? '☀️' : '🌙';
+        }
+    });
 }
 
 /* ========== Кнопка "Наверх" ========== */
