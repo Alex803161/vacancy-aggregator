@@ -14,7 +14,5 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ],
-  "categories": ["jobs", "search", "employment"],
-  "prefer_related_applications": false
+  ]
 }
