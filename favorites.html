@@ -17,6 +17,7 @@
     <meta property="og:type" content="website">
     
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
@@ -271,7 +272,7 @@
     const copyNotification = document.getElementById('copyNotification');
     let currentSort = 'date';
 
-    // Локальная функция сохранения заметки (использует глобальные getFavorites/saveFavorites)
+    // Локальная функция сохранения заметки
     function saveNote(id, note) {
         let favorites = getFavorites();
         const index = favorites.findIndex(v => v.id === id);
@@ -281,7 +282,7 @@
         }
     }
 
-    // Удаление с сохранением заметки (использует глобальные функции)
+    // Удаление с сохранением заметки
     function removeFavorite(id) {
         let favorites = getFavorites();
         const index = favorites.findIndex(v => v.id === id);
