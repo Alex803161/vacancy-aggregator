@@ -54,9 +54,8 @@
             const actionsDiv = document.querySelector('.compare-actions');
             const clearBtn = document.getElementById('clearCompare');
 
-            // Используем функции из common.js (getCompareList, saveCompareList, toggleCompare)
             function renderCompare() {
-                const list = getCompareList(); // возвращает массив объектов вакансий
+                const list = getCompareList();
                 if (!list || list.length === 0) {
                     container.innerHTML = `
                         <div class="empty-state">
@@ -69,7 +68,6 @@
 
                 if (actionsDiv) actionsDiv.style.display = 'block';
 
-                // Определяем поля для отображения
                 const fields = [
                     { key: 'name', label: 'Название' },
                     { key: 'employer', label: 'Компания' },
@@ -83,7 +81,6 @@
                 ];
 
                 let tableHTML = '<div class="table-responsive"><table class="compare-table">';
-                // Заголовки
                 tableHTML += '<thead><tr><th>Параметр</th>';
                 list.forEach((vac, idx) => {
                     tableHTML += `<th>${escapeHtml(vac.name || 'Вакансия ' + (idx+1))}
@@ -91,7 +88,6 @@
                 });
                 tableHTML += '</tr></thead><tbody>';
 
-                // Строки параметров
                 fields.forEach(field => {
                     tableHTML += '<tr>';
                     tableHTML += `<td class="field-label">${field.label}</td>`;
@@ -105,7 +101,7 @@
                                 value = vac.employer ? escapeHtml(vac.employer.name) : '—';
                                 break;
                             case 'salary':
-                                value = vac.salary ? formatSalary(vac.salary) : '—';  // formatSalary из common.js
+                                value = vac.salary ? formatSalary(vac.salary) : '—';
                                 break;
                             case 'area':
                                 value = vac.area ? escapeHtml(vac.area.name) : '—';
@@ -127,7 +123,7 @@
                                 value = vac.schedule ? escapeHtml(vac.schedule.name) : '—';
                                 break;
                             case 'published_at':
-                                value = vac.published_at ? formatDate(vac.published_at) : '—'; // formatDate из common.js
+                                value = vac.published_at ? formatDate(vac.published_at) : '—';
                                 break;
                             default:
                                 value = '—';
@@ -140,14 +136,12 @@
                 tableHTML += '</tbody></table></div>';
                 container.innerHTML = tableHTML;
 
-                // Обработчики удаления отдельных вакансий
                 document.querySelectorAll('.remove-compare').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         const index = parseInt(btn.dataset.index, 10);
                         const currentList = getCompareList();
                         if (index >= 0 && index < currentList.length) {
-                            // Используем toggleCompare, чтобы удалить эту конкретную вакансию
                             toggleCompare(currentList[index]);
                             renderCompare();
                         }
@@ -155,39 +149,33 @@
                 });
             }
 
-            // Очистка всего списка
             if (clearBtn) {
                 clearBtn.addEventListener('click', () => {
                     if (confirm('Удалить все вакансии из сравнения?')) {
-                        saveCompareList([]);  // прямая установка
+                        saveCompareList([]);
                         renderCompare();
                     }
                 });
             }
 
-            // Первичная отрисовка
             renderCompare();
 
-            // Обновление при изменении localStorage в других вкладках
             window.addEventListener('storage', (e) => {
                 if (e.key === 'compareList') {
                     renderCompare();
                 }
             });
 
-            // Если нет getCompareList (на случай ошибки загрузки common.js) — заглушка
             if (typeof getCompareList === 'undefined') {
                 container.innerHTML = '<div class="error">Ошибка загрузки общих функций. Попробуйте обновить страницу.</div>';
             }
         });
 
-        // Форматирование даты (если formatDate не определён в common.js, можно продублировать)
         function formatDate(dateStr) {
             if (!dateStr) return '—';
             const d = new Date(dateStr);
             return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
         }
-        // Если formatSalary нет, продублируем (обычно она есть в common.js, но на всякий случай)
         if (typeof formatSalary === 'undefined') {
             window.formatSalary = function(salary) {
                 if (!salary) return '—';
@@ -198,12 +186,9 @@
                 return result || '—';
             };
         }
-    </script>
 
-    <!-- Service Worker регистрация (как на других страницах, из common.js) -->
-    <script>
         if ('serviceWorker' in navigator && typeof registerSW === 'function') {
-            registerSW();  // Функция из common.js
+            registerSW();
         }
     </script>
 </body>
