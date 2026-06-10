@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <title>Разместить вакансию — ВКАНСА</title>
-    <meta name="description" content="Бесплатное размещение вакансий для прямых работодателей.">
+    <meta name="description" content="Бесплатное размещение вакансий для прямых работодателей. Найдите сотрудников быстро и просто на сайте ВКАНСА.">
+    
     <meta property="og:title" content="Разместить вакансию — ВКАНСА">
-    <meta property="og:description" content="Бесплатное размещение вакансий.">
-    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/post-job.html">
+    <meta property="og:description" content="Бесплатное размещение вакансий для прямых работодателей.">
+    <meta property="og:url" content="https://vkansa.ru/post-job.html">
     <meta property="og:type" content="website">
     
     <link rel="stylesheet" href="style.css">
+    <!-- FAVICON -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     
     <script>
@@ -141,14 +143,6 @@
             font-weight: 500;
         }
     </style>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y3LEHS2D4G');
-    </script>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -168,12 +162,6 @@
         <div class="sub">Разместите вакансию бесплатно или с премиум-выделением</div>
 
         <form id="jobForm">
-            <!-- Honeypot: невидимое поле -->
-            <div style="position:absolute; left:-9999px;" aria-hidden="true">
-                <input type="text" name="honeypot" id="honeypotPost" tabindex="-1" autocomplete="off">
-            </div>
-            <input type="hidden" id="formTimestampPost" value="">
-
             <div class="form-group">
                 <label for="title">Название должности *</label>
                 <input type="text" id="title" required placeholder="Например: Веб-разработчик">
@@ -224,27 +212,10 @@
     const form = document.getElementById('jobForm');
     const formMessage = document.getElementById('formMessage');
 
-    const pageLoadTimePost = Date.now();
-    document.getElementById('formTimestampPost').value = pageLoadTimePost;
-    const MIN_FORM_TIME_POST = 3000;
-
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        // Honeypot check
-        if (document.getElementById('honeypotPost').value) {
-            console.log('Spam detected (honeypot)');
-            return;
-        }
-
-        // Time check
-        const ts = parseInt(document.getElementById('formTimestampPost').value);
-        if (isNaN(ts) || (Date.now() - ts) < MIN_FORM_TIME_POST) {
-            formMessage.textContent = '❌ Пожалуйста, подождите несколько секунд перед отправкой.';
-            formMessage.style.color = '#dc2626';
-            return;
-        }
-
+        
+        // Экранируем HTML-теги в текстовых полях для безопасности
         const job = {
             id: Date.now(),
             title: escapeHtml(document.getElementById('title').value.trim()),
@@ -255,24 +226,23 @@
             isPremium: document.getElementById('premiumCheckbox').checked,
             timestamp: new Date().toISOString()
         };
-
+        
         if (!job.title || !job.company) {
             formMessage.textContent = '❌ Заполните название вакансии и компанию';
             formMessage.style.color = '#dc2626';
             return;
         }
-
+        
         const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]');
         existing.push(job);
         localStorage.setItem('direct_jobs', JSON.stringify(existing));
-
+        
         formMessage.textContent = '✅ Вакансия успешно добавлена!';
         formMessage.style.color = '#059669';
-        sendGAEvent('post_job', { event_category: 'engagement', event_label: job.title });
         form.reset();
-        document.getElementById('formTimestampPost').value = Date.now();
     });
 
+    // Вызов функций из common.js
     setupThemeToggle('themeToggle');
     setupBackToTop('backToTopBtn');
     registerSW('/vacancy-aggregator/');
