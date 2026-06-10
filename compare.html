@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Сравнение вакансий — ВКанса">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Сравнение вакансий — ВКанса</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="robots" content="noindex, follow">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/vacancy-aggregator/" class="logo">ВКанса</a>
+            <nav class="main-nav">
+                <a href="/vacancy-aggregator/">Поиск</a>
+                <a href="/vacancy-aggregator/vacancies.html">Все вакансии</a>
+                <a href="/vacancy-aggregator/favorites.html">Избранное</a>
+                <a href="/vacancy-aggregator/history.html">История</a>
+                <a href="/vacancy-aggregator/compare.html" class="active">Сравнение</a>
+            </nav>
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему" title="Переключить тему">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container compare-page">
+        <h1>Сравнение вакансий</h1>
+        <div id="compareContainer">
+            <div class="loading">Загрузка списка сравнения...</div>
+        </div>
+        <div class="compare-actions" style="display:none;">
+            <button id="clearCompare" class="btn btn-outline-danger">Очистить всё</button>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 ВКанса. Данные с hh.ru</p>
+            <p><a href="privacy.html">Политика конфиденциальности</a> | <a href="terms.html">Условия</a> | <a href="contacts.html">Контакты</a></p>
+        </div>
+    </footer>
+
+    <button id="scrollToTop" class="scroll-to-top" title="Наверх">↑</button>
+
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('compareContainer');
+            const actionsDiv = document.querySelector('.compare-actions');
+            const clearBtn = document.getElementById('clearCompare');
+
+            // Используем функции из common.js (getCompareList, saveCompareList, toggleCompare)
+            function renderCompare() {
+                const list = getCompareList(); // возвращает массив объектов вакансий
+                if (!list || list.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <p>🔍 Вы пока не добавили вакансии для сравнения.</p>
+                            <p>Нажмите «К сравнению» на карточках вакансий в поиске или избранном.</p>
+                        </div>`;
+                    if (actionsDiv) actionsDiv.style.display = 'none';
+                    return;
+                }
+
+                if (actionsDiv) actionsDiv.style.display = 'block';
+
+                // Определяем поля для отображения
+                const fields = [
+                    { key: 'name', label: 'Название' },
+                    { key: 'employer', label: 'Компания' },
+                    { key: 'salary', label: 'Зарплата' },
+                    { key: 'area', label: 'Город' },
+                    { key: 'skills', label: 'Навыки' },
+                    { key: 'experience', label: 'Опыт' },
+                    { key: 'employment', label: 'Занятость' },
+                    { key: 'schedule', label: 'График' },
+                    { key: 'published_at', label: 'Дата публикации' }
+                ];
+
+                let tableHTML = '<div class="table-responsive"><table class="compare-table">';
+                // Заголовки
+                tableHTML += '<thead><tr><th>Параметр</th>';
+                list.forEach((vac, idx) => {
+                    tableHTML += `<th>${escapeHtml(vac.name || 'Вакансия ' + (idx+1))}
+                        <button class="remove-compare" data-index="${idx}" title="Удалить из сравнения">✕</button></th>`;
+                });
+                tableHTML += '</tr></thead><tbody>';
+
+                // Строки параметров
+                fields.forEach(field => {
+                    tableHTML += '<tr>';
+                    tableHTML += `<td class="field-label">${field.label}</td>`;
+                    list.forEach((vac, idx) => {
+                        let value = '';
+                        switch (field.key) {
+                            case 'name':
+                                value = `<a href="${vac.alternate_url || '#'}" target="_blank">${escapeHtml(vac.name)}</a>`;
+                                break;
+                            case 'employer':
+                                value = vac.employer ? escapeHtml(vac.employer.name) : '—';
+                                break;
+                            case 'salary':
+                                value = vac.salary ? formatSalary(vac.salary) : '—';  // formatSalary из common.js
+                                break;
+                            case 'area':
+                                value = vac.area ? escapeHtml(vac.area.name) : '—';
+                                break;
+                            case 'skills':
+                                if (vac.key_skills && vac.key_skills.length) {
+                                    value = vac.key_skills.map(s => escapeHtml(s.name)).join(', ');
+                                } else {
+                                    value = '—';
+                                }
+                                break;
+                            case 'experience':
+                                value = vac.experience ? escapeHtml(vac.experience.name) : '—';
+                                break;
+                            case 'employment':
+                                value = vac.employment ? escapeHtml(vac.employment.name) : '—';
+                                break;
+                            case 'schedule':
+                                value = vac.schedule ? escapeHtml(vac.schedule.name) : '—';
+                                break;
+                            case 'published_at':
+                                value = vac.published_at ? formatDate(vac.published_at) : '—'; // formatDate из common.js
+                                break;
+                            default:
+                                value = '—';
+                        }
+                        tableHTML += `<td>${value}</td>`;
+                    });
+                    tableHTML += '</tr>';
+                });
+
+                tableHTML += '</tbody></table></div>';
+                container.innerHTML = tableHTML;
+
+                // Обработчики удаления отдельных вакансий
+                document.querySelectorAll('.remove-compare').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const index = parseInt(btn.dataset.index, 10);
+                        const currentList = getCompareList();
+                        if (index >= 0 && index < currentList.length) {
+                            // Используем toggleCompare, чтобы удалить эту конкретную вакансию
+                            toggleCompare(currentList[index]);
+                            renderCompare();
+                        }
+                    });
+                });
+            }
+
+            // Очистка всего списка
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    if (confirm('Удалить все вакансии из сравнения?')) {
+                        saveCompareList([]);  // прямая установка
+                        renderCompare();
+                    }
+                });
+            }
+
+            // Первичная отрисовка
+            renderCompare();
+
+            // Обновление при изменении localStorage в других вкладках
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'compareList') {
+                    renderCompare();
+                }
+            });
+
+            // Если нет getCompareList (на случай ошибки загрузки common.js) — заглушка
+            if (typeof getCompareList === 'undefined') {
+                container.innerHTML = '<div class="error">Ошибка загрузки общих функций. Попробуйте обновить страницу.</div>';
+            }
+        });
+
+        // Форматирование даты (если formatDate не определён в common.js, можно продублировать)
+        function formatDate(dateStr) {
+            if (!dateStr) return '—';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+        // Если formatSalary нет, продублируем (обычно она есть в common.js, но на всякий случай)
+        if (typeof formatSalary === 'undefined') {
+            window.formatSalary = function(salary) {
+                if (!salary) return '—';
+                let result = '';
+                if (salary.from) result += 'от ' + salary.from.toLocaleString();
+                if (salary.to) result += (result ? ' до ' : 'до ') + salary.to.toLocaleString();
+                if (salary.currency) result += ' ' + salary.currency;
+                return result || '—';
+            };
+        }
+    </script>
+
+    <!-- Service Worker регистрация (как на других страницах, из common.js) -->
+    <script>
+        if ('serviceWorker' in navigator && typeof registerSW === 'function') {
+            registerSW();  // Функция из common.js
+        }
+    </script>
+</body>
+</html>
