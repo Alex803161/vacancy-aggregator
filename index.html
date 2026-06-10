@@ -130,6 +130,25 @@
         }
         html.dark .btn-compare { background: #334155; border-color: #475569; color: #e2e8f0; }
         html.dark .btn-compare.in-compare { background: #3b82f6; border-color: #3b82f6; }
+        /* Кнопка перехода к сравнению в хедере */
+        .compare-header-btn {
+            background: #eef2ff;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .compare-header-btn:hover { background: #0047cc; color: white; border-color: #0047cc; }
+        html.dark .compare-header-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -191,7 +210,13 @@
         </div>
         <div class="history-badges" id="historyContainer"><button id="clearHistoryBtn" class="clear-history">Очистить историю</button></div>
     </div>
-    <div class="results-header"><div class="counter" id="counterDisplay">Найдено: <span>0</span></div><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button></div>
+    <div class="results-header">
+        <div class="counter" id="counterDisplay">Найдено: <span>0</span></div>
+        <div style="display: flex; gap: 8px;">
+            <button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button>
+            <a href="compare.html" id="compareLinkBtn" class="compare-header-btn" style="display:none;"><i class="fas fa-balance-scale"></i> Сравнение (<span id="compareCount">0</span>)</a>
+        </div>
+    </div>
     <!-- Статистика поиска -->
     <div id="statsContainer" style="display:none;"></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
@@ -240,7 +265,16 @@
         <div class="recent-scroll" id="recentContainer"></div>
     </div>
 </div>
-<footer class="site-footer"><div class="footer-links"><a href="privacy.html">Политика конфиденциальности</a><a href="terms.html">Пользовательское соглашение</a><a href="contacts.html">Контакты</a><a href="history.html">История просмотров</a></div><div class="footer-copy">© 2026 Ваканса. Все права защищены.</div></footer>
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="terms.html">Пользовательское соглашение</a>
+        <a href="contacts.html">Контакты</a>
+        <a href="history.html">История просмотров</a>
+        <a href="compare.html">Сравнение</a>
+    </div>
+    <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
+</footer>
 <button id="themeToggle" class="theme-switch">🌙</button>
 <div id="toastNotification" class="toast-notification">🔔 Новые вакансии по сохранённым поискам!</div>
 
@@ -328,6 +362,9 @@
     const filterWithSalary = document.getElementById('filterWithSalary');
     const filterRemote = document.getElementById('filterRemote');
     const filterShowHidden = document.getElementById('filterShowHidden');
+
+    const compareLinkBtn = document.getElementById('compareLinkBtn');
+    const compareCountSpan = document.getElementById('compareCount');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1022,6 +1059,13 @@
         toggleCompare(vac);
         const inCompare = isInCompare(id);
         btn.classList.toggle('in-compare', inCompare);
+        updateCompareCount();
+    }
+
+    function updateCompareCount() {
+        const count = getCompareList().length;
+        compareCountSpan.textContent = count;
+        compareLinkBtn.style.display = count > 0 ? 'inline-flex' : 'none';
     }
 
     function resetFilters(){
@@ -1045,6 +1089,7 @@
     loadAllAreas().then(() => console.log('Areas loaded')).catch(() => {});
     renderRecentVacancies();
     renderSavedSearches();
+    updateCompareCount();
     performSearch(true);
 
     setupThemeToggle('themeToggle');
