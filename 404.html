@@ -37,7 +37,7 @@
             font-weight: 600;
             text-decoration: none;
         }
-        /* Тёмная тема */
+        /* Тёмная тема по системным настройкам */
         @media (prefers-color-scheme: dark) {
             body { background: #0f172a; }
             .container { background: #1e293b; }
@@ -47,11 +47,11 @@
         }
     </style>
     <script>
-        // Принудительная тема, если пользователь уже выбрал
+        // Принудительная тема, если пользователь уже выбрал тёмную
         (function() {
             const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
-                document.documentElement.style.setProperty('background', '#0f172a');
+                document.body.style.background = '#0f172a';
                 document.querySelector('.container').style.background = '#1e293b';
             }
         })();
