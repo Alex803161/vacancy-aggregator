@@ -114,6 +114,14 @@
             color: #f87171;
         }
     </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y3LEHS2D4G');
+    </script>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
@@ -175,6 +183,7 @@
 
     clearBtn.addEventListener('click', () => {
         localStorage.removeItem('recentVacancies');
+        sendGAEvent('clear_history', { event_category: 'engagement' });
         renderHistory();
     });
 
