@@ -180,7 +180,10 @@
 
 <script src="common.js"></script>
 <script>
-    const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';
+    // Раздельные URL для поиска и подписки
+    const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';   // Node (поиск, вакансии, города)
+    const SUBSCRIBE_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8'; // Python (подписка)
+
     const PAGE_SIZE = 20;
     const CACHE_TTL = 5 * 60 * 1000;
     const searchCache = new Map();
@@ -778,6 +781,7 @@
         goToVacancy(id);
     });
 
+    // Подписка теперь использует SUBSCRIBE_URL (Python-функция)
     subscribeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = subscribeEmailInput.value.trim();
@@ -790,7 +794,7 @@
         subscribeSubmitBtn.innerHTML = '<span>Отправка...</span> <i class="fas fa-spinner fa-pulse"></i>';
         subscribeStatus.textContent = '';
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(SUBSCRIBE_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: 'subscribe', email: email })
