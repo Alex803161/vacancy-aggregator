@@ -314,11 +314,10 @@ function saveSubscriptionFilters(filters) {
 
 /* ========== Уведомления в Telegram ========== */
 
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // замени на свой токен от BotFather
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // замени на свой chat_id
+const TELEGRAM_BOT_TOKEN = '8665726865:AAHKsidJs19haX4L7KPmuKv9QqIkrpqTHAU';
+const TELEGRAM_CHAT_ID = '949632651';
 
 async function sendTelegramNotification(text) {
-    if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN') return; // не отправлять, если токен не задан
     try {
         await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
