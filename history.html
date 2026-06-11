@@ -16,175 +16,52 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <script>
-        (function() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else if (theme === 'light') {
-                document.documentElement.classList.remove('dark');
-            } else {
-                const hour = new Date().getHours();
-                if (hour >= 20 || hour < 6) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-        })();
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') { document.documentElement.classList.add('dark'); } else if (theme === 'light') { document.documentElement.classList.remove('dark'); } else { const hour = new Date().getHours(); if (hour >= 20 || hour < 6) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } } })();
     </script>
     <style>
-        .cards {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 16px 20px;
-            border: 1px solid #edf2f7;
-            cursor: pointer;
-            transition: box-shadow 0.2s;
-        }
-        html.dark .card {
-            background: #1e293b;
-            border-color: #334155;
-        }
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .card h3 {
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-        html.dark .card h3 {
-            color: #f1f5f9;
-        }
-        .card .company {
-            color: #334155;
-            font-weight: 600;
-        }
-        html.dark .card .company {
-            color: #f1f5f9;
-        }
-        .card .salary {
-            color: #059669;
-            font-weight: 700;
-        }
-        html.dark .card .salary {
-            color: #34d399;
-        }
-        .card .city {
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-        html.dark .card .city {
-            color: #94a3b8;
-        }
-        .card .timestamp {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            margin-top: 8px;
-        }
-        html.dark .card .timestamp {
-            color: #64748b;
-        }
-        .clear-section {
-            text-align: right;
-            margin-bottom: 16px;
-        }
-        .clear-btn {
-            background: none;
-            border: 1px solid #cbd5e1;
-            color: #dc2626;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        html.dark .clear-btn {
-            border-color: #475569;
-            color: #f87171;
-        }
+        .cards { display: flex; flex-direction: column; gap: 12px; }
+        .card { background: white; border-radius: 16px; padding: 16px 20px; border: 1px solid #edf2f7; cursor: pointer; transition: box-shadow 0.2s; } html.dark .card { background: #1e293b; border-color: #334155; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .card h3 { color: #0f172a; margin-bottom: 4px; } html.dark .card h3 { color: #f1f5f9; }
+        .card .company { color: #334155; font-weight: 600; } html.dark .card .company { color: #f1f5f9; }
+        .card .salary { color: #059669; font-weight: 700; } html.dark .card .salary { color: #34d399; }
+        .card .city { color: #64748b; font-size: 0.85rem; } html.dark .card .city { color: #94a3b8; }
+        .card .timestamp { color: #94a3b8; font-size: 0.75rem; margin-top: 8px; } html.dark .card .timestamp { color: #64748b; }
+        .clear-section { text-align: right; margin-bottom: 16px; }
+        .clear-btn { background: none; border: 1px solid #cbd5e1; color: #dc2626; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 500; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; } html.dark .clear-btn { border-color: #475569; color: #f87171; }
     </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
-
 <div class="container">
-    <div class="header">
-        <div class="logo-container">
-            <span class="logo-heart"></span>
-            <span class="logo-text">Ваканса</span>
-        </div>
-        <h1 class="page-title">История просмотров</h1>
-        <p>Работа найдётся — и не одна</p>
-    </div>
-
-    <div class="clear-section">
-        <button id="clearHistoryBtn" class="clear-btn"><i class="fas fa-trash-alt"></i> Очистить историю</button>
-    </div>
-
+    <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">История просмотров</h1><p>Работа найдётся — и не одна</p></div>
+    <div class="clear-section"><button id="clearHistoryBtn" class="clear-btn"><i class="fas fa-trash-alt"></i> Очистить историю</button></div>
     <div id="historyList" class="cards"></div>
     <p id="emptyMessage" style="display:none; text-align:center; padding:40px; color:#64748b;">Нет просмотренных вакансий.</p>
 </div>
-
 <footer class="site-footer">
     <div class="footer-links">
-        <a href="privacy.html">Политика конфиденциальности</a>
-        <a href="terms.html">Пользовательское соглашение</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="history.html">История просмотров</a>
-        <a href="compare.html">Сравнение</a>
-        <a href="dashboard.html">Дашборд</a>
+        <div class="footer-links-row">
+            <a href="history.html"><i class="fas fa-history"></i> История</a>
+            <a href="compare.html" class="highlight"><i class="fas fa-balance-scale"></i> Сравнение</a>
+            <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
+        </div>
+        <div class="footer-links-row">
+            <a href="privacy.html">Политика</a>
+            <a href="terms.html">Соглашение</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
     </div>
     <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
 </footer>
-
 <button id="themeToggle" class="theme-switch">🌙</button>
-
 <script src="common.js"></script>
 <script>
-    const historyList = document.getElementById('historyList');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const clearBtn = document.getElementById('clearHistoryBtn');
-
-    function renderHistory() {
-        const recent = JSON.parse(localStorage.getItem('recentVacancies') || '[]');
-        if (recent.length === 0) {
-            historyList.innerHTML = '';
-            emptyMessage.style.display = 'block';
-            return;
-        }
-        emptyMessage.style.display = 'none';
-        historyList.innerHTML = recent.map(v => `
-            <div class="card" onclick="window.location.href='vacancy.html?id=${v.id}'">
-                <h3>${escapeHtml(v.name) || 'Без названия'}</h3>
-                <p class="company">${escapeHtml(v.employer) || 'Компания не указана'}</p>
-                ${v.salary ? `<p class="salary">${escapeHtml(v.salary)}</p>` : ''}
-                ${v.area ? `<p class="city">📍 ${escapeHtml(v.area)}</p>` : ''}
-                <p class="timestamp">${v.timestamp ? new Date(v.timestamp).toLocaleString('ru-RU') : ''}</p>
-            </div>
-        `).join('');
-    }
-
-    clearBtn.addEventListener('click', () => {
-        localStorage.removeItem('recentVacancies');
-        renderHistory();
-    });
-
+    const historyList = document.getElementById('historyList'), emptyMessage = document.getElementById('emptyMessage'), clearBtn = document.getElementById('clearHistoryBtn');
+    function renderHistory() { const recent = JSON.parse(localStorage.getItem('recentVacancies') || '[]'); if (recent.length === 0) { historyList.innerHTML = ''; emptyMessage.style.display = 'block'; return; } emptyMessage.style.display = 'none'; historyList.innerHTML = recent.map(v => `<div class="card" onclick="window.location.href='vacancy.html?id=${v.id}'"><h3>${escapeHtml(v.name) || 'Без названия'}</h3><p class="company">${escapeHtml(v.employer) || 'Компания не указана'}</p>${v.salary ? `<p class="salary">${escapeHtml(v.salary)}</p>` : ''}${v.area ? `<p class="city">📍 ${escapeHtml(v.area)}</p>` : ''}<p class="timestamp">${v.timestamp ? new Date(v.timestamp).toLocaleString('ru-RU') : ''}</p></div>`).join(''); }
+    clearBtn.addEventListener('click', () => { localStorage.removeItem('recentVacancies'); renderHistory(); });
     renderHistory();
-
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
-    registerSW('/vacancy-aggregator/');
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
