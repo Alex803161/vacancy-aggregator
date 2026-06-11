@@ -150,9 +150,24 @@ html.dark .site-footer {
 }
 
 .footer-links a {
-    color: #64748b;
+    color: #334155;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.footer-links a:hover {
+    color: #0047cc;
+    text-decoration: underline;
+}
+
+html.dark .footer-links a {
+    color: #cbd5e1;
+}
+
+html.dark .footer-links a:hover {
+    color: #60a5fa;
 }
 
 .footer-copy {
@@ -847,11 +862,11 @@ html.dark .subscribe-desc {
 
 .subscribe-input {
     flex: 1 1 250px;
-    padding: 14px 18px;
+    padding: 10px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 40px;
     outline: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     background: white;
     color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -871,10 +886,10 @@ html.dark .subscribe-input {
     background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
     color: white;
     border: none;
-    padding: 14px 28px;
+    padding: 10px 24px;
     border-radius: 40px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
     box-shadow: 0 4px 12px rgba(0,71,204,0.3);
@@ -1146,13 +1161,20 @@ html.dark .saved-search-card {
     }
     .subscribe-input {
         width: 100%;
+        padding: 10px 14px;
+        font-size: 0.85rem;
     }
     .subscribe-btn {
         width: 100%;
         justify-content: center;
+        padding: 10px 24px;
+        font-size: 0.85rem;
     }
     .site-footer {
         padding-bottom: 120px;
+    }
+    .footer-links a {
+        font-size: 0.9rem;
     }
     .theme-switch {
         bottom: 80px;
@@ -1168,6 +1190,25 @@ html.dark .saved-search-card {
         width: 46px;
         height: 46px;
         font-size: 1.2rem;
+    }
+    /* Крестик и сердечко на мобильных */
+    .save-btn {
+        width: 30px;
+        height: 30px;
+        right: 6px;
+        top: 6px;
+    }
+    .hide-btn {
+        width: 30px;
+        height: 30px;
+        right: 40px;
+        top: 6px;
+    }
+    .job-title {
+        padding-right: 75px;
+    }
+    .salary {
+        padding-right: 75px;
     }
 }
 
@@ -1236,9 +1277,20 @@ html.dark .saved-search-card {
     .subscribe-desc {
         font-size: 0.85rem;
     }
+    .subscribe-input {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    .subscribe-btn {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+    }
     .footer-links {
         flex-direction: column;
         gap: 10px;
+    }
+    .footer-links a {
+        font-size: 0.9rem;
     }
     .theme-switch {
         bottom: 70px;
@@ -1253,5 +1305,24 @@ html.dark .saved-search-card {
         width: 42px;
         height: 42px;
         font-size: 1rem;
+    }
+    /* Крестик и сердечко на самых маленьких */
+    .save-btn {
+        width: 28px;
+        height: 28px;
+        right: 4px;
+        top: 4px;
+    }
+    .hide-btn {
+        width: 28px;
+        height: 28px;
+        right: 34px;
+        top: 4px;
+    }
+    .job-title {
+        padding-right: 65px;
+    }
+    .salary {
+        padding-right: 65px;
     }
 }
