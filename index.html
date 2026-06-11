@@ -165,6 +165,11 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 12px;
         }
+        /* Новые кнопки мессенджеров */
+        .btn-vk { background: #0077FF; color: white; }
+        .btn-vk:hover { background: #0066CC; }
+        .btn-max { background: #8B5CF6; color: white; }
+        .btn-max:hover { background: #6D28D9; }
         @media (max-width: 768px) { 
             .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
             #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -1058,6 +1063,8 @@
             const shareText = encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}. Подробнее: ${vacancyUrl}`);
             const whatsappLink = `https://wa.me/?text=${shareText}`;
             const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
+            const vkLink = `https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
+            const maxLink = `https://max.ru/share?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;
 
             // Плашка совпадения
             let matchBadge = '';
@@ -1067,7 +1074,7 @@
                 else matchBadge = `<span class="match-badge match--low">${vac.score}%</span>`;
             }
 
-            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a></div>`;
+            card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${matchBadge}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${logoSrc}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); sendGAEvent('click_respond', { vacancy_id: '${vac.id}', vacancy_title: '${vac.title}', vacancy_company: '${vac.company}' }); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${contactButton}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" onclick="event.stopPropagation();" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" onclick="event.stopPropagation();" title="Telegram"><i class="fab fa-telegram-plane"></i></a><a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" onclick="event.stopPropagation();" title="ВКонтакте"><i class="fab fa-vk"></i></a><a href="${maxLink}" target="_blank" class="btn-share-round btn-max" onclick="event.stopPropagation();" title="Макс"><i class="fas fa-comment-dots"></i></a></div>`;
             container.appendChild(card);
         });
     }
