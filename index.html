@@ -161,7 +161,7 @@
             <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
         </div>
         <div class="footer-links-row">
-            <a href="privacy.html">Политика</a><a href="terms.html">Соглашение</a><a href="contacts.html">Контакты</a>
+            <a href="privacy.html">Политика</a> <a href="terms.html">Соглашение</a> <a href="contacts.html">Контакты</a>
         </div>
     </div>
     <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
@@ -180,6 +180,8 @@
     const CACHE_TTL=5*60*1000, searchCache=new Map();
     function getCachedResult(key){const c=searchCache.get(key);if(!c)return null;if(Date.now()-c.timestamp>CACHE_TTL){searchCache.delete(key);return null}return c.data}
     function setCachedResult(key,data){searchCache.set(key,{timestamp:Date.now(),data:data})}
+    function getAds() { return JSON.parse(localStorage.getItem('ads') || '[]'); }
+    function isAdActive(ad) { if (!ad.expiry) return true; return new Date(ad.expiry) > new Date(); }
     async function fetchVacanciesFromAPI(query,filters={}){const p=new URLSearchParams();if(filters._t)p.set('_t',filters._t);if(query)p.set('text',query);if(filters.area)p.set('area',filters.area);if(filters.employment)p.set('employment',filters.employment);if(filters.schedule)p.set('schedule',filters.schedule);if(filters.order_by)p.set('order_by',filters.order_by);const pp=filters.per_page||30;p.set('per_page',pp);if(filters.page!==undefined)p.set('page',filters.page);const r=await fetch(`${API_URL}?${p.toString()}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);const d=await r.json();if(d&&d.items&&Array.isArray(d.items))return{items:d.items,found:d.found||d.items.length};if(d&&Array.isArray(d))return{items:d,found:d.length};return{items:[],found:0}}
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),
         vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),
