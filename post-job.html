@@ -34,6 +34,7 @@
         .btn-submit { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 14px 24px; border-radius: 40px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s; }
         .btn-submit:hover { background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%); }
         .back-link { display: inline-block; margin-top: 24px; color: #1a73e8; text-decoration: none; font-weight: 500; }
+        .form-hint { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
     </style>
 </head>
 <body class="light">
@@ -48,6 +49,9 @@
             <div class="form-group"><label for="company">Компания *</label><input type="text" id="company" required placeholder="ООО Ромашка"></div>
             <div class="form-group"><label for="city">Город</label><input type="text" id="city" placeholder="Москва"></div>
             <div class="form-group"><label for="salary">Зарплата</label><input type="text" id="salary" placeholder="от 100 000 ₽"></div>
+            <div class="form-group"><label for="phone">Телефон для связи</label><input type="tel" id="phone" placeholder="+7 (999) 123-45-67"><span class="form-hint">Будет показана кнопка «Позвонить»</span></div>
+            <div class="form-group"><label for="email">Email для откликов</label><input type="email" id="email" placeholder="hr@company.ru"><span class="form-hint">Будет показана кнопка «Написать»</span></div>
+            <div class="form-group"><label for="website">Сайт компании</label><input type="url" id="website" placeholder="https://company.ru"><span class="form-hint">Будет показана кнопка «Сайт компании»</span></div>
             <div class="form-group"><label for="description">Описание вакансии</label><textarea id="description" rows="5" placeholder="Обязанности, требования, условия..."></textarea></div>
             <div class="premium-option"><input type="checkbox" id="premiumCheckbox"><label for="premiumCheckbox" style="margin:0; font-weight:600;">⭐ Премиум-размещение</label><span style="font-size:0.8rem; margin-left:auto;">Будет видно на главной</span></div>
             <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Опубликовать вакансию</button>
@@ -75,7 +79,7 @@
 <script src="common.js"></script>
 <script>
     const form = document.getElementById('jobForm'), formMessage = document.getElementById('formMessage');
-    form.addEventListener('submit', (e) => { e.preventDefault(); const job = { id: Date.now(), title: escapeHtml(document.getElementById('title').value.trim()), company: escapeHtml(document.getElementById('company').value.trim()), city: escapeHtml(document.getElementById('city').value.trim()), salary: escapeHtml(document.getElementById('salary').value.trim()), description: escapeHtml(document.getElementById('description').value.trim()), isPremium: document.getElementById('premiumCheckbox').checked, timestamp: new Date().toISOString() }; if (!job.title || !job.company) { formMessage.textContent = '❌ Заполните название вакансии и компанию'; formMessage.style.color = '#dc2626'; return; } const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]'); existing.push(job); localStorage.setItem('direct_jobs', JSON.stringify(existing)); formMessage.textContent = '✅ Вакансия успешно добавлена!'; formMessage.style.color = '#059669'; form.reset(); });
+    form.addEventListener('submit', (e) => { e.preventDefault(); const job = { id: Date.now(), title: escapeHtml(document.getElementById('title').value.trim()), company: escapeHtml(document.getElementById('company').value.trim()), city: escapeHtml(document.getElementById('city').value.trim()), salary: escapeHtml(document.getElementById('salary').value.trim()), phone: escapeHtml(document.getElementById('phone').value.trim()), email: escapeHtml(document.getElementById('email').value.trim()), website: escapeHtml(document.getElementById('website').value.trim()), description: escapeHtml(document.getElementById('description').value.trim()), isPremium: document.getElementById('premiumCheckbox').checked, timestamp: new Date().toISOString() }; if (!job.title || !job.company) { formMessage.textContent = '❌ Заполните название вакансии и компанию'; formMessage.style.color = '#dc2626'; return; } const existing = JSON.parse(localStorage.getItem('direct_jobs') || '[]'); existing.push(job); localStorage.setItem('direct_jobs', JSON.stringify(existing)); formMessage.textContent = '✅ Вакансия успешно добавлена!'; formMessage.style.color = '#059669'; form.reset(); });
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
