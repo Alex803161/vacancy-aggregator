@@ -174,7 +174,6 @@ function setupThemeToggle(buttonId) {
         btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
-    // Слушатель изменения системной темы
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
         const saved = localStorage.getItem('theme');
@@ -271,4 +270,20 @@ async function fetchPopularVacancies(apiUrl, count = 5) {
         console.warn('Не удалось загрузить рекомендации', e);
         return [];
     }
+}
+
+/* ========== Прямые вакансии ========== */
+
+function getDirectJobs() {
+    return JSON.parse(localStorage.getItem('direct_jobs') || '[]');
+}
+
+/* ========== Подписка на вакансии ========== */
+
+function getSubscriptionFilters() {
+    return JSON.parse(localStorage.getItem('subscriptionFilters') || '{"query":"","area":"113","areaName":"","salaryFrom":"","email":""}');
+}
+
+function saveSubscriptionFilters(filters) {
+    localStorage.setItem('subscriptionFilters', JSON.stringify(filters));
 }
