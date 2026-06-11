@@ -88,27 +88,27 @@
         loadingIndicator=document.getElementById('loadingIndicator'), sortByDateV=document.getElementById('sortByDateV'),
         sortBySalaryV=document.getElementById('sortBySalaryV'), sortByMatchV=document.getElementById('sortByMatchV');
 
-    function getDirectJobs() { return JSON.parse(localStorage.getItem('direct_jobs') || '[]'); }
-
     function setActiveSortButton(sort) { [sortByDateV,sortBySalaryV,sortByMatchV].forEach(b=>b.classList.remove('active')); if(sort==='publication_time')sortByDateV.classList.add('active'); else if(sort==='salary_desc')sortBySalaryV.classList.add('active'); else if(sort==='match_score')sortByMatchV.classList.add('active'); }
 
     function sortVacancies(items) {
         const premium = items.filter(v => v.isPremium);
-        const normal = items.filter(v => !v.isPremium);
+        const urgent = items.filter(v => !v.isPremium && v.isUrgent);
+        const normal = items.filter(v => !v.isPremium && !v.isUrgent);
         const sortFn = (a, b) => {
             if (currentSort === 'match_score') return (b._score || 0) - (a._score || 0);
             if (currentSort === 'salary_desc') return (b.salary?.from || 0) - (a.salary?.from || 0);
             return new Date(b.published_at) - new Date(a.published_at);
         };
         premium.sort(sortFn);
+        urgent.sort(sortFn);
         normal.sort(sortFn);
-        return [...premium, ...normal];
+        return [...premium, ...urgent, ...normal];
     }
 
     function createCard(v) {
         const emp=getEmployerName(v.employer), empLogo=v.employer?.logo_urls?.original||v.employer?.logo_urls?.['90'], salary=formatSalary(v.salary),
             area=v.area?.name||'', published=timeAgo(v.published_at), score=calculateMatchScore(v,currentSearchQuery),
-            inCompare=isInCompare(v.id), isPremium=v.isPremium===true;
+            inCompare=isInCompare(v.id), isPremium=v.isPremium===true, isUrgent=v.isUrgent===true;
         let matchBadge='';
         if(currentSearchQuery&&score>0){
             if(score>=85)matchBadge=`<span class="match-badge match--high">${score}%</span>`;
@@ -121,8 +121,14 @@
         const telegramLink=`https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${v.name||'Без названия'} (${emp}), ${salary}`)}`;
         const vkLink=`https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${v.name||'Без названия'} (${emp}), ${salary}`)}`;
         const shareBlock=`<div class="share-wrapper" onclick="event.stopPropagation();"><button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button><div class="share-popup"><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a><a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a><button class="btn-share-round btn-copy-link" title="Копировать ссылку" data-url="${vacancyUrl}"><i class="fas fa-link"></i></button></div></div>`;
-        const cardClass = isPremium ? 'vacancy-card premium' : 'vacancy-card';
-        return `<div class="${cardClass}" onclick="window.location.href='vacancy.html?id=${v.id}'"><div class="job-title"><span>${escapeHtml(v.name)||'Без названия'}</span>${matchBadge}${published?`<span class="date-badge">${published}</span>`:''}</div>${salary?`<div class="salary">${salary}</div>`:''}<div class="company-block"><div class="logo-placeholder">${empLogo?`<img src="${empLogo}" alt="Логотип компании ${escapeHtml(emp)}" loading="lazy">`:(emp||'?').charAt(0).toUpperCase()}</div><span class="company-name">${escapeHtml(emp)||'Компания не указана'}</span></div>${area?`<div class="address">📍 ${escapeHtml(area)}</div>`:''}<div class="card-actions" onclick="event.stopPropagation();"><a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a><button class="btn-compare ${inCompare?'in-compare':''}" data-id="${v.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>${shareBlock}</div></div>`;
+        let contactButtons = '';
+        if (v.phone) contactButtons += `<a href="tel:${v.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
+        if (v.email) contactButtons += `<a href="mailto:${v.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`;
+        if (v.website) contactButtons += `<a href="${v.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`;
+        let cardClass = 'vacancy-card';
+        if (isPremium) cardClass += ' premium';
+        if (isUrgent) cardClass += ' urgent';
+        return `<div class="${cardClass}" onclick="window.location.href='vacancy.html?id=${v.id}'"><div class="job-title"><span>${escapeHtml(v.name)||'Без названия'}</span>${matchBadge}${published?`<span class="date-badge">${published}</span>`:''}</div>${salary?`<div class="salary">${salary}</div>`:''}<div class="company-block"><div class="logo-placeholder">${empLogo?`<img src="${empLogo}" alt="Логотип компании ${escapeHtml(emp)}" loading="lazy">`:(emp||'?').charAt(0).toUpperCase()}</div><span class="company-name">${escapeHtml(emp)||'Компания не указана'}</span></div>${area?`<div class="address">📍 ${escapeHtml(area)}</div>`:''}<div class="card-actions" onclick="event.stopPropagation();"><a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a>${contactButtons}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${v.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>${shareBlock}</div></div>`;
     }
 
     async function loadVacancies(page=0, append=false) {
@@ -133,7 +139,6 @@
             const res=await fetch(`${API_URL}?${params.toString()}`);
             const data=await res.json();
             let items=data.items||[];
-            // Добавляем прямые вакансии
             const directJobs = getDirectJobs();
             const directItems = directJobs.map(j => ({
                 id: j.id,
@@ -144,10 +149,13 @@
                 area: { name: j.city },
                 published_at: j.timestamp,
                 isPremium: !!j.isPremium,
+                isUrgent: !!j.isUrgent,
+                phone: j.phone || null,
+                email: j.email || null,
+                website: j.website || null,
                 source: 'direct'
             }));
             items = [...items, ...directItems];
-            // Убираем дубликаты
             const seen = new Set();
             items = items.filter(v => {
                 if (seen.has(v.id)) return false;
@@ -191,9 +199,11 @@
         const id=card.dataset.id;
         if(e.target.closest('.btn-compare')){
             e.stopPropagation();
-            const vac=allVacancies.find(v=>v.id==id);
-            if(vac){toggleCompare(vac);const btn=e.target.closest('.btn-compare');btn.classList.toggle('in-compare',isInCompare(id))}
-            return
+            const vac={id:id};
+            toggleCompare(vac);
+            const btn=e.target.closest('.btn-compare');
+            btn.classList.toggle('in-compare',isInCompare(id));
+            return;
         }
     });
     document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper')){document.querySelectorAll('.share-popup.show').forEach(p=>p.classList.remove('show'))}});
