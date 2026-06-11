@@ -88,6 +88,9 @@
         loadingIndicator=document.getElementById('loadingIndicator'), sortByDateV=document.getElementById('sortByDateV'),
         sortBySalaryV=document.getElementById('sortBySalaryV'), sortByMatchV=document.getElementById('sortByMatchV');
 
+    function getAds() { return JSON.parse(localStorage.getItem('ads') || '[]'); }
+    function isAdActive(ad) { if (!ad.expiry) return true; return new Date(ad.expiry) > new Date(); }
+
     function setActiveSortButton(sort) { [sortByDateV,sortBySalaryV,sortByMatchV].forEach(b=>b.classList.remove('active')); if(sort==='publication_time')sortByDateV.classList.add('active'); else if(sort==='salary_desc')sortBySalaryV.classList.add('active'); else if(sort==='match_score')sortByMatchV.classList.add('active'); }
 
     function sortVacancies(items) {
@@ -131,6 +134,20 @@
         return `<div class="${cardClass}" onclick="window.location.href='vacancy.html?id=${v.id}'"><div class="job-title"><span>${escapeHtml(v.name)||'Без названия'}</span>${matchBadge}${published?`<span class="date-badge">${published}</span>`:''}</div>${salary?`<div class="salary">${salary}</div>`:''}<div class="company-block"><div class="logo-placeholder">${empLogo?`<img src="${empLogo}" alt="Логотип компании ${escapeHtml(emp)}" loading="lazy">`:(emp||'?').charAt(0).toUpperCase()}</div><span class="company-name">${escapeHtml(emp)||'Компания не указана'}</span></div>${area?`<div class="address">📍 ${escapeHtml(area)}</div>`:''}<div class="card-actions" onclick="event.stopPropagation();"><a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a>${contactButtons}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${v.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>${shareBlock}</div></div>`;
     }
 
+    function createAdCard(ad) {
+        const imgHtml = ad.image ? `<img src="${escapeHtml(ad.image)}" alt="${escapeHtml(ad.title)}" style="width:100%; height:120px; object-fit:cover; border-radius:12px; margin-bottom:8px;">` : '';
+        const descHtml = ad.description ? `<p style="color:#92400e; margin:8px 0;">${escapeHtml(ad.description)}</p>` : '';
+        return `<div class="vacancy-card ad" data-ad-id="${ad.id}" onclick="event.stopPropagation(); window.open('${escapeHtml(ad.link)}', '_blank');">
+            <button class="hide-btn" data-ad-id="${ad.id}" title="Скрыть рекламу" onclick="event.stopPropagation(); this.closest('.vacancy-card').remove();"><i class="fas fa-times"></i></button>
+            ${imgHtml}
+            <div class="job-title"><span>${escapeHtml(ad.title)}</span></div>
+            ${descHtml}
+            <div class="card-actions">
+                <a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();"><i class="fas fa-external-link-alt"></i> Перейти</a>
+            </div>
+        </div>`;
+    }
+
     async function loadVacancies(page=0, append=false) {
         if(isLoading)return; isLoading=true; loadingIndicator.style.display='block'; loadMoreBtn.style.display='none';
         const query=searchInput.value.trim(); currentSearchQuery=query;
@@ -165,7 +182,17 @@
             items.forEach(v=>{v._score=calculateMatchScore(v,query)});
             items = sortVacancies(items);
             if(!append){vacanciesContainer.innerHTML='';}
-            items.forEach(v=>{vacanciesContainer.innerHTML+=createCard(v)});
+            // Вставка рекламы в выдачу
+            const ads = getAds().filter(isAdActive);
+            let adIndex = 0;
+            items.forEach((v, i) => {
+                vacanciesContainer.innerHTML += createCard(v);
+                // Каждые 6 вакансий вставляем рекламу
+                if ((i + 1) % 6 === 0 && adIndex < ads.length) {
+                    vacanciesContainer.innerHTML += createAdCard(ads[adIndex]);
+                    adIndex++;
+                }
+            });
             document.querySelectorAll('.vacancy-card').forEach(card=>{
                 const trigger=card.querySelector('.btn-share-trigger'), popup=card.querySelector('.share-popup');
                 if(trigger&&popup){
@@ -196,6 +223,12 @@
     sortByMatchV.addEventListener('click',()=>{currentSort='match_score';setActiveSortButton(currentSort);loadVacancies(0,false)});
     vacanciesContainer.addEventListener('click',e=>{
         const card=e.target.closest('.vacancy-card');if(!card)return;
+        if(card.classList.contains('ad')){
+            const adId=card.dataset.adId;
+            const ad=getAds().find(a=>a.id==adId);
+            if(ad)window.open(ad.link,'_blank');
+            return;
+        }
         const id=card.dataset.id;
         if(e.target.closest('.btn-compare')){
             e.stopPropagation();
