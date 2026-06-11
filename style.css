@@ -99,7 +99,7 @@ html.dark .logo-heart {
     box-shadow: 0 6px 12px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
 }
 
-/* === Кнопка темы (плавающая) === */
+/* === Кнопка темы === */
 .theme-switch {
     position: fixed;
     bottom: 90px;
@@ -706,7 +706,6 @@ html.dark .tag {
 .btn-telegram { background: #0088cc; color: white; }
 .btn-telegram:hover { background: #006699; }
 
-/* Отступы для групп кнопок */
 .share-buttons {
     display: flex;
     gap: 14px;
@@ -714,6 +713,7 @@ html.dark .tag {
     flex-wrap: wrap;
 }
 
+/* === Кнопки Избранное (вверху) и Скрыть (внизу) === */
 .save-btn {
     position: absolute;
     top: 10px;
@@ -732,6 +732,7 @@ html.dark .tag {
     transition: all 0.2s;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     padding: 0;
+    z-index: 5;
 }
 
 .save-btn.saved {
@@ -742,8 +743,9 @@ html.dark .tag {
 
 .hide-btn {
     position: absolute;
-    top: 10px;
-    right: 50px;
+    bottom: 10px;
+    right: 10px;
+    top: auto;
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -766,6 +768,7 @@ html.dark .tag {
     border-color: #dc2626;
 }
 
+html.dark .save-btn,
 html.dark .hide-btn {
     background: #1e293b;
     border-color: #475569;
@@ -1198,7 +1201,7 @@ html.dark .saved-search-card {
         height: 46px;
         font-size: 1.2rem;
     }
-    /* Кнопки "Скрыть" и "В избранное" на мобильных */
+    /* Кнопки на мобильных */
     .save-btn {
         width: 30px;
         height: 30px;
@@ -1208,8 +1211,9 @@ html.dark .saved-search-card {
     .hide-btn {
         width: 30px;
         height: 30px;
-        right: 42px;   /* увеличено */
-        top: 6px;
+        right: 6px;
+        bottom: 6px;
+        top: auto;
     }
     .job-title {
         padding-right: 80px;
@@ -1319,7 +1323,6 @@ html.dark .saved-search-card {
         height: 42px;
         font-size: 1rem;
     }
-    /* Кнопки "Скрыть" и "В избранное" на самых маленьких */
     .save-btn {
         width: 28px;
         height: 28px;
@@ -1329,8 +1332,9 @@ html.dark .saved-search-card {
     .hide-btn {
         width: 28px;
         height: 28px;
-        right: 38px;   /* увеличено */
-        top: 4px;
+        right: 4px;
+        bottom: 4px;
+        top: auto;
     }
     .job-title {
         padding-right: 70px;
@@ -1356,10 +1360,14 @@ html.dark .saved-search-card {
         bottom: 120px;
         font-size: 1rem;
     }
-    .hide-btn {
-        right: 38px;
-    }
     .save-btn {
-        right: 6px;
+        width: 26px;
+        height: 26px;
+        right: 2px;
+    }
+    .hide-btn {
+        width: 26px;
+        height: 26px;
+        right: 2px;
     }
 }
