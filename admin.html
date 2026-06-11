@@ -21,9 +21,16 @@
     </script>
     <style>
         .cards { display: flex; flex-direction: column; gap: 12px; }
+        .card { background: white; border-radius: 16px; padding: 16px 20px; border: 1px solid #edf2f7; transition: box-shadow 0.2s; position: relative; }
+        html.dark .card { background: #1e293b; border-color: #334155; }
+        .card.premium { border: 2px solid #f5b042; box-shadow: 0 2px 12px rgba(245,176,66,0.3); }
         .card h3 { color: #0f172a; margin-bottom: 4px; } html.dark .card h3 { color: #f1f5f9; }
         .card .company { color: #334155; font-weight: 600; } html.dark .card .company { color: #f1f5f9; }
         .card .salary { color: #059669; font-weight: 700; } html.dark .card .salary { color: #34d399; }
+        .card-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .premium-btn { background: #f59e0b; color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
+        .premium-btn.active { background: #b45309; }
+        .remove-btn { background: #dc2626; color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
     </style>
 </head>
 <body class="light">
@@ -54,8 +61,10 @@
 <script>
     const jobsList = document.getElementById('jobsList'), emptyMessage = document.getElementById('emptyMessage');
     function getDirectJobs() { return JSON.parse(localStorage.getItem('direct_jobs') || '[]'); }
-    function deleteJob(id) { let jobs = getDirectJobs(); jobs = jobs.filter(j => j.id !== id); localStorage.setItem('direct_jobs', JSON.stringify(jobs)); renderJobs(); }
-    function renderJobs() { const jobs = getDirectJobs(); jobsList.innerHTML = ''; if (jobs.length === 0) { emptyMessage.style.display = 'block'; return; } emptyMessage.style.display = 'none'; jobs.forEach(job => { const card = document.createElement('div'); card.className = 'card'; const title = document.createElement('h3'); title.textContent = job.title || 'Без названия'; card.appendChild(title); const company = document.createElement('p'); company.className = 'company'; company.textContent = job.company || 'Компания не указана'; card.appendChild(company); if (job.salary) { const salary = document.createElement('p'); salary.className = 'salary'; salary.textContent = escapeHtml(job.salary); card.appendChild(salary); } const desc = document.createElement('p'); desc.textContent = job.description || ''; card.appendChild(desc); const actions = document.createElement('div'); actions.className = 'card-actions'; const delBtn = document.createElement('button'); delBtn.textContent = 'Удалить'; delBtn.className = 'remove-btn'; delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteJob(job.id); }); actions.appendChild(delBtn); card.appendChild(actions); jobsList.appendChild(card); }); }
+    function saveDirectJobs(jobs) { localStorage.setItem('direct_jobs', JSON.stringify(jobs)); }
+    function togglePremium(id) { let jobs = getDirectJobs(); const index = jobs.findIndex(j => j.id === id); if (index > -1) { jobs[index].isPremium = !jobs[index].isPremium; saveDirectJobs(jobs); renderJobs(); } }
+    function deleteJob(id) { let jobs = getDirectJobs(); jobs = jobs.filter(j => j.id !== id); saveDirectJobs(jobs); renderJobs(); }
+    function renderJobs() { const jobs = getDirectJobs(); jobsList.innerHTML = ''; if (jobs.length === 0) { emptyMessage.style.display = 'block'; return; } emptyMessage.style.display = 'none'; jobs.sort((a, b) => (b.isPremium ? 1 : 0) - (a.isPremium ? 1 : 0)); jobs.forEach(job => { const card = document.createElement('div'); card.className = 'card'; if (job.isPremium) card.classList.add('premium'); const title = document.createElement('h3'); title.textContent = (job.isPremium ? '⭐ ' : '') + (job.title || 'Без названия'); card.appendChild(title); const company = document.createElement('p'); company.className = 'company'; company.textContent = job.company || 'Компания не указана'; card.appendChild(company); if (job.salary) { const salary = document.createElement('p'); salary.className = 'salary'; salary.textContent = escapeHtml(job.salary); card.appendChild(salary); } const desc = document.createElement('p'); desc.textContent = job.description || ''; card.appendChild(desc); const actions = document.createElement('div'); actions.className = 'card-actions'; const premiumBtn = document.createElement('button'); premiumBtn.className = 'premium-btn' + (job.isPremium ? ' active' : ''); premiumBtn.innerHTML = job.isPremium ? '<i class="fas fa-star"></i> Убрать премиум' : '<i class="far fa-star"></i> Сделать премиум'; premiumBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePremium(job.id); }); actions.appendChild(premiumBtn); const delBtn = document.createElement('button'); delBtn.textContent = 'Удалить'; delBtn.className = 'remove-btn'; delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteJob(job.id); }); actions.appendChild(delBtn); card.appendChild(actions); jobsList.appendChild(card); }); }
     renderJobs();
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
