@@ -21,206 +21,38 @@
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else if (theme === 'light') {
-                document.documentElement.classList.remove('dark');
-            } else {
-                const hour = new Date().getHours();
-                if (hour >= 20 || hour < 6) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
+            if (theme === 'dark') { document.documentElement.classList.add('dark'); }
+            else if (theme === 'light') { document.documentElement.classList.remove('dark'); }
+            else { const hour = new Date().getHours(); if (hour >= 20 || hour < 6) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } }
         })();
     </script>
     <style>
-        .sort-panel {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .sort-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            background: #eef2ff;
-            border: 1px solid #cbd5e1;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .sort-btn.active {
-            background: #0047cc;
-            color: white;
-            border-color: #0047cc;
-        }
-        html.dark .sort-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        html.dark .sort-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-        .export-panel {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-        .export-btn {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            color: #334155;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        .export-btn:hover {
-            background: #e2e8f0;
-        }
-        html.dark .export-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        .copy-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #059669;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .copy-notification.show {
-            opacity: 1;
-        }
-        .cards {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 16px 20px;
-            border: 1px solid #edf2f7;
-            cursor: pointer;
-            transition: box-shadow 0.2s;
-        }
-        html.dark .card {
-            background: #1e293b;
-            border-color: #334155;
-        }
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .card h3 {
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-        html.dark .card h3 {
-            color: #f1f5f9;
-        }
-        .card .company {
-            color: #334155;
-            font-weight: 600;
-        }
-        html.dark .card .company {
-            color: #f1f5f9;
-        }
-        .card .salary {
-            color: #059669;
-            font-weight: 700;
-        }
-        html.dark .card .salary {
-            color: #34d399;
-        }
-        .card .published {
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-        html.dark .card .published {
-            color: #94a3b8;
-        }
-        .note-container {
-            margin-top: 10px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .note-input {
-            flex: 1;
-            padding: 6px 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            background: white;
-            color: #0f172a;
-        }
-        html.dark .note-input {
-            background: #0f172a;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        .save-note-btn {
-            background: #eef2ff;
-            border: 1px solid #cbd5e1;
-            color: #334155;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-        html.dark .save-note-btn {
-            background: #334155;
-            border-color: #475569;
-            color: #e2e8f0;
-        }
-        .card-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .card-actions button {
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-size: 0.85rem;
-        }
-        .card-actions button:first-child {
-            background: #1a73e8;
-            color: white;
-        }
-        .remove-btn {
-            background: #dc2626 !important;
-            color: white !important;
-        }
+        .sort-panel { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .sort-btn { padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; background: #eef2ff; border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .sort-btn.active { background: #0047cc; color: white; border-color: #0047cc; }
+        html.dark .sort-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
+        html.dark .sort-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .export-panel { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        .export-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .export-btn:hover { background: #e2e8f0; }
+        html.dark .export-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .copy-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #059669; color: white; padding: 10px 24px; border-radius: 40px; font-weight: 600; z-index: 1000; opacity: 0; transition: opacity 0.3s; }
+        .copy-notification.show { opacity: 1; }
+        .cards { display: flex; flex-direction: column; gap: 12px; }
+        .card { background: white; border-radius: 16px; padding: 16px 20px; border: 1px solid #edf2f7; cursor: pointer; transition: box-shadow 0.2s; }
+        html.dark .card { background: #1e293b; border-color: #334155; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .card h3 { color: #0f172a; margin-bottom: 4px; } html.dark .card h3 { color: #f1f5f9; }
+        .card .company { color: #334155; font-weight: 600; } html.dark .card .company { color: #f1f5f9; }
+        .card .salary { color: #059669; font-weight: 700; } html.dark .card .salary { color: #34d399; }
+        .card .published { color: #64748b; font-size: 0.85rem; } html.dark .card .published { color: #94a3b8; }
+        .note-container { margin-top: 10px; display: flex; gap: 8px; align-items: center; }
+        .note-input { flex: 1; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; background: white; color: #0f172a; } html.dark .note-input { background: #0f172a; border-color: #475569; color: #e2e8f0; }
+        .save-note-btn { background: #eef2ff; border: 1px solid #cbd5e1; color: #334155; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.8rem; white-space: nowrap; } html.dark .save-note-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .card-actions { display: flex; gap: 8px; margin-top: 10px; }
+        .card-actions button { padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 0.85rem; }
+        .card-actions button:first-child { background: #1a73e8; color: white; }
+        .remove-btn { background: #dc2626 !important; color: white !important; }
     </style>
 </head>
 <body class="light">
@@ -228,10 +60,7 @@
 
 <div class="container">
     <div class="header">
-        <div class="logo-container">
-            <span class="logo-heart"></span>
-            <span class="logo-text">Ваканса</span>
-        </div>
+        <div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div>
         <h1 class="page-title">Избранные вакансии</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
@@ -252,11 +81,16 @@
 
 <footer class="site-footer">
     <div class="footer-links">
-        <a href="privacy.html">Политика конфиденциальности</a>
-        <a href="terms.html">Пользовательское соглашение</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="compare.html">Сравнение</a>
-        <a href="dashboard.html">Дашборд</a>
+        <div class="footer-links-row">
+            <a href="history.html"><i class="fas fa-history"></i> История</a>
+            <a href="compare.html" class="highlight"><i class="fas fa-balance-scale"></i> Сравнение</a>
+            <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
+        </div>
+        <div class="footer-links-row">
+            <a href="privacy.html">Политика</a>
+            <a href="terms.html">Соглашение</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
     </div>
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
@@ -265,203 +99,24 @@
 
 <script src="common.js"></script>
 <script>
-    const favoritesList = document.getElementById('favoritesList');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const sortByDateBtn = document.getElementById('sortByDate');
-    const sortBySalaryBtn = document.getElementById('sortBySalary');
-    const sortByNameBtn = document.getElementById('sortByName');
-    const exportBtn = document.getElementById('exportBtn');
-    const copyNotification = document.getElementById('copyNotification');
+    const favoritesList = document.getElementById('favoritesList'), emptyMessage = document.getElementById('emptyMessage'),
+        sortByDateBtn = document.getElementById('sortByDate'), sortBySalaryBtn = document.getElementById('sortBySalary'),
+        sortByNameBtn = document.getElementById('sortByName'), exportBtn = document.getElementById('exportBtn'),
+        copyNotification = document.getElementById('copyNotification');
     let currentSort = 'date';
 
-    function saveNote(id, note) {
-        let favorites = getFavorites();
-        const index = favorites.findIndex(v => v.id === id);
-        if (index > -1) {
-            favorites[index].note = note;
-            saveFavorites(favorites);
-        }
-    }
-
-    function removeFavorite(id) {
-        let favorites = getFavorites();
-        const index = favorites.findIndex(v => v.id === id);
-        if (index > -1) {
-            const deletedNotes = getDeletedNotes();
-            deletedNotes[id] = favorites[index].note || '';
-            saveDeletedNotes(deletedNotes);
-            favorites.splice(index, 1);
-            saveFavorites(favorites);
-            renderFavorites();
-        }
-    }
-
-    function sortFavorites(favorites, sortType) {
-        const sorted = [...favorites];
-        switch (sortType) {
-            case 'salary':
-                sorted.sort((a, b) => {
-                    const aSal = a.salary?.from || a.salary?.to || 0;
-                    const bSal = b.salary?.from || b.salary?.to || 0;
-                    return bSal - aSal;
-                });
-                break;
-            case 'name':
-                sorted.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ru'));
-                break;
-            case 'date':
-            default:
-                sorted.sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0));
-                break;
-        }
-        return sorted;
-    }
-
-    function setActiveSortButton(sortType) {
-        [sortByDateBtn, sortBySalaryBtn, sortByNameBtn].forEach(btn => btn.classList.remove('active'));
-        if (sortType === 'salary') sortBySalaryBtn.classList.add('active');
-        else if (sortType === 'name') sortByNameBtn.classList.add('active');
-        else sortByDateBtn.classList.add('active');
-    }
-
-    function exportFavorites() {
-        const favorites = getFavorites();
-        if (favorites.length === 0) {
-            alert('Нет вакансий для экспорта');
-            return;
-        }
-        const sorted = sortFavorites(favorites, currentSort);
-        const baseUrl = 'https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=';
-        const text = sorted.map(v => {
-            const emp = v.employer || 'Компания не указана';
-            const sal = formatSalary(v.salary);
-            const note = v.note ? ` [Заметка: ${v.note}]` : '';
-            return `${v.name || 'Без названия'} | ${emp} | ${sal}${note} | ${baseUrl}${v.id}`;
-        }).join('\n');
-
-        navigator.clipboard.writeText(text).then(() => {
-            copyNotification.classList.add('show');
-            setTimeout(() => copyNotification.classList.remove('show'), 2000);
-        }).catch(() => {
-            alert('Не удалось скопировать текст. Пожалуйста, скопируйте вручную.');
-        });
-    }
-
-    function renderFavorites() {
-        const favorites = getFavorites();
-        if (favorites.length === 0) {
-            favoritesList.innerHTML = '';
-            emptyMessage.style.display = 'block';
-            return;
-        }
-        emptyMessage.style.display = 'none';
-
-        const sorted = sortFavorites(favorites, currentSort);
-
-        favoritesList.innerHTML = '';
-        sorted.forEach(vacancy => {
-            const card = document.createElement('div');
-            card.className = 'card';
-
-            const title = document.createElement('h3');
-            title.textContent = vacancy.name || 'Без названия';
-            card.appendChild(title);
-
-            const company = document.createElement('p');
-            company.className = 'company';
-            company.textContent = vacancy.employer || 'Компания не указана';
-            card.appendChild(company);
-
-            if (vacancy.salary) {
-                const salary = document.createElement('p');
-                salary.className = 'salary';
-                salary.textContent = formatSalary(vacancy.salary);
-                card.appendChild(salary);
-            }
-
-            if (vacancy.published_at) {
-                const date = document.createElement('p');
-                date.className = 'published';
-                date.textContent = timeAgo(vacancy.published_at);
-                card.appendChild(date);
-            }
-
-            // Заметка
-            const noteContainer = document.createElement('div');
-            noteContainer.className = 'note-container';
-            const noteInput = document.createElement('input');
-            noteInput.type = 'text';
-            noteInput.className = 'note-input';
-            noteInput.placeholder = 'Добавить заметку...';
-            noteInput.value = vacancy.note || '';
-            noteInput.addEventListener('click', (e) => e.stopPropagation());
-            const saveNoteBtn = document.createElement('button');
-            saveNoteBtn.className = 'save-note-btn';
-            saveNoteBtn.textContent = 'Сохранить';
-            saveNoteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                saveNote(vacancy.id, noteInput.value);
-                saveNoteBtn.textContent = '✓';
-                setTimeout(() => { saveNoteBtn.textContent = 'Сохранить'; }, 1500);
-            });
-            noteContainer.appendChild(noteInput);
-            noteContainer.appendChild(saveNoteBtn);
-            card.appendChild(noteContainer);
-
-            const actions = document.createElement('div');
-            actions.className = 'card-actions';
-
-            const viewBtn = document.createElement('button');
-            viewBtn.textContent = 'Подробнее';
-            viewBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.location.href = `vacancy.html?id=${vacancy.id}`;
-            });
-            actions.appendChild(viewBtn);
-
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'Удалить';
-            removeBtn.className = 'remove-btn';
-            removeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                removeFavorite(vacancy.id);
-            });
-            actions.appendChild(removeBtn);
-
-            card.appendChild(actions);
-
-            card.addEventListener('click', () => {
-                window.location.href = `vacancy.html?id=${vacancy.id}`;
-            });
-
-            favoritesList.appendChild(card);
-        });
-    }
-
-    sortByDateBtn.addEventListener('click', () => {
-        currentSort = 'date';
-        setActiveSortButton('date');
-        renderFavorites();
-    });
-    sortBySalaryBtn.addEventListener('click', () => {
-        currentSort = 'salary';
-        setActiveSortButton('salary');
-        renderFavorites();
-    });
-    sortByNameBtn.addEventListener('click', () => {
-        currentSort = 'name';
-        setActiveSortButton('name');
-        renderFavorites();
-    });
-
+    function saveNote(id, note) { let favorites = getFavorites(); const index = favorites.findIndex(v => v.id === id); if (index > -1) { favorites[index].note = note; saveFavorites(favorites); } }
+    function removeFavorite(id) { let favorites = getFavorites(); const index = favorites.findIndex(v => v.id === id); if (index > -1) { const deletedNotes = getDeletedNotes(); deletedNotes[id] = favorites[index].note || ''; saveDeletedNotes(deletedNotes); favorites.splice(index, 1); saveFavorites(favorites); renderFavorites(); } }
+    function sortFavorites(favorites, sortType) { const sorted = [...favorites]; switch (sortType) { case 'salary': sorted.sort((a, b) => { const aSal = a.salary?.from || a.salary?.to || 0; const bSal = b.salary?.from || b.salary?.to || 0; return bSal - aSal; }); break; case 'name': sorted.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'ru')); break; default: sorted.sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0)); } return sorted; }
+    function setActiveSortButton(sortType) { [sortByDateBtn, sortBySalaryBtn, sortByNameBtn].forEach(btn => btn.classList.remove('active')); if (sortType === 'salary') sortBySalaryBtn.classList.add('active'); else if (sortType === 'name') sortByNameBtn.classList.add('active'); else sortByDateBtn.classList.add('active'); }
+    function exportFavorites() { const favorites = getFavorites(); if (favorites.length === 0) { alert('Нет вакансий для экспорта'); return; } const sorted = sortFavorites(favorites, currentSort); const baseUrl = 'https://alex803161.github.io/vacancy-aggregator/vacancy.html?id='; const text = sorted.map(v => { const emp = v.employer || 'Компания не указана'; const sal = formatSalary(v.salary); const note = v.note ? ` [Заметка: ${v.note}]` : ''; return `${v.name || 'Без названия'} | ${emp} | ${sal}${note} | ${baseUrl}${v.id}`; }).join('\n'); navigator.clipboard.writeText(text).then(() => { copyNotification.classList.add('show'); setTimeout(() => copyNotification.classList.remove('show'), 2000); }).catch(() => { alert('Не удалось скопировать текст. Пожалуйста, скопируйте вручную.'); }); }
+    function renderFavorites() { const favorites = getFavorites(); if (favorites.length === 0) { favoritesList.innerHTML = ''; emptyMessage.style.display = 'block'; return; } emptyMessage.style.display = 'none'; const sorted = sortFavorites(favorites, currentSort); favoritesList.innerHTML = ''; sorted.forEach(vacancy => { const card = document.createElement('div'); card.className = 'card'; const title = document.createElement('h3'); title.textContent = vacancy.name || 'Без названия'; card.appendChild(title); const company = document.createElement('p'); company.className = 'company'; company.textContent = vacancy.employer || 'Компания не указана'; card.appendChild(company); if (vacancy.salary) { const salary = document.createElement('p'); salary.className = 'salary'; salary.textContent = formatSalary(vacancy.salary); card.appendChild(salary); } if (vacancy.published_at) { const date = document.createElement('p'); date.className = 'published'; date.textContent = timeAgo(vacancy.published_at); card.appendChild(date); } const noteContainer = document.createElement('div'); noteContainer.className = 'note-container'; const noteInput = document.createElement('input'); noteInput.type = 'text'; noteInput.className = 'note-input'; noteInput.placeholder = 'Добавить заметку...'; noteInput.value = vacancy.note || ''; noteInput.addEventListener('click', (e) => e.stopPropagation()); const saveNoteBtn = document.createElement('button'); saveNoteBtn.className = 'save-note-btn'; saveNoteBtn.textContent = 'Сохранить'; saveNoteBtn.addEventListener('click', (e) => { e.stopPropagation(); saveNote(vacancy.id, noteInput.value); saveNoteBtn.textContent = '✓'; setTimeout(() => { saveNoteBtn.textContent = 'Сохранить'; }, 1500); }); noteContainer.appendChild(noteInput); noteContainer.appendChild(saveNoteBtn); card.appendChild(noteContainer); const actions = document.createElement('div'); actions.className = 'card-actions'; const viewBtn = document.createElement('button'); viewBtn.textContent = 'Подробнее'; viewBtn.addEventListener('click', (e) => { e.stopPropagation(); window.location.href = `vacancy.html?id=${vacancy.id}`; }); actions.appendChild(viewBtn); const removeBtn = document.createElement('button'); removeBtn.textContent = 'Удалить'; removeBtn.className = 'remove-btn'; removeBtn.addEventListener('click', (e) => { e.stopPropagation(); removeFavorite(vacancy.id); }); actions.appendChild(removeBtn); card.appendChild(actions); card.addEventListener('click', () => { window.location.href = `vacancy.html?id=${vacancy.id}`; }); favoritesList.appendChild(card); }); }
+    sortByDateBtn.addEventListener('click', () => { currentSort = 'date'; setActiveSortButton('date'); renderFavorites(); });
+    sortBySalaryBtn.addEventListener('click', () => { currentSort = 'salary'; setActiveSortButton('salary'); renderFavorites(); });
+    sortByNameBtn.addEventListener('click', () => { currentSort = 'name'; setActiveSortButton('name'); renderFavorites(); });
     exportBtn.addEventListener('click', exportFavorites);
-
     renderFavorites();
-
-    // Вызов функций из common.js
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
-    registerSW('/vacancy-aggregator/');
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
