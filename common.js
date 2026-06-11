@@ -272,10 +272,34 @@ async function fetchPopularVacancies(apiUrl, count = 5) {
     }
 }
 
-/* ========== Прямые вакансии ========== */
+/* ========== Прямые вакансии и модерация ========== */
 
 function getDirectJobs() {
     return JSON.parse(localStorage.getItem('direct_jobs') || '[]');
+}
+
+function getPendingJobs() {
+    return JSON.parse(localStorage.getItem('pending_jobs') || '[]');
+}
+
+function savePendingJobs(jobs) {
+    localStorage.setItem('pending_jobs', JSON.stringify(jobs));
+}
+
+function getPendingAds() {
+    return JSON.parse(localStorage.getItem('pending_ads') || '[]');
+}
+
+function savePendingAds(ads) {
+    localStorage.setItem('pending_ads', JSON.stringify(ads));
+}
+
+function getAds() {
+    return JSON.parse(localStorage.getItem('ads') || '[]');
+}
+
+function saveAds(ads) {
+    localStorage.setItem('ads', JSON.stringify(ads));
 }
 
 /* ========== Подписка на вакансии ========== */
@@ -286,4 +310,26 @@ function getSubscriptionFilters() {
 
 function saveSubscriptionFilters(filters) {
     localStorage.setItem('subscriptionFilters', JSON.stringify(filters));
+}
+
+/* ========== Уведомления в Telegram ========== */
+
+const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // замени на свой токен от BotFather
+const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // замени на свой chat_id
+
+async function sendTelegramNotification(text) {
+    if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN') return; // не отправлять, если токен не задан
+    try {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: text,
+                parse_mode: 'HTML'
+            })
+        });
+    } catch (e) {
+        console.warn('Не удалось отправить уведомление в Telegram', e);
+    }
 }
