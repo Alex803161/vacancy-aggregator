@@ -113,7 +113,7 @@
             border-radius: 16px;
             padding: 8px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            z-index: 20;
+            z-index: 30;
             white-space: nowrap;
             flex-direction: row;
             gap: 6px;
@@ -129,6 +129,9 @@
             width: 36px;
             height: 36px;
             font-size: 0.9rem;
+        }
+        .vacancy-card {
+            overflow: visible !important;
         }
         @media (max-width: 768px) { 
             .share-popup { bottom: auto; top: 110%; }
@@ -308,11 +311,10 @@
             }
 
             items.forEach(v => {
-                const cardHTML = createCard(v);
-                vacanciesContainer.innerHTML += cardHTML;
+                vacanciesContainer.innerHTML += createCard(v);
             });
 
-            // После отрисовки вешаем обработчики на кнопки «Поделиться»
+            // Вешаем обработчики на кнопки «Поделиться»
             document.querySelectorAll('.vacancy-card').forEach(card => {
                 const trigger = card.querySelector('.btn-share-trigger');
                 const popup = card.querySelector('.share-popup');
