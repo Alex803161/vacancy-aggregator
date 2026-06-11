@@ -9,7 +9,7 @@
   "description": "Агрегатор вакансий ВКАНСА — найдите работу своей мечты.",
   "icons": [
     {
-      "src": "/vacancy-aggregator/icons/icon.svg",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%230047cc;stop-opacity:1' /><stop offset='100%25' style='stop-color:%233b82f6;stop-opacity:1' /></linearGradient></defs><circle cx='256' cy='256' r='240' fill='%23ffffff' /><path d='M256 420 C140 340 72 268 72 190 C72 140 108 104 152 104 C182 104 210 126 226 154 L256 192 L286 154 C302 126 330 104 360 104 C404 104 440 140 440 190 C440 268 372 340 256 420Z' fill='url(%23grad)' /></svg>",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
