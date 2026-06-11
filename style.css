@@ -143,10 +143,18 @@ html.dark .site-footer {
 
 .footer-links {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.footer-links-row {
+    display: flex;
+    gap: 24px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 8px;
 }
 
 .footer-links a {
@@ -155,6 +163,7 @@ html.dark .site-footer {
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.2s, text-decoration 0.2s;
+    white-space: nowrap;
 }
 
 .footer-links a:hover {
@@ -170,9 +179,24 @@ html.dark .footer-links a:hover {
     color: #60a5fa;
 }
 
+.footer-links .highlight {
+    font-weight: 600;
+    color: #0047cc;
+}
+
+html.dark .footer-links .highlight {
+    color: #60a5fa;
+}
+
 .footer-copy {
     color: #94a3b8;
     font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .footer-links a {
+        font-size: 0.95rem;
+    }
 }
 
 /* === Кнопка "Наверх" === */
