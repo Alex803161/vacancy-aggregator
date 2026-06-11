@@ -308,7 +308,20 @@
             }
 
             items.forEach(v => {
-                vacanciesContainer.innerHTML += createCard(v);
+                const cardHTML = createCard(v);
+                vacanciesContainer.innerHTML += cardHTML;
+            });
+
+            // После отрисовки вешаем обработчики на кнопки «Поделиться»
+            document.querySelectorAll('.vacancy-card').forEach(card => {
+                const trigger = card.querySelector('.btn-share-trigger');
+                const popup = card.querySelector('.share-popup');
+                if (trigger && popup) {
+                    trigger.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        popup.classList.toggle('show');
+                    });
+                }
             });
 
             totalPages = data.pages || 1;
@@ -379,12 +392,6 @@
                 const btn = e.target.closest('.btn-compare');
                 btn.classList.toggle('in-compare', isInCompare(id));
             }
-            return;
-        }
-        if(e.target.closest('.btn-share-trigger')){
-            e.stopPropagation();
-            const popup = e.target.closest('.share-wrapper').querySelector('.share-popup');
-            if(popup) popup.classList.toggle('show');
             return;
         }
     });
