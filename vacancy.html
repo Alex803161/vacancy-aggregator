@@ -8,19 +8,19 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Статические SEO-теги (видны без JavaScript) -->
+    <!-- Статические SEO-теги -->
     <title>Вакансия — ВКАНСА | Поиск работы</title>
     <meta name="description" content="Подробная информация о вакансии на сайте ВКАНСА. Актуальные предложения работы от проверенных работодателей.">
     <link rel="canonical" id="seoCanonical" href="">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph (статика) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Вакансия на ВКАНСА">
     <meta property="og:description" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей.">
     <meta property="og:url" id="ogUrl" content="">
     <meta property="og:type" content="website">
     
-    <!-- JSON-LD Structured Data (заполнится динамически) -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" id="jsonLd"></script>
     
     <link rel="stylesheet" href="style.css">
@@ -200,27 +200,66 @@
         html.dark .similar-card .salary {
             color: #34d399;
         }
-        .share-buttons {
-            display: flex;
-            gap: 14px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+        /* === Кнопка «Поделиться» + popup === */
+        .share-wrapper {
+            position: relative;
+            display: inline-flex;
         }
-        .btn-share {
-            padding: 10px 22px;
+        .btn-share-trigger {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            padding: 8px 14px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
+            font-size: 0.85rem;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }
-        .btn-whatsapp { background: #25D366; color: white; }
-        .btn-whatsapp:hover { background: #128C7E; }
-        .btn-telegram { background: #0088cc; color: white; }
-        .btn-telegram:hover { background: #006699; }
+        .btn-share-trigger:hover { background: #e2e8f0; }
+        html.dark .btn-share-trigger { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .share-popup {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 40;
+            flex-direction: row;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .share-popup.show { display: flex; }
+        html.dark .share-popup { background: #1e293b; border-color: #334155; }
+        .share-popup .btn-share-round {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .share-popup .btn-share-round i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        @media (max-width: 768px) {
+            .share-popup { padding: 8px; gap: 6px; }
+            .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body class="light">
@@ -232,7 +271,6 @@
             <span class="logo-heart"></span>
             <span class="logo-text">Ваканса</span>
         </div>
-        <!-- Заголовок по умолчанию, позже JS обновит -->
         <h1 class="page-title" id="vacancyTitle">Вакансия</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
@@ -245,7 +283,6 @@
     </main>
 </div>
 
-<!-- Резервный контент для поисковиков (без JavaScript) -->
 <noscript>
     <div style="padding:20px; text-align:center;">
         <h2>Вакансия на ВКАНСА</h2>
@@ -359,6 +396,7 @@
         const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`);
         const whatsappLink = `https://wa.me/?text=${shareText}`;
         const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
+        const vkLink = `https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`;
 
         const reportSubject = isDirect
             ? 'Жалоба на прямое объявление'
@@ -367,6 +405,17 @@
             ? `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AID: ${vacancy.id}%0D%0AСсылка: ${vacancyUrl}`
             : `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`;
         const reportMailto = `mailto:abuse@vakansa.ru?subject=${encodeURIComponent(reportSubject)}&body=${reportBody}`;
+
+        const shareBlock = `
+            <div class="share-wrapper" onclick="event.stopPropagation();">
+                <button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button>
+                <div class="share-popup">
+                    <a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+        `;
 
         let html = `
             <div class="vacancy-full">
@@ -382,14 +431,21 @@
                     ${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener noreferrer" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">🏠 Прямое объявление</span>'}
                     <a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a>
                     <a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>
-                </div>
-                <div class="share-buttons">
-                    <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="${telegramLink}" target="_blank" rel="noopener noreferrer" class="btn-share btn-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    ${shareBlock}
                 </div>
             </div>
         `;
         detailContainer.innerHTML = html;
+
+        // Вешаем обработчик на кнопку «Поделиться»
+        const trigger = document.querySelector('.btn-share-trigger');
+        const popup = document.querySelector('.share-popup');
+        if (trigger && popup) {
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                popup.classList.toggle('show');
+            });
+        }
 
         updateSEOTags(vacancy, isDirect);
 
@@ -476,6 +532,13 @@
             console.error('Ошибка загрузки похожих вакансий', e);
         }
     }
+
+    // Закрытие popup при клике вне
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.share-wrapper')) {
+            document.querySelectorAll('.share-popup.show').forEach(p => p.classList.remove('show'));
+        }
+    });
 
     const urlParams = new URLSearchParams(window.location.search);
     const vacancyId = urlParams.get('id');
