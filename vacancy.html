@@ -54,6 +54,12 @@
         .share-popup.show { display: flex; } html.dark .share-popup { background: #1e293b; border-color: #334155; }
         .share-popup .btn-share-round { width: 40px; height: 40px; font-size: 1rem; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
         .share-popup .btn-share-round i { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .no-vacancy { text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px; margin: 20px 0; }
+        html.dark .no-vacancy { background: #1e293b; }
+        .no-vacancy i { font-size: 3rem; color: #0047cc; margin-bottom: 16px; }
+        .no-vacancy h2 { color: #0f172a; margin-bottom: 8px; } html.dark .no-vacancy h2 { color: #f1f5f9; }
+        .no-vacancy p { color: #64748b; margin-bottom: 20px; } html.dark .no-vacancy p { color: #94a3b8; }
+        .btn-search { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 1rem; }
         @media (max-width: 768px) { .share-popup { padding: 8px; gap: 6px; } .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; } }
     </style>
 </head>
@@ -97,7 +103,17 @@
     document.addEventListener('click', (e) => { if (!e.target.closest('.share-wrapper')) { document.querySelectorAll('.share-popup.show').forEach(p => p.classList.remove('show')); } });
     const urlParams = new URLSearchParams(window.location.search); const vacancyId = urlParams.get('id');
     const detailContainer = document.getElementById('vacancyDetail'), similarContainer = document.getElementById('similarContainer'), loadingEl = document.getElementById('loading'), errorEl = document.getElementById('error');
-    if (vacancyId) { loadVacancy(vacancyId); } else { document.getElementById('vacancyTitle').textContent = 'Вакансия не указана'; errorEl.textContent = 'Идентификатор вакансии не указан. Пожалуйста, выберите вакансию из списка.'; errorEl.style.display = 'block'; }
+    if (vacancyId) { loadVacancy(vacancyId); } else {
+        document.getElementById('vacancyTitle').textContent = 'Вакансия не выбрана';
+        detailContainer.innerHTML = `
+            <div class="no-vacancy">
+                <i class="fas fa-search"></i>
+                <h2>Вакансия не выбрана</h2>
+                <p>Пожалуйста, выберите вакансию из списка или начните поиск.</p>
+                <a href="index.html" class="btn-search"><i class="fas fa-arrow-right"></i> Перейти к поиску</a>
+            </div>
+        `;
+    }
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
