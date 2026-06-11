@@ -16,62 +16,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <script>
-        (function() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else if (theme === 'light') {
-                document.documentElement.classList.remove('dark');
-            } else {
-                const hour = new Date().getHours();
-                if (hour >= 20 || hour < 6) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-        })();
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') { document.documentElement.classList.add('dark'); } else if (theme === 'light') { document.documentElement.classList.remove('dark'); } else { const hour = new Date().getHours(); if (hour >= 20 || hour < 6) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } } })();
     </script>
     <style>
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            margin-bottom: 24px;
-            color: #0f172a;
-            line-height: 1.8;
-        }
-        html.dark .content {
-            background: #1e293b;
-            border-color: #334155;
-            color: #e2e8f0;
-        }
-        .content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-            color: #0f172a;
-        }
-        html.dark .content h2 {
-            color: #f1f5f9;
-        }
+        .content { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 24px; color: #0f172a; line-height: 1.8; } html.dark .content { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+        .content h2 { font-size: 1.8rem; margin-bottom: 16px; color: #0f172a; } html.dark .content h2 { color: #f1f5f9; }
     </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 <div class="container">
-    <div class="header">
-        <div class="logo-container">
-            <span class="logo-heart"></span>
-            <span class="logo-text">Ваканса</span>
-        </div>
-        <h1 class="page-title">Политика конфиденциальности</h1>
-        <p>Работа найдётся — и не одна</p>
-    </div>
-
+    <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Политика конфиденциальности</h1><p>Работа найдётся — и не одна</p></div>
     <div class="content">
         <h2>Политика конфиденциальности</h2>
         <p><em>Дата вступления в силу: 1 января 2026 г.</em></p>
@@ -80,25 +35,25 @@
         <p>Если у вас есть вопросы, свяжитесь с нами через <a href="contacts.html">контакты</a>.</p>
     </div>
 </div>
-
 <footer class="site-footer">
     <div class="footer-links">
-        <a href="privacy.html">Политика конфиденциальности</a>
-        <a href="terms.html">Пользовательское соглашение</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="compare.html">Сравнение</a>
-        <a href="dashboard.html">Дашборд</a>
+        <div class="footer-links-row">
+            <a href="history.html"><i class="fas fa-history"></i> История</a>
+            <a href="compare.html" class="highlight"><i class="fas fa-balance-scale"></i> Сравнение</a>
+            <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
+        </div>
+        <div class="footer-links-row">
+            <a href="privacy.html">Политика</a>
+            <a href="terms.html">Соглашение</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
     </div>
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
-
 <button id="themeToggle" class="theme-switch">🌙</button>
-
 <script src="common.js"></script>
 <script>
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
-    registerSW('/vacancy-aggregator/');
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
