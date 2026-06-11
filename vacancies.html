@@ -21,355 +21,83 @@
     <script>
         (function() {
             const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else if (theme === 'light') {
-                document.documentElement.classList.remove('dark');
-            } else {
-                const hour = new Date().getHours();
-                if (hour >= 20 || hour < 6) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
+            if (theme === 'dark') { document.documentElement.classList.add('dark'); }
+            else if (theme === 'light') { document.documentElement.classList.remove('dark'); }
+            else { const hour = new Date().getHours(); if (hour >= 20 || hour < 6) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } }
         })();
     </script>
     <style>
-        .match-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 46px;
-            height: 22px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-left: 8px;
-            flex-shrink: 0;
-        }
-        .match--high { background: #dcfce7; color: #166534; }
-        .match--medium { background: #fef9c3; color: #854d0e; }
-        .match--low { background: #f1f5f9; color: #475569; }
-        html.dark .match--high { background: #14532d; color: #bbf7d0; }
-        html.dark .match--medium { background: #713f12; color: #fde047; }
-        html.dark .match--low { background: #1e293b; color: #94a3b8; }
+        .match-badge { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 22px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; line-height: 1; margin-left: 8px; flex-shrink: 0; }
+        .match--high { background: #dcfce7; color: #166534; } .match--medium { background: #fef9c3; color: #854d0e; } .match--low { background: #f1f5f9; color: #475569; }
+        html.dark .match--high { background: #14532d; color: #bbf7d0; } html.dark .match--medium { background: #713f12; color: #fde047; } html.dark .match--low { background: #1e293b; color: #94a3b8; }
         .sort-btns { display: flex; gap: 8px; margin-top: 10px; }
-        .btn-compare {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            color: #334155;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
+        .btn-compare { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
         .btn-compare.in-compare { background: #1e40af; color: white; border-color: #1e40af; }
-        html.dark .btn-compare { background: #334155; border-color: #475569; color: #e2e8f0; }
-        html.dark .btn-compare.in-compare { background: #3b82f6; border-color: #3b82f6; }
-        /* === Кнопка «Поделиться» + popup === */
+        html.dark .btn-compare { background: #334155; border-color: #475569; color: #e2e8f0; } html.dark .btn-compare.in-compare { background: #3b82f6; border-color: #3b82f6; }
         .share-wrapper { position: relative; display: inline-flex; }
-        .btn-share-trigger {
-            background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155;
-            padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-            transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-        .btn-share-trigger:hover { background: #e2e8f0; }
-        html.dark .btn-share-trigger { background: #334155; border-color: #475569; color: #e2e8f0; }
-        .share-popup {
-            display: none; position: absolute; bottom: calc(100% + 8px);
-            left: 50%; transform: translateX(-50%);
-            background: white; border: 1px solid #e2e8f0; border-radius: 16px;
-            padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            z-index: 40; flex-direction: row; gap: 8px; white-space: nowrap;
-        }
-        .share-popup.show { display: flex; }
-        html.dark .share-popup { background: #1e293b; border-color: #334155; }
+        .btn-share-trigger { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .btn-share-trigger:hover { background: #e2e8f0; } html.dark .btn-share-trigger { background: #334155; border-color: #475569; color: #e2e8f0; }
+        .share-popup { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 40; flex-direction: row; gap: 8px; white-space: nowrap; }
+        .share-popup.show { display: flex; } html.dark .share-popup { background: #1e293b; border-color: #334155; }
         .share-popup .btn-share-round { width: 40px; height: 40px; font-size: 1rem; }
         .vacancy-card { overflow: visible !important; }
-        @media (max-width: 768px) { 
-            .share-popup { padding: 8px; gap: 6px; }
-            .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; }
-        }
+        @media (max-width: 768px) { .share-popup { padding: 8px; gap: 6px; } .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; } }
     </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
-
 <div class="container">
     <div class="header">
-        <div class="logo-container">
-            <span class="logo-heart"></span>
-            <span class="logo-text">Ваканса</span>
-        </div>
+        <div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div>
         <h1 class="page-title">Все вакансии</h1>
         <p>Работа найдётся — и не одна</p>
     </div>
-
     <div class="search-section">
-        <div class="search-row">
-            <input type="text" id="searchInput" class="search-input" placeholder="Должность или ключевое слово">
-            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Найти</button>
-        </div>
-        <div class="sort-btns">
-            <button id="sortByDateV" class="sort-btn active"><i class="fas fa-clock"></i> По дате</button>
-            <button id="sortBySalaryV" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button>
-            <button id="sortByMatchV" class="sort-btn"><i class="fas fa-bullseye"></i> По совпадению</button>
-        </div>
+        <div class="search-row"><input type="text" id="searchInput" class="search-input" placeholder="Должность или ключевое слово"><button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Найти</button></div>
+        <div class="sort-btns"><button id="sortByDateV" class="sort-btn active"><i class="fas fa-clock"></i> По дате</button><button id="sortBySalaryV" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button><button id="sortByMatchV" class="sort-btn"><i class="fas fa-bullseye"></i> По совпадению</button></div>
     </div>
-
-    <div class="results-header">
-        <span id="counter" class="counter">Загрузка...</span>
-    </div>
-
+    <div class="results-header"><span id="counter" class="counter">Загрузка...</span></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
     <div id="loadingIndicator" style="text-align:center; padding: 20px; display:none;">Загрузка...</div>
-    <div style="text-align:center; margin-top: 20px;">
-        <button id="loadMoreBtn" class="load-more-btn" style="display:none;">Загрузить ещё</button>
-    </div>
+    <div style="text-align:center; margin-top: 20px;"><button id="loadMoreBtn" class="load-more-btn" style="display:none;">Загрузить ещё</button></div>
 </div>
-
 <footer class="site-footer">
     <div class="footer-links">
-        <a href="privacy.html">Политика конфиденциальности</a>
-        <a href="terms.html">Пользовательское соглашение</a>
-        <a href="contacts.html">Контакты</a>
-        <a href="compare.html">Сравнение</a>
-        <a href="dashboard.html">Дашборд</a>
+        <div class="footer-links-row">
+            <a href="history.html"><i class="fas fa-history"></i> История</a>
+            <a href="compare.html" class="highlight"><i class="fas fa-balance-scale"></i> Сравнение</a>
+            <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
+        </div>
+        <div class="footer-links-row">
+            <a href="privacy.html">Политика</a>
+            <a href="terms.html">Соглашение</a>
+            <a href="contacts.html">Контакты</a>
+        </div>
     </div>
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
-
 <button id="themeToggle" class="theme-switch">🌙</button>
-
 <script src="common.js"></script>
 <script>
     const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
-
-    let currentPage = 0;
-    let totalPages = 1;
-    let isLoading = false;
-    let currentSort = 'publication_time';
-    let currentSearchQuery = '';
-
-    const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.getElementById('searchBtn');
-    const counter = document.getElementById('counter');
-    const vacanciesContainer = document.getElementById('vacanciesContainer');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    const sortByDateV = document.getElementById('sortByDateV');
-    const sortBySalaryV = document.getElementById('sortBySalaryV');
-    const sortByMatchV = document.getElementById('sortByMatchV');
-
-    function setActiveSortButton(sort) {
-        [sortByDateV, sortBySalaryV, sortByMatchV].forEach(b => b.classList.remove('active'));
-        if (sort === 'publication_time') sortByDateV.classList.add('active');
-        else if (sort === 'salary_desc') sortBySalaryV.classList.add('active');
-        else if (sort === 'match_score') sortByMatchV.classList.add('active');
-    }
-
-    function sortVacancies(items) {
-        if (currentSort === 'match_score') {
-            items.sort((a, b) => (b._score || 0) - (a._score || 0));
-        } else if (currentSort === 'salary_desc') {
-            items.sort((a, b) => (b.salary?.from || 0) - (a.salary?.from || 0));
-        } else {
-            items.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-        }
-    }
-
-    function createCard(v) {
-        const emp = getEmployerName(v.employer);
-        const empLogo = v.employer?.logo_urls?.original || v.employer?.logo_urls?.['90'];
-        const salary = formatSalary(v.salary);
-        const area = v.area?.name || '';
-        const published = timeAgo(v.published_at);
-        const score = calculateMatchScore(v, currentSearchQuery);
-        const inCompare = isInCompare(v.id);
-        let matchBadge = '';
-        if (currentSearchQuery && score > 0) {
-            if (score >= 85) matchBadge = `<span class="match-badge match--high">${score}%</span>`;
-            else if (score >= 60) matchBadge = `<span class="match-badge match--medium">${score}%</span>`;
-            else matchBadge = `<span class="match-badge match--low">${score}%</span>`;
-        }
-
-        const vacancyUrl = `https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=${v.id}`;
-        const shareText = encodeURIComponent(`Вакансия: ${v.name || 'Без названия'} (${emp}), ${salary}. Подробнее: ${vacancyUrl}`);
-        const whatsappLink = `https://wa.me/?text=${shareText}`;
-        const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${v.name || 'Без названия'} (${emp}), ${salary}`)}`;
-        const vkLink = `https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${v.name || 'Без названия'} (${emp}), ${salary}`)}`;
-
-        const shareBlock = `
-            <div class="share-wrapper" onclick="event.stopPropagation();">
-                <button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button>
-                <div class="share-popup">
-                    <a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a>
-                </div>
-            </div>
-        `;
-
-        return `
-            <div class="vacancy-card" onclick="window.location.href='vacancy.html?id=${v.id}'">
-                <div class="job-title">
-                    <span>${escapeHtml(v.name) || 'Без названия'}</span>${matchBadge}
-                    ${published ? `<span class="date-badge">${published}</span>` : ''}
-                </div>
-                ${salary ? `<div class="salary">${salary}</div>` : ''}
-                <div class="company-block">
-                    <div class="logo-placeholder">
-                        ${empLogo ? `<img src="${empLogo}" alt="${escapeHtml(emp)}" loading="lazy">` : (emp || '?').charAt(0).toUpperCase()}
-                    </div>
-                    <span class="company-name">${escapeHtml(emp) || 'Компания не указана'}</span>
-                </div>
-                ${area ? `<div class="address">📍 ${escapeHtml(area)}</div>` : ''}
-                <div class="card-actions" onclick="event.stopPropagation();">
-                    <a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a>
-                    <button class="btn-compare ${inCompare ? 'in-compare' : ''}" data-id="${v.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>
-                    ${shareBlock}
-                </div>
-            </div>
-        `;
-    }
-
-    async function loadVacancies(page = 0, append = false) {
-        if (isLoading) return;
-        isLoading = true;
-        loadingIndicator.style.display = 'block';
-        loadMoreBtn.style.display = 'none';
-
-        const query = searchInput.value.trim();
-        currentSearchQuery = query;
-
-        const params = new URLSearchParams({
-            action: 'vacancies',
-            text: query,
-            per_page: 20,
-            page: page,
-            order_by: 'publication_time'
-        });
-
-        try {
-            const res = await fetch(`${API_URL}?${params.toString()}`);
-            const data = await res.json();
-            const items = data.items || [];
-
-            items.forEach(v => { v._score = calculateMatchScore(v, query); });
-            sortVacancies(items);
-
-            if (!append) {
-                vacanciesContainer.innerHTML = '';
-            }
-
-            items.forEach(v => {
-                vacanciesContainer.innerHTML += createCard(v);
-            });
-
-            document.querySelectorAll('.vacancy-card').forEach(card => {
-                const trigger = card.querySelector('.btn-share-trigger');
-                const popup = card.querySelector('.share-popup');
-                if (trigger && popup) {
-                    trigger.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        popup.classList.toggle('show');
-                    });
-                }
-            });
-
-            totalPages = data.pages || 1;
-            currentPage = page;
-            counter.textContent = `Найдено: ${data.found || items.length}`;
-
-            if (currentPage < totalPages - 1) {
-                loadMoreBtn.style.display = 'inline-flex';
-                loadMoreBtn.textContent = 'Загрузить ещё';
-                loadMoreBtn.disabled = false;
-            } else {
-                loadMoreBtn.style.display = 'none';
-            }
-
-            if (items.length === 0 && !append) {
-                vacanciesContainer.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">Ничего не найдено</div>';
-            }
-        } catch (e) {
-            console.error('Ошибка загрузки', e);
-            if (!append) {
-                vacanciesContainer.innerHTML = '<div style="text-align:center; padding:40px; color:#dc2626;">Ошибка загрузки</div>';
-            }
-        } finally {
-            isLoading = false;
-            loadingIndicator.style.display = 'none';
-        }
-    }
-
-    searchBtn.addEventListener('click', () => loadVacancies(0, false));
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') loadVacancies(0, false);
-    });
-
-    loadMoreBtn.addEventListener('click', () => {
-        if (isLoading) return;
-        loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Загрузка...';
-        loadVacancies(currentPage + 1, true).finally(() => {
-            loadMoreBtn.innerHTML = 'Загрузить ещё';
-        });
-    });
-
-    sortByDateV.addEventListener('click', () => {
-        currentSort = 'publication_time';
-        setActiveSortButton(currentSort);
-        loadVacancies(0, false);
-    });
-    sortBySalaryV.addEventListener('click', () => {
-        currentSort = 'salary_desc';
-        setActiveSortButton(currentSort);
-        loadVacancies(0, false);
-    });
-    sortByMatchV.addEventListener('click', () => {
-        currentSort = 'match_score';
-        setActiveSortButton(currentSort);
-        loadVacancies(0, false);
-    });
-
-    vacanciesContainer.addEventListener('click', e => {
-        const card = e.target.closest('.vacancy-card');
-        if (!card) return;
-        const id = card.dataset.id;
-        if (e.target.closest('.btn-compare')) {
-            e.stopPropagation();
-            const vac = allVacancies.find(v => v.id == id);
-            if (vac) {
-                toggleCompare(vac);
-                const btn = e.target.closest('.btn-compare');
-                btn.classList.toggle('in-compare', isInCompare(id));
-            }
-            return;
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.share-wrapper')) {
-            document.querySelectorAll('.share-popup.show').forEach(p => p.classList.remove('show'));
-        }
-    });
-
-    loadVacancies(0, false);
-
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
-    registerSW('/vacancy-aggregator/');
+    let currentPage=0, totalPages=1, isLoading=false, currentSort='publication_time', currentSearchQuery='';
+    const searchInput=document.getElementById('searchInput'), searchBtn=document.getElementById('searchBtn'), counter=document.getElementById('counter'),
+        vacanciesContainer=document.getElementById('vacanciesContainer'), loadMoreBtn=document.getElementById('loadMoreBtn'),
+        loadingIndicator=document.getElementById('loadingIndicator'), sortByDateV=document.getElementById('sortByDateV'),
+        sortBySalaryV=document.getElementById('sortBySalaryV'), sortByMatchV=document.getElementById('sortByMatchV');
+    function setActiveSortButton(sort) { [sortByDateV,sortBySalaryV,sortByMatchV].forEach(b=>b.classList.remove('active')); if(sort==='publication_time')sortByDateV.classList.add('active'); else if(sort==='salary_desc')sortBySalaryV.classList.add('active'); else if(sort==='match_score')sortByMatchV.classList.add('active'); }
+    function sortVacancies(items) { if(currentSort==='match_score'){ items.sort((a,b)=>(b._score||0)-(a._score||0)); } else if(currentSort==='salary_desc'){ items.sort((a,b)=>(b.salary?.from||0)-(a.salary?.from||0)); } else { items.sort((a,b)=>new Date(b.published_at)-new Date(a.published_at)); } }
+    function createCard(v) { const emp=getEmployerName(v.employer), empLogo=v.employer?.logo_urls?.original||v.employer?.logo_urls?.['90'], salary=formatSalary(v.salary), area=v.area?.name||'', published=timeAgo(v.published_at), score=calculateMatchScore(v,currentSearchQuery), inCompare=isInCompare(v.id); let matchBadge=''; if(currentSearchQuery&&score>0){ if(score>=85)matchBadge=`<span class="match-badge match--high">${score}%</span>`; else if(score>=60)matchBadge=`<span class="match-badge match--medium">${score}%</span>`; else matchBadge=`<span class="match-badge match--low">${score}%</span>`; } const vacancyUrl=`https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=${v.id}`; const shareText=encodeURIComponent(`Вакансия: ${v.name||'Без названия'} (${emp}), ${salary}. Подробнее: ${vacancyUrl}`); const whatsappLink=`https://wa.me/?text=${shareText}`; const telegramLink=`https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${v.name||'Без названия'} (${emp}), ${salary}`)}`; const vkLink=`https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${v.name||'Без названия'} (${emp}), ${salary}`)}`; const shareBlock=`<div class="share-wrapper" onclick="event.stopPropagation();"><button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button><div class="share-popup"><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a><a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a></div></div>`; return `<div class="vacancy-card" onclick="window.location.href='vacancy.html?id=${v.id}'"><div class="job-title"><span>${escapeHtml(v.name)||'Без названия'}</span>${matchBadge}${published?`<span class="date-badge">${published}</span>`:''}</div>${salary?`<div class="salary">${salary}</div>`:''}<div class="company-block"><div class="logo-placeholder">${empLogo?`<img src="${empLogo}" alt="${escapeHtml(emp)}" loading="lazy">`:(emp||'?').charAt(0).toUpperCase()}</div><span class="company-name">${escapeHtml(emp)||'Компания не указана'}</span></div>${area?`<div class="address">📍 ${escapeHtml(area)}</div>`:''}<div class="card-actions" onclick="event.stopPropagation();"><a href="vacancy.html?id=${v.id}" class="btn-respond">Подробнее</a><button class="btn-compare ${inCompare?'in-compare':''}" data-id="${v.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>${shareBlock}</div></div>`; }
+    async function loadVacancies(page=0, append=false) { if(isLoading)return; isLoading=true; loadingIndicator.style.display='block'; loadMoreBtn.style.display='none'; const query=searchInput.value.trim(); currentSearchQuery=query; const params=new URLSearchParams({action:'vacancies',text:query,per_page:20,page:page,order_by:'publication_time'}); try{ const res=await fetch(`${API_URL}?${params.toString()}`); const data=await res.json(); const items=data.items||[]; items.forEach(v=>{v._score=calculateMatchScore(v,query)}); sortVacancies(items); if(!append){vacanciesContainer.innerHTML='';} items.forEach(v=>{vacanciesContainer.innerHTML+=createCard(v)}); document.querySelectorAll('.vacancy-card').forEach(card=>{const trigger=card.querySelector('.btn-share-trigger'), popup=card.querySelector('.share-popup'); if(trigger&&popup){trigger.addEventListener('click',function(e){e.stopPropagation();popup.classList.toggle('show')})}}); totalPages=data.pages||1; currentPage=page; counter.textContent=`Найдено: ${data.found||items.length}`; if(currentPage<totalPages-1){loadMoreBtn.style.display='inline-flex';loadMoreBtn.textContent='Загрузить ещё';loadMoreBtn.disabled=false}else{loadMoreBtn.style.display='none'} if(items.length===0&&!append){vacanciesContainer.innerHTML='<div style="text-align:center; padding:40px; color:#64748b;">Ничего не найдено</div>'} } catch(e){ console.error('Ошибка загрузки',e); if(!append){vacanciesContainer.innerHTML='<div style="text-align:center; padding:40px; color:#dc2626;">Ошибка загрузки</div>'} } finally{ isLoading=false; loadingIndicator.style.display='none' } }
+    searchBtn.addEventListener('click',()=>loadVacancies(0,false)); searchInput.addEventListener('keydown',(e)=>{if(e.key==='Enter')loadVacancies(0,false)});
+    loadMoreBtn.addEventListener('click',()=>{if(isLoading)return;loadMoreBtn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Загрузка...';loadVacancies(currentPage+1,true).finally(()=>{loadMoreBtn.innerHTML='Загрузить ещё'})});
+    sortByDateV.addEventListener('click',()=>{currentSort='publication_time';setActiveSortButton(currentSort);loadVacancies(0,false)});
+    sortBySalaryV.addEventListener('click',()=>{currentSort='salary_desc';setActiveSortButton(currentSort);loadVacancies(0,false)});
+    sortByMatchV.addEventListener('click',()=>{currentSort='match_score';setActiveSortButton(currentSort);loadVacancies(0,false)});
+    vacanciesContainer.addEventListener('click',e=>{const card=e.target.closest('.vacancy-card');if(!card)return;const id=card.dataset.id;if(e.target.closest('.btn-compare')){e.stopPropagation();const vac=allVacancies.find(v=>v.id==id);if(vac){toggleCompare(vac);const btn=e.target.closest('.btn-compare');btn.classList.toggle('in-compare',isInCompare(id))}return}});
+    document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper')){document.querySelectorAll('.share-popup.show').forEach(p=>p.classList.remove('show'))}});
+    loadVacancies(0,false);
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
 </body>
 </html>
