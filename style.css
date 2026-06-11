@@ -589,6 +589,43 @@ html.dark .vacancy-card.urgent {
     bottom: -12px;
 }
 
+/* === Рекламная карточка === */
+.vacancy-card.ad {
+    border: 2px dashed #f59e0b;
+    background: #fffbeb;
+    cursor: pointer;
+}
+
+html.dark .vacancy-card.ad {
+    background: #2d2a1e;
+    border-color: #f59e0b;
+}
+
+.vacancy-card.ad::before {
+    content: "📢 Реклама";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f59e0b;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    z-index: 15;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.vacancy-card.ad .job-title {
+    color: #92400e;
+}
+
+html.dark .vacancy-card.ad .job-title {
+    color: #fbbf24;
+}
+
 .job-title {
     font-size: 1.1rem;
     font-weight: 700;
@@ -1550,4 +1587,4 @@ html.dark .saved-search-card {
         height: 36px;
         font-size: 1rem;
     }
-        }
+}
