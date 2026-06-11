@@ -501,6 +501,7 @@ html.dark .card {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    word-break: break-word;
 }
 
 html.dark .job-title {
@@ -1161,14 +1162,15 @@ html.dark .saved-search-card {
     }
     .subscribe-input {
         width: 100%;
-        padding: 10px 14px;
+        padding: 8px 12px;
         font-size: 0.85rem;
     }
     .subscribe-btn {
         width: 100%;
         justify-content: center;
-        padding: 10px 24px;
+        padding: 8px 24px;
         font-size: 0.85rem;
+        height: auto;
     }
     .site-footer {
         padding-bottom: 120px;
@@ -1191,7 +1193,7 @@ html.dark .saved-search-card {
         height: 46px;
         font-size: 1.2rem;
     }
-    /* Крестик и сердечко на мобильных */
+    /* Кнопки "Скрыть" и "В избранное" на мобильных */
     .save-btn {
         width: 30px;
         height: 30px;
@@ -1205,10 +1207,11 @@ html.dark .saved-search-card {
         top: 6px;
     }
     .job-title {
-        padding-right: 75px;
+        padding-right: 80px;
+        word-break: break-word;
     }
     .salary {
-        padding-right: 75px;
+        padding-right: 80px;
     }
 }
 
@@ -1253,10 +1256,12 @@ html.dark .saved-search-card {
     }
     .job-title {
         font-size: 1rem;
-        padding-right: 70px;
+        padding-right: 75px;
+        word-break: break-word;
     }
     .salary {
         font-size: 1rem;
+        padding-right: 75px;
     }
     .btn-respond,
     .btn-call,
@@ -1278,11 +1283,11 @@ html.dark .saved-search-card {
         font-size: 0.85rem;
     }
     .subscribe-input {
-        padding: 8px 12px;
+        padding: 6px 12px;
         font-size: 0.8rem;
     }
     .subscribe-btn {
-        padding: 8px 20px;
+        padding: 6px 20px;
         font-size: 0.8rem;
     }
     .footer-links {
@@ -1306,7 +1311,7 @@ html.dark .saved-search-card {
         height: 42px;
         font-size: 1rem;
     }
-    /* Крестик и сердечко на самых маленьких */
+    /* Кнопки "Скрыть" и "В избранное" на самых маленьких */
     .save-btn {
         width: 28px;
         height: 28px;
@@ -1316,13 +1321,13 @@ html.dark .saved-search-card {
     .hide-btn {
         width: 28px;
         height: 28px;
-        right: 34px;
+        right: 32px;
         top: 4px;
     }
     .job-title {
-        padding-right: 65px;
+        padding-right: 70px;
     }
     .salary {
-        padding-right: 65px;
+        padding-right: 70px;
     }
 }
