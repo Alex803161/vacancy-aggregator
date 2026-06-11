@@ -13,128 +13,25 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <style>
-        .content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            margin-bottom: 24px;
-            color: #0f172a;
-            line-height: 1.8;
-            text-align: center;
-        }
-        html.dark .content {
-            background: #1e293b;
-            border-color: #334155;
-            color: #e2e8f0;
-        }
-        .btn {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-secondary {
-            background: #64748b;
-        }
-        .success {
-            color: #059669;
-            font-weight: 600;
-        }
-        html.dark .success {
-            color: #34d399;
-        }
+        .content { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 24px; color: #0f172a; line-height: 1.8; text-align: center; } html.dark .content { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+        .btn { background: #dc2626; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; font-size: 1rem; cursor: pointer; margin: 10px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-secondary { background: #64748b; }
+        .success { color: #059669; font-weight: 600; } html.dark .success { color: #34d399; }
     </style>
 </head>
 <body class="light">
 <div class="container">
-    <div class="header">
-        <div class="logo-container">
-            <span class="logo-heart"></span>
-            <span class="logo-text">Ваканса</span>
-        </div>
-        <h1 class="page-title">Отписка от рассылки</h1>
-        <p>Работа найдётся — и не одна</p>
-    </div>
-
-    <div id="statusContent" class="content">
-        <p id="statusText">Проверяем адрес...</p>
-    </div>
+    <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Отписка от рассылки</h1><p>Работа найдётся — и не одна</p></div>
+    <div id="statusContent" class="content"><p id="statusText">Проверяем адрес...</p></div>
 </div>
-
 <script src="common.js"></script>
 <script>
-    const API_URL = 'https://functions.yandexcloud.net/d4ee0jo7sp3ttn6ch7oa'; // bookvista-subscribe
-
-    function getEmailFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('email')?.trim();
-    }
-
-    function renderUnsubscribeForm(email) {
-        const container = document.getElementById('statusContent');
-        container.innerHTML = `
-            <h2>📧 Отписаться от уведомлений</h2>
-            <p>Адрес: <strong>${escapeHtml(email)}</strong></p>
-            <p>Вы уверены, что хотите отписаться от рассылки вакансий?</p>
-            <button id="confirmBtn" class="btn"><i class="fas fa-bell-slash"></i> Отписаться</button>
-            <button id="cancelBtn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Назад</button>
-            <p id="resultMsg" style="margin-top:20px;"></p>
-        `;
-
-        document.getElementById('confirmBtn').addEventListener('click', async () => {
-            const confirmBtn = document.getElementById('confirmBtn');
-            confirmBtn.disabled = true;
-            confirmBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отписка...';
-            const resultMsg = document.getElementById('resultMsg');
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'unsubscribe', email: email })
-                });
-                const data = await response.json();
-                if (data.success) {
-                    resultMsg.innerHTML = '<span class="success">✅ Вы успешно отписались. До свидания!</span>';
-                } else {
-                    resultMsg.textContent = '❌ Не удалось отписаться. Попробуйте позже.';
-                }
-            } catch (error) {
-                resultMsg.textContent = '❌ Ошибка связи с сервером.';
-            } finally {
-                confirmBtn.disabled = false;
-                confirmBtn.innerHTML = '<i class="fas fa-bell-slash"></i> Отписаться';
-            }
-        });
-
-        document.getElementById('cancelBtn').addEventListener('click', () => {
-            window.location.href = '/vacancy-aggregator/index.html';
-        });
-    }
-
-    function showError(message) {
-        document.getElementById('statusContent').innerHTML = `<p>${message}</p><p><a href="index.html">На главную</a></p>`;
-    }
-
-    const email = getEmailFromURL();
-    if (email) {
-        renderUnsubscribeForm(email);
-    } else {
-        showError('Адрес электронной почты не указан.');
-    }
-
-    setupThemeToggle('themeToggle');
-    setupBackToTop('backToTopBtn');
+    const API_URL = 'https://functions.yandexcloud.net/d4ee0jo7sp3ttn6ch7oa';
+    function getEmailFromURL() { const params = new URLSearchParams(window.location.search); return params.get('email')?.trim(); }
+    function renderUnsubscribeForm(email) { const container = document.getElementById('statusContent'); container.innerHTML = `<h2>📧 Отписаться от уведомлений</h2><p>Адрес: <strong>${escapeHtml(email)}</strong></p><p>Вы уверены, что хотите отписаться от рассылки вакансий?</p><button id="confirmBtn" class="btn"><i class="fas fa-bell-slash"></i> Отписаться</button><button id="cancelBtn" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Назад</button><p id="resultMsg" style="margin-top:20px;"></p>`; document.getElementById('confirmBtn').addEventListener('click', async () => { const confirmBtn = document.getElementById('confirmBtn'); confirmBtn.disabled = true; confirmBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отписка...'; const resultMsg = document.getElementById('resultMsg'); try { const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'unsubscribe', email: email }) }); const data = await response.json(); if (data.success) { resultMsg.innerHTML = '<span class="success">✅ Вы успешно отписались. До свидания!</span>'; } else { resultMsg.textContent = '❌ Не удалось отписаться. Попробуйте позже.'; } } catch (error) { resultMsg.textContent = '❌ Ошибка связи с сервером.'; } finally { confirmBtn.disabled = false; confirmBtn.innerHTML = '<i class="fas fa-bell-slash"></i> Отписаться'; } }); document.getElementById('cancelBtn').addEventListener('click', () => { window.location.href = '/vacancy-aggregator/index.html'; }); }
+    function showError(message) { document.getElementById('statusContent').innerHTML = `<p>${message}</p><p><a href="index.html">На главную</a></p>`; }
+    const email = getEmailFromURL(); if (email) { renderUnsubscribeForm(email); } else { showError('Адрес электронной почты не указан.'); }
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn');
 </script>
 </body>
 </html>
