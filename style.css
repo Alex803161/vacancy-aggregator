@@ -196,6 +196,10 @@ html.dark .footer-links .highlight {
 @media (max-width: 768px) {
     .footer-links a {
         font-size: 0.95rem;
+        margin: 0 4px; /* чтобы не слипались */
+    }
+    .footer-links-row {
+        gap: 12px;
     }
 }
 
@@ -873,6 +877,8 @@ html.dark .tag {
 .btn-whatsapp:hover { background: #128C7E; }
 .btn-telegram { background: #0088cc; color: white; }
 .btn-telegram:hover { background: #006699; }
+.btn-vk { background: #0077FF; color: white; }
+.btn-vk:hover { background: #0066CC; }
 
 .share-buttons {
     display: flex;
@@ -1374,6 +1380,10 @@ html.dark .saved-search-card {
     }
     .footer-links a {
         font-size: 0.9rem;
+        margin: 0 4px;
+    }
+    .footer-links-row {
+        gap: 12px;
     }
     .theme-switch {
         bottom: 80px;
@@ -1496,6 +1506,10 @@ html.dark .saved-search-card {
     }
     .footer-links a {
         font-size: 0.9rem;
+        margin: 0 4px;
+    }
+    .footer-links-row {
+        gap: 8px;
     }
     .theme-switch {
         bottom: 70px;
@@ -1587,4 +1601,4 @@ html.dark .saved-search-card {
         height: 36px;
         font-size: 1rem;
     }
-}
+        }
