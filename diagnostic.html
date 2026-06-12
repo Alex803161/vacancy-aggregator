@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диагностика ВКАНСА</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; background: #f3f4f6; }
+        .card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .ok { color: #059669; } .fail { color: #dc2626; }
+        button { background: #0047cc; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 600; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<h2>Диагностика</h2>
+<div id="results"></div>
+<button onclick="runAll()">Запустить проверку</button>
+
+<script src="common.js"></script>
+<script>
+    const results = document.getElementById('results');
+
+    function addResult(title, ok, detail) {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `<strong>${title}</strong>: <span class="${ok ? 'ok' : 'fail'}">${ok ? '✅ OK' : '❌ ОШИБКА'}</span><br><small>${detail}</small>`;
+        results.appendChild(div);
+    }
+
+    async function runAll() {
+        results.innerHTML = '';
+        // 1. common.js загружен?
+        addResult('common.js загружен', typeof getPendingJobs === 'function', typeof getPendingJobs === 'function' ? 'Функция getPendingJobs найдена' : 'Функция не найдена — возможно, файл не обновился');
+
+        // 2. localStorage работает?
+        try {
+            localStorage.setItem('test', '1');
+            const v = localStorage.getItem('test');
+            addResult('localStorage доступен', v === '1', v === '1' ? 'Запись и чтение работают' : 'Не удалось прочитать');
+        } catch(e) {
+            addResult('localStorage доступен', false, e.message);
+        }
+
+        // 3. Сохранение вакансии
+        const job = { id: Date.now(), title: 'Тест', company: 'Тест', timestamp: new Date().toISOString() };
+        try {
+            const pending = getPendingJobs();
+            pending.push(job);
+            savePendingJobs(pending);
+            const saved = getPendingJobs();
+            const found = saved.find(j => j.id === job.id);
+            addResult('Сохранение pending_jobs', !!found, found ? 'Вакансия сохранена в очередь' : 'Вакансия не найдена в очереди');
+        } catch(e) {
+            addResult('Сохранение pending_jobs', false, e.message);
+        }
+
+        // 4. Отправка уведомления
+        try {
+            const res = await fetch('https://functions.yandexcloud.net/d4e3tiqrl2dvo10svl7f', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: 'Тест диагностики' })
+            });
+            const data = await res.json();
+            addResult('Облачная функция', data.ok === true, JSON.stringify(data));
+        } catch(e) {
+            addResult('Облачная функция', false, e.message);
+        }
+    }
+    // Автозапуск
+    runAll();
+</script>
+</body>
+</html>
