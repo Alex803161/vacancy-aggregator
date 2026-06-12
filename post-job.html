@@ -74,7 +74,7 @@
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
 <button id="themeToggle" class="theme-switch">🌙</button>
-<script src="common.js"></script>
+<script src="common.js?v=2"></script>
 <script>
     const form = document.getElementById('jobForm'), formMessage = document.getElementById('formMessage');
     form.addEventListener('submit', (e) => {
@@ -97,13 +97,21 @@
             formMessage.style.color = '#dc2626';
             return;
         }
+        // Диагностика: проверяем, что функции доступны
+        if (typeof getPendingJobs !== 'function') {
+            alert('Ошибка: getPendingJobs не определена. common.js не загрузился?');
+            return;
+        }
         const pending = getPendingJobs();
         pending.push(job);
         savePendingJobs(pending);
         formMessage.textContent = '✅ Вакансия отправлена на модерацию!';
         formMessage.style.color = '#059669';
         form.reset();
-        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}`);
+        // Попытка отправить уведомление с алертом
+        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}`)
+        .then(() => alert('Уведомление отправлено'))
+        .catch(err => alert('Ошибка отправки уведомления: ' + err.message));
     });
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
