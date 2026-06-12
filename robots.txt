@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Disallow: /test.html
+Disallow: /diagnostic.html
+Disallow: /test-notify.html
 
 Sitemap: https://alex803161.github.io/vacancy-aggregator/sitemap.xml
 Host: alex803161.github.io
