@@ -318,12 +318,16 @@ const NOTIFY_API_URL = 'https://functions.yandexcloud.net/d4e3tiqrl2dvo10svl7f';
 
 async function sendTelegramNotification(text) {
     try {
-        await fetch(NOTIFY_API_URL, {
+        const response = await fetch(NOTIFY_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: text })
         });
+        const data = await response.json();
+        if (!data.ok) {
+            alert('Ошибка отправки уведомления: ' + JSON.stringify(data));
+        }
     } catch (e) {
-        console.warn('Не удалось отправить уведомление', e);
+        alert('Ошибка соединения с облачной функцией: ' + e.message);
     }
-                           }
+}
