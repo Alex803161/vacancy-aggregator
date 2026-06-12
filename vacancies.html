@@ -151,7 +151,7 @@
     async function loadVacancies(page=0, append=false) {
         if(isLoading)return; isLoading=true; loadingIndicator.style.display='block'; loadMoreBtn.style.display='none';
         const query=searchInput.value.trim(); currentSearchQuery=query;
-        const params=new URLSearchParams({action:'vacancies',text:query,per_page:20,page:page,order_by:'publication_time'});
+        const params=new URLSearchParams({action:'vacancies',text:query,per_page:20,page:page,order_by:'publication_time',area:'113'});
         try{
             const res=await fetch(`${API_URL}?${params.toString()}`);
             const data=await res.json();
@@ -182,12 +182,10 @@
             items.forEach(v=>{v._score=calculateMatchScore(v,query)});
             items = sortVacancies(items);
             if(!append){vacanciesContainer.innerHTML='';}
-            // Вставка рекламы в выдачу
             const ads = getAds().filter(isAdActive);
             let adIndex = 0;
             items.forEach((v, i) => {
                 vacanciesContainer.innerHTML += createCard(v);
-                // Каждые 6 вакансий вставляем рекламу
                 if ((i + 1) % 6 === 0 && adIndex < ads.length) {
                     vacanciesContainer.innerHTML += createAdCard(ads[adIndex]);
                     adIndex++;
