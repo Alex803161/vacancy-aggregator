@@ -63,6 +63,10 @@
         .no-vacancy p { color: #64748b; margin-bottom: 20px; } html.dark .no-vacancy p { color: #94a3b8; }
         .btn-search { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 12px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 1rem; }
         .btn-website { background: linear-gradient(180deg, #8b5cf6 0%, #6d28d9 100%); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; border: 1px solid #5b21b6; box-shadow: 0 4px 10px rgba(139,92,246,0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
+        .breadcrumbs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 20px; font-size: 0.85rem; }
+        .breadcrumbs a { color: #1a73e8; text-decoration: none; }
+        .breadcrumbs span { color: #64748b; }
+        html.dark .breadcrumbs span { color: #9ca3af; }
         @media (max-width: 768px) { .share-popup { padding: 8px; gap: 6px; } .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; } }
     </style>
 </head>
@@ -73,6 +77,9 @@
         <div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div>
         <h1 class="page-title" id="vacancyTitle">Вакансия</h1>
         <p>Работа найдётся — и не одна</p>
+    </div>
+    <div class="breadcrumbs" id="breadcrumbsContainer">
+        <a href="/vacancy-aggregator/">Главная</a> <span>→</span> <span id="breadcrumbTitle">Вакансия</span>
     </div>
     <main><div id="vacancyDetail"></div><div id="similarContainer"></div><div id="loading" style="display:none;">Загрузка...</div><div id="error" style="display:none;"></div></main>
 </div>
@@ -95,6 +102,47 @@
 <script>
     const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
     function mapDirectJobToVacancy(job) { return { id: job.id, name: job.title, employer: job.company, salary: parseSalaryString(job.salary), description: job.description || 'Описание отсутствует', area: { name: job.city || '' }, key_skills: [], published_at: job.timestamp, alternate_url: null, source: 'direct', phone: job.phone || null, email: job.email || null, website: job.website || null, isPremium: !!job.isPremium, isUrgent: !!job.isUrgent }; }
+    function updateBreadcrumbs(vacancy) {
+        const city = vacancy.area?.name || '';
+        const title = vacancy.name || 'Без названия';
+        let html = '<a href="/vacancy-aggregator/">Главная</a> <span>→</span> ';
+        if (city) {
+            html += `<a href="/vacancy-aggregator/vacancies/rossiya/${city.toLowerCase()}.html">${escapeHtml(city)}</a> <span>→</span> `;
+        }
+        html += `<span>${escapeHtml(title)}</span>`;
+        document.getElementById('breadcrumbsContainer').innerHTML = html;
+        // JSON-LD для хлебных крошек
+        const breadcrumbData = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://alex803161.github.io/vacancy-aggregator/" }
+            ]
+        };
+        if (city) {
+            breadcrumbData.itemListElement.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": city,
+                "item": `https://alex803161.github.io/vacancy-aggregator/vacancies/rossiya/${city.toLowerCase()}.html`
+            });
+            breadcrumbData.itemListElement.push({
+                "@type": "ListItem",
+                "position": 3,
+                "name": title
+            });
+        } else {
+            breadcrumbData.itemListElement.push({
+                "@type": "ListItem",
+                "position": 2,
+                "name": title
+            });
+        }
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(breadcrumbData);
+        document.head.appendChild(script);
+    }
     function updateSEOTags(vacancy, isDirect) { const empName = getEmployerName(vacancy.employer); const salaryText = formatSalary(vacancy.salary); const cityText = vacancy.area?.name || ''; const title = `${vacancy.name} — вакансия в компании ${empName} — ВКАНСА`; const description = `Вакансия: ${vacancy.name} (${empName}). ${salaryText}. ${cityText}. Подробности, зарплата, требования — на ВКАНСА.`.substring(0, 160); const canonicalUrl = window.location.origin + window.location.pathname + '?id=' + vacancy.id; document.title = title; document.getElementById('seoCanonical').setAttribute('href', canonicalUrl); document.querySelector('meta[property="og:title"]').setAttribute('content', title); document.querySelector('meta[property="og:description"]').setAttribute('content', description); document.getElementById('ogUrl').setAttribute('content', canonicalUrl); document.getElementById('vacancyTitle').textContent = vacancy.name; const jsonLd = { "@context": "https://schema.org", "@type": "JobPosting", "title": vacancy.name, "description": vacancy.description || description, "hiringOrganization": { "@type": "Organization", "name": empName }, "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": cityText || 'Не указан' } }, "datePosted": vacancy.published_at ? new Date(vacancy.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0] }; if (vacancy.salary) { jsonLd.baseSalary = { "@type": "MonetaryAmount", "currency": vacancy.salary.currency === '₽' ? 'RUB' : (vacancy.salary.currency || 'RUB'), "value": { "@type": "QuantitativeValue", "minValue": vacancy.salary.from || undefined, "maxValue": vacancy.salary.to || undefined, "unitText": "MONTH" } }; if (!jsonLd.baseSalary.value.minValue) delete jsonLd.baseSalary.value.minValue; if (!jsonLd.baseSalary.value.maxValue) delete jsonLd.baseSalary.value.maxValue; } document.getElementById('jsonLd').textContent = JSON.stringify(jsonLd); }
     function saveRecentVacancy(vacancy) { let recent = JSON.parse(localStorage.getItem('recentVacancies')) || []; recent = recent.filter(v => v.id !== vacancy.id); recent.unshift({ id: vacancy.id, name: vacancy.name, employer: getEmployerName(vacancy.employer), salary: formatSalary(vacancy.salary), area: vacancy.area?.name || '', timestamp: Date.now() }); if (recent.length > 200) recent = recent.slice(0, 200); localStorage.setItem('recentVacancies', JSON.stringify(recent)); }
     function renderVacancy(vacancy) { const employerName = getEmployerName(vacancy.employer); const vacancyUrl = window.location.href; const isDirect = vacancy.source === 'direct'; const shareText = encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}. Подробнее: ${vacancyUrl}`); const whatsappLink = `https://wa.me/?text=${shareText}`; const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(vacancyUrl)}&text=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`; const vkLink = `https://vk.com/share.php?url=${encodeURIComponent(vacancyUrl)}&title=${encodeURIComponent(`Вакансия: ${vacancy.name} (${employerName}), ${formatSalary(vacancy.salary)}`)}`; const reportSubject = isDirect ? 'Жалоба на прямое объявление' : `Жалоба на вакансию ID ${vacancy.id}`; const reportBody = isDirect ? `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AID: ${vacancy.id}%0D%0AСсылка: ${vacancyUrl}` : `Пожалуйста, опишите проблему с вакансией "${vacancy.name}" (${employerName}).%0D%0AСсылка: ${vacancyUrl}`; const reportMailto = `mailto:abuse@vakansa.ru?subject=${encodeURIComponent(reportSubject)}&body=${reportBody}`; const shareBlock = `<div class="share-wrapper" onclick="event.stopPropagation();"><button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button><div class="share-popup"><a href="${whatsappLink}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${telegramLink}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a><a href="${vkLink}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a><button class="btn-share-round btn-copy-link" title="Копировать ссылку" data-url="${vacancyUrl}"><i class="fas fa-link"></i></button></div></div>`; 
@@ -104,6 +152,7 @@
         if (vacancy.website) { contactButtons += `<a href="${vacancy.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`; }
         let html = `<div class="vacancy-full"><h2>${vacancy.name || 'Без названия'}</h2><p class="company">${employerName}</p><p class="salary">${formatSalary(vacancy.salary)}</p><div class="description">${vacancy.description || 'Описание отсутствует'}</div><p class="skills"><strong>Навыки:</strong> ${(vacancy.key_skills || []).map(s => typeof s === 'object' ? s.name : s).join(', ') || 'Не указаны'}</p><p class="published"><strong>Опубликовано:</strong> ${vacancy.published_at ? new Date(vacancy.published_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Неизвестно'}</p>${vacancy.area?.name ? `<p class="address">📍 ${vacancy.area.name}</p>` : ''}<div class="actions"><button id="favButton" class="fav-btn" style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">★ В избранное</button>${!isDirect ? `<a href="${vacancy.alternate_url || '#'}" target="_blank" rel="noopener noreferrer" style="color: #1a73e8;">Открыть на hh.ru</a>` : '<span style="color: #94a3b8; font-size: 0.9rem;">🏠 Прямое объявление</span>'}${contactButtons}<a href="javascript:history.back()" class="back-link" style="color: #1a73e8;">← Назад</a><a href="${reportMailto}" class="btn-report" title="Пожаловаться на вакансию"><i class="fas fa-flag"></i> Пожаловаться</a>${shareBlock}</div></div>`; 
         detailContainer.innerHTML = html; 
+        updateBreadcrumbs(vacancy);
         const trigger = document.querySelector('.btn-share-trigger'); const popup = document.querySelector('.share-popup'); if (trigger && popup) { trigger.addEventListener('click', function(e) { e.stopPropagation(); popup.classList.toggle('show'); }); } 
         const copyBtn = document.querySelector('.btn-copy-link'); if (copyBtn) { copyBtn.addEventListener('click', function(e) { e.stopPropagation(); e.preventDefault(); const url = this.dataset.url; navigator.clipboard.writeText(url).then(() => { this.classList.add('copied'); setTimeout(() => this.classList.remove('copied'), 1500); }).catch(() => { alert('Не удалось скопировать ссылку'); }); }); } 
         updateSEOTags(vacancy, isDirect); const favBtn = document.getElementById('favButton'); updateFavButton(favBtn, vacancy); favBtn.addEventListener('click', () => { toggleFavorite(vacancy); updateFavButton(favBtn, vacancy); }); loadSimilar(vacancy.name, vacancy.id); saveRecentVacancy(vacancy); }
