@@ -48,7 +48,6 @@
         html.dark .ad-card { background: #2d2a1e; border-color: #f59e0b; }
         .pending-card { background: #fefce8; border: 1px solid #fde047; }
         html.dark .pending-card { background: #2d2a1e; border-color: #f59e0b; }
-        /* Стили для окна ввода пароля */
         #passwordOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
@@ -72,7 +71,6 @@
     </style>
 </head>
 <body class="light">
-<!-- Окно ввода пароля -->
 <div id="passwordOverlay">
     <div id="passwordBox">
         <h3>🔐 Доступ ограничен</h3>
@@ -86,28 +84,24 @@
 <div class="container">
     <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Панель администратора</h1><p>Работа найдётся — и не одна</p></div>
 
-    <!-- Модерация вакансий -->
     <div class="section-divider">
         <h2 style="margin-bottom: 16px;"><i class="fas fa-clock"></i> Ожидающие вакансии</h2>
         <div id="pendingJobsList" class="cards"></div>
         <p id="pendingJobsEmpty" style="display:none; text-align:center; padding:20px;">Нет вакансий на модерации.</p>
     </div>
 
-    <!-- Активные вакансии -->
     <div class="section-divider">
         <h2 style="margin-bottom: 16px;"><i class="fas fa-briefcase"></i> Активные вакансии</h2>
         <div id="jobsList" class="cards"></div>
         <p id="emptyMessage" style="display:none; text-align:center; padding:20px;">Нет активных вакансий.</p>
     </div>
 
-    <!-- Модерация рекламы -->
     <div class="section-divider">
         <h2 style="margin-bottom: 16px;"><i class="fas fa-clock"></i> Ожидающая реклама</h2>
         <div id="pendingAdsList" class="cards"></div>
         <p id="pendingAdsEmpty" style="display:none; text-align:center; padding:20px;">Нет рекламы на модерации.</p>
     </div>
 
-    <!-- Управление рекламой -->
     <div class="section-divider">
         <h2 style="margin-bottom: 16px;"><i class="fas fa-ad"></i> Активная реклама</h2>
         <div class="ad-form">
@@ -143,8 +137,7 @@
 <button id="themeToggle" class="theme-switch">🌙</button>
 <script src="common.js"></script>
 <script>
-    // === Защита паролем ===
-    const ADMIN_PASSWORD = 'admin123'; // Пароль для входа в админку
+    const ADMIN_PASSWORD = 'admin08042017';
     const passwordOverlay = document.getElementById('passwordOverlay');
     const passwordInput = document.getElementById('passwordInput');
     const passwordSubmit = document.getElementById('passwordSubmit');
@@ -153,7 +146,7 @@
     passwordSubmit.addEventListener('click', () => {
         if (passwordInput.value === ADMIN_PASSWORD) {
             passwordOverlay.style.display = 'none';
-            initAdmin(); // Запускаем админку после успешного входа
+            initAdmin();
         } else {
             passwordError.style.display = 'block';
             passwordInput.value = '';
@@ -164,21 +157,17 @@
     });
 
     function initAdmin() {
-        // === Активные вакансии ===
         const jobsList = document.getElementById('jobsList'), emptyMessage = document.getElementById('emptyMessage');
         function saveDirectJobs(jobs) { localStorage.setItem('direct_jobs', JSON.stringify(jobs)); }
         function togglePremium(id) { let jobs = getDirectJobs(); const index = jobs.findIndex(j => j.id === id); if (index > -1) { jobs[index].isPremium = !jobs[index].isPremium; saveDirectJobs(jobs); renderJobs(); } }
         function toggleUrgent(id) { let jobs = getDirectJobs(); const index = jobs.findIndex(j => j.id === id); if (index > -1) { jobs[index].isUrgent = !jobs[index].isUrgent; saveDirectJobs(jobs); renderJobs(); } }
         function deleteJob(id) { let jobs = getDirectJobs(); jobs = jobs.filter(j => j.id !== id); saveDirectJobs(jobs); renderJobs(); }
         function renderJobs() { const jobs = getDirectJobs(); jobsList.innerHTML = ''; if (jobs.length === 0) { emptyMessage.style.display = 'block'; return; } emptyMessage.style.display = 'none'; jobs.sort((a, b) => (b.isPremium ? 1 : 0) - (a.isPremium ? 1 : 0) || (b.isUrgent ? 1 : 0) - (a.isUrgent ? 1 : 0)); jobs.forEach(job => { const card = document.createElement('div'); card.className = 'card'; if (job.isPremium) card.classList.add('premium'); if (job.isUrgent) card.classList.add('urgent'); const title = document.createElement('h3'); title.innerHTML = (job.isPremium ? '⭐ ' : '') + (job.isUrgent ? '🔴 ' : '') + escapeHtml(job.title || 'Без названия'); card.appendChild(title); const company = document.createElement('p'); company.className = 'company'; company.textContent = job.company || 'Компания не указана'; card.appendChild(company); if (job.salary) { const salary = document.createElement('p'); salary.className = 'salary'; salary.textContent = escapeHtml(job.salary); card.appendChild(salary); } const desc = document.createElement('p'); desc.textContent = job.description || ''; card.appendChild(desc); const actions = document.createElement('div'); actions.className = 'card-actions'; const premiumBtn = document.createElement('button'); premiumBtn.className = 'premium-btn' + (job.isPremium ? ' active' : ''); premiumBtn.innerHTML = job.isPremium ? '<i class="fas fa-star"></i> Убрать премиум' : '<i class="far fa-star"></i> Сделать премиум'; premiumBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePremium(job.id); }); actions.appendChild(premiumBtn); const urgentBtn = document.createElement('button'); urgentBtn.className = 'urgent-btn' + (job.isUrgent ? ' active' : ''); urgentBtn.innerHTML = job.isUrgent ? '<i class="fas fa-exclamation-circle"></i> Убрать срочность' : '<i class="far fa-exclamation-circle"></i> Сделать срочной'; urgentBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleUrgent(job.id); }); actions.appendChild(urgentBtn); const delBtn = document.createElement('button'); delBtn.textContent = 'Удалить'; delBtn.className = 'remove-btn'; delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteJob(job.id); }); actions.appendChild(delBtn); card.appendChild(actions); jobsList.appendChild(card); }); }
-
-        // === Модерация вакансий ===
         const pendingJobsList = document.getElementById('pendingJobsList'), pendingJobsEmpty = document.getElementById('pendingJobsEmpty');
         function approveJob(id) { const pending = getPendingJobs(); const job = pending.find(j => j.id === id); if (!job) return; const active = getDirectJobs(); active.push(job); saveDirectJobs(active); const updated = pending.filter(j => j.id !== id); savePendingJobs(updated); renderPendingJobs(); renderJobs(); sendTelegramNotification(`✅ Вакансия одобрена: ${job.title}`); }
         function rejectJob(id) { const pending = getPendingJobs(); const updated = pending.filter(j => j.id !== id); savePendingJobs(updated); renderPendingJobs(); }
         function renderPendingJobs() { const pending = getPendingJobs(); pendingJobsList.innerHTML = ''; if (pending.length === 0) { pendingJobsEmpty.style.display = 'block'; return; } pendingJobsEmpty.style.display = 'none'; pending.forEach(job => { const card = document.createElement('div'); card.className = 'card pending-card'; card.innerHTML = `<h3>${escapeHtml(job.title || 'Без названия')}</h3><p class="company">${escapeHtml(job.company || 'Компания не указана')}</p>${job.salary ? `<p class="salary">${escapeHtml(job.salary)}</p>` : ''}<p>${escapeHtml(job.description || '')}</p><div class="card-actions"><button class="approve-btn" data-id="${job.id}"><i class="fas fa-check"></i> Одобрить</button><button class="reject-btn" data-id="${job.id}"><i class="fas fa-times"></i> Отклонить</button></div>`; card.querySelector('.approve-btn').addEventListener('click', (e) => { e.stopPropagation(); approveJob(job.id); }); card.querySelector('.reject-btn').addEventListener('click', (e) => { e.stopPropagation(); rejectJob(job.id); }); pendingJobsList.appendChild(card); }); }
 
-        // === Активная реклама ===
         const adsList = document.getElementById('adsList'), adsEmpty = document.getElementById('adsEmpty');
         function isAdActive(ad) { if (!ad.expiry) return true; return new Date(ad.expiry) > new Date(); }
         function deleteAd(id) { let ads = getAds(); ads = ads.filter(a => a.id !== id); saveAds(ads); renderAds(); }
@@ -186,7 +175,6 @@
         function clearAdForm() { document.getElementById('adTitle').value = ''; document.getElementById('adDescription').value = ''; document.getElementById('adLink').value = ''; document.getElementById('adImage').value = ''; document.getElementById('adExpiry').value = ''; }
         function renderAds() { const ads = getAds().filter(isAdActive); adsList.innerHTML = ''; if (ads.length === 0) { adsEmpty.style.display = 'block'; return; } adsEmpty.style.display = 'none'; ads.forEach(ad => { const card = document.createElement('div'); card.className = 'card ad-card'; card.innerHTML = `<h3>${escapeHtml(ad.title)}</h3><p>${escapeHtml(ad.description) || ''}</p><p><a href="${escapeHtml(ad.link)}" target="_blank">${escapeHtml(ad.link)}</a></p>${ad.image ? `<img src="${escapeHtml(ad.image)}" style="max-width:100px; max-height:60px; margin-top:8px;">` : ''}<p style="font-size:0.8rem; color:#64748b;">${ad.expiry ? 'До: ' + new Date(ad.expiry).toLocaleDateString('ru-RU') : 'Без срока'}</p><div class="card-actions"><button class="remove-btn" data-id="${ad.id}">Удалить</button></div>`; card.querySelector('.remove-btn').addEventListener('click', (e) => { e.stopPropagation(); deleteAd(ad.id); }); adsList.appendChild(card); }); }
 
-        // === Модерация рекламы ===
         const pendingAdsList = document.getElementById('pendingAdsList'), pendingAdsEmpty = document.getElementById('pendingAdsEmpty');
         function approveAd(id) { const pending = getPendingAds(); const ad = pending.find(a => a.id === id); if (!ad) return; const active = getAds(); active.push(ad); saveAds(active); const updated = pending.filter(a => a.id !== id); savePendingAds(updated); renderPendingAds(); renderAds(); sendTelegramNotification(`✅ Реклама одобрена: ${ad.title}`); }
         function rejectAd(id) { const pending = getPendingAds(); const updated = pending.filter(a => a.id !== id); savePendingAds(updated); renderPendingAds(); }
