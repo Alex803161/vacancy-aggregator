@@ -312,23 +312,18 @@ function saveSubscriptionFilters(filters) {
     localStorage.setItem('subscriptionFilters', JSON.stringify(filters));
 }
 
-/* ========== Уведомления напрямую в Telegram ========== */
+/* ========== Уведомления через облачную функцию ========== */
 
-const TELEGRAM_BOT_TOKEN = '8665726865:AAFldOqa1GrQ7Pj53iOKQAkrE2jXK16kFLs';
-const TELEGRAM_CHAT_ID = '949632651';
+const NOTIFY_API_URL = 'https://functions.yandexcloud.net/d4e3tiqrl2dvo10svl7f';
 
 async function sendTelegramNotification(text) {
     try {
-        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        await fetch(NOTIFY_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: text,
-                parse_mode: 'HTML'
-            })
+            body: JSON.stringify({ text: text })
         });
     } catch (e) {
-        console.warn('Не удалось отправить уведомление в Telegram', e);
+        console.warn('Не удалось отправить уведомление', e);
     }
-}
+                }
