@@ -326,4 +326,4 @@ async function sendTelegramNotification(text) {
     } catch (e) {
         console.warn('Не удалось отправить уведомление', e);
     }
-}
+                           }
