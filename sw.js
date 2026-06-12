@@ -1,10 +1,11 @@
 // sw.js
-const CACHE_NAME = 'vakansa-v2';
+const CACHE_NAME = 'vakansa-v3';
 const STATIC_ASSETS = [
   '/vacancy-aggregator/',
   '/vacancy-aggregator/index.html',
   '/vacancy-aggregator/style.css',
   '/vacancy-aggregator/manifest.json',
+  '/vacancy-aggregator/common.js',
   '/vacancy-aggregator/vacancy.html',
   '/vacancy-aggregator/favorites.html',
   '/vacancy-aggregator/vacancies.html',
@@ -38,16 +39,19 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // API-запросы — только сеть
   if (url.href.includes('api.hh.ru') || url.href.includes('functions.yandexcloud.net')) {
-    event.respondWith(networkFirst(request));
+    event.respondWith(networkOnly(request));
     return;
   }
 
+  // HTML — сеть, при ошибке — кеш
   if (request.mode === 'navigate' || (request.headers.get('accept') && request.headers.get('accept').includes('text/html'))) {
     event.respondWith(networkFirst(request));
     return;
   }
 
+  // Статические ресурсы — кеш первый
   if (
     request.destination === 'style' ||
     request.destination === 'script' ||
@@ -58,11 +62,13 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Изображения — стратегия "сначала кеш, потом сеть, обновление кеша"
   if (request.destination === 'image') {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
+  // Всё остальное — сеть первая
   event.respondWith(networkFirst(request));
 });
 
@@ -107,4 +113,12 @@ async function staleWhileRevalidate(request) {
     return response;
   }).catch(() => cached);
   return cached || fetchPromise;
+}
+
+async function networkOnly(request) {
+  try {
+    return await fetch(request);
+  } catch (e) {
+    return new Response('Offline', { status: 503 });
+  }
 }
