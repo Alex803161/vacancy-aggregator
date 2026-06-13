@@ -13,7 +13,7 @@
     
     <meta property="og:title" content="Разместить вакансию — ВКАНСА">
     <meta property="og:description" content="Бесплатное размещение вакансий для прямых работодателей.">
-    <meta property="og:url" content="https://vkansa.ru/post-job.html">
+    <meta property="og:url" content="https://vakansa24.ru/post-job.html">
     <meta property="og:type" content="website">
     
     <link rel="stylesheet" href="style.css">
@@ -74,7 +74,7 @@
     <div class="footer-copy">© 2025 ВКАНСА</div>
 </footer>
 <button id="themeToggle" class="theme-switch">🌙</button>
-<script src="common.js?v=2"></script>
+<script src="common.js?v=3"></script>
 <script>
     const form = document.getElementById('jobForm'), formMessage = document.getElementById('formMessage');
     form.addEventListener('submit', (e) => {
@@ -97,21 +97,13 @@
             formMessage.style.color = '#dc2626';
             return;
         }
-        // Диагностика: проверяем, что функции доступны
-        if (typeof getPendingJobs !== 'function') {
-            alert('Ошибка: getPendingJobs не определена. common.js не загрузился?');
-            return;
-        }
         const pending = getPendingJobs();
         pending.push(job);
         savePendingJobs(pending);
         formMessage.textContent = '✅ Вакансия отправлена на модерацию!';
         formMessage.style.color = '#059669';
         form.reset();
-        // Попытка отправить уведомление с алертом
-        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}`)
-        .then(() => alert('Уведомление отправлено'))
-        .catch(err => alert('Ошибка отправки уведомления: ' + err.message));
+        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}`);
     });
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
