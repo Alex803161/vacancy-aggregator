@@ -7,178 +7,81 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <title>Ваканса — поиск работы | свежие вакансии во всех городах России</title>
-    <meta name="description" content="Агрегатор вакансий Ваканса — найдите работу своей мечты. Тысячи предложений от ведущих компаний: работа в Москве, удалённая работа, вакансии без опыта и для студентов. Удобный поиск и фильтры.">
-    <link rel="canonical" href="https://alex803161.github.io/vacancy-aggregator/">
-    
+    <meta name="description" content="Агрегатор вакансий Ваканса — найдите работу своей мечты.">
+    <link rel="canonical" href="https://vakansa24.ru/">
     <meta property="og:title" content="ВКАНСА — поиск работы">
-    <meta property="og:description" content="Найдите работу своей мечты. Тысячи актуальных вакансий от проверенных работодателей с удобным поиском и фильтрами.">
-    <meta property="og:url" content="https://alex803161.github.io/vacancy-aggregator/">
+    <meta property="og:description" content="Найдите работу своей мечты.">
+    <meta property="og:url" content="https://vakansa24.ru/">
     <meta property="og:type" content="website">
-    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3LEHS2D4G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y3LEHS2D4G');
-    </script>
-    
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-Y3LEHS2D4G')</script>
     <style>
-        .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: #0f172a; display: flex; align-items: center; gap: 8px; }
-        html.dark .page-title { color: #f1f5f9; }
-        .filter-checkbox-option { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 0.9rem; font-weight: 500; color: #334155; }
-        html.dark .filter-checkbox-option { color: #cbd5e1; }
-        .filter-checkbox-option input[type="checkbox"] { width: 18px; height: 18px; accent-color: #0047cc; }
-        .save-search-btn { background: #eef2ff; border: 1px solid #cbd5e1; color: #334155; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; }
-        html.dark .save-search-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
-        .save-search-btn:hover { background: #0047cc; color: white; border-color: #0047cc; }
-        .new-badge { background: #dc2626; color: white; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 8px; white-space: nowrap; }
-        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #059669; color: white; padding: 14px 28px; border-radius: 40px; font-weight: 600; z-index: 1000; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.4s; pointer-events: none; white-space: nowrap; }
-        .toast-notification.show { opacity: 1; pointer-events: auto; }
-        .saved-search-actions { display: flex; gap: 8px; margin-top: 10px; }
-        .saved-search-apply, .saved-search-delete { flex: 1; padding: 6px 0; border: none; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
-        .saved-search-apply { background: #0047cc; color: white; }
-        .saved-search-delete { background: #f1f5f9; color: #dc2626; border: 1px solid #e2e8f0; }
-        html.dark .saved-search-delete { background: #334155; border-color: #475569; }
-        .match-badge { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 22px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; line-height: 1; margin-left: 8px; flex-shrink: 0; }
-        .match--high { background: #dcfce7; color: #166534; } .match--medium { background: #fef9c3; color: #854d0e; } .match--low { background: #f1f5f9; color: #475569; }
-        html.dark .match--high { background: #14532d; color: #bbf7d0; } html.dark .match--medium { background: #713f12; color: #fde047; } html.dark .match--low { background: #1e293b; color: #94a3b8; }
-        .stats-block { background: #f8fafc; border-radius: 16px; padding: 16px 20px; margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.9rem; border: 1px solid #e2e8f0; transition: background 0.2s, border-color 0.2s; }
-        html.dark .stats-block { background: #1e293b; border-color: #334155; }
-        .stat-item { display: flex; flex-direction: column; gap: 4px; }
-        .stat-label { color: #64748b; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; } html.dark .stat-label { color: #94a3b8; }
-        .stat-value { color: #0f172a; font-weight: 700; font-size: 1.1rem; } html.dark .stat-value { color: #f1f5f9; }
-        .stat-value.salary { color: #059669; } html.dark .stat-value.salary { color: #34d399; }
-        .stat-value.skills { color: #1e40af; } html.dark .stat-value.skills { color: #93c5fd; }
-        .btn-compare { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-        .btn-compare.in-compare { background: #1e40af; color: white; border-color: #1e40af; }
-        html.dark .btn-compare { background: #334155; border-color: #475569; color: #e2e8f0; } html.dark .btn-compare.in-compare { background: #3b82f6; border-color: #3b82f6; }
-        .compare-header-btn { background: #eef2ff; border: 1px solid #cbd5e1; color: #334155; padding: 6px 16px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; text-decoration: none; }
-        .compare-header-btn:hover { background: #0047cc; color: white; border-color: #0047cc; }
-        html.dark .compare-header-btn { background: #334155; border-color: #475569; color: #e2e8f0; }
-        .recommendations-block { margin-bottom: 24px; }
-        .recommendations-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: #0f172a; } html.dark .recommendations-title { color: #f1f5f9; }
-        .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-        .share-wrapper { position: relative; display: inline-flex; }
-        .btn-share-trigger { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-        .btn-share-trigger:hover { background: #e2e8f0; } html.dark .btn-share-trigger { background: #334155; border-color: #475569; color: #e2e8f0; }
-        .share-popup { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 40; flex-direction: row; gap: 8px; white-space: nowrap; }
-        .share-popup.show { display: flex; } html.dark .share-popup { background: #1e293b; border-color: #334155; }
-        .share-popup .btn-share-round { width: 40px; height: 40px; font-size: 1rem; }
-        .btn-copy-link { background: #64748b; color: white; } .btn-copy-link:hover { background: #475569; }
-        .btn-copy-link.copied { background: #059669; }
-        .vacancy-card { overflow: visible !important; }
-        /* Кнопка "Разместить вакансию" */
-        .post-job-hero {
-            background: linear-gradient(135deg, #0047cc, #3b82f6);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            text-align: center;
-            color: white;
-        }
-        .post-job-hero h2 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-        }
-        .post-job-hero p {
-            margin-bottom: 16px;
-            opacity: 0.9;
-        }
-        .post-job-hero .btn-post-job {
-            display: inline-block;
-            background: white;
-            color: #0047cc;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.2s;
-        }
-        .post-job-hero .btn-post-job:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        @media (max-width: 768px) { 
-            .theme-switch { bottom: 80px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; border-width: 2px; }
-            #backToTopBtn { bottom: 145px; right: 10px; width: 46px; height: 46px; font-size: 1.2rem; }
-            .site-footer { padding-bottom: 120px; }
-            .save-search-btn { font-size: 0.8rem; padding: 6px 12px; }
-            .toast-notification { font-size: 0.85rem; padding: 10px 20px; }
-            .logo-text { font-size: 2.2rem; }
-            .share-popup { padding: 8px; gap: 6px; }
-            .share-popup .btn-share-round { width: 36px; height: 36px; font-size: 0.9rem; }
-        }
+        .page-title{font-size:1.8rem;font-weight:700;margin-bottom:16px;color:#0f172a;display:flex;align-items:center;gap:8px}
+        html.dark .page-title{color:#f1f5f9}
+        .filter-checkbox-option{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.9rem;font-weight:500;color:#334155}
+        html.dark .filter-checkbox-option{color:#cbd5e1}
+        .save-search-btn{background:#eef2ff;border:1px solid #cbd5e1;color:#334155;padding:8px 16px;border-radius:20px;font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap}
+        .new-badge{background:#dc2626;color:white;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;white-space:nowrap}
+        .toast-notification{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#059669;color:white;padding:14px 28px;border-radius:40px;font-weight:600;z-index:1000;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.2);opacity:0;transition:opacity .4s;pointer-events:none;white-space:nowrap}
+        .toast-notification.show{opacity:1;pointer-events:auto}
+        .match-badge{display:inline-flex;align-items:center;justify-content:center;width:46px;height:22px;border-radius:12px;font-size:.75rem;font-weight:700;line-height:1;margin-left:8px;flex-shrink:0}
+        .match--high{background:#dcfce7;color:#166534}.match--medium{background:#fef9c3;color:#854d0e}.match--low{background:#f1f5f9;color:#475569}
+        .stats-block{background:#f8fafc;border-radius:16px;padding:16px 20px;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:20px;font-size:.9rem;border:1px solid #e2e8f0}
+        .stat-item{display:flex;flex-direction:column;gap:4px}
+        .stat-label{color:#64748b;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+        .stat-value{color:#0f172a;font-weight:700;font-size:1.1rem}
+        .stat-value.salary{color:#059669}.stat-value.skills{color:#1e40af}
+        .btn-compare{background:#f1f5f9;border:1px solid #cbd5e1;color:#334155;padding:8px 14px;border-radius:20px;font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+        .btn-compare.in-compare{background:#1e40af;color:white;border-color:#1e40af}
+        .compare-header-btn{background:#eef2ff;border:1px solid #cbd5e1;color:#334155;padding:6px 16px;border-radius:20px;font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;text-decoration:none}
+        .recommendations-block{margin-bottom:24px}
+        .recommendations-title{font-size:1.2rem;font-weight:700;margin-bottom:12px;color:#0f172a}
+        .recommendations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+        .share-wrapper{position:relative;display:inline-flex}
+        .btn-share-trigger{background:#f1f5f9;border:1px solid #cbd5e1;color:#334155;padding:8px 14px;border-radius:20px;font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+        .share-popup{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:white;border:1px solid #e2e8f0;border-radius:16px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:40;flex-direction:row;gap:8px;white-space:nowrap}
+        .share-popup.show{display:flex}
+        .btn-copy-link{background:#64748b;color:white}.btn-copy-link.copied{background:#059669}
+        .vacancy-card{overflow:visible!important}
+        .post-job-hero{background:linear-gradient(135deg,#0047cc,#3b82f6);border-radius:20px;padding:24px;margin-bottom:24px;text-align:center;color:white}
+        .post-job-hero h2{font-size:1.4rem;margin-bottom:8px}
+        .post-job-hero p{margin-bottom:16px;opacity:.9}
+        .post-job-hero .btn-post-job{display:inline-block;background:white;color:#0047cc;padding:12px 28px;border-radius:40px;font-weight:700;text-decoration:none;font-size:1rem;transition:all .2s}
+        @media(max-width:768px){.theme-switch{bottom:80px;right:10px;width:46px;height:46px;font-size:1.2rem;border-width:2px}#backToTopBtn{bottom:145px;right:10px;width:46px;height:46px;font-size:1.2rem}.site-footer{padding-bottom:120px}.logo-text{font-size:2.2rem}}
     </style>
 </head>
 <body class="light">
 <button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
 <div class="container">
     <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Поиск работы — свежие вакансии</h1><p>Работа найдётся — и не одна</p></div>
-    
-    <!-- Блок для работодателей -->
-    <div class="post-job-hero">
-        <h2>Вы работодатель?</h2>
-        <p>Разместите вакансию бесплатно и найдите сотрудников уже сегодня</p>
-        <a href="post-job.html" class="btn-post-job"><i class="fas fa-plus-circle"></i> Разместить вакансию</a>
-    </div>
-    
-    <div id="recommendationsBlock" class="recommendations-block" style="display:none;"><div class="recommendations-title"><i class="fas fa-star" style="color: #f59e0b;"></i> Рекомендованные вакансии</div><div id="recommendationsContainer" class="recommendations-grid"></div></div>
+    <div class="post-job-hero"><h2>Вы работодатель?</h2><p>Разместите вакансию бесплатно и найдите сотрудников уже сегодня</p><a href="post-job.html" class="btn-post-job"><i class="fas fa-plus-circle"></i> Разместить вакансию</a></div>
     <div class="search-section">
         <div class="search-row"><input type="text" id="searchInput" class="search-input" placeholder="Должность, компания, город..." autocomplete="off"><button id="searchButton" class="search-btn"><span>Найти</span></button></div>
         <div class="filters-grid">
-            <div class="filter-group"><label>Город</label><input type="text" id="filterCity" class="filter-input-small" placeholder="Введите город..." autocomplete="off"><div class="city-suggestions" id="citySuggestions"></div></div>
+            <div class="filter-group"><label>Город</label><input type="text" id="filterCity" class="filter-input-small" placeholder="Введите город..."><div class="city-suggestions" id="citySuggestions"></div></div>
             <div class="filter-group"><label>Опыт работы</label><select id="filterExperience" class="filter-select"><option value="">Любой</option><option>Нет опыта</option><option>От 1 года до 3 лет</option><option>От 3 до 6 лет</option><option>Более 6 лет</option></select></div>
             <div class="filter-group"><label>Тип занятости</label><select id="filterEmployment" class="filter-select"><option value="">Любая</option><option value="full">Полная</option><option value="part">Частичная</option><option value="remote">Удалённая</option><option value="probation">Стажировка</option></select></div>
             <div class="filter-group"><label>Зарплата от</label><input type="number" id="filterSalaryFrom" class="filter-input-small" placeholder="0" step="1000"></div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
             <div class="sort-btns"><button id="sortByDate" class="sort-btn active"><i class="fas fa-clock"></i> По дате</button><button id="sortBySalary" class="sort-btn"><i class="fas fa-arrow-up"></i> По зарплате</button><button id="sortByMatch" class="sort-btn"><i class="fas fa-bullseye"></i> По совпадению</button></div>
-            <div class="filter-checkbox-option"><input type="checkbox" id="filterWithSalary"><label for="filterWithSalary">Только с зарплатой</label></div>
-            <div class="filter-checkbox-option"><input type="checkbox" id="filterRemote"><label for="filterRemote">Удалённая работа</label></div>
-            <div class="filter-checkbox-option"><input type="checkbox" id="filterShowHidden"><label for="filterShowHidden">Показывать скрытые</label></div>
+            <div class="filter-checkbox-option"><input type="checkbox" id="filterWithSalary"><label>Только с зарплатой</label></div>
+            <div class="filter-checkbox-option"><input type="checkbox" id="filterRemote"><label>Удалённая работа</label></div>
+            <div class="filter-checkbox-option"><input type="checkbox" id="filterShowHidden"><label>Показывать скрытые</label></div>
             <button id="saveSearchBtn" class="save-search-btn"><i class="fas fa-save"></i> Сохранить поиск</button>
         </div>
         <div class="history-badges" id="historyContainer"><button id="clearHistoryBtn" class="clear-history">Очистить историю</button></div>
     </div>
-    <div class="results-header">
-        <div class="counter" id="counterDisplay">Найдено: <span>0</span></div>
-        <div style="display: flex; gap: 8px;"><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button><a href="compare.html" id="compareLinkBtn" class="compare-header-btn" style="display:none;"><i class="fas fa-balance-scale"></i> Сравнение (<span id="compareCount">0</span>)</a></div>
-    </div>
-    <div id="statsContainer" style="display:none;"></div>
+    <div class="results-header"><div class="counter" id="counterDisplay">Найдено: <span>0</span></div><div style="display:flex;gap:8px"><button id="resetButton" class="reset-btn"><i class="fas fa-undo"></i> Сбросить</button><a href="compare.html" id="compareLinkBtn" class="compare-header-btn" style="display:none"><i class="fas fa-balance-scale"></i> Сравнение (<span id="compareCount">0</span>)</a></div></div>
     <div id="vacanciesContainer" class="vacancies-list"></div>
-    <div id="loadMoreWrapper" style="text-align:center; display:none; margin-top: 16px;"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
-    <div id="scrollSentinel" style="height: 1px;"></div>
-    <div class="subscribe-section">
-        <div class="subscribe-card">
-            <div class="subscribe-icon"><i class="fas fa-heart"></i></div>
-            <h3 class="subscribe-title">Подпишитесь на вакансии</h3>
-            <p class="subscribe-desc">Получайте лучшие предложения прямо на почту. Без спама, только то, что вам интересно.</p>
-            <form id="subscribeForm" class="subscribe-form" style="flex-direction: column; gap: 12px;">
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 450px; justify-content: center;">
-                    <input type="email" id="subscribeEmailInput" class="subscribe-input" placeholder="Введите ваш email" required autocomplete="email" style="flex: 1 1 200px;">
-                    <button type="submit" class="subscribe-btn" id="subscribeSubmitBtn"><span>Подписаться</span> <i class="fas fa-paper-plane"></i></button>
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 450px; justify-content: center;">
-                    <input type="text" id="subscribeCity" class="subscribe-input" placeholder="Город (необязательно)" autocomplete="off" style="flex: 1 1 130px; height: 38px; line-height: 38px; padding: 0 10px; font-size: 0.85rem;">
-                    <input type="number" id="subscribeSalaryFrom" class="subscribe-input" placeholder="Зарплата от" step="1000" style="flex: 1 1 130px; height: 38px; line-height: 38px; padding: 0 10px; font-size: 0.85rem;">
-                    <input type="text" id="subscribeKeywords" class="subscribe-input" placeholder="Ключевые слова" style="flex: 1 1 130px; height: 38px; line-height: 38px; padding: 0 10px; font-size: 0.85rem;">
-                </div>
-                <div class="city-suggestions" id="subscribeCitySuggestions" style="position: relative; width: 100%; max-width: 450px;"></div>
-            </form>
-            <div class="subscribe-status" id="subscribeStatus"></div>
-        </div>
-    </div>
+    <div id="loadMoreWrapper" style="text-align:center;display:none;margin-top:16px"><button id="loadMoreBtn" class="load-more-btn">Загрузить ещё</button></div>
     <div class="extra-sections">
         <div class="section-title">Популярные города</div>
-        <div class="companies-grid" id="popularCitiesGrid">
+        <div class="companies-grid">
             <a href="vacancies/rossiya/moskva.html" class="company-card">Москва</a>
             <a href="vacancies/rossiya/sankt-peterburg.html" class="company-card">Санкт-Петербург</a>
             <a href="vacancies/rossiya/kazan.html" class="company-card">Казань</a>
@@ -191,8 +94,20 @@
             <div class="company-card" data-search="Магнит">Магнит</div><div class="company-card" data-search="Пятёрочка">Пятёрочка</div><div class="company-card" data-search="Сбер">Сбер</div><div class="company-card" data-search="Яндекс">Яндекс</div><div class="company-card" data-search="Ozon">Ozon</div><div class="company-card" data-search="МТС">МТС</div>
         </div>
     </div>
-    <div id="savedSearchesSection" class="saved-searches-section" style="display:none;"><div class="saved-searches-header"><h3 class="saved-searches-title">Мои поиски</h3></div><div class="saved-searches-scroll" id="savedSearchesContainer"></div></div>
-    <div id="recentSection" class="recent-section" style="display:none;"><div class="recent-header"><h3 class="recent-title">Недавно просмотренные</h3><button id="clearRecentBtn" class="recent-clear-btn"><i class="fas fa-trash-alt"></i> Очистить</button></div><div class="recent-scroll" id="recentContainer"></div></div>
+    <div class="subscribe-section">
+        <div class="subscribe-card">
+            <div class="subscribe-icon"><i class="fas fa-heart"></i></div>
+            <h3 class="subscribe-title">Подпишитесь на вакансии</h3>
+            <p class="subscribe-desc">Получайте лучшие предложения прямо на почту.</p>
+            <form id="subscribeForm" class="subscribe-form" style="flex-direction:column;gap:12px">
+                <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                    <input type="email" id="subscribeEmailInput" class="subscribe-input" placeholder="Введите ваш email" required autocomplete="email">
+                    <button type="submit" class="subscribe-btn" id="subscribeSubmitBtn"><span>Подписаться</span> <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+            <div class="subscribe-status" id="subscribeStatus"></div>
+        </div>
+    </div>
 </div>
 <footer class="site-footer">
     <div class="footer-links">
@@ -203,6 +118,7 @@
         </div>
         <div class="footer-links-row">
             <a href="post-job.html" class="highlight"><i class="fas fa-plus-circle"></i> Разместить вакансию</a>
+            <a href="tariffs.html">Тарифы</a>
             <a href="privacy.html">Политика</a> <a href="terms.html">Соглашение</a> <a href="contacts.html">Контакты</a>
         </div>
     </div>
@@ -210,32 +126,20 @@
 </footer>
 <button id="themeToggle" class="theme-switch">🌙</button>
 <div id="toastNotification" class="toast-notification">🔔 Новые вакансии по сохранённым поискам!</div>
-
-<!-- JSON-LD микроразметка для списка вакансий -->
-<script type="application/ld+json" id="itemListSchema">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "numberOfItems": 0,
-  "itemListElement": []
-}
-</script>
-
-<script src="common.js"></script>
+<script src="common.js?v=3"></script>
 <script>
     const API_URL="https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
-    let allVacancies=[], filteredVacancies=[], displayedCount=0, currentSort='publication_time';
+    let allVacancies=[],filteredVacancies=[],displayedCount=0,currentSort='publication_time';
     const PAGE_SIZE=20;
-    let favorites=JSON.parse(localStorage.getItem('favorites'))||[];
-    let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];
-    let currentArea='113', selectedCityId=null, allAreas=[], lastSearchFound=0, currentSearchQuery='';
-    let hiddenVacancies=JSON.parse(localStorage.getItem('hiddenVacancies'))||[], isLoadingMore=false;
-    const CACHE_TTL=5*60*1000, searchCache=new Map();
+    let currentArea='113',selectedCityId=null,allAreas=[];
+    let hiddenVacancies=JSON.parse(localStorage.getItem('hiddenVacancies'))||[],isLoadingMore=false;
+    const CACHE_TTL=5*60*1000,searchCache=new Map();
     function getCachedResult(key){const c=searchCache.get(key);if(!c)return null;if(Date.now()-c.timestamp>CACHE_TTL){searchCache.delete(key);return null}return c.data}
-    function setCachedResult(key,data){searchCache.set(key,{timestamp:Date.now(),data:data})}
-    function getAds() { return JSON.parse(localStorage.getItem('ads') || '[]'); }
-    function isAdActive(ad) { if (!ad.expiry) return true; return new Date(ad.expiry) > new Date(); }
-    async function fetchVacanciesFromAPI(query,filters={}){const p=new URLSearchParams();if(filters._t)p.set('_t',filters._t);if(query)p.set('text',query);if(filters.area)p.set('area',filters.area);if(filters.employment)p.set('employment',filters.employment);if(filters.schedule)p.set('schedule',filters.schedule);if(filters.order_by)p.set('order_by',filters.order_by);const pp=filters.per_page||30;p.set('per_page',pp);if(filters.page!==undefined)p.set('page',filters.page);const r=await fetch(`${API_URL}?${p.toString()}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);const d=await r.json();if(d&&d.items&&Array.isArray(d.items))return{items:d.items,found:d.found||d.items.length};if(d&&Array.isArray(d))return{items:d,found:d.length};return{items:[],found:0}}
+    function setCachedResult(key,data){searchCache.set(key,{timestamp:Date.now(),data})}
+    function getAds(){return JSON.parse(localStorage.getItem('ads')||'[]')}
+    function isAdActive(ad){if(!ad.expiry)return true;return new Date(ad.expiry)>new Date()}
+    function getDirectJobs(){return JSON.parse(localStorage.getItem('direct_jobs')||'[]')}
+    async function fetchVacanciesFromAPI(query,filters={}){const p=new URLSearchParams;if(filters._t)p.set('_t',filters._t);if(query)p.set('text',query);if(filters.area)p.set('area',filters.area);if(filters.employment)p.set('employment',filters.employment);if(filters.schedule)p.set('schedule',filters.schedule);if(filters.order_by)p.set('order_by',filters.order_by);const pp=filters.per_page||30;p.set('per_page',pp);if(filters.page!==undefined)p.set('page',filters.page);const r=await fetch(`${API_URL}?${p.toString()}`);if(!r.ok)throw new Error(`HTTP ${r.status}`);const d=await r.json();if(d&&d.items&&Array.isArray(d.items))return{items:d.items,found:d.found||d.items.length};if(d&&Array.isArray(d))return{items:d,found:d.length};return{items:[],found:0}}
     const searchInput=document.getElementById('searchInput'),searchBtn=document.getElementById('searchButton'),
         vacanciesContainer=document.getElementById('vacanciesContainer'),counterSpan=document.querySelector('#counterDisplay span'),
         loadMoreBtn=document.getElementById('loadMoreBtn'),loadMoreWrapper=document.getElementById('loadMoreWrapper'),
@@ -243,120 +147,60 @@
         filterEmployment=document.getElementById('filterEmployment'),filterSalaryFrom=document.getElementById('filterSalaryFrom'),
         sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),
         sortByMatchBtn=document.getElementById('sortByMatch'),resetButton=document.getElementById('resetButton'),
-        historyContainer=document.getElementById('historyContainer'),clearHistoryBtn=document.getElementById('clearHistoryBtn'),
-        citySuggestions=document.getElementById('citySuggestions'),scrollSentinel=document.getElementById('scrollSentinel'),
-        toastNotification=document.getElementById('toastNotification');
-    const subscribeForm=document.getElementById('subscribeForm'),subscribeEmailInput=document.getElementById('subscribeEmailInput'),
-        subscribeSubmitBtn=document.getElementById('subscribeSubmitBtn'),subscribeStatus=document.getElementById('subscribeStatus'),
-        subscribeCity=document.getElementById('subscribeCity'),subscribeSalaryFrom=document.getElementById('subscribeSalaryFrom'),
-        subscribeKeywords=document.getElementById('subscribeKeywords'),subscribeCitySuggestions=document.getElementById('subscribeCitySuggestions');
-    const recentSection=document.getElementById('recentSection'),recentContainer=document.getElementById('recentContainer'),
-        clearRecentBtn=document.getElementById('clearRecentBtn');
-    const savedSearchesSection=document.getElementById('savedSearchesSection'),savedSearchesContainer=document.getElementById('savedSearchesContainer'),
-        saveSearchBtn=document.getElementById('saveSearchBtn');
-    const filterWithSalary=document.getElementById('filterWithSalary'),filterRemote=document.getElementById('filterRemote'),
+        filterWithSalary=document.getElementById('filterWithSalary'),filterRemote=document.getElementById('filterRemote'),
         filterShowHidden=document.getElementById('filterShowHidden');
-    const compareLinkBtn=document.getElementById('compareLinkBtn'),compareCountSpan=document.getElementById('compareCount');
-    const recommendationsBlock=document.getElementById('recommendationsBlock'),recommendationsContainer=document.getElementById('recommendationsContainer');
-    const observer=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting&&!isLoadingMore&&displayedCount<filteredVacancies.length)loadMore()})},{rootMargin:'200px'});
-    observer.observe(scrollSentinel);
-    toastNotification.addEventListener('click',()=>{toastNotification.classList.remove('show')});
-    function showToast(m){toastNotification.textContent=m;toastNotification.classList.add('show');setTimeout(()=>{toastNotification.classList.remove('show')},5000)}
-    function sendGAEvent(n,p){if(typeof gtag==="function")gtag("event",n,p)}
-    async function loadAllAreas() {
-        try {
-            const r = await fetch(`${API_URL}?action=areas`);
-            if (!r.ok) throw new Error('');
-            const all = await r.json();
-            const russia = all.find(a => a.id === '113');
-            allAreas = russia ? [russia] : [];
-        } catch(e) {
-            try {
-                const r = await fetch('https://api.hh.ru/areas');
-                const all = await r.json();
-                const russia = all.find(a => a.id === '113');
-                allAreas = russia ? [russia] : [];
-            } catch(e2) {}
-        }
+
+    // Загружаем только Россию
+    async function loadAllAreas(){try{const r=await fetch(`${API_URL}?action=areas`);if(!r.ok)throw new Error('');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e){try{const r=await fetch('https://api.hh.ru/areas');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e2){}}
     }
+
     function findCities(a,q){let r=[];function s(a){if(a.name&&a.name.toLowerCase().includes(q)&&a.id)r.push({id:String(a.id),name:a.name});if(a.areas)a.areas.forEach(s)}if(Array.isArray(a))a.forEach(s);return r}
     function showCitySuggestions(c){if(!c.length){citySuggestions.style.display='none';return}citySuggestions.innerHTML=c.map(c=>`<div class="city-suggestion-item" data-city-id="${c.id}" data-city-name="${escapeHtml(c.name)}">${escapeHtml(c.name)}</div>`).join('');citySuggestions.style.display='block'}
-    function showSubscribeCitySuggestions(c){if(!c.length){subscribeCitySuggestions.style.display='none';return}subscribeCitySuggestions.innerHTML=c.map(c=>`<div class="city-suggestion-item" data-city-id="${c.id}" data-city-name="${escapeHtml(c.name)}">${escapeHtml(c.name)}</div>`).join('');subscribeCitySuggestions.style.display='block'}
     filterCity.addEventListener('input',function(){const v=this.value.trim();if(!v){selectedCityId=null;currentArea='113';citySuggestions.style.display='none';return}if(allAreas.length===0)return;const f=findCities(allAreas,v.toLowerCase());showCitySuggestions(f.slice(0,8))});
     filterCity.addEventListener('blur',function(){setTimeout(()=>{citySuggestions.style.display='none'},200)});
-    filterCity.addEventListener('focus',function(){if(this.value.trim()&&citySuggestions.children.length>0)citySuggestions.style.display='block'});
     citySuggestions.addEventListener('click',function(e){const i=e.target.closest('.city-suggestion-item');if(!i)return;filterCity.value=i.dataset.cityName;selectedCityId=i.dataset.cityId;currentArea=i.dataset.cityId;citySuggestions.style.display='none';performSearch(true,false)});
-    subscribeCity.addEventListener('input',function(){const v=this.value.trim();if(!v){subscribeCitySuggestions.style.display='none';return}if(allAreas.length===0)return;const f=findCities(allAreas,v.toLowerCase());showSubscribeCitySuggestions(f.slice(0,8))});
-    subscribeCity.addEventListener('blur',function(){setTimeout(()=>{subscribeCitySuggestions.style.display='none'},200)});
-    subscribeCitySuggestions.addEventListener('click',function(e){const i=e.target.closest('.city-suggestion-item');if(!i)return;subscribeCity.value=i.dataset.cityName;subscribeCity.dataset.cityId=i.dataset.cityId;subscribeCitySuggestions.style.display='none'});
+
     function hideVacancy(id){if(!hiddenVacancies.includes(id)){hiddenVacancies.push(id);localStorage.setItem('hiddenVacancies',JSON.stringify(hiddenVacancies))}applyFilters()}
-    function getSavedSearches(){return JSON.parse(localStorage.getItem('savedSearches'))||[]}
-    function saveCurrentSearch(){const q=searchInput.value.trim(),aId=currentArea,aName=filterCity.value.trim(),sFrom=filterSalaryFrom.value.trim(),emp=filterEmployment.value,exp=filterExperience.value,sort=currentSort,rem=filterRemote.checked;const ex=getSavedSearches();if(ex.some(s=>s.query===q&&s.areaId===aId&&s.remote===rem)){alert('Такой поиск уже сохранён');return}ex.push({query:q,areaId:aId,areaName:aName,salaryFrom:sFrom,employment:emp,experience:exp,sort:sort,remote:rem,lastCount:0});localStorage.setItem('savedSearches',JSON.stringify(ex));renderSavedSearches()}
-    function deleteSavedSearch(i){const s=getSavedSearches();s.splice(i,1);localStorage.setItem('savedSearches',JSON.stringify(s));renderSavedSearches()}
-    async function applySavedSearch(s){searchInput.value=s.query;filterCity.value=s.areaName;currentArea=s.areaId;selectedCityId=s.areaId!=='113'?s.areaId:null;filterSalaryFrom.value=s.salaryFrom;filterEmployment.value=s.employment;filterExperience.value=s.experience;filterRemote.checked=s.remote||false;setSort(s.sort);await performSearch(true,false)}
-    function updateSavedSearchCounts(q,aId,emp,sch,found){const s=getSavedSearches();let u=false;const n=s.map(s=>{if(s.query===q&&s.areaId===aId&&s.employment===emp&&s.remote===sch){if(s.lastCount!==found){u=true;return{...s,lastCount:found}}}return s});if(u){localStorage.setItem('savedSearches',JSON.stringify(n));renderSavedSearches()}}
-    async function renderSavedSearches(){const s=getSavedSearches();if(s.length===0){savedSearchesSection.style.display='none';return}savedSearchesSection.style.display='block';const u=await Promise.all(s.map(async(s)=>{try{const{found}=await fetchVacanciesFromAPI(s.query,{area:s.areaId,employment:s.employment,schedule:s.remote?'remote':undefined,order_by:s.sort,per_page:1});return{...s,currentFound:found}}catch(e){return{...s,currentFound:s.lastCount||0}}}));let t=0;const l=JSON.parse(localStorage.getItem('lastSeenCounts'))||{};u.forEach(s=>{const k=`${s.query}_${s.areaId}_${s.employment}_${s.remote||false}`;const ls=l[k]||s.lastCount||0;if(s.currentFound>ls)t+=(s.currentFound-ls)});if(t>0)showToast(`🔔 ${t} новых вакансий по сохранённым поискам!`);const nl={};u.forEach(s=>{const k=`${s.query}_${s.areaId}_${s.employment}_${s.remote||false}`;nl[k]=s.currentFound});localStorage.setItem('lastSeenCounts',JSON.stringify(nl));savedSearchesContainer.innerHTML=u.map((s,i)=>{const lk=`${s.query}_${s.areaId}_${s.employment}_${s.remote||false}`;const ls=(JSON.parse(localStorage.getItem('lastSeenCounts'))||{})[lk]||s.lastCount||0;const nc=s.currentFound-ls;const b=nc>0?`<span class="new-badge">+${nc} новых</span>`:'';return`<div class="saved-search-card"><h4>${escapeHtml(s.query)||'Поиск'} ${b}</h4><div class="search-detail">${s.areaName?'Город: '+escapeHtml(s.areaName):'Город не выбран'}</div>${s.salaryFrom?`<div class="salary">от ${s.salaryFrom}</div>`:''}<div class="saved-search-actions"><button class="saved-search-apply" data-index="${i}"><i class="fas fa-play"></i> Применить</button><button class="saved-search-delete" data-index="${i}"><i class="fas fa-trash"></i> Удалить</button></div></div>`}).join('');document.querySelectorAll('.saved-search-apply').forEach(b=>{b.addEventListener('click',(e)=>{const i=e.target.closest('button').dataset.index;const s=getSavedSearches();if(s[i])applySavedSearch(s[i])})});document.querySelectorAll('.saved-search-delete').forEach(b=>{b.addEventListener('click',(e)=>{const i=e.target.closest('button').dataset.index;deleteSavedSearch(parseInt(i))})})}
-    saveSearchBtn.addEventListener('click',saveCurrentSearch);
-    function saveRecentVacancy(v){let r=JSON.parse(localStorage.getItem('recentVacancies'))||[];r=r.filter(x=>x.id!==v.id);r.unshift({...v,timestamp:Date.now()});if(r.length>200)r=r.slice(0,200);localStorage.setItem('recentVacancies',JSON.stringify(r));renderRecentVacancies()}
-    function renderRecentVacancies(){const r=JSON.parse(localStorage.getItem('recentVacancies'))||[];if(r.length===0){recentSection.style.display='none';return}recentSection.style.display='block';const s=r.slice(0,10);recentContainer.innerHTML=s.map(v=>`<a href="vacancy.html?id=${v.id}" class="recent-card"><h4>${escapeHtml(v.name)||'Без названия'}</h4><div class="company">${escapeHtml(v.employer)||'Компания не указана'}</div>${v.salary?`<div class="salary">${escapeHtml(v.salary)}</div>`:''}${v.area?`<div class="city">${escapeHtml(v.area)}</div>`:''}</a>`).join('')}
-    clearRecentBtn.addEventListener('click',()=>{localStorage.removeItem('recentVacancies');renderRecentVacancies()});
-    renderRecentVacancies();renderSavedSearches();
+
     filterExperience.addEventListener('change',applyFilters);filterEmployment.addEventListener('change',applyFilters);
     filterSalaryFrom.addEventListener('input',applyFilters);filterWithSalary.addEventListener('change',()=>{searchCache.clear();applyFilters()});
     filterRemote.addEventListener('change',applyFilters);filterShowHidden.addEventListener('change',applyFilters);
     sortByDateBtn.addEventListener('click',()=>{setSort('publication_time');applyFilters()});
     sortBySalaryBtn.addEventListener('click',()=>{setSort('salary_desc');applyFilters()});
     sortByMatchBtn.addEventListener('click',()=>{setSort('match_score');applyFilters()});
-    resetButton.addEventListener('click',resetFilters);clearHistoryBtn.addEventListener('click',clearHistory);
+    resetButton.addEventListener('click',resetFilters);
     searchBtn.addEventListener('click',()=>performSearch(true,true));
     searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch(true,true)});
     loadMoreBtn.addEventListener('click',loadMore);
-    document.querySelectorAll('[data-search]').forEach(el=>{el.addEventListener('click',()=>{searchInput.value=el.dataset.search;searchInput.blur();performSearch(true,false).then(()=>{setTimeout(()=>vacanciesContainer.scrollIntoView({behavior:'smooth',block:'start'}),100)})})});
-    vacanciesContainer.addEventListener('click',e=>{const card=e.target.closest('.vacancy-card');if(!card)return;const id=card.dataset.id;if(e.target.closest('.save-btn')){toggleSaved(id,e.target.closest('.save-btn'));return}if(e.target.closest('.hide-btn')){hideVacancy(id);return}if(e.target.closest('.btn-compare')){toggleCompareFromCard(id,e.target.closest('.btn-compare'));return}if(e.target.closest('.btn-respond')){goToVacancy(id);return}if(card.classList.contains('ad')){const ad=getAds().find(a=>a.id==id);if(ad)window.open(ad.link,'_blank');return}goToVacancy(id)});
-    document.addEventListener('click',(e)=>{if(!e.target.closest('.share-wrapper')){document.querySelectorAll('.share-popup.show').forEach(p=>p.classList.remove('show'))}});
-    recommendationsContainer.addEventListener('click',e=>{const card=e.target.closest('.vacancy-card');if(!card)return;const id=card.dataset.id;if(e.target.closest('.save-btn')){toggleSaved(id,e.target.closest('.save-btn'));return}if(e.target.closest('.hide-btn')){hideVacancy(id);return}if(e.target.closest('.btn-compare')){toggleCompareFromCard(id,e.target.closest('.btn-compare'));return}if(e.target.closest('.btn-respond')){goToVacancy(id);return}if(card.classList.contains('ad')){const ad=getAds().find(a=>a.id==id);if(ad)window.open(ad.link,'_blank');return}goToVacancy(id)});
-    subscribeForm.addEventListener('submit',async(e)=>{e.preventDefault();const email=subscribeEmailInput.value.trim();if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){subscribeStatus.textContent='Пожалуйста, введите корректный email';subscribeStatus.className='subscribe-status error';return}subscribeSubmitBtn.disabled=true;subscribeSubmitBtn.innerHTML='<span>Отправка...</span> <i class="fas fa-spinner fa-pulse"></i>';subscribeStatus.textContent='';const filters={query:subscribeKeywords.value.trim(),area:subscribeCity.dataset.cityId||'113',areaName:subscribeCity.value.trim(),salaryFrom:subscribeSalaryFrom.value.trim(),email:email};saveSubscriptionFilters(filters);try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'subscribe',email:email})});const d=await r.json();if(d.success){subscribeStatus.textContent='✅ Вы успешно подписались!';subscribeStatus.className='subscribe-status success';subscribeEmailInput.value=''}else{subscribeStatus.textContent='❌ Ошибка подписки. Попробуйте позже.';subscribeStatus.className='subscribe-status error'}}catch(err){subscribeStatus.textContent='❌ Не удалось соединиться с сервером';subscribeStatus.className='subscribe-status error'}finally{subscribeSubmitBtn.disabled=false;subscribeSubmitBtn.innerHTML='<span>Подписаться</span> <i class="fas fa-paper-plane"></i>'}});
-    async function performSearch(reset=true,recordHistory=true){searchInput.blur();if(reset){allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none';recommendationsBlock.style.display='none'}currentSearchQuery=searchInput.value.trim();if(recordHistory)addToHistory(currentSearchQuery);if(reset){vacanciesContainer.innerHTML='<div class="vacancy-card" style="height:100px; background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size:200% 100%; animation: shimmer 1.2s infinite;"></div>'.repeat(8);counterSpan.textContent='0'}const o=searchBtn.innerHTML;searchBtn.disabled=true;searchBtn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Поиск...';try{const ck=`${currentSearchQuery}_${currentArea}_${filterEmployment.value}_${currentSort}_${filterRemote.checked}`;if(!filterWithSalary.checked){const cd=getCachedResult(ck);if(cd){allVacancies=cd.items;lastSearchFound=cd.found;applyFilters();searchBtn.disabled=false;searchBtn.innerHTML=o;updateSavedSearchCounts(currentSearchQuery,currentArea,filterEmployment.value,filterRemote.checked,cd.found);return}}const f={employment:filterEmployment.value,schedule:filterRemote.checked?'remote':undefined,order_by:currentSort==='match_score'?'publication_time':currentSort,area:currentArea,per_page:30,page:0};if(filterWithSalary.checked)f._t=Date.now();const{items,found}=await fetchVacanciesFromAPI(currentSearchQuery,f);allVacancies=items;lastSearchFound=found;if(!filterWithSalary.checked)setCachedResult(ck,{items,found});applyFilters();updateSavedSearchCounts(currentSearchQuery,currentArea,filterEmployment.value,filterRemote.checked,found);sendGAEvent("search",{search_term:currentSearchQuery});if(window.innerWidth<=768)setTimeout(()=>{vacanciesContainer.scrollIntoView({behavior:'smooth',block:'start'})},150)}catch(e){vacanciesContainer.innerHTML='<p style="text-align:center; padding:40px;">Ошибка загрузки</p>';console.error(e);allVacancies=[];filteredVacancies=[]}finally{searchBtn.disabled=false;searchBtn.innerHTML=o}}
-    function loadMore(){if(isLoadingMore)return;isLoadingMore=true;if(displayedCount<filteredVacancies.length){const n=filteredVacancies.slice(displayedCount,displayedCount+PAGE_SIZE);renderVacancies(n);displayedCount+=n.length;updateLoadMoreButton()}isLoadingMore=false;observer.observe(scrollSentinel)}
+
     function setSort(s){currentSort=s;sortByDateBtn.classList.toggle('active',s==='publication_time');sortBySalaryBtn.classList.toggle('active',s==='salary_desc');sortByMatchBtn.classList.toggle('active',s==='match_score')}
-    function computeStats(v){const s={medianFrom:0,medianTo:0,salaryCount:0,topSkills:[],topCities:[],recentCount:0};if(!v.length)return s;const sf=[],st=[];v.forEach(v=>{if(v.salary&&v.salary.from)sf.push(v.salary.from);if(v.salary&&v.salary.to)st.push(v.salary.to)});if(sf.length){sf.sort((a,b)=>a-b);const m=Math.floor(sf.length/2);s.medianFrom=sf.length%2?sf[m]:Math.round((sf[m-1]+sf[m])/2)}if(st.length){st.sort((a,b)=>a-b);const m=Math.floor(st.length/2);s.medianTo=st.length%2?st[m]:Math.round((st[m-1]+st[m])/2)}s.salaryCount=Math.max(sf.length,st.length);const sk=new Map();v.forEach(v=>{(v.key_skills||[]).forEach(s=>{const n=typeof s==='object'?s.name:s;if(n)sk.set(n,(sk.get(n)||0)+1)})});s.topSkills=[...sk.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n,c])=>n);const cf=new Map();v.forEach(v=>{const c=v.area?.name||'';if(c)cf.set(c,(cf.get(c)||0)+1)});s.topCities=[...cf.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3).map(([n,c])=>n);const now=new Date(),wa=new Date(now.getTime()-7*24*60*60*1000);s.recentCount=v.filter(v=>{if(!v.published_at)return false;return new Date(v.published_at)>=wa}).length;return s}
-    function renderStats(s){const c=document.getElementById('statsContainer');if(!s.medianFrom&&!s.medianTo&&!s.topSkills.length){c.style.display='none';return}c.style.display='block';c.innerHTML=`<div class="stats-block"><div class="stat-item"><span class="stat-label">Медианная зарплата</span><span class="stat-value salary">${s.medianFrom?'от '+s.medianFrom.toLocaleString():''}${s.medianTo?' до '+s.medianTo.toLocaleString():''} ₽</span><span style="font-size:0.7rem;color:#94a3b8;">на основе ${s.salaryCount} вакансий</span></div><div class="stat-item"><span class="stat-label">Топ навыков</span><span class="stat-value skills">${s.topSkills.join(', ')||'—'}</span></div><div class="stat-item"><span class="stat-label">Популярные города</span><span class="stat-value">${s.topCities.join(', ')||'—'}</span></div><div class="stat-item"><span class="stat-label">За последнюю неделю</span><span class="stat-value">${s.recentCount} вакансий</span></div></div>`}
-    function applyFilters(){let f=[...allVacancies];const exp=filterExperience.value;if(exp)f=f.filter(v=>v.experience===exp);const emp=filterEmployment.value;if(emp)f=f.filter(v=>v.employment===emp);const sf=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;if(sf)f=f.filter(v=>{if(v.salary?.from&&v.salary.from>=sf)return true;if(v.salary?.to&&v.salary.to>=sf)return true;return false});if(filterWithSalary.checked)f=f.filter(v=>v.salary&&(v.salary.from!=null||v.salary.to!=null));if(filterRemote.checked)f=f.filter(v=>v.schedule?.id==='remote');if(!filterShowHidden.checked){const hs=new Set(hiddenVacancies);f=f.filter(v=>!hs.has(String(v.id)))}const premium=f.filter(v=>v.isPremium===true);const urgent=f.filter(v=>!v.isPremium&&v.isUrgent===true);const normal=f.filter(v=>!v.isPremium&&!v.isUrgent);const sortFn=(a,b)=>{if(currentSort==='match_score')return(b._score||0)-(a._score||0);if(currentSort==='salary_desc')return(b.salary?.from||0)-(a.salary?.from||0);return new Date(b.published_at)-new Date(a.published_at)};premium.sort(sortFn);urgent.sort(sortFn);normal.sort(sortFn);f=[...premium,...urgent,...normal];filteredVacancies=f;vacanciesContainer.innerHTML='';displayedCount=0;counterSpan.textContent=f.length;renderStats(computeStats(f));updateItemListSchema(f);if(f.length===0){vacanciesContainer.innerHTML=`<div style="text-align:center; padding:40px; background: #f8fafc; border-radius: 24px; margin-top: 20px;"><div style="font-size: 48px; margin-bottom: 16px;">🔍</div><div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px;">Ничего не найдено</div><div style="color: #64748b; margin-bottom: 24px;">Попробуйте изменить фильтры или поисковый запрос</div><button id="emptyStateResetBtn" style="background: #0047cc; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer;">Сбросить все фильтры</button></div>`;loadMoreWrapper.style.display='none';document.getElementById('emptyStateResetBtn')?.addEventListener('click',()=>resetFilters());return}const fp=f.slice(0,PAGE_SIZE);renderVacancies(fp);displayedCount+=fp.length;updateLoadMoreButton()}
+
+    async function performSearch(reset=true,recordHistory=true){searchInput.blur();if(reset){allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none'}const o=searchBtn.innerHTML;searchBtn.disabled=true;searchBtn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Поиск...';try{const f={employment:filterEmployment.value,schedule:filterRemote.checked?'remote':undefined,order_by:currentSort==='match_score'?'publication_time':currentSort,area:currentArea,per_page:30,page:0};const{items,found}=await fetchVacanciesFromAPI(searchInput.value.trim(),f);
+    // Добавляем прямые вакансии
+    const directJobs=getDirectJobs();
+    const directItems=directJobs.map(j=>({id:j.id,name:j.title,employer:{name:j.company},salary:parseSalaryString(j.salary),description:j.description,area:{name:j.city},published_at:j.timestamp,isPremium:!!j.isPremium,isUrgent:!!j.isUrgent,phone:j.phone||null,email:j.email||null,website:j.website||null,source:'direct'}));
+    allVacancies=[...items,...directItems];
+    // Убираем дубликаты
+    const seen=new Set;allVacancies=allVacancies.filter(v=>{if(seen.has(v.id))return false;seen.add(v.id);return true});
+    lastSearchFound=found;applyFilters()}catch(e){vacanciesContainer.innerHTML='<p style="text-align:center; padding:40px;">Ошибка загрузки</p>';console.error(e);allVacancies=[];filteredVacancies=[]}finally{searchBtn.disabled=false;searchBtn.innerHTML=o}}
+
+    function applyFilters(){let f=[...allVacancies];const exp=filterExperience.value;if(exp)f=f.filter(v=>v.experience===exp);const emp=filterEmployment.value;if(emp)f=f.filter(v=>v.employment===emp);const sf=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;if(sf)f=f.filter(v=>{if(v.salary?.from&&v.salary.from>=sf)return true;if(v.salary?.to&&v.salary.to>=sf)return true;return false});if(filterWithSalary.checked)f=f.filter(v=>v.salary&&(v.salary.from!=null||v.salary.to!=null));if(filterRemote.checked)f=f.filter(v=>v.schedule?.id==='remote');if(!filterShowHidden.checked){const hs=new Set(hiddenVacancies);f=f.filter(v=>!hs.has(String(v.id)))}const premium=f.filter(v=>v.isPremium===true);const urgent=f.filter(v=>!v.isPremium&&v.isUrgent===true);const normal=f.filter(v=>!v.isPremium&&!v.isUrgent);const sortFn=(a,b)=>{if(currentSort==='match_score')return(b._score||0)-(a._score||0);if(currentSort==='salary_desc')return(b.salary?.from||0)-(a.salary?.from||0);return new Date(b.published_at)-new Date(a.published_at)};premium.sort(sortFn);urgent.sort(sortFn);normal.sort(sortFn);f=[...premium,...urgent,...normal];filteredVacancies=f;vacanciesContainer.innerHTML='';displayedCount=0;counterSpan.textContent=f.length;if(f.length===0){vacanciesContainer.innerHTML='<div style="text-align:center; padding:40px;">Ничего не найдено</div>';loadMoreWrapper.style.display='none';return}const fp=f.slice(0,PAGE_SIZE);renderVacancies(fp);displayedCount+=fp.length;updateLoadMoreButton()}
+
+    function loadMore(){if(isLoadingMore)return;isLoadingMore=true;if(displayedCount<filteredVacancies.length){const n=filteredVacancies.slice(displayedCount,displayedCount+PAGE_SIZE);renderVacancies(n);displayedCount+=n.length;updateLoadMoreButton()}isLoadingMore=false}
+
     function updateLoadMoreButton(){if(displayedCount>=filteredVacancies.length){loadMoreBtn.textContent='Вакансий больше нет';loadMoreBtn.disabled=true}else{loadMoreBtn.textContent='Загрузить ещё';loadMoreBtn.disabled=false}loadMoreWrapper.style.display='block'}
-    function enrich(v){const en=typeof v.employer==='object'?(v.employer?.name||'Компания не указана'):(v.employer||'Компания не указана');const el=v.employer?.logo_urls?.['90']||v.employer?.logo_urls?.original||v.logo_url||null;const sc=calculateMatchScore(v,currentSearchQuery);v._score=sc;return{...v,title:v.name||'Без названия',company:en,city:v.area?.name||v.area||'',link:v.url||'#',experience:v.experience?.name||v.experience||'Не указан',employment:v.employment?.name||v.employment||'',schedule:v.schedule?.name||v.schedule||'',salary:formatSalary(v.salary),rating:v.employer_rating||(Math.random()*2+3).toFixed(1),reviews:v.employer_reviews||Math.floor(Math.random()*5000)+100,logoLetter:(en||'А').charAt(0).toUpperCase(),logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(en||'А').charCodeAt(0)%6],phone:v.phone||null,email:v.email||null,website:v.website||null,logoUrl:el,publishedDate:timeAgo(v.published_at),score:sc,isPremium:!!v.isPremium,isUrgent:!!v.isUrgent}}
-    function renderVacancies(vacancies,container=vacanciesContainer){vacancies.forEach(v=>{const vac=enrich(v),isSaved=favorites.some(f=>f.id===vac.id),inCompare=isInCompare(vac.id),card=document.createElement('div');let classes='vacancy-card';if(vac.isPremium)classes+=' premium';if(vac.isUrgent)classes+=' urgent';card.className=classes;card.dataset.id=vac.id;let cb='';if(vac.phone){cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`}else if(vac.email){cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`}else if(vac.website){cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`}const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">`:vac.logoLetter;const vu=`https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=${vac.id}`;const st=encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}. Подробнее: ${vu}`);const wl=`https://wa.me/?text=${st}`;const tl=`https://t.me/share/url?url=${encodeURIComponent(vu)}&text=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;const vl=`https://vk.com/share.php?url=${encodeURIComponent(vu)}&title=${encodeURIComponent(`Вакансия: ${vac.title} (${vac.company}), ${vac.salary}`)}`;let mb='';if(currentSearchQuery&&vac.score>0){if(vac.score>=85)mb=`<span class="match-badge match--high">${vac.score}%</span>`;else if(vac.score>=60)mb=`<span class="match-badge match--medium">${vac.score}%</span>`;else mb=`<span class="match-badge match--low">${vac.score}%</span>`}const sb=`<div class="share-wrapper" onclick="event.stopPropagation();"><button class="btn-share-trigger" title="Поделиться"><i class="fas fa-share-alt"></i> Поделиться</button><div class="share-popup"><a href="${wl}" target="_blank" class="btn-share-round btn-whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${tl}" target="_blank" class="btn-share-round btn-telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a><a href="${vl}" target="_blank" class="btn-share-round btn-vk" title="ВКонтакте"><i class="fab fa-vk"></i></a><button class="btn-share-round btn-copy-link" title="Копировать ссылку" data-url="${vu}"><i class="fas fa-link"></i></button></div></div>`;card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${mb}${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="tags">${vac.employment?`<span class="tag">${escapeHtml(vac.employment)}</span>`:''}${vac.schedule?`<span class="tag">${escapeHtml(vac.schedule)}</span>`:''}<span class="tag">${escapeHtml(vac.experience)}</span></div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><div><div class="company-name">${escapeHtml(vac.company)}</div><div class="rating-row">⭐ ${vac.rating} • ${vac.reviews.toLocaleString()} отзывов</div></div></div><div class="address">${escapeHtml(vac.city)}</div><div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');"><i class="fas fa-paper-plane"></i> Откликнуться</button>${cb}<button class="btn-compare ${inCompare?'in-compare':''}" data-id="${vac.id}" title="К сравнению"><i class="fas fa-balance-scale"></i> Сравнить</button>${sb}</div>`;container.appendChild(card);const tr=card.querySelector('.btn-share-trigger'),pp=card.querySelector('.share-popup');if(tr&&pp){tr.addEventListener('click',function(e){e.stopPropagation();pp.classList.toggle('show')})}const cp=card.querySelector('.btn-copy-link');if(cp){cp.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();const url=this.dataset.url;navigator.clipboard.writeText(url).then(()=>{this.classList.add('copied');setTimeout(()=>this.classList.remove('copied'),1500)}).catch(()=>{alert('Не удалось скопировать ссылку')})})}})}
-    function updateItemListSchema(vacancies) {
-        const schema = document.getElementById('itemListSchema');
-        const items = vacancies.slice(0, 20).map((v, i) => ({
-            "@type": "ListItem",
-            "position": i + 1,
-            "item": {
-                "@type": "JobPosting",
-                "title": v.name || 'Без названия',
-                "hiringOrganization": { "@type": "Organization", "name": v.employer?.name || 'Компания не указана' },
-                "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": v.area?.name || '' } },
-                "baseSalary": v.salary ? { "@type": "MonetaryAmount", "currency": v.salary.currency === 'RUR' ? 'RUB' : (v.salary.currency || 'RUB'), "value": { "@type": "QuantitativeValue", "minValue": v.salary.from || null, "maxValue": v.salary.to || null, "unitText": "MONTH" } } : null,
-                "url": `https://alex803161.github.io/vacancy-aggregator/vacancy.html?id=${v.id}`
-            }
-        }));
-        schema.innerHTML = JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "numberOfItems": items.length,
-            "itemListElement": items
-        });
+
+    function enrich(v){const en=typeof v.employer==='object'?(v.employer?.name||'Компания не указана'):(v.employer||'Компания не указана');const el=v.employer?.logo_urls?.['90']||v.employer?.logo_urls?.original||v.logo_url||null;const sc=calculateMatchScore(v,searchInput.value.trim());v._score=sc;return{...v,title:v.name||'Без названия',company:en,city:v.area?.name||v.area||'',salary:formatSalary(v.salary),logoLetter:(en||'А').charAt(0).toUpperCase(),logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(en||'А').charCodeAt(0)%6],phone:v.phone||null,email:v.email||null,website:v.website||null,logoUrl:el,publishedDate:timeAgo(v.published_at),score:sc,isPremium:!!v.isPremium,isUrgent:!!v.isUrgent}}
+
+    function renderVacancies(vacancies,container=vacanciesContainer){vacancies.forEach(v=>{const vac=enrich(v),card=document.createElement('div');let classes='vacancy-card';if(vac.isPremium)classes+=' premium';if(vac.isUrgent)classes+=' urgent';card.className=classes;card.dataset.id=vac.id;let cb='';if(vac.phone){cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`}else if(vac.email){cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`}else if(vac.website){cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`}const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`:vac.logoLetter;const vu=`https://vakansa24.ru/vacancy.html?id=${vac.id}`;card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><span class="company-name">${escapeHtml(vac.company)}</span></div>${vac.city?`<div class="address">📍 ${escapeHtml(vac.city)}</div>`:''}<div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');">Подробнее</button>${cb}</div>`;container.appendChild(card)});
+    // Вставка рекламы каждые 6 вакансий
+    const ads=getAds().filter(isAdActive);if(ads.length>0&&vacancies.length>=6){let adIndex=0;for(let i=5;i<container.children.length;i+=7){if(adIndex<ads.length){const ad=ads[adIndex];const adCard=document.createElement('div');adCard.className='vacancy-card ad';adCard.innerHTML=`<div class="job-title"><span>📢 ${escapeHtml(ad.title)}</span></div><p>${escapeHtml(ad.description||'')}</p><div class="card-actions"><a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();">Перейти</a></div>`;adCard.addEventListener('click',()=>window.open(ad.link,'_blank'));container.insertBefore(adCard,container.children[i+1]);adIndex++}}}
     }
-    async function loadRecommendations(){let rv=[];const fv=getFavorites();if(fv.length>0){rv=fv.slice(0,5).map(f=>({id:f.id,name:f.name,employer:{name:f.employer},salary:f.salary,area:{name:f.area},alternate_url:f.alternate_url}))}else{const rc=JSON.parse(localStorage.getItem('recentVacancies')||'[]');if(rc.length>0){rv=rc.slice(0,5).map(r=>({id:r.id,name:r.name,employer:{name:r.employer},salary:parseSalaryString(r.salary),area:{name:r.area},alternate_url:''}))}else{rv=await fetchPopularVacancies(API_URL,6)}}if(rv.length>0){recommendationsContainer.innerHTML='';recommendationsBlock.style.display='block';renderVacancies(rv,recommendationsContainer)}}
-    window.goToVacancy=function(id){const v=allVacancies.find(v=>v.id==id);if(v){const e=typeof v.employer==='object'?v.employer?.name:v.employer;saveRecentVacancy({id:v.id,name:v.name,employer:e||'Компания не указана',salary:formatSalary(v.salary),area:v.area?.name||''})}window.location.href='vacancy.html?id='+id};
-    function toggleSaved(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleFavorite(v);const isF=isFavorite(id);b.classList.toggle('saved',isF)}
-    function toggleCompareFromCard(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleCompare(v);const isC=isInCompare(id);b.classList.toggle('in-compare',isC);updateCompareCount()}
-    function updateCompareCount(){const c=getCompareList().length;compareCountSpan.textContent=c;compareLinkBtn.style.display=c>0?'inline-flex':'none'}
+
+    window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
     function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';filterWithSalary.checked=false;filterRemote.checked=false;filterShowHidden.checked=false;currentArea='113';selectedCityId=null;setSort('publication_time');performSearch(true,false)}
-    function addToHistory(q){if(!q||q.length<2)return;searchHistory=[q,...searchHistory.filter(h=>h!==q)].slice(0,7);localStorage.setItem('searchHistory',JSON.stringify(searchHistory));renderHistory()}
-    function clearHistory(){searchHistory=[];localStorage.removeItem('searchHistory');renderHistory()}
-    function renderHistory(){const c=document.getElementById('historyContainer');if(!searchHistory.length){c.innerHTML='<span style="font-size:0.8rem;color:#94a3b8;">Нет истории</span>';return}c.innerHTML=searchHistory.map(q=>`<div class="history-item" data-query="${q}"><span>${q}</span><button class="delete-history" data-query="${q}">&times;</button></div>`).join('');document.querySelectorAll('.history-item span').forEach(e=>e.addEventListener('click',(e)=>{if(!e.target.classList.contains('delete-history')){searchInput.value=e.parentElement.dataset.query;performSearch(true,true)}}));document.querySelectorAll('.delete-history').forEach(b=>b.addEventListener('click',(e)=>{e.stopPropagation();searchHistory=searchHistory.filter(h=>h!==b.dataset.query);localStorage.setItem('searchHistory',JSON.stringify(searchHistory));renderHistory()}))}
+
     loadAllAreas().then(()=>console.log('Areas loaded')).catch(()=>{});
-    renderRecentVacancies();renderSavedSearches();updateCompareCount();loadRecommendations();
     setupThemeToggle('themeToggle');setupBackToTop('backToTopBtn');registerSW('/vacancy-aggregator/');
 </script>
 </body>
