@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы на размещение вакансий — ВКАНСА</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f3f4f6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; color: #0f172a; }
+        .tariffs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
+        .tariff-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+        .tariff-card h2 { color: #0f172a; margin-bottom: 8px; }
+        .tariff-card .price { font-size: 2rem; font-weight: 700; color: #0047cc; margin: 12px 0; }
+        .tariff-card ul { list-style: none; padding: 0; text-align: left; }
+        .tariff-card li { padding: 4px 0; }
+        .btn { display: block; width: 100%; padding: 12px; margin-top: 12px; border-radius: 40px; font-weight: 600; text-decoration: none; text-align: center; transition: background 0.2s; }
+        .btn-telegram { background: #0088cc; color: white; }
+        .btn-telegram:hover { background: #006699; }
+        .back-link { display: block; text-align: center; margin-top: 24px; color: #1a73e8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Тарифы на размещение вакансий</h1>
+        <div class="tariffs">
+            <div class="tariff-card">
+                <h2>Бесплатный</h2>
+                <div class="price">0 ₽</div>
+                <ul>
+                    <li>✅ Размещение вакансии</li>
+                    <li>⏳ Модерация до 24 часов</li>
+                    <li>📋 Обычное отображение</li>
+                </ul>
+                <a href="post-job.html" class="btn btn-telegram">Разместить бесплатно</a>
+            </div>
+            <div class="tariff-card">
+                <h2>Премиум</h2>
+                <div class="price">450 ₽</div>
+                <ul>
+                    <li>⭐ Золотая рамка</li>
+                    <li>⚡ Приоритет в выдаче</li>
+                    <li>🚀 Модерация до 1 часа</li>
+                </ul>
+                <a href="https://t.me/VakansaModerBot?start=premium" class="btn btn-telegram">Оплатить через Telegram</a>
+            </div>
+            <div class="tariff-card">
+                <h2>Срочный</h2>
+                <div class="price">300 ₽</div>
+                <ul>
+                    <li>🔴 Красный бейдж «Срочно»</li>
+                    <li>⚡ Приоритет в выдаче</li>
+                    <li>🚀 Модерация до 1 часа</li>
+                </ul>
+                <a href="https://t.me/VakansaModerBot?start=urgent" class="btn btn-telegram">Оплатить через Telegram</a>
+            </div>
+            <div class="tariff-card">
+                <h2>Рекламный</h2>
+                <div class="price">750 ₽</div>
+                <ul>
+                    <li>📢 Баннер в выдаче</li>
+                    <li>🎯 Нацеливание на аудиторию</li>
+                    <li>⏳ Показ 7 дней</li>
+                </ul>
+                <a href="https://t.me/VakansaModerBot?start=ads" class="btn btn-telegram">Оплатить через Telegram</a>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">← На главную</a>
+    </div>
+</body>
+</html>
