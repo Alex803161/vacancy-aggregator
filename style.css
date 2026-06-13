@@ -196,10 +196,6 @@ html.dark .footer-links .highlight {
 @media (max-width: 768px) {
     .footer-links a {
         font-size: 0.95rem;
-        margin: 0 4px; /* чтобы не слипались */
-    }
-    .footer-links-row {
-        gap: 12px;
     }
 }
 
@@ -582,52 +578,89 @@ html.dark .vacancy-card.urgent {
     letter-spacing: 0.5px;
 }
 
-/* Если карточка и премиум, и срочная — оба значка */
-.vacancy-card.premium.urgent::before {
-    content: "⭐ Премиум";
-    top: -12px;
-}
-
-.vacancy-card.premium.urgent::after {
-    content: "🔴 Срочно!";
-    bottom: -12px;
-}
-
-/* === Рекламная карточка === */
+/* === Рекламная карточка (обновлённый стиль) === */
 .vacancy-card.ad {
-    border: 2px dashed #f59e0b;
-    background: #fffbeb;
+    border: 1px solid #f59e0b;
+    border-left: 6px solid #f59e0b;
+    background: #fffbf0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 16px;
+}
+
+.vacancy-card.ad:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
 }
 
 html.dark .vacancy-card.ad {
     background: #2d2a1e;
     border-color: #f59e0b;
-}
-
-.vacancy-card.ad::before {
-    content: "📢 Реклама";
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #f59e0b;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 3px 12px;
-    border-radius: 20px;
-    z-index: 15;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(245,158,11,0.1);
 }
 
 .vacancy-card.ad .job-title {
-    color: #92400e;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
 }
 
 html.dark .vacancy-card.ad .job-title {
     color: #fbbf24;
+}
+
+.vacancy-card.ad .ad-image {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.vacancy-card.ad .ad-description {
+    color: #4b5563;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+html.dark .vacancy-card.ad .ad-description {
+    color: #9ca3af;
+}
+
+.vacancy-card.ad .ad-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(245,158,11,0.9);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+}
+
+.vacancy-card.ad .btn-ad {
+    display: inline-block;
+    background: #f59e0b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.vacancy-card.ad .btn-ad:hover {
+    background: #d97706;
 }
 
 .job-title {
@@ -1308,297 +1341,3 @@ html.dark .saved-search-card {
 .fav-btn:active {
     outline: none;
 }
-/* ========== АДАПТИВНОСТЬ ========== */
-
-/* Планшеты и небольшие ноутбуки */
-@media (max-width: 1024px) {
-    .container {
-        padding: 0 12px;
-    }
-    .search-section {
-        padding: 16px;
-    }
-}
-
-/* Мобильные устройства (ширина до 768px) */
-@media (max-width: 768px) {
-    .logo-text {
-        font-size: 2.2rem;
-    }
-    .page-title {
-        font-size: 1.5rem;
-    }
-    .search-row {
-        flex-direction: column;
-    }
-    .search-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    .filters-grid {
-        grid-template-columns: 1fr;
-    }
-    .sort-btns {
-        justify-content: center;
-        width: 100%;
-    }
-    .card-actions {
-        justify-content: center;
-    }
-    .btn-share-round {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-    }
-    .recent-card,
-    .saved-search-card {
-        min-width: 180px;
-    }
-    .share-buttons {
-        justify-content: center;
-    }
-    .subscribe-form {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .subscribe-input {
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        padding: 0 12px;
-        font-size: 0.85rem;
-    }
-    .subscribe-btn {
-        width: 100%;
-        justify-content: center;
-        height: 40px;
-        padding: 0 20px;
-        font-size: 0.85rem;
-    }
-    .site-footer {
-        padding-bottom: 120px;
-    }
-    .footer-links a {
-        font-size: 0.9rem;
-        margin: 0 4px;
-    }
-    .footer-links-row {
-        gap: 12px;
-    }
-    .theme-switch {
-        bottom: 80px;
-        right: 10px;
-        width: 46px;
-        height: 46px;
-        font-size: 1.2rem;
-        border-width: 2px;
-    }
-    #backToTopBtn {
-        bottom: 145px;
-        right: 10px;
-        width: 46px;
-        height: 46px;
-        font-size: 1.2rem;
-    }
-    .save-btn {
-        width: 30px;
-        height: 30px;
-        top: 8px;
-        right: 8px;
-    }
-    .hide-btn {
-        width: 30px;
-        height: 30px;
-        top: 42px;
-        right: 8px;
-    }
-    .job-title {
-        padding-right: 80px;
-        word-break: break-word;
-    }
-    .salary {
-        padding-right: 80px;
-    }
-}
-
-/* Очень маленькие экраны (до 480px) */
-@media (max-width: 480px) {
-    body {
-        padding: 0 8px 16px;
-    }
-    .header {
-        margin: 20px 0 12px;
-    }
-    .logo-heart {
-        width: 100px;
-        height: 100px;
-    }
-    .logo-text {
-        font-size: 1.8rem;
-    }
-    .page-title {
-        font-size: 1.3rem;
-    }
-    .search-section {
-        padding: 12px;
-        border-radius: 16px;
-    }
-    .search-input {
-        font-size: 0.9rem;
-        padding: 10px 14px;
-    }
-    .search-btn {
-        font-size: 0.9rem;
-        height: 42px;
-    }
-    .filter-select,
-    .filter-input-small {
-        font-size: 0.8rem;
-        padding: 8px 10px;
-    }
-    .sort-btn {
-        font-size: 0.75rem;
-        padding: 6px 12px;
-    }
-    .job-title {
-        font-size: 1rem;
-        padding-right: 70px;
-        word-break: break-word;
-    }
-    .salary {
-        font-size: 1rem;
-        padding-right: 70px;
-    }
-    .btn-respond,
-    .btn-call,
-    .btn-email,
-    .btn-website {
-        font-size: 0.8rem;
-        padding: 6px 14px;
-    }
-    .vacancy-card,
-    .card {
-        padding: 12px 14px;
-    }
-    .share-buttons {
-        gap: 10px;
-    }
-    .subscribe-title {
-        font-size: 1.2rem;
-    }
-    .subscribe-desc {
-        font-size: 0.85rem;
-    }
-    .subscribe-input {
-        height: 38px;
-        line-height: 38px;
-        padding: 0 10px;
-        font-size: 0.8rem;
-    }
-    .subscribe-btn {
-        height: 38px;
-        padding: 0 16px;
-        font-size: 0.8rem;
-    }
-    .footer-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .footer-links a {
-        font-size: 0.9rem;
-        margin: 0 4px;
-    }
-    .footer-links-row {
-        gap: 8px;
-    }
-    .theme-switch {
-        bottom: 70px;
-        right: 8px;
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
-    }
-    #backToTopBtn {
-        bottom: 130px;
-        right: 8px;
-        width: 42px;
-        height: 42px;
-        font-size: 1rem;
-    }
-    .save-btn {
-        width: 28px;
-        height: 28px;
-        top: 6px;
-        right: 6px;
-    }
-    .hide-btn {
-        width: 28px;
-        height: 28px;
-        top: 38px;
-        right: 6px;
-    }
-    .job-title {
-        padding-right: 65px;
-    }
-    .salary {
-        padding-right: 65px;
-    }
-}
-
-/* Экстренные правки для экранов ≤360px */
-@media (max-width: 360px) {
-    .theme-switch {
-        right: 4px;
-        width: 38px;
-        height: 38px;
-        bottom: 70px;
-        font-size: 1rem;
-    }
-    #backToTopBtn {
-        right: 4px;
-        width: 38px;
-        height: 38px;
-        bottom: 120px;
-        font-size: 1rem;
-    }
-    .save-btn {
-        width: 26px;
-        height: 26px;
-        top: 4px;
-        right: 4px;
-    }
-    .hide-btn {
-        width: 26px;
-        height: 26px;
-        top: 34px;
-        right: 4px;
-    }
-}
-
-/* === Выпадающее меню мессенджеров (одинаковые иконки) === */
-.share-popup .btn-share-round {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-.share-popup .btn-share-round i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-
-/* В мобильной версии чуть меньше */
-@media (max-width: 768px) {
-    .share-popup .btn-share-round {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
-        }
