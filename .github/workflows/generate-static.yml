@@ -9,7 +9,7 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write          # разрешаем push
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,6 +26,11 @@ jobs:
 
       - name: Generate static pages
         run: node ssr-generator.js
+
+      - name: Show generated files (debug)
+        run: |
+          echo "=== Содержимое vacancies/ ==="
+          ls -R vacancies/ || echo "Папка vacancies не найдена"
 
       - name: Commit and push changes
         run: |
