@@ -1,0 +1,39 @@
+name: Generate Yandex Jobs Feed
+
+on:
+  schedule:
+    - cron: '0 4 * * *'   # каждый день в 4 утра
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install axios fs-extra
+
+      - name: Generate Yandex Jobs XML
+        run: node generate-yandex-jobs.js
+
+      - name: Commit and push feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add yandex_jobs.xml
+          if git diff --staged --quiet; then
+            echo "Фид не изменился"
+          else
+            git commit -m "Автообновление yandex_jobs.xml" && git push
+          fi
