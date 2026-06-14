@@ -200,38 +200,55 @@
 
     function enrich(v){const en=typeof v.employer==='object'?(v.employer?.name||'Компания не указана'):(v.employer||'Компания не указана');const el=v.employer?.logo_urls?.['90']||v.employer?.logo_urls?.original||v.logo_url||null;const sc=calculateMatchScore(v,searchInput.value.trim());v._score=sc;return{...v,title:v.name||'Без названия',company:en,city:v.area?.name||v.area||'',salary:formatSalary(v.salary),logoLetter:(en||'А').charAt(0).toUpperCase(),logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(en||'А').charCodeAt(0)%6],phone:v.phone||null,email:v.email||null,website:v.website||null,logoUrl:el,publishedDate:timeAgo(v.published_at),score:sc,isPremium:!!v.isPremium,isUrgent:!!v.isUrgent}}
 
-    function renderVacancies(vacancies,container=vacanciesContainer){vacancies.forEach(v=>{const vac=enrich(v),isSaved=favorites.some(f=>f.id===vac.id),inCompare=isInCompare(vac.id),card=document.createElement('div');let classes='vacancy-card';if(vac.isPremium)classes+=' premium';if(vac.isUrgent)classes+=' urgent';card.className=classes;card.dataset.id=vac.id;let cb='';if(vac.phone){cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`}else if(vac.email){cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`}else if(vac.website){cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`}const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`:vac.logoLetter;const vu=`https://vakansa24.ru/vacancy.html?id=${vac.id}`;card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><span class="company-name">${escapeHtml(vac.company)}</span></div>${vac.city?`<div class="address">📍 ${escapeHtml(vac.city)}</div>`:''}<div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');">Подробнее</button>${cb}</div>`;container.appendChild(card)});
-    // Вставка рекламы каждые 6 вакансий
-    const ads=getAds().filter(isAdActive);if(ads.length>0&&vacancies.length>=6){let adIndex=0;for(let i=5;i<container.children.length;i+=7){if(adIndex<ads.length){const ad=ads[adIndex];const adCard=document.createElement('div');adCard.className='vacancy-card ad';adCard.innerHTML=`<div class="job-title"><span>📢 ${escapeHtml(ad.title)}</span></div><p>${escapeHtml(ad.description||'')}</p><div class="card-actions"><a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();">Перейти</a></div>`;adCard.addEventListener('click',()=>window.open(ad.link,'_blank'));container.insertBefore(adCard,container.children[i+1]);adIndex++}}}}
+    function renderVacancies(vacancies,container=vacanciesContainer){
+        container.innerHTML = '';
+        vacancies.forEach(v=>{
+            const vac=enrich(v),isSaved=favorites.some(f=>f.id===vac.id),inCompare=isInCompare(vac.id),card=document.createElement('div');
+            let classes='vacancy-card';
+            if(vac.isPremium)classes+=' premium';
+            if(vac.isUrgent)classes+=' urgent';
+            card.className=classes;
+            card.dataset.id=vac.id;
+            let cb='';
+            if(vac.phone)cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`;
+            else if(vac.email)cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`;
+            else if(vac.website)cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`;
+            const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`:vac.logoLetter;
+            const vu=`https://vakansa24.ru/vacancy.html?id=${vac.id}`;
+            card.innerHTML = `<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><span class="company-name">${escapeHtml(vac.company)}</span></div>${vac.city?`<div class="address">📍 ${escapeHtml(vac.city)}</div>`:''}<div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');">Подробнее</button>${cb}</div>`;
+            container.appendChild(card);
+        });
+        // Реклама
+        const ads=getAds().filter(isAdActive);
+        if(ads.length>0 && vacancies.length>=6){
+            let adIndex=0;
+            for(let i=5;i<container.children.length;i+=7){
+                if(adIndex<ads.length){
+                    const ad=ads[adIndex];
+                    const adCard=document.createElement('div');
+                    adCard.className='vacancy-card ad';
+                    adCard.innerHTML = `<div class="job-title"><span>📢 ${escapeHtml(ad.title)}</span></div><p>${escapeHtml(ad.description||'')}</p><div class="card-actions"><a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();">Перейти</a></div>`;
+                    adCard.addEventListener('click',()=>window.open(ad.link,'_blank'));
+                    container.insertBefore(adCard,container.children[i+1]);
+                    adIndex++;
+                }
+            }
+        }
     }
 
     vacanciesContainer.addEventListener('click', e => {
         const card = e.target.closest('.vacancy-card');
         if (!card) return;
         const id = card.dataset.id;
-        if (e.target.closest('.save-btn')) {
-            toggleSaved(id, e.target.closest('.save-btn'));
-            return;
-        }
-        if (e.target.closest('.hide-btn')) {
-            hideVacancy(id);
-            return;
-        }
-        if (e.target.closest('.btn-compare')) {
-            toggleCompareFromCard(id, e.target.closest('.btn-compare'));
-            return;
-        }
-        if (e.target.closest('.btn-respond')) {
-            goToVacancy(id);
-            return;
-        }
-        if (card.classList.contains('ad')) {
-            const ad = getAds().find(a => a.id == id);
-            if (ad) window.open(ad.link, '_blank');
-            return;
-        }
+        if (e.target.closest('.save-btn')) { toggleSaved(id, e.target.closest('.save-btn')); return; }
+        if (e.target.closest('.hide-btn')) { hideVacancy(id); return; }
+        if (e.target.closest('.btn-compare')) { toggleCompareFromCard(id, e.target.closest('.btn-compare')); return; }
+        if (e.target.closest('.btn-respond')) { goToVacancy(id); return; }
+        if (card.classList.contains('ad')) { const ad = getAds().find(a => a.id == id); if (ad) window.open(ad.link, '_blank'); return; }
         goToVacancy(id);
-    });window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
+    });
+
+    window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
     function toggleSaved(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleFavorite(v);const isF=isFavorite(id);b.classList.toggle('saved',isF)}
     function toggleCompareFromCard(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleCompare(v);const isC=isInCompare(id);b.classList.toggle('in-compare',isC);updateCompareCount()}
     function updateCompareCount(){const c=getCompareList().length;compareCountSpan.textContent=c;compareLinkBtn.style.display=c>0?'inline-flex':'none'}
