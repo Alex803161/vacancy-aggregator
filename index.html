@@ -131,6 +131,7 @@
     const API_URL="https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8";
     let allVacancies=[],filteredVacancies=[],displayedCount=0,currentSort='publication_time';
     const PAGE_SIZE=20;
+    let favorites=JSON.parse(localStorage.getItem('favorites'))||[];
     let currentArea='113',selectedCityId=null,allAreas=[];
     let hiddenVacancies=JSON.parse(localStorage.getItem('hiddenVacancies'))||[],isLoadingMore=false;
     const CACHE_TTL=5*60*1000,searchCache=new Map();
@@ -148,11 +149,19 @@
         sortByDateBtn=document.getElementById('sortByDate'),sortBySalaryBtn=document.getElementById('sortBySalary'),
         sortByMatchBtn=document.getElementById('sortByMatch'),resetButton=document.getElementById('resetButton'),
         filterWithSalary=document.getElementById('filterWithSalary'),filterRemote=document.getElementById('filterRemote'),
-        filterShowHidden=document.getElementById('filterShowHidden');
+        filterShowHidden=document.getElementById('filterShowHidden'),
+        clearHistoryBtn=document.getElementById('clearHistoryBtn'),
+        historyContainer=document.getElementById('historyContainer'),
+        citySuggestions=document.getElementById('citySuggestions'),
+        toastNotification=document.getElementById('toastNotification'),
+        subscribeForm=document.getElementById('subscribeForm'),
+        subscribeEmailInput=document.getElementById('subscribeEmailInput'),
+        subscribeSubmitBtn=document.getElementById('subscribeSubmitBtn'),
+        subscribeStatus=document.getElementById('subscribeStatus'),
+        compareLinkBtn=document.getElementById('compareLinkBtn'),
+        compareCountSpan=document.getElementById('compareCount');
 
-    // Загружаем только Россию
-    async function loadAllAreas(){try{const r=await fetch(`${API_URL}?action=areas`);if(!r.ok)throw new Error('');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e){try{const r=await fetch('https://api.hh.ru/areas');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e2){}}
-    }
+    async function loadAllAreas(){try{const r=await fetch(`${API_URL}?action=areas`);if(!r.ok)throw new Error('');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e){try{const r=await fetch('https://api.hh.ru/areas');const all=await r.json();const russia=all.find(a=>a.id==='113');allAreas=russia?[russia]:[]}catch(e2){}}}
 
     function findCities(a,q){let r=[];function s(a){if(a.name&&a.name.toLowerCase().includes(q)&&a.id)r.push({id:String(a.id),name:a.name});if(a.areas)a.areas.forEach(s)}if(Array.isArray(a))a.forEach(s);return r}
     function showCitySuggestions(c){if(!c.length){citySuggestions.style.display='none';return}citySuggestions.innerHTML=c.map(c=>`<div class="city-suggestion-item" data-city-id="${c.id}" data-city-name="${escapeHtml(c.name)}">${escapeHtml(c.name)}</div>`).join('');citySuggestions.style.display='block'}
@@ -172,17 +181,16 @@
     searchBtn.addEventListener('click',()=>performSearch(true,true));
     searchInput.addEventListener('keypress',e=>{if(e.key==='Enter')performSearch(true,true)});
     loadMoreBtn.addEventListener('click',loadMore);
+    clearHistoryBtn.addEventListener('click',clearHistory);
 
     function setSort(s){currentSort=s;sortByDateBtn.classList.toggle('active',s==='publication_time');sortBySalaryBtn.classList.toggle('active',s==='salary_desc');sortByMatchBtn.classList.toggle('active',s==='match_score')}
 
     async function performSearch(reset=true,recordHistory=true){searchInput.blur();if(reset){allVacancies=[];filteredVacancies=[];displayedCount=0;vacanciesContainer.innerHTML='';loadMoreWrapper.style.display='none'}const o=searchBtn.innerHTML;searchBtn.disabled=true;searchBtn.innerHTML='<i class="fas fa-spinner fa-pulse"></i> Поиск...';try{const f={employment:filterEmployment.value,schedule:filterRemote.checked?'remote':undefined,order_by:currentSort==='match_score'?'publication_time':currentSort,area:currentArea,per_page:30,page:0};const{items,found}=await fetchVacanciesFromAPI(searchInput.value.trim(),f);
-    // Добавляем прямые вакансии
     const directJobs=getDirectJobs();
     const directItems=directJobs.map(j=>({id:j.id,name:j.title,employer:{name:j.company},salary:parseSalaryString(j.salary),description:j.description,area:{name:j.city},published_at:j.timestamp,isPremium:!!j.isPremium,isUrgent:!!j.isUrgent,phone:j.phone||null,email:j.email||null,website:j.website||null,source:'direct'}));
     allVacancies=[...items,...directItems];
-    // Убираем дубликаты
     const seen=new Set;allVacancies=allVacancies.filter(v=>{if(seen.has(v.id))return false;seen.add(v.id);return true});
-    lastSearchFound=found;applyFilters()}catch(e){vacanciesContainer.innerHTML='<p style="text-align:center; padding:40px;">Ошибка загрузки</p>';console.error(e);allVacancies=[];filteredVacancies=[]}finally{searchBtn.disabled=false;searchBtn.innerHTML=o}}
+    applyFilters()}catch(e){vacanciesContainer.innerHTML='<p style="text-align:center; padding:40px;">Ошибка загрузки</p>';console.error(e);allVacancies=[];filteredVacancies=[]}finally{searchBtn.disabled=false;searchBtn.innerHTML=o}}
 
     function applyFilters(){let f=[...allVacancies];const exp=filterExperience.value;if(exp)f=f.filter(v=>v.experience===exp);const emp=filterEmployment.value;if(emp)f=f.filter(v=>v.employment===emp);const sf=parseInt(filterSalaryFrom.value.replace(/\s/g,''))||0;if(sf)f=f.filter(v=>{if(v.salary?.from&&v.salary.from>=sf)return true;if(v.salary?.to&&v.salary.to>=sf)return true;return false});if(filterWithSalary.checked)f=f.filter(v=>v.salary&&(v.salary.from!=null||v.salary.to!=null));if(filterRemote.checked)f=f.filter(v=>v.schedule?.id==='remote');if(!filterShowHidden.checked){const hs=new Set(hiddenVacancies);f=f.filter(v=>!hs.has(String(v.id)))}const premium=f.filter(v=>v.isPremium===true);const urgent=f.filter(v=>!v.isPremium&&v.isUrgent===true);const normal=f.filter(v=>!v.isPremium&&!v.isUrgent);const sortFn=(a,b)=>{if(currentSort==='match_score')return(b._score||0)-(a._score||0);if(currentSort==='salary_desc')return(b.salary?.from||0)-(a.salary?.from||0);return new Date(b.published_at)-new Date(a.published_at)};premium.sort(sortFn);urgent.sort(sortFn);normal.sort(sortFn);f=[...premium,...urgent,...normal];filteredVacancies=f;vacanciesContainer.innerHTML='';displayedCount=0;counterSpan.textContent=f.length;if(f.length===0){vacanciesContainer.innerHTML='<div style="text-align:center; padding:40px;">Ничего не найдено</div>';loadMoreWrapper.style.display='none';return}const fp=f.slice(0,PAGE_SIZE);renderVacancies(fp);displayedCount+=fp.length;updateLoadMoreButton()}
 
@@ -192,14 +200,47 @@
 
     function enrich(v){const en=typeof v.employer==='object'?(v.employer?.name||'Компания не указана'):(v.employer||'Компания не указана');const el=v.employer?.logo_urls?.['90']||v.employer?.logo_urls?.original||v.logo_url||null;const sc=calculateMatchScore(v,searchInput.value.trim());v._score=sc;return{...v,title:v.name||'Без названия',company:en,city:v.area?.name||v.area||'',salary:formatSalary(v.salary),logoLetter:(en||'А').charAt(0).toUpperCase(),logoColor:['#e0e7ff','#dbeafe','#ede9fe','#fce7f3','#ffedd5','#dcfce7'][(en||'А').charCodeAt(0)%6],phone:v.phone||null,email:v.email||null,website:v.website||null,logoUrl:el,publishedDate:timeAgo(v.published_at),score:sc,isPremium:!!v.isPremium,isUrgent:!!v.isUrgent}}
 
-    function renderVacancies(vacancies,container=vacanciesContainer){vacancies.forEach(v=>{const vac=enrich(v),card=document.createElement('div');let classes='vacancy-card';if(vac.isPremium)classes+=' premium';if(vac.isUrgent)classes+=' urgent';card.className=classes;card.dataset.id=vac.id;let cb='';if(vac.phone){cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`}else if(vac.email){cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`}else if(vac.website){cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`}const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`:vac.logoLetter;const vu=`https://vakansa24.ru/vacancy.html?id=${vac.id}`;card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><span class="company-name">${escapeHtml(vac.company)}</span></div>${vac.city?`<div class="address">📍 ${escapeHtml(vac.city)}</div>`:''}<div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');">Подробнее</button>${cb}</div>`;container.appendChild(card)});
+    function renderVacancies(vacancies,container=vacanciesContainer){vacancies.forEach(v=>{const vac=enrich(v),isSaved=favorites.some(f=>f.id===vac.id),inCompare=isInCompare(vac.id),card=document.createElement('div');let classes='vacancy-card';if(vac.isPremium)classes+=' premium';if(vac.isUrgent)classes+=' urgent';card.className=classes;card.dataset.id=vac.id;let cb='';if(vac.phone){cb=`<a href="tel:${vac.phone}" class="btn-call" onclick="event.stopPropagation();"><i class="fas fa-phone-alt"></i> Позвонить</a>`}else if(vac.email){cb=`<a href="mailto:${vac.email}" class="btn-email" onclick="event.stopPropagation();"><i class="fas fa-envelope"></i> Написать</a>`}else if(vac.website){cb=`<a href="${vac.website}" target="_blank" rel="noopener noreferrer" class="btn-website" onclick="event.stopPropagation();"><i class="fas fa-globe"></i> Сайт компании</a>`}const ls=vac.logoUrl?`<img src="${vac.logoUrl}" alt="${escapeHtml(vac.company)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`:vac.logoLetter;const vu=`https://vakansa24.ru/vacancy.html?id=${vac.id}`;card.innerHTML=`<button class="hide-btn" data-id="${vac.id}" title="Скрыть"><i class="fas fa-times"></i></button><button class="save-btn ${isSaved?'saved':''}" data-id="${vac.id}"><i class="fas fa-heart"></i></button><div class="job-title"><span>${escapeHtml(vac.title)}</span>${vac.publishedDate?`<span class="date-badge">${vac.publishedDate}</span>`:''}</div><div class="salary">${vac.salary}</div><div class="company-block"><div class="logo-placeholder" style="background:${vac.logoUrl?'transparent':vac.logoColor}">${ls}</div><span class="company-name">${escapeHtml(vac.company)}</span></div>${vac.city?`<div class="address">📍 ${escapeHtml(vac.city)}</div>`:''}<div class="card-actions"><button class="btn-respond" onclick="event.stopPropagation(); goToVacancy('${vac.id}');">Подробнее</button>${cb}</div>`;container.appendChild(card)});
     // Вставка рекламы каждые 6 вакансий
-    const ads=getAds().filter(isAdActive);if(ads.length>0&&vacancies.length>=6){let adIndex=0;for(let i=5;i<container.children.length;i+=7){if(adIndex<ads.length){const ad=ads[adIndex];const adCard=document.createElement('div');adCard.className='vacancy-card ad';adCard.innerHTML=`<div class="job-title"><span>📢 ${escapeHtml(ad.title)}</span></div><p>${escapeHtml(ad.description||'')}</p><div class="card-actions"><a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();">Перейти</a></div>`;adCard.addEventListener('click',()=>window.open(ad.link,'_blank'));container.insertBefore(adCard,container.children[i+1]);adIndex++}}}
+    const ads=getAds().filter(isAdActive);if(ads.length>0&&vacancies.length>=6){let adIndex=0;for(let i=5;i<container.children.length;i+=7){if(adIndex<ads.length){const ad=ads[adIndex];const adCard=document.createElement('div');adCard.className='vacancy-card ad';adCard.innerHTML=`<div class="job-title"><span>📢 ${escapeHtml(ad.title)}</span></div><p>${escapeHtml(ad.description||'')}</p><div class="card-actions"><a href="${escapeHtml(ad.link)}" target="_blank" class="btn-respond" onclick="event.stopPropagation();">Перейти</a></div>`;adCard.addEventListener('click',()=>window.open(ad.link,'_blank'));container.insertBefore(adCard,container.children[i+1]);adIndex++}}}}
     }
 
-    window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
+    vacanciesContainer.addEventListener('click', e => {
+        const card = e.target.closest('.vacancy-card');
+        if (!card) return;
+        const id = card.dataset.id;
+        if (e.target.closest('.save-btn')) {
+            toggleSaved(id, e.target.closest('.save-btn'));
+            return;
+        }
+        if (e.target.closest('.hide-btn')) {
+            hideVacancy(id);
+            return;
+        }
+        if (e.target.closest('.btn-compare')) {
+            toggleCompareFromCard(id, e.target.closest('.btn-compare'));
+            return;
+        }
+        if (e.target.closest('.btn-respond')) {
+            goToVacancy(id);
+            return;
+        }
+        if (card.classList.contains('ad')) {
+            const ad = getAds().find(a => a.id == id);
+            if (ad) window.open(ad.link, '_blank');
+            return;
+        }
+        goToVacancy(id);
+    });
+        window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
+    function toggleSaved(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleFavorite(v);const isF=isFavorite(id);b.classList.toggle('saved',isF)}
+    function toggleCompareFromCard(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleCompare(v);const isC=isInCompare(id);b.classList.toggle('in-compare',isC);updateCompareCount()}
+    function updateCompareCount(){const c=getCompareList().length;compareCountSpan.textContent=c;compareLinkBtn.style.display=c>0?'inline-flex':'none'}
     function resetFilters(){filterCity.value='';filterExperience.value='';filterEmployment.value='';filterSalaryFrom.value='';filterWithSalary.checked=false;filterRemote.checked=false;filterShowHidden.checked=false;currentArea='113';selectedCityId=null;setSort('publication_time');performSearch(true,false)}
-
+    function addToHistory(q){if(!q||q.length<2)return;let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];searchHistory=[q,...searchHistory.filter(h=>h!==q)].slice(0,7);localStorage.setItem('searchHistory',JSON.stringify(searchHistory));renderHistory()}
+    function clearHistory(){localStorage.removeItem('searchHistory');renderHistory()}
+    function renderHistory(){const c=document.getElementById('historyContainer');const searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];if(!searchHistory.length){c.innerHTML='<span style="font-size:0.8rem;color:#94a3b8;">Нет истории</span>';return}c.innerHTML=searchHistory.map(q=>`<div class="history-item" data-query="${q}"><span>${q}</span><button class="delete-history" data-query="${q}">&times;</button></div>`).join('');document.querySelectorAll('.history-item span').forEach(e=>e.addEventListener('click',(e)=>{if(!e.target.classList.contains('delete-history')){searchInput.value=e.parentElement.dataset.query;performSearch(true,true)}}));document.querySelectorAll('.delete-history').forEach(b=>b.addEventListener('click',(e)=>{e.stopPropagation();let searchHistory=JSON.parse(localStorage.getItem('searchHistory'))||[];searchHistory=searchHistory.filter(h=>h!==b.dataset.query);localStorage.setItem('searchHistory',JSON.stringify(searchHistory));renderHistory()}))}
+    subscribeForm.addEventListener('submit',async(e)=>{e.preventDefault();const email=subscribeEmailInput.value.trim();if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){subscribeStatus.textContent='Пожалуйста, введите корректный email';subscribeStatus.className='subscribe-status error';return}subscribeSubmitBtn.disabled=true;subscribeSubmitBtn.innerHTML='<span>Отправка...</span> <i class="fas fa-spinner fa-pulse"></i>';subscribeStatus.textContent='';try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'subscribe',email:email})});const d=await r.json();if(d.success){subscribeStatus.textContent='✅ Вы успешно подписались!';subscribeStatus.className='subscribe-status success';subscribeEmailInput.value=''}else{subscribeStatus.textContent='❌ Ошибка подписки. Попробуйте позже.';subscribeStatus.className='subscribe-status error'}}catch(err){subscribeStatus.textContent='❌ Не удалось соединиться с сервером';subscribeStatus.className='subscribe-status error'}finally{subscribeSubmitBtn.disabled=false;subscribeSubmitBtn.innerHTML='<span>Подписаться</span> <i class="fas fa-paper-plane"></i>'}});
     loadAllAreas().then(()=>console.log('Areas loaded')).catch(()=>{});
     setupThemeToggle('themeToggle');setupBackToTop('backToTopBtn');registerSW('/vacancy-aggregator/');
 </script>
