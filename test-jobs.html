@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Тест вакансий</title></head>
+<body>
+<h2>Проверка загрузки вакансий</h2>
+<button onclick="test()">Загрузить</button>
+<div id="out"></div>
+<script src="common.js?v=3"></script>
+<script>
+function test() {
+    const direct = getDirectJobs ? getDirectJobs() : [];
+    const fromAPI = [];
+    fetch('https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8?action=vacancies&text=&area=113&per_page=10&order_by=publication_time')
+      .then(r => r.json())
+      .then(data => {
+         const items = data.items || [];
+         document.getElementById('out').innerHTML = 
+           '<p>API вакансий: ' + items.length + '</p>' +
+           '<p>Прямых вакансий: ' + direct.length + '</p>' +
+           '<pre>' + JSON.stringify(items.slice(0,2), null, 2) + '</pre>';
+      })
+      .catch(e => alert('Ошибка API: ' + e.message));
+}
+</script>
+</body>
+</html>
