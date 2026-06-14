@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Заказать рекламу — ВКАНСА</title>
+    <meta name="description" content="Разместите рекламный баннер на сайте ВКАНСА.">
+    <meta property="og:title" content="Заказать рекламу — ВКАНСА">
+    <meta property="og:description" content="Разместите рекламный баннер.">
+    <meta property="og:url" content="https://vakansa24.ru/order-ad.html">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+    <script>
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') { document.documentElement.classList.add('dark'); } else if (theme === 'light') { document.documentElement.classList.remove('dark'); } else { const hour = new Date().getHours(); if (hour >= 20 || hour < 6) { document.documentElement.classList.add('dark'); localStorage.setItem('theme', 'dark'); } else { document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light'); } } })();
+    </script>
+    <style>
+        .order-container { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        html.dark .order-container { background: #1e293b; border-color: #334155; }
+        .order-container h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+        html.dark .order-container h2 { color: #f1f5f9; }
+        .sub { color: #64748b; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; }
+        html.dark .sub { color: #9ca3af; border-color: #334155; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #334155; }
+        html.dark .form-group label { color: #e2e8f0; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 1rem; font-family: inherit; background: white; color: #0f172a; }
+        html.dark .form-group input, html.dark .form-group textarea, html.dark .form-group select { background: #0f172a; border-color: #475569; color: #e2e8f0; }
+        .btn-submit { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 14px 24px; border-radius: 40px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn-submit:hover { background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%); }
+        .back-link { display: inline-block; margin-top: 24px; color: #1a73e8; text-decoration: none; font-weight: 500; }
+    </style>
+</head>
+<body class="light">
+<button id="backToTopBtn" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+<div class="container">
+    <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Заказать рекламу</h1><p>Работа найдётся — и не одна</p></div>
+    <div class="order-container">
+        <h2><i class="fas fa-ad"></i> Рекламный блок</h2>
+        <div class="sub">Заполните данные для рекламного баннера и оплатите тариф.</div>
+        <form id="adForm">
+            <div class="form-group"><label for="adTitle">Заголовок *</label><input type="text" id="adTitle" required placeholder="Например: Лучшие курсы"></div>
+            <div class="form-group"><label for="adDescription">Описание</label><textarea id="adDescription" rows="2" placeholder="Краткое описание"></textarea></div>
+            <div class="form-group"><label for="adLink">Ссылка *</label><input type="url" id="adLink" required placeholder="https://..."></div>
+            <div class="form-group"><label for="adImage">URL изображения (необязательно)</label><input type="url" id="adImage" placeholder="https://..."></div>
+            <div class="form-group">
+                <label for="adTariff">Тариф</label>
+                <select id="adTariff">
+                    <option value="premium">Премиум — 450 ₽</option>
+                    <option value="urgent">Срочный — 300 ₽</option>
+                    <option value="ads" selected>Рекламный блок — 750 ₽</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-credit-card"></i> Оплатить и разместить</button>
+        </form>
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+    </div>
+    <p id="formMessage" style="text-align:center; margin: 16px 0; font-weight:500;"></p>
+</div>
+<footer class="site-footer">
+    <div class="footer-links">
+        <div class="footer-links-row">
+            <a href="history.html"><i class="fas fa-history"></i> История</a>
+            <a href="compare.html" class="highlight"><i class="fas fa-balance-scale"></i> Сравнение</a>
+            <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
+        </div>
+        <div class="footer-links-row">
+            <a href="post-job.html" class="highlight"><i class="fas fa-plus-circle"></i> Разместить вакансию</a>
+            <a href="tariffs.html">Тарифы</a>
+            <a href="order-ad.html">Заказать рекламу</a>
+            <a href="privacy.html">Политика</a> <a href="terms.html">Соглашение</a> <a href="contacts.html">Контакты</a>
+        </div>
+    </div>
+    <div class="footer-copy">© 2026 Ваканса. Все права защищены.</div>
+</footer>
+<button id="themeToggle" class="theme-switch">🌙</button>
+<script src="common.js"></script>
+<script>
+    const PAYMENT_LINKS = {
+        premium: 'https://pay.cloudtips.ru/p/cc8ad00d',
+        urgent: 'https://pay.cloudtips.ru/p/6fcc7c1f',
+        ads: 'https://pay.cloudtips.ru/p/51fb2759'
+    };
+    const form = document.getElementById('adForm'), formMessage = document.getElementById('formMessage');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ad = {
+            id: Date.now(),
+            title: escapeHtml(document.getElementById('adTitle').value.trim()),
+            description: escapeHtml(document.getElementById('adDescription').value.trim()),
+            link: escapeHtml(document.getElementById('adLink').value.trim()),
+            image: escapeHtml(document.getElementById('adImage').value.trim()),
+            tariff: document.getElementById('adTariff').value,
+            created: new Date().toISOString()
+        };
+        if (!ad.title || !ad.link) {
+            formMessage.textContent = '❌ Заполните заголовок и ссылку';
+            formMessage.style.color = '#dc2626';
+            return;
+        }
+        // Сохраняем заявку в pending_ads до оплаты
+        const pending = getPendingAds();
+        pending.push(ad);
+        savePendingAds(pending);
+        // Перенаправляем на оплату
+        window.location.href = PAYMENT_LINKS[ad.tariff];
+    });
+    setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
+</script>
+</body>
+</html>
