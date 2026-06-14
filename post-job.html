@@ -29,8 +29,8 @@
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #334155; } html.dark .form-group label { color: #e2e8f0; }
         .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 1rem; font-family: inherit; background: white; color: #0f172a; } html.dark .form-group input, html.dark .form-group textarea { background: #0f172a; border-color: #475569; color: #e2e8f0; }
-        .premium-option { background: #fff6e5; border: 1px solid #f5b042; border-radius: 20px; padding: 16px; margin: 20px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; } html.dark .premium-option { background: #2d3a4e; border-color: #f5b042; }
-        .premium-option input[type="checkbox"] { width: auto; transform: scale(1.2); margin-right: 8px; }
+        .notice { background: #eef2ff; border-radius: 12px; padding: 12px; margin: 20px 0; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .notice i { color: #0047cc; font-size: 1.2rem; }
         .btn-submit { background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%); color: white; border: none; padding: 14px 24px; border-radius: 40px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s; }
         .btn-submit:hover { background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%); }
         .back-link { display: inline-block; margin-top: 24px; color: #1a73e8; text-decoration: none; font-weight: 500; }
@@ -42,8 +42,8 @@
 <div class="container">
     <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Разместить вакансию</h1><p>Работа найдётся — и не одна</p></div>
     <div class="post-job-container">
-        <h2><i class="fas fa-plus-circle"></i> Новая вакансия</h2>
-        <div class="sub">Разместите вакансию бесплатно или с премиум-выделением. После отправки она попадёт на модерацию.</div>
+        <h2><i class="fas fa-plus-circle"></i> Бесплатное размещение</h2>
+        <div class="sub">Разместите вакансию бесплатно. После отправки она попадёт на модерацию и будет опубликована в течение 24 часов.</div>
         <form id="jobForm">
             <div class="form-group"><label for="title">Название должности *</label><input type="text" id="title" required placeholder="Например: Веб-разработчик"></div>
             <div class="form-group"><label for="company">Компания *</label><input type="text" id="company" required placeholder="ООО Ромашка"></div>
@@ -53,7 +53,12 @@
             <div class="form-group"><label for="email">Email для откликов</label><input type="email" id="email" placeholder="hr@company.ru"><span class="form-hint">Будет показана кнопка «Написать»</span></div>
             <div class="form-group"><label for="website">Сайт компании</label><input type="url" id="website" placeholder="https://company.ru"><span class="form-hint">Будет показана кнопка «Сайт компании»</span></div>
             <div class="form-group"><label for="description">Описание вакансии</label><textarea id="description" rows="5" placeholder="Обязанности, требования, условия..."></textarea></div>
-            <div class="premium-option"><input type="checkbox" id="premiumCheckbox"><label for="premiumCheckbox" style="margin:0; font-weight:600;">⭐ Премиум-размещение</label><span style="font-size:0.8rem; margin-left:auto;">Будет видно на главной</span></div>
+            
+            <div class="notice">
+                <i class="fas fa-star"></i>
+                Хотите выделить вакансию? <a href="tariffs.html" style="color: #0047cc; font-weight: 600;">Оплатите Премиум или Срочное размещение</a>
+            </div>
+            
             <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Отправить на модерацию</button>
         </form>
         <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
@@ -68,6 +73,7 @@
             <a href="dashboard.html" class="highlight"><i class="fas fa-chart-pie"></i> Дашборд</a>
         </div>
         <div class="footer-links-row">
+            <a href="tariffs.html">Тарифы</a>
             <a href="privacy.html">Политика</a> <a href="terms.html">Соглашение</a> <a href="contacts.html">Контакты</a>
         </div>
     </div>
@@ -89,7 +95,7 @@
             email: escapeHtml(document.getElementById('email').value.trim()),
             website: escapeHtml(document.getElementById('website').value.trim()),
             description: escapeHtml(document.getElementById('description').value.trim()),
-            isPremium: document.getElementById('premiumCheckbox').checked,
+            isPremium: false,  // Всегда false для бесплатной формы
             timestamp: new Date().toISOString()
         };
         if (!job.title || !job.company) {
