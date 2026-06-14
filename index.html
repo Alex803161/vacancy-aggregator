@@ -232,7 +232,7 @@
         }
         goToVacancy(id);
     });
-        window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
+    window.goToVacancy=function(id){window.location.href='vacancy.html?id='+id};
     function toggleSaved(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleFavorite(v);const isF=isFavorite(id);b.classList.toggle('saved',isF)}
     function toggleCompareFromCard(id,b){const v=allVacancies.find(v=>v.id==id);if(!v)return;toggleCompare(v);const isC=isInCompare(id);b.classList.toggle('in-compare',isC);updateCompareCount()}
     function updateCompareCount(){const c=getCompareList().length;compareCountSpan.textContent=c;compareLinkBtn.style.display=c>0?'inline-flex':'none'}
