@@ -2,7 +2,8 @@ const fs = require('fs-extra');
 const axios = require('axios');
 const path = require('path');
 
-const API_URL = 'https://functions.yandexcloud.net/d4e5m82nlqkadc3ap5o5';
+// ИСПРАВЛЕНО: Используем тот же API URL, что и на основном сайте
+const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 const OUTPUT_DIR = path.join(__dirname, 'vacancies');
 const SITEMAP_PATH = path.join(__dirname, 'sitemap.xml');
 const BASE_URL = 'https://alex803161.github.io/vacancy-aggregator';
@@ -24,16 +25,19 @@ const PROFESSIONS = [
 
 async function fetchVacanciesForArea(areaId, text = '', perPage = 50) {
   const params = new URLSearchParams({
-    action: 'search',
+    action: 'vacancies',
     text: text,
     area: areaId,
     per_page: perPage,
     order_by: 'publication_time'
   });
+  console.log(`Запрос к API: ${API_URL}?${params.toString()}`);
   const res = await axios.get(`${API_URL}?${params.toString()}`);
+  console.log(`Статус ответа: ${res.status}, всего вакансий: ${res.data.items?.length || 0}`);
   return res.data.items || [];
 }
 
+// Функции buildCityPage и buildProfessionPage остались без изменений
 function buildCityPage(city, vacancies) {
   const title = `Работа в ${city.name} – свежие вакансии | ВКАНСА`;
   const description = `Найдите работу в ${city.name}. Актуальные вакансии от прямых работодателей и кадровых агентств. Удобный поиск и фильтры.`;
@@ -161,6 +165,7 @@ function buildProfessionPage(profession, vacancies) {
 </html>`;
   return html;
 }
+
 async function generateSitemap(citySlugs, professionSlugs) {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
