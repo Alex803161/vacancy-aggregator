@@ -3,73 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тарифы на размещение вакансий — ВКАНСА</title>
+    <title>Тарифы на размещение — ВКАНСА</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: system-ui, sans-serif; background: #f3f4f6; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { text-align: center; color: #0f172a; }
-        .tariffs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
-        .tariff-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .tariff-card h2 { color: #0f172a; margin-bottom: 8px; }
-        .tariff-card .price { font-size: 2rem; font-weight: 700; color: #0047cc; margin: 12px 0; }
-        .tariff-card ul { list-style: none; padding: 0; text-align: left; width: 100%; }
-        .tariff-card li { padding: 4px 0; }
-        .btn { display: block; width: 100%; padding: 12px; margin-top: 12px; border-radius: 40px; font-weight: 600; text-decoration: none; text-align: center; transition: background 0.2s; }
-        .btn-pay { background: #0088cc; color: white; }
-        .btn-pay:hover { background: #006699; }
-        .back-link { display: block; text-align: center; margin-top: 24px; color: #1a73e8; }
-        .notice { background: #fef9c3; border-radius: 12px; padding: 12px; margin-top: 12px; font-size: 0.9rem; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 40px 20px;
+            transition: background 0.2s;
+        }
+        html.dark body {
+            background: #0f172a;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        html.dark h1 {
+            color: #f8fafc;
+        }
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        html.dark .subtitle {
+            color: #94a3b8;
+        }
+
+        .tariffs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .tariff-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.02);
+            border: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        html.dark .tariff-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .tariff-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.06), 0 8px 16px rgba(0,0,0,0.04);
+            border-color: #cbd5e1;
+        }
+
+        /* Популярный тариф */
+        .tariff-card.popular {
+            border: 2px solid #f5b042;
+            box-shadow: 0 8px 24px rgba(245,176,66,0.15);
+            background: linear-gradient(135deg, #ffffff 0%, #fefce8 100%);
+        }
+        html.dark .tariff-card.popular {
+            background: linear-gradient(135deg, #1e293b 0%, #2d2a1e 100%);
+            border-color: #f5b042;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #f5b042, #e0950f);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            box-shadow: 0 4px 10px rgba(245,176,66,0.4);
+            white-space: nowrap;
+        }
+
+        .tariff-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: #0047cc;
+        }
+        html.dark .tariff-icon {
+            color: #60a5fa;
+        }
+        .tariff-card.popular .tariff-icon {
+            color: #f5b042;
+        }
+
+        .tariff-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        html.dark .tariff-name {
+            color: #f8fafc;
+        }
+
+        .tariff-price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 16px 0;
+            line-height: 1;
+        }
+        html.dark .tariff-price {
+            color: #f8fafc;
+        }
+        .tariff-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-left: 4px;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+            flex-grow: 1;
+        }
+        .features-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #334155;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        html.dark .features-list li {
+            color: #cbd5e1;
+            border-bottom-color: #334155;
+        }
+        .features-list li i {
+            color: #10b981;
+            font-size: 0.9rem;
+            width: 18px;
+            text-align: center;
+        }
+
+        .btn-pay {
+            display: block;
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(180deg, #0055e6 0%, #0039a6 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+            box-shadow: 0 6px 14px rgba(0,71,204,0.25);
+            letter-spacing: 0.3px;
+        }
+        .btn-pay:hover {
+            background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
+            box-shadow: 0 10px 20px rgba(0,71,204,0.35);
+            transform: translateY(-1px);
+        }
+        .btn-pay-outline {
+            background: transparent;
+            border: 2px solid #cbd5e1;
+            color: #334155;
+            box-shadow: none;
+        }
+        html.dark .btn-pay-outline {
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        .btn-pay-outline:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 32px;
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Тарифы на размещение вакансий</h1>
-        <div class="tariffs">
+        <h1>Тарифы для бизнеса</h1>
+        <p class="subtitle">Выберите подходящий формат продвижения вакансии</p>
+
+        <div class="tariffs-grid">
+            <!-- Бесплатный тариф -->
             <div class="tariff-card">
-                <h2>Бесплатный</h2>
-                <div class="price">0 ₽</div>
-                <ul>
-                    <li>✅ Размещение вакансии</li>
-                    <li>⏳ Модерация до 24 часов</li>
-                    <li>📋 Обычное отображение</li>
+                <div class="tariff-icon"><i class="fas fa-paper-plane"></i></div>
+                <div class="tariff-name">Бесплатный</div>
+                <div class="tariff-price">0 <span>₽</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Размещение вакансии</li>
+                    <li><i class="fas fa-check"></i> Модерация до 24 часов</li>
+                    <li><i class="fas fa-check"></i> Стандартное отображение</li>
                 </ul>
-                <a href="post-job.html" class="btn btn-pay">Разместить бесплатно</a>
+                <a href="post-job.html" class="btn-pay btn-pay-outline">Разместить бесплатно</a>
             </div>
+
+            <!-- Срочный тариф -->
             <div class="tariff-card">
-                <h2>Премиум</h2>
-                <div class="price">450 ₽</div>
-                <ul>
-                    <li>⭐ Золотая рамка</li>
-                    <li>⚡ Приоритет в выдаче</li>
-                    <li>🚀 Модерация до 1 часа</li>
+                <div class="tariff-icon"><i class="fas fa-bolt"></i></div>
+                <div class="tariff-name">Срочный</div>
+                <div class="tariff-price">300 <span>₽</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Красный бейдж «Срочно»</li>
+                    <li><i class="fas fa-check"></i> Приоритет в выдаче</li>
+                    <li><i class="fas fa-check"></i> Модерация до 1 часа</li>
                 </ul>
-                <a href="https://pay.cloudtips.ru/p/cc8ad00d" class="btn btn-pay">Оплатить</a>
-                <div class="notice">После оплаты услуга активируется в течение часа.</div>
+                <a href="https://pay.cloudtips.ru/p/6fcc7c1f" class="btn-pay">Оплатить</a>
             </div>
-            <div class="tariff-card">
-                <h2>Срочный</h2>
-                <div class="price">300 ₽</div>
-                <ul>
-                    <li>🔴 Красный бейдж «Срочно»</li>
-                    <li>⚡ Приоритет в выдаче</li>
-                    <li>🚀 Модерация до 1 часа</li>
+
+            <!-- Премиум тариф (популярный) -->
+            <div class="tariff-card popular">
+                <div class="popular-badge">Популярный</div>
+                <div class="tariff-icon"><i class="fas fa-crown"></i></div>
+                <div class="tariff-name">Премиум</div>
+                <div class="tariff-price">450 <span>₽</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Золотая рамка</li>
+                    <li><i class="fas fa-check"></i> Приоритет в выдаче</li>
+                    <li><i class="fas fa-check"></i> Модерация до 1 часа</li>
                 </ul>
-                <a href="https://pay.cloudtips.ru/p/6fcc7c1f" class="btn btn-pay">Оплатить</a>
-                <div class="notice">После оплаты услуга активируется в течение часа.</div>
+                <a href="https://pay.cloudtips.ru/p/cc8ad00d" class="btn-pay">Оплатить</a>
             </div>
+
+            <!-- Рекламный тариф -->
             <div class="tariff-card">
-                <h2>Рекламный</h2>
-                <div class="price">750 ₽</div>
-                <ul>
-                    <li>📢 Баннер в выдаче</li>
-                    <li>🎯 Нацеливание на аудиторию</li>
-                    <li>⏳ Показ 7 дней</li>
+                <div class="tariff-icon"><i class="fas fa-ad"></i></div>
+                <div class="tariff-name">Рекламный</div>
+                <div class="tariff-price">750 <span>₽</span></div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Баннер в выдаче</li>
+                    <li><i class="fas fa-check"></i> Нацеливание на аудиторию</li>
+                    <li><i class="fas fa-check"></i> Показ 7 дней</li>
                 </ul>
-                <a href="order-ad.html" class="btn btn-pay">Заказать рекламу</a>
-                <div class="notice">После оплаты реклама активируется в течение часа.</div>
+                <a href="order-ad.html" class="btn-pay">Заказать рекламу</a>
             </div>
         </div>
-        <a href="index.html" class="back-link">← На главную</a>
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Вернуться к поиску</a>
     </div>
 </body>
 </html>
