@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <title>Разместить вакансию — ВКАНСА</title>
-    <meta name="description" content="Бесплатное размещение вакансий для прямых работодателей. Найдите сотрудников быстро и просто на сайте ВКАНСА.">
+    <meta name="description" content="Бесплатное и платное размещение вакансий для прямых работодателей. Найдите сотрудников быстро и просто на сайте ВКАНСА.">
     
     <meta property="og:title" content="Разместить вакансию — ВКАНСА">
-    <meta property="og:description" content="Бесплатное размещение вакансий для прямых работодателей.">
+    <meta property="og:description" content="Размещение вакансий для прямых работодателей.">
     <meta property="og:url" content="https://vakansa24.ru/post-job.html">
     <meta property="og:type" content="website">
     
@@ -42,8 +42,8 @@
 <div class="container">
     <div class="header"><div class="logo-container"><span class="logo-heart"></span><span class="logo-text">Ваканса</span></div><h1 class="page-title">Разместить вакансию</h1><p>Работа найдётся — и не одна</p></div>
     <div class="post-job-container">
-        <h2><i class="fas fa-plus-circle"></i> Бесплатное размещение</h2>
-        <div class="sub">Разместите вакансию бесплатно. После отправки она попадёт на модерацию и будет опубликована в течение 24 часов.</div>
+        <h2 id="planTitle"><i class="fas fa-plus-circle"></i> Бесплатное размещение</h2>
+        <div class="sub" id="planSub">Разместите вакансию бесплатно. После отправки она попадёт на модерацию и будет опубликована в течение 24 часов.</div>
         <form id="jobForm">
             <div class="form-group"><label for="title">Название должности *</label><input type="text" id="title" required placeholder="Например: Веб-разработчик"></div>
             <div class="form-group"><label for="company">Компания *</label><input type="text" id="company" required placeholder="ООО Ромашка"></div>
@@ -54,12 +54,12 @@
             <div class="form-group"><label for="website">Сайт компании</label><input type="url" id="website" placeholder="https://company.ru"><span class="form-hint">Будет показана кнопка «Сайт компании»</span></div>
             <div class="form-group"><label for="description">Описание вакансии</label><textarea id="description" rows="5" placeholder="Обязанности, требования, условия..."></textarea></div>
             
-            <div class="notice">
+            <div id="planNotice" class="notice" style="display:none;">
                 <i class="fas fa-star"></i>
-                Хотите выделить вакансию? <a href="tariffs.html" style="color: #0047cc; font-weight: 600;">Оплатите Премиум или Срочное размещение</a>
+                <span>Вы выбрали <strong id="planName"></strong>. После отправки вы будете перенаправлены на оплату.</span>
             </div>
             
-            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Отправить на модерацию</button>
+            <button type="submit" class="btn-submit" id="submitButton"><i class="fas fa-paper-plane"></i> Отправить на модерацию</button>
         </form>
         <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
     </div>
@@ -82,6 +82,41 @@
 <button id="themeToggle" class="theme-switch">🌙</button>
 <script src="common.js?v=3"></script>
 <script>
+    // Получаем параметр плана из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan'); // 'premium', 'urgent' или null (бесплатный)
+    
+    const PAYMENT_LINKS = {
+        premium: 'https://pay.cloudtips.ru/p/cc8ad00d',
+        urgent: 'https://pay.cloudtips.ru/p/6fcc7c1f'
+    };
+
+    const planTitle = document.getElementById('planTitle');
+    const planSub = document.getElementById('planSub');
+    const planNotice = document.getElementById('planNotice');
+    const planNameSpan = document.getElementById('planName');
+    const submitButton = document.getElementById('submitButton');
+
+    // Настройка интерфейса в зависимости от тарифа
+    if (plan === 'premium') {
+        planTitle.innerHTML = '<i class="fas fa-crown"></i> Премиум размещение';
+        planSub.textContent = 'Ваша вакансия будет выделена золотой рамкой и получит приоритет в выдаче. После заполнения формы вы перейдёте к оплате (450 ₽).';
+        planNotice.style.display = 'flex';
+        planNameSpan.textContent = 'Премиум';
+        submitButton.innerHTML = '<i class="fas fa-credit-card"></i> Продолжить к оплате';
+    } else if (plan === 'urgent') {
+        planTitle.innerHTML = '<i class="fas fa-bolt"></i> Срочное размещение';
+        planSub.textContent = 'Вакансия получит красный бейдж «Срочно» и приоритет в выдаче. После заполнения формы вы перейдёте к оплате (300 ₽).';
+        planNotice.style.display = 'flex';
+        planNameSpan.textContent = 'Срочный';
+        submitButton.innerHTML = '<i class="fas fa-credit-card"></i> Продолжить к оплате';
+    } else {
+        // Бесплатный тариф – без изменений
+        planTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Бесплатное размещение';
+        planSub.textContent = 'Разместите вакансию бесплатно. После отправки она попадёт на модерацию и будет опубликована в течение 24 часов.';
+        submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить на модерацию';
+    }
+
     const form = document.getElementById('jobForm'), formMessage = document.getElementById('formMessage');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -95,7 +130,8 @@
             email: escapeHtml(document.getElementById('email').value.trim()),
             website: escapeHtml(document.getElementById('website').value.trim()),
             description: escapeHtml(document.getElementById('description').value.trim()),
-            isPremium: false,  // Всегда false для бесплатной формы
+            isPremium: plan === 'premium',
+            isUrgent: plan === 'urgent',
             timestamp: new Date().toISOString()
         };
         if (!job.title || !job.company) {
@@ -106,10 +142,22 @@
         const pending = getPendingJobs();
         pending.push(job);
         savePendingJobs(pending);
-        formMessage.textContent = '✅ Вакансия отправлена на модерацию!';
-        formMessage.style.color = '#059669';
-        form.reset();
-        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}`);
+        
+        // Уведомление в Telegram
+        sendTelegramNotification(`📌 Новая вакансия на модерацию: ${job.title}\nКомпания: ${job.company}\nГород: ${job.city || 'не указан'}\nЗарплата: ${job.salary || 'не указана'}${plan ? '\nТариф: ' + plan : ''}`);
+        
+        // Если это платный тариф — перенаправляем на оплату
+        if (plan && PAYMENT_LINKS[plan]) {
+            formMessage.textContent = '✅ Вакансия сохранена, сейчас вы будете перенаправлены на оплату...';
+            formMessage.style.color = '#059669';
+            setTimeout(() => {
+                window.location.href = PAYMENT_LINKS[plan];
+            }, 1000);
+        } else {
+            formMessage.textContent = '✅ Вакансия отправлена на модерацию!';
+            formMessage.style.color = '#059669';
+            form.reset();
+        }
     });
     setupThemeToggle('themeToggle'); setupBackToTop('backToTopBtn'); registerSW('/vacancy-aggregator/');
 </script>
