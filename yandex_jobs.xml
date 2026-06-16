@@ -1,807 +1,1516 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jobs>
-  <employer>
+<yml_catalog date="2026-06-16">
+  <shop>
     <name>ВКАНСА</name>
+    <company>ВКАНСА</company>
     <url>https://vakansa24.ru/vacancy-aggregator</url>
-  </employer>
-  <job>
-    <title>Рабочий</title>
-    <description></description>
-    <salary>от 100000 RUR</salary>
-    <area>Красногорск (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132940267</url>
-    <date>2026-06-15T22:07:55+0300</date>
-  </job>
-  <job>
-    <title>Полицейский</title>
-    <description></description>
-    <salary>от 60000 до 105000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132044658</url>
-    <date>2026-06-15T22:07:25+0300</date>
-  </job>
-  <job>
-    <title>Клиентский менеджер</title>
-    <description></description>
-    <salary>от 130000 RUR</salary>
-    <area>Лобня (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132428317</url>
-    <date>2026-06-15T22:07:12+0300</date>
-  </job>
-  <job>
-    <title>Data Engineer (разработка АБС для филиала в Индии)</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188758</url>
-    <date>2026-06-15T22:06:50+0300</date>
-  </job>
-  <job>
-    <title>Кухонный работник</title>
-    <description></description>
-    <salary> до 2200 RUR</salary>
-    <area>Красноярск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188757</url>
-    <date>2026-06-15T22:06:29+0300</date>
-  </job>
-  <job>
-    <title>Мастер ногтевого сервиса (метро Верхние Лихоборы)</title>
-    <description></description>
-    <salary>от 120000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188756</url>
-    <date>2026-06-15T22:06:26+0300</date>
-  </job>
-  <job>
-    <title>Рабочий на склад</title>
-    <description></description>
-    <salary>от 50000 до 60000 RUR</salary>
-    <area>Симферополь</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188755</url>
-    <date>2026-06-15T22:06:20+0300</date>
-  </job>
-  <job>
-    <title>Мастер цеха на производство</title>
-    <description></description>
-    <salary>от 100000 до 120000 RUR</salary>
-    <area>Пенза</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188754</url>
-    <date>2026-06-15T22:06:10+0300</date>
-  </job>
-  <job>
-    <title>Разнорабочий</title>
-    <description></description>
-    <salary>от 100000 до 150000 RUR</salary>
-    <area>Электросталь (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188753</url>
-    <date>2026-06-15T22:05:51+0300</date>
-  </job>
-  <job>
-    <title>Технический директор (CTO)</title>
-    <description></description>
-    <salary>от 250000 до 350000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188752</url>
-    <date>2026-06-15T22:05:39+0300</date>
-  </job>
-  <job>
-    <title>Кладовщик</title>
-    <description></description>
-    <salary>от 75000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132240099</url>
-    <date>2026-06-15T22:05:37+0300</date>
-  </job>
-  <job>
-    <title>Администратор в стоматологию</title>
-    <description></description>
-    <salary> до 375 RUR</salary>
-    <area>Люберцы  (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188751</url>
-    <date>2026-06-15T22:04:41+0300</date>
-  </job>
-  <job>
-    <title>Продавец (ТЦ Европа)</title>
-    <description></description>
-    <salary>от 50200 RUR</salary>
-    <area>Рязань</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133120140</url>
-    <date>2026-06-15T22:03:55+0300</date>
-  </job>
-  <job>
-    <title>Специалист по эксплуатации</title>
-    <description></description>
-    <salary>от 70000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188750</url>
-    <date>2026-06-15T22:03:29+0300</date>
-  </job>
-  <job>
-    <title>Курьер из ПВЗ</title>
-    <description></description>
-    <salary>от 177000 до 220000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188749</url>
-    <date>2026-06-15T22:03:21+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по развитию продаж</title>
-    <description></description>
-    <salary>от 120000 до 220000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188748</url>
-    <date>2026-06-15T22:03:09+0300</date>
-  </job>
-  <job>
-    <title>Капитан маломерного судна</title>
-    <description></description>
-    <salary> до 150000 RUR</salary>
-    <area>Петрозаводск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188747</url>
-    <date>2026-06-15T22:02:59+0300</date>
-  </job>
-  <job>
-    <title>Медицинский массажист</title>
-    <description></description>
-    <salary>от 80000 до 120000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188746</url>
-    <date>2026-06-15T22:02:59+0300</date>
-  </job>
-  <job>
-    <title>Медицинский эксперт-методолог</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188745</url>
-    <date>2026-06-15T22:02:50+0300</date>
-  </job>
-  <job>
-    <title>Менеджер склада (кладовщик)</title>
-    <description></description>
-    <salary>от 50000 до 55000 RUR</salary>
-    <area>Сыктывкар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188744</url>
-    <date>2026-06-15T22:02:49+0300</date>
-  </job>
-  <job>
-    <title>Парикмахер-универсал (метро Верхние Лихоборы)</title>
-    <description></description>
-    <salary>от 120000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188743</url>
-    <date>2026-06-15T22:02:45+0300</date>
-  </job>
-  <job>
-    <title>Педагог в детский центр по ментальной арифметике, логопед, логопед-диффектолог</title>
-    <description></description>
-    <salary>от 40000 до 60000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188742</url>
-    <date>2026-06-15T22:02:39+0300</date>
-  </job>
-  <job>
-    <title>Специалист по рекламе / менеджер по работе с блогерами</title>
-    <description></description>
-    <salary>от 60000 RUR</salary>
-    <area>Рязань</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130212293</url>
-    <date>2026-06-15T22:02:31+0300</date>
-  </job>
-  <job>
-    <title>Заместитель директора по производству</title>
-    <description></description>
-    <salary>от 150000 RUR</salary>
-    <area>Усолье-Сибирское</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188741</url>
-    <date>2026-06-15T22:01:24+0300</date>
-  </job>
-  <job>
-    <title>Эксперт отдела оценки</title>
-    <description></description>
-    <salary>от 100000 RUR</salary>
-    <area>Минеральные Воды</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133753584</url>
-    <date>2026-06-15T22:00:31+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 46000 RUR</salary>
-    <area>Кукмор</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188735</url>
-    <date>2026-06-15T22:00:07+0300</date>
-  </job>
-  <job>
-    <title>Визитный мерчандайзер (м. Красносельская, Сокольники, Преображенская пл, б.Рокоссовского)</title>
-    <description></description>
-    <salary> до 76000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188733</url>
-    <date>2026-06-15T22:00:03+0300</date>
-  </job>
-  <job>
-    <title>Слесарь-сборщик платежных терминалов</title>
-    <description></description>
-    <salary>от 100000 до 150000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188732</url>
-    <date>2026-06-15T21:59:58+0300</date>
-  </job>
-  <job>
-    <title>Специалист по анализу AI-результатов</title>
-    <description></description>
-    <salary>от 54000 до 68000 RUR</salary>
-    <area>Абакан</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188731</url>
-    <date>2026-06-15T21:59:58+0300</date>
-  </job>
-  <job>
-    <title>Врач-гинеколог (УЗИ)</title>
-    <description></description>
-    <salary>от 50000 до 150000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188730</url>
-    <date>2026-06-15T21:59:58+0300</date>
-  </job>
-  <job>
-    <title>Секретарь</title>
-    <description></description>
-    <salary>от 80000 до 110000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188729</url>
-    <date>2026-06-15T21:59:57+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продаже контрактных автозапчастей Вольво, Лэнд Ровер, БМВ</title>
-    <description></description>
-    <salary>от 130000 до 210000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188728</url>
-    <date>2026-06-15T21:59:57+0300</date>
-  </job>
-  <job>
-    <title>Прораб электромонтажных работ</title>
-    <description></description>
-    <salary>от 130000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188727</url>
-    <date>2026-06-15T21:59:57+0300</date>
-  </job>
-  <job>
-    <title>Операционный Бухгалтер</title>
-    <description></description>
-    <salary>от 40000 до 50000 RUR</salary>
-    <area>Ульяновск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188726</url>
-    <date>2026-06-15T21:59:57+0300</date>
-  </job>
-  <job>
-    <title>Инженер ПТО</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Нижнекамск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188725</url>
-    <date>2026-06-15T21:59:54+0300</date>
-  </job>
-  <job>
-    <title>Специалист по снабжению и обслуживанию флота</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188722</url>
-    <date>2026-06-15T21:59:47+0300</date>
-  </job>
-  <job>
-    <title>Специалист по снабжению и обслуживанию флота</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188723</url>
-    <date>2026-06-15T21:59:47+0300</date>
-  </job>
-  <job>
-    <title>Специалист по снабжению и обслуживанию флота</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Новороссийск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188724</url>
-    <date>2026-06-15T21:59:47+0300</date>
-  </job>
-  <job>
-    <title>Официант в Печёрские бани</title>
-    <description></description>
-    <salary>от 70000 до 80000 RUR</salary>
-    <area>Нижний Новгород</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188721</url>
-    <date>2026-06-15T21:59:47+0300</date>
-  </job>
-  <job>
-    <title>Менеджер</title>
-    <description></description>
-    <salary>от 60000 до 70000 RUR</salary>
-    <area>Златоуст</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188720</url>
-    <date>2026-06-15T21:59:47+0300</date>
-  </job>
-  <job>
-    <title>Оператор товарный нефтебазы в г.Видное</title>
-    <description></description>
-    <salary>от 85000 до 85000 RUR</salary>
-    <area>Видное (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188719</url>
-    <date>2026-06-15T21:59:44+0300</date>
-  </job>
-  <job>
-    <title>Бариста Surf Coffee, Москва</title>
-    <description></description>
-    <salary>от 60000 до 80000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188718</url>
-    <date>2026-06-15T21:59:38+0300</date>
-  </job>
-  <job>
-    <title>Водитель газель</title>
-    <description></description>
-    <salary>от 90000 до 90000 RUR</salary>
-    <area>Ломоносов</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188717</url>
-    <date>2026-06-15T21:59:37+0300</date>
-  </job>
-  <job>
-    <title>Прораб</title>
-    <description></description>
-    <salary>от 200000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188716</url>
-    <date>2026-06-15T21:59:33+0300</date>
-  </job>
-  <job>
-    <title>Агент по привлечению клиентов бухгалтерской компании</title>
-    <description></description>
-    <salary>от 120000 до 300000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188713</url>
-    <date>2026-06-15T21:59:10+0300</date>
-  </job>
-  <job>
-    <title>Пиццамейкер</title>
-    <description></description>
-    <salary> до 4000 RUR</salary>
-    <area>Красноярск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188701</url>
-    <date>2026-06-15T21:58:53+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 39500 RUR</salary>
-    <area>Кузнецк</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188686</url>
-    <date>2026-06-15T21:58:45+0300</date>
-  </job>
-  <job>
-    <title>Администратор салона красоты</title>
-    <description></description>
-    <salary>от 4000 RUR</salary>
-    <area>Череповец</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188685</url>
-    <date>2026-06-15T21:58:36+0300</date>
-  </job>
-  <job>
-    <title>Учитель начальных классов</title>
-    <description></description>
-    <salary>от 90000 RUR</salary>
-    <area>Мытищи (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188684</url>
-    <date>2026-06-15T21:58:10+0300</date>
-  </job>
-  <job>
-    <title>Персональный тренер / тренер EMS</title>
-    <description></description>
-    <salary>от 125000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188683</url>
-    <date>2026-06-15T21:57:43+0300</date>
-  </job>
-  <job>
-    <title>Senior white collar crime Advocate - top law firm</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188682</url>
-    <date>2026-06-15T21:57:38+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 46000 RUR</salary>
-    <area>Крымск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188681</url>
-    <date>2026-06-15T21:57:31+0300</date>
-  </job>
-  <job>
-    <title>Маркетолог-стратег (Маркетолог по продвижению)</title>
-    <description></description>
-    <salary>от 100000 RUR</salary>
-    <area>Ставрополь</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188679</url>
-    <date>2026-06-15T21:56:54+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам/Торговый представитель</title>
-    <description></description>
-    <salary>от 100000 RUR</salary>
-    <area>Анапа</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133200251</url>
-    <date>2026-06-15T21:56:46+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам/торговый представитель VIP-отдел</title>
-    <description></description>
-    <salary>от 120000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133796204</url>
-    <date>2026-06-15T21:56:38+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам/ Торговый представитель</title>
-    <description></description>
-    <salary>от 80000 RUR</salary>
-    <area>Туапсе</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133870609</url>
-    <date>2026-06-15T21:56:34+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам / Торговый представитель (Музыкальный, Красная Площадь, Зиповская)</title>
-    <description></description>
-    <salary>от 100000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133948043</url>
-    <date>2026-06-15T21:56:16+0300</date>
-  </job>
-  <job>
-    <title>Начинающий инженер поддержки продаж по выпрямительным/инверторным системам, АКБ, UPS</title>
-    <description></description>
-    <salary>от 50000 до 130000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=128506770</url>
-    <date>2026-06-15T21:56:16+0300</date>
-  </job>
-  <job>
-    <title>Медицинская сестра / медицинский брат по массажу</title>
-    <description></description>
-    <salary>от 30000 до 31000 RUR</salary>
-    <area>Казань</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188676</url>
-    <date>2026-06-15T21:56:09+0300</date>
-  </job>
-  <job>
-    <title>Продавец-кассир (ул.Маяковского д.45 А)</title>
-    <description></description>
-    <salary>от 40310 до 44340 RUR</salary>
-    <area>Калуга</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132448918</url>
-    <date>2026-06-15T21:56:03+0300</date>
-  </job>
-  <job>
-    <title>Администратор офиса (м. Белорусская)</title>
-    <description></description>
-    <salary>от 83000 до 93000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188675</url>
-    <date>2026-06-15T21:55:37+0300</date>
-  </job>
-  <job>
-    <title>Продавец (г Домодедово д Кучино)</title>
-    <description></description>
-    <salary>от 48262 до 53089 RUR</salary>
-    <area>Домодедово (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=129947917</url>
-    <date>2026-06-15T21:55:32+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 49500 RUR</salary>
-    <area>Красноуфимск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188673</url>
-    <date>2026-06-15T21:55:17+0300</date>
-  </job>
-  <job>
-    <title>Зачистник/сдатчик сварных швов</title>
-    <description></description>
-    <salary>от 500 до 700 RUR</salary>
-    <area>Челябинск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188672</url>
-    <date>2026-06-15T21:55:01+0300</date>
-  </job>
-  <job>
-    <title>Флорист в цветочный магазин</title>
-    <description></description>
-    <salary>от 90000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188669</url>
-    <date>2026-06-15T21:54:42+0300</date>
-  </job>
-  <job>
-    <title>Сливщик-разливщик на нефтебазе, г.Видное</title>
-    <description></description>
-    <salary>от 90000 до 90000 RUR</salary>
-    <area>Видное (Московская область)</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133337562</url>
-    <date>2026-06-15T21:54:37+0300</date>
-  </job>
-  <job>
-    <title>Главный инженер</title>
-    <description></description>
-    <salary>от 150000 RUR</salary>
-    <area>Старый Оскол</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134082034</url>
-    <date>2026-06-15T21:54:20+0300</date>
-  </job>
-  <job>
-    <title>Кладовщик на производство спецтехники</title>
-    <description></description>
-    <salary>от 80000 до 80000 RUR</salary>
-    <area>Нижний Новгород</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188668</url>
-    <date>2026-06-15T21:54:12+0300</date>
-  </job>
-  <job>
-    <title>Инженер ПТО (общестрой)</title>
-    <description></description>
-    <salary>от 100000 до 120000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133997628</url>
-    <date>2026-06-15T21:54:11+0300</date>
-  </job>
-  <job>
-    <title>Торговый представитель (Нижнекамск)</title>
-    <description></description>
-    <salary>от 80000 RUR</salary>
-    <area>Нижнекамск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134066970</url>
-    <date>2026-06-15T21:54:06+0300</date>
-  </job>
-  <job>
-    <title>Кровельщик по мембране ПВХ</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Симферополь</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=121393556</url>
-    <date>2026-06-15T21:54:01+0300</date>
-  </job>
-  <job>
-    <title>Техник ПТО (помощник инженера ПТО)</title>
-    <description></description>
-    <salary>от 60000 до 80000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133999258</url>
-    <date>2026-06-15T21:53:45+0300</date>
-  </job>
-  <job>
-    <title>Сотрудник пункта выдачи заказов Озон/Яндекс Маркет</title>
-    <description></description>
-    <salary>от 45000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188667</url>
-    <date>2026-06-15T21:53:41+0300</date>
-  </job>
-  <job>
-    <title>Упаковщик - комплектовщик жвачки и драже на склад готовой продукции</title>
-    <description></description>
-    <salary>от 184500 до 279000 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188666</url>
-    <date>2026-06-15T21:53:36+0300</date>
-  </job>
-  <job>
-    <title>Менеджер ПВЗ/пункта выдачи заказов Wildberries (ул. Ставропольская, 107/11)</title>
-    <description></description>
-    <salary>от 40000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188665</url>
-    <date>2026-06-15T21:53:31+0300</date>
-  </job>
-  <job>
-    <title>Официантка/официант в Ночной клуб (м. Лубянка)</title>
-    <description></description>
-    <salary>от 120000 до 180000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133162989</url>
-    <date>2026-06-15T21:52:20+0300</date>
-  </job>
-  <job>
-    <title>Ведущий бухгалтер</title>
-    <description></description>
-    <salary> до 175000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188662</url>
-    <date>2026-06-15T21:52:11+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по работе с партнерами по инфраструктурным решениям</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133223193</url>
-    <date>2026-06-15T21:52:09+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 49500 RUR</salary>
-    <area>Краснотурьинск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188661</url>
-    <date>2026-06-15T21:51:51+0300</date>
-  </job>
-  <job>
-    <title>Повар</title>
-    <description></description>
-    <salary> до 5500 RUR</salary>
-    <area>Санкт-Петербург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188660</url>
-    <date>2026-06-15T21:51:48+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам в ИТ (IT) B2B</title>
-    <description></description>
-    <salary> до 120000 RUR</salary>
-    <area>Екатеринбург</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188659</url>
-    <date>2026-06-15T21:51:43+0300</date>
-  </job>
-  <job>
-    <title>Консультант нишевой парфюмерии (Золотое Яблоко\Иль Де Боте)</title>
-    <description></description>
-    <salary>от 85000 до 100000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188658</url>
-    <date>2026-06-15T21:51:42+0300</date>
-  </job>
-  <job>
-    <title>Программист 1С ERP/Аналитк 1С</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130218764</url>
-    <date>2026-06-15T21:51:19+0300</date>
-  </job>
-  <job>
-    <title>Продавец (ТЦ Круиз)</title>
-    <description></description>
-    <salary>от 50200 RUR</salary>
-    <area>Рязань</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133542629</url>
-    <date>2026-06-15T21:51:16+0300</date>
-  </job>
-  <job>
-    <title>Электрик</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Анапа</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188657</url>
-    <date>2026-06-15T21:51:13+0300</date>
-  </job>
-  <job>
-    <title>Affiliate manager (Crypto)</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188655</url>
-    <date>2026-06-15T21:50:55+0300</date>
-  </job>
-  <job>
-    <title>Руководитель отдела маркетплейсов</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188654</url>
-    <date>2026-06-15T21:50:53+0300</date>
-  </job>
-  <job>
-    <title>Грузчик-разнорабочий</title>
-    <description></description>
-    <salary>от 2860 RUR</salary>
-    <area>Курсавка</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188653</url>
-    <date>2026-06-15T21:50:48+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 39500 RUR</salary>
-    <area>Котово</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188652</url>
-    <date>2026-06-15T21:50:45+0300</date>
-  </job>
-  <job>
-    <title>Сборщик заказов в "Самокат"</title>
-    <description></description>
-    <salary>от 90000 до 120000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188651</url>
-    <date>2026-06-15T21:50:29+0300</date>
-  </job>
-  <job>
-    <title>Врач ультразвуковой диагностики/Врач УЗИ (м. Коломенская)</title>
-    <description></description>
-    <salary>от 150000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188650</url>
-    <date>2026-06-15T21:50:22+0300</date>
-  </job>
-  <job>
-    <title>Дизайнер интерьеров в Москве</title>
-    <description></description>
-    <salary>от 160000 до 250000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188649</url>
-    <date>2026-06-15T21:50:19+0300</date>
-  </job>
-  <job>
-    <title>Водитель категории CE (Коломна)</title>
-    <description></description>
-    <salary>от 160000 до 240000 RUR</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188648</url>
-    <date>2026-06-15T21:50:18+0300</date>
-  </job>
-  <job>
-    <title>Менеджер по продажам автозапчастей (входящие заявки)</title>
-    <description></description>
-    <salary>от 60000 до 120000 RUR</salary>
-    <area>Саранск</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188647</url>
-    <date>2026-06-15T21:49:42+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 42500 RUR</salary>
-    <area>Кумертау</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188646</url>
-    <date>2026-06-15T21:49:34+0300</date>
-  </job>
-  <job>
-    <title>Сварщик эвакуаторных платформ</title>
-    <description></description>
-    <salary>от 100000 до 150000 RUR</salary>
-    <area>Нижний Новгород</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188645</url>
-    <date>2026-06-15T21:48:59+0300</date>
-  </job>
-  <job>
-    <title>Директор проектов/Руководитель проектов в Отдел реализации проектов автоматизации</title>
-    <description></description>
-    <salary>Не указана</salary>
-    <area>Москва</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133709886</url>
-    <date>2026-06-15T21:48:46+0300</date>
-  </job>
-  <job>
-    <title>Консультант по банковским продуктам</title>
-    <description></description>
-    <salary>от 42500 RUR</salary>
-    <area>Коркино</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188644</url>
-    <date>2026-06-15T21:48:20+0300</date>
-  </job>
-  <job>
-    <title>Региональный менеджер по оптовым продажам</title>
-    <description></description>
-    <salary>от 150000 RUR</salary>
-    <area>Краснодар</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134188643</url>
-    <date>2026-06-15T21:48:09+0300</date>
-  </job>
-  <job>
-    <title>Прораб / Мастер СМР</title>
-    <description></description>
-    <salary>от 140000 RUR</salary>
-    <area>Пермь</area>
-    <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133281490</url>
-    <date>2026-06-15T21:47:27+0300</date>
-  </job>
-</jobs>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Работа</category>
+    </categories>
+    <offers>
+    <offer id="114623813" available="true">
+      <name>Врач-уролог поликлиники</name>
+      <price>100000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ГАУЗ Свердловской области Полевская ЦГБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=114623813</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4281167.png</picture>
+      <description></description>
+      <param name="Город">Екатеринбург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">100000</param>
+      <param name="Зарплата до">100000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132252546" available="true">
+      <name>Менеджер склада (Оператор СУС)</name>
+      <price>65000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>АГАТ, Управляющая компания</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132252546</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/75093.jpeg</picture>
+      <description></description>
+      <param name="Город">Воронеж</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">65000</param>
+      <param name="Зарплата до">65000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232901" available="true">
+      <name>Руководитель филиала</name>
+      <price>300000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Контакт Сервис</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232901</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Петрозаводск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">300000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232900" available="true">
+      <name>Senior Traffic Manager / Senior Таргетолог (Недвижимость)</name>
+      <price>1300</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Lion Target</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232900</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1390141.png</picture>
+      <description></description>
+      <param name="Город">Минск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">1300</param>
+      <param name="Зарплата до">1800</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232899" available="true">
+      <name>Ассистент отдела продаж</name>
+      <price>80000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Актио Рус</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232899</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1440413.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">80000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232898" available="true">
+      <name>Мерчандайзер стационарный (Богатырский пр-кт)</name>
+      <price>7000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Работут</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232898</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6979629.jpeg</picture>
+      <description></description>
+      <param name="Город">Санкт-Петербург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">7000</param>
+      <param name="Зарплата до">7000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232896" available="true">
+      <name>Водитель электроштабелёра на склад напитков</name>
+      <price>115500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>СИМПЛЕКС</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232896</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4263723.jpeg</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">115500</param>
+      <param name="Зарплата до">136500</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232897" available="true">
+      <name>Водитель электроштабелёра на склад напитков</name>
+      <price>115500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>СИМПЛЕКС</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232897</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4263723.jpeg</picture>
+      <description></description>
+      <param name="Город">Чебоксары</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">115500</param>
+      <param name="Зарплата до">136500</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232895" available="true">
+      <name>Оператор на склад (Крепостной переулок, 183)</name>
+      <price>80000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Глобалмаркет</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232895</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6946853.png</picture>
+      <description></description>
+      <param name="Город">Ростов-на-Дону</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">80000</param>
+      <param name="Зарплата до">100000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="127650886" available="true">
+      <name>Специалист контактного центра на исходящую линию</name>
+      <price>50000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=127650886</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">50000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232894" available="true">
+      <name>Руководитель филиала</name>
+      <price>300000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Контакт Сервис</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232894</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Псков</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">300000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133711571" available="true">
+      <name>Ведущий специалист андеррайтинга банковских экспресс-гарантий</name>
+      <price>42000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133711571</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">42000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232892" available="true">
+      <name>Финансовый аудитор</name>
+      <price>130000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ГБУ Автомобильные дороги САО</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232892</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3408700.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">130000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232891" available="true">
+      <name>Менеджер по подбору персонала</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Курьер Сервис Экспресс</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232891</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1391684.png</picture>
+      <description></description>
+      <param name="Город">Томилино (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133208078" available="true">
+      <name>Менеджер по продажам / Назначение КЭВ / Ремонт</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Топ Ремонт</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133208078</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4204027.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">150000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232890" available="true">
+      <name>Специалист по договорной и закупочной деятельности</name>
+      <price>120000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Worldskills Russia</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232890</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2396904.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">120000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232888" available="true">
+      <name>Менеджер пункта выдачи заказов</name>
+      <price>3500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Ермолова Анастасия Александровна</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232888</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Химки (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">3500</param>
+      <param name="Зарплата до">4000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133186894" available="true">
+      <name>Ведущий менеджер по работе с маркетплейсом OZON</name>
+      <price>200000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ТрейдХоум</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133186894</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5808636.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">200000</param>
+      <param name="Зарплата до">300000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232887" available="true">
+      <name>Главный инженер (д. Старцево)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Ozon</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232887</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5899116.png</picture>
+      <description></description>
+      <param name="Город">Красноярск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232872" available="true">
+      <name>Мерчандайзер стационарный (Приморское ш.)</name>
+      <price>19000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Работут</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232872</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6979629.jpeg</picture>
+      <description></description>
+      <param name="Город">Сестрорецк</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">19000</param>
+      <param name="Зарплата до">19000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232863" available="true">
+      <name>Официант бармен</name>
+      <price>3000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Sky Elbrus</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232863</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Нальчик</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">3000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232859" available="true">
+      <name>Руководитель филиала</name>
+      <price>300000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Контакт Сервис</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232859</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Мурманск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">300000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232858" available="true">
+      <name>Автомаляр подготовщик</name>
+      <price>150000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>BlackTon, установочный центр</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232858</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Екатеринбург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">150000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132137315" available="true">
+      <name>Секретарь судебного заседания</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Правительство Москвы</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132137315</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/596590.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133964375" available="true">
+      <name>Менеджер по продажам премиальной бытовой техники Miele (в шоу-рум)</name>
+      <price>150000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Альтасеилс</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133964375</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3771698.jpeg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">150000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232856" available="true">
+      <name>Project Manager интернет-магазина / IT Project Manager e-commerce</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>OFFPRICE</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232856</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4280219.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086371" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086371</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Волгоград</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086370" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086370</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Батайск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086369" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086369</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Шахты</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086368" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086368</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Тамбов</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086367" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086367</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086366" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086366</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Екатеринбург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086364" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086364</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Сургут</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086363" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086363</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Стерлитамак</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086362" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086362</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Пенза</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086361" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086361</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Орел</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086359" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086359</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Энгельс</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086358" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086358</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Тула</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086357" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086357</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Тольятти</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086356" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086356</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Челябинск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086354" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086354</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Славянск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086353" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086353</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Киров (Кировская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086352" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086352</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Мурманск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086351" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086351</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Кропоткин</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086350" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086350</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Зеленодольск (Республика Татарстан)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086349" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086349</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Дзержинск (Нижегородская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134086347" available="true">
+      <name>Водитель большегруза</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086347</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Тюмень</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232855" available="true">
+      <name>Охранник в гостиничный комплекс</name>
+      <price>120000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Серяков Никита Александрович</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232855</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Волгоград</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">120000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133653123" available="true">
+      <name>Специалист контактного центра (входящая линия)</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133653123</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Кумертау</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232854" available="true">
+      <name>IT Support Monitoring Specialist (Junior/Junior+)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Ок Софт</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232854</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3987802.png</picture>
+      <description></description>
+      <param name="Город">Хабаровск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232853" available="true">
+      <name>Менеджер пункта выдачи Валдберис</name>
+      <price>2500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Петина Галина Викторовна</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232853</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Барнаул</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">2500</param>
+      <param name="Зарплата до">3000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133182274" available="true">
+      <name>Специалист контактного центра (входящая линия)</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133182274</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Нефтекамск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232852" available="true">
+      <name>Кладовщик</name>
+      <price>150000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Фрамбини</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232852</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6909133.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">150000</param>
+      <param name="Зарплата до">150000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132460970" available="true">
+      <name>Куратор отдела бухгалтерской отчетности (ОСНО, производство)</name>
+      <price>130000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Специализированный Застройщик Железно</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132460970</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/7052765.png</picture>
+      <description></description>
+      <param name="Город">Киров (Кировская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">130000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232850" available="true">
+      <name>Обвальщик/Мясник</name>
+      <price>4500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Решете Сергей Васильевич</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232850</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">4500</param>
+      <param name="Зарплата до">5000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="130158247" available="true">
+      <name>Начинающий специалист контактного центра (без продаж)</name>
+      <price>60200</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130158247</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60200</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232848" available="true">
+      <name>Уборщица/уборщик офисного помещения</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Стеллдом</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232848</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1457430.png</picture>
+      <description></description>
+      <param name="Город">Воронеж</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232849" available="true">
+      <name>Уборщица/уборщик офисного помещения</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Стеллдом</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232849</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1457430.png</picture>
+      <description></description>
+      <param name="Город">Отрадное (Воронежская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134186629" available="true">
+      <name>Менеджер проектов</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Полилог, КГ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134186629</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395307.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132548894" available="true">
+      <name>Режиссер прямых эфиров/Технический специалист студии</name>
+      <price>120000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Полилог, КГ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132548894</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395307.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">120000</param>
+      <param name="Зарплата до">120000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133765284" available="true">
+      <name>Менеджер по работе с участниками</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Полилог, КГ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133765284</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395307.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133222617" available="true">
+      <name>Главный юрисконсульт по сопровождению судебной деятельности</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>МАГНИТ, Розничная сеть</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133222617</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232847" available="true">
+      <name>Руководитель филиала</name>
+      <price>300000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Контакт Сервис</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232847</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Севастополь</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">300000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232846" available="true">
+      <name>Мерчендайзер подработка (Серпухов/Чехов)</name>
+      <price>15500</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БЛГ-Сервис</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232846</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6211316.jpeg</picture>
+      <description></description>
+      <param name="Город">Серпухов (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">15500</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132917645" available="true">
+      <name>Альфа-Агент (г. Нерехта)</name>
+      <price>75000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Альфа-Банк</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132917645</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3096623.png</picture>
+      <description></description>
+      <param name="Город">Кострома</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">75000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="129462620" available="true">
+      <name>Руководитель девелоперского проекта (Служба заказчика)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ФСК Северо-Запад</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=129462620</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1386987.png</picture>
+      <description></description>
+      <param name="Город">Санкт-Петербург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232845" available="true">
+      <name>Комплектовщик на склад (ул. Цедрика, 42)</name>
+      <price>50000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Глобалмаркет</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232845</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6946853.png</picture>
+      <description></description>
+      <param name="Город">Новороссийск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">50000</param>
+      <param name="Зарплата до">60000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133577070" available="true">
+      <name>Производитель работ дорожное строительство и благоустройство территорий</name>
+      <price>125000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Благо-с</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133577070</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Рязань</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">125000</param>
+      <param name="Зарплата до">140000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="126643066" available="true">
+      <name>Заместитель главного бухгалтера</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ФСК Северо-Запад</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=126643066</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1386987.png</picture>
+      <description></description>
+      <param name="Город">Санкт-Петербург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232844" available="true">
+      <name>Ресерчер по товарам маркетплейсов / Trend Scout (электроника и гаджеты)</name>
+      <price>120000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>AddOne</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232844</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1438635.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">120000</param>
+      <param name="Зарплата до">180000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="130103243" available="true">
+      <name>Альфа-Агент</name>
+      <price>77000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Альфа-Банк</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130103243</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3096623.png</picture>
+      <description></description>
+      <param name="Город">Нерехта</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">77000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232843" available="true">
+      <name>Продавец-консультант в магазин азиатских и европейских сладостей и напитков (м. Саларьево)</name>
+      <price>70000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>SWEET LAVKA</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232843</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6963609.jpeg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">70000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232842" available="true">
+      <name>Мобильный клиентский менеджер</name>
+      <price>65000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Банк ВТБ (ПАО)</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232842</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2369887.png</picture>
+      <description></description>
+      <param name="Город">Пятигорск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">65000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="131357975" available="true">
+      <name>Врач-физиотерапевт</name>
+      <price>380000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Рудник Тэутэджак</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131357975</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6379248.png</picture>
+      <description></description>
+      <param name="Город">Краснодар</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">380000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232841" available="true">
+      <name>Мерчендайзер стационарный (Московский пр-кт)</name>
+      <price>18000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Работут</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232841</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6979629.jpeg</picture>
+      <description></description>
+      <param name="Город">Санкт-Петербург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">18000</param>
+      <param name="Зарплата до">18000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132206222" available="true">
+      <name>Кладовщик</name>
+      <price>114943</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Парк Сказка</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132206222</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5855700.jpeg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">114943</param>
+      <param name="Зарплата до">114943</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232840" available="true">
+      <name>Менеджер по развитию бизнеса (BDM)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>UCar&lt;&gt;TopDoer</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232840</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1435747.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133834363" available="true">
+      <name>Финансовый аналитик (логистика Ozon Global)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Ozon</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133834363</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5899116.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232839" available="true">
+      <name>Агент по недвижимости/Риэлтор-менеджер по продажам/Эксперт по недвижимости (г. Королев)</name>
+      <price>320000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Столичная Недвижимость</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232839</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6906969.jpeg</picture>
+      <description></description>
+      <param name="Город">Королев (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">320000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232838" available="true">
+      <name>UX-редактор B2B (финтех)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>RWB (Wildberries &amp; Russ)</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232838</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1490898.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133666259" available="true">
+      <name>Руководитель отдела подготовки производства</name>
+      <price>150000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БТОМО</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133666259</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/811513.jpeg</picture>
+      <description></description>
+      <param name="Город">Челябинск</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">150000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232836" available="true">
+      <name>Комплектовщик на склад (Революционная улица, 2Е)</name>
+      <price>50000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Глобалмаркет</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232836</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6946853.png</picture>
+      <description></description>
+      <param name="Город">Пенза</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">50000</param>
+      <param name="Зарплата до">70000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232835" available="true">
+      <name>Медицинская сестра/Медицинский брат постовая (Центр планирования семьи и репродукции)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ГБУЗ ГКБ имени С.С. Юдина ДЗМ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232835</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232832" available="true">
+      <name>Производитель электромонтажных работ</name>
+      <price>180000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Нефтегазовые технологии и инженерные изыскания</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232832</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3734886.png</picture>
+      <description></description>
+      <param name="Город">Новый Уренгой</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">180000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="125547029" available="true">
+      <name>Продавец-консультант в магазин Jeans Dean (Levi's, Lee, Wrangler) в ТЦ Кузьминки Молл</name>
+      <price>75000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Иридато</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=125547029</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1385240.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">75000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134027064" available="true">
+      <name>Повар в ресторан "Тануки"</name>
+      <price>80000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Тануки, японский ресторан</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134027064</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1398469.png</picture>
+      <description></description>
+      <param name="Город">Казань</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">80000</param>
+      <param name="Зарплата до">130000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="123179189" available="true">
+      <name>Начинающий специалист по работе с клиентами</name>
+      <price>60200</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=123179189</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60200</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232831" available="true">
+      <name>Помощник воспитателя</name>
+      <price>55423</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Innovation Preschool</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232831</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">55423</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232830" available="true">
+      <name>Сборщик на склад (Коммунальная улица, 21Б)</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Глобалмаркет</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232830</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6946853.png</picture>
+      <description></description>
+      <param name="Город">Тамбов</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">75000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132848033" available="true">
+      <name>Специалист контактного центра</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132848033</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Казань</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133907960" available="true">
+      <name>Кладовщик на склад (Борисовский)</name>
+      <price>115000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Pony Express</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133907960</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5705107.jpeg</picture>
+      <description></description>
+      <param name="Город">Подольск (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">115000</param>
+      <param name="Зарплата до">115000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232827" available="true">
+      <name>Мерчендайзер стационарный (Руставели)</name>
+      <price>12000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Работут</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232827</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6979629.jpeg</picture>
+      <description></description>
+      <param name="Город">Санкт-Петербург</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">12000</param>
+      <param name="Зарплата до">12000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232826" available="true">
+      <name>Специалист по кадрам</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Курьер Сервис Экспресс</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232826</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1391684.png</picture>
+      <description></description>
+      <param name="Город">Томилино (Московская область)</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232825" available="true">
+      <name>Менеджер по развитию корпоративного спорта и партнёрств</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Сафонова Валерия Андреевна</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232825</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Вологда</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">70000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232824" available="true">
+      <name>Электромонтер</name>
+      <price>81400</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Камаз</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232824</url>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <description></description>
+      <param name="Город">Набережные Челны</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">81400</param>
+      <param name="Зарплата до">97000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="133496558" available="true">
+      <name>Country manager/ Director/Территориальный директор/BDM/менеджер по развитию бизнеса (Китай)</name>
+      <price>0</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>ФИНАМ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133496558</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/7152978.png</picture>
+      <description></description>
+      <param name="Город">Москва</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="134232823" available="true">
+      <name>Сборщик на склад (Северная улица, 6)</name>
+      <price>60000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Глобалмаркет</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134232823</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6946853.png</picture>
+      <description></description>
+      <param name="Город">Сочи</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">60000</param>
+      <param name="Зарплата до">90000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="132420013" available="true">
+      <name>Специалист на проверку документов</name>
+      <price>45000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>БАНК УРАЛСИБ</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132420013</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5729503.png</picture>
+      <description></description>
+      <param name="Город">Уфа</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">45000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="131357956" available="true">
+      <name>Врач-педиатр</name>
+      <price>380000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Рудник Тэутэджак</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131357956</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6379248.png</picture>
+      <description></description>
+      <param name="Город">Краснодар</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">380000</param>
+      <param name="Зарплата до">0</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    <offer id="131055647" available="true">
+      <name>Специалист удаленной поддержки</name>
+      <price>75000</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>Ozon</vendor>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131055647</url>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5899116.png</picture>
+      <description></description>
+      <param name="Город">Йошкар-Ола</param>
+      <param name="Дата публикации">2026-06-16</param>
+      <param name="Зарплата от">0</param>
+      <param name="Зарплата до">75000</param>
+      <param name="Валюта">RUR</param>
+    </offer>
+    </offers>
+  </shop>
+</yml_catalog>
