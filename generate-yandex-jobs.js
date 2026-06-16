@@ -78,6 +78,10 @@ function buildXml(vacancies) {
     </offers>
   </shop>
 </yml_catalog>`;
+
+  // Удаляем дублирующиеся <param name="конверсия">, которые могли появиться после ручных правок
+  xml = xml.replace(/<param name="конверсия"><\/param>\s*\n\s*<param name="конверсия"><\/param>/g, '<param name="конверсия"></param>');
+
   return xml;
 }
 
