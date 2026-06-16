@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-06-16 16:51">
+<yml_catalog date="2026-06-16 17:23">
   <shop>
     <name>ВКАНСА</name>
     <company>ВКАНСА</company>
@@ -11,1104 +11,1104 @@
       <category id="1">Работа</category>
     </categories>
     <offers>
-    <offer id="134233054" available="true">
-      <name>Продавец-консультант</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233054</url>
+    <offer id="133217639" available="true">
+      <name>Мастер маникюра</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133217639</url>
       <description>Описание отсутствует</description>
-      <employer>Italian Shoe</employer>
-      <area>Симферополь</area>
-      <salary from="70000" to="100000" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
+      <employer>Арт Стиль</employer>
+      <area>Красногорск (Московская область)</area>
+      <salary from="100000" to="250000" currency="RUR"/>
+      <date>2026-06-16 17:21</date>
       <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="131990478" available="true">
-      <name>Представитель в Т-Bank</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131990478</url>
+    <offer id="134233359" available="true">
+      <name>Старший специалист по эмиссии ценных бумаг</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233359</url>
       <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
+      <employer>Алабуга, ОЭЗ ППТ</employer>
+      <area>Екатеринбург</area>
+      <salary from="225000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:21</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1392604.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233358" available="true">
+      <name>Тренер по фитнесу и кинезитерапии</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233358</url>
+      <description>Описание отсутствует</description>
+      <employer>Кощеева Алена Александровна</employer>
+      <area>Пермь</area>
+      <salary from="20000" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:21</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488030.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233357" available="true">
+      <name>Стажер в ИТ-направление ВТБ ИТ Юниор</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233357</url>
+      <description>Описание отсутствует</description>
+      <employer>Changellenge</employer>
+      <area>Самара</area>
+      <salary from="70000" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:21</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5721911.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233356" available="true">
+      <name>Ведущий бухгалтер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233356</url>
+      <description>Описание отсутствует</description>
+      <employer>Маслова Наталия Сергеевна</employer>
+      <area>Анапа</area>
+      <salary from="70000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233355" available="true">
+      <name>Оператор линии в цех кондитерских изделий</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233355</url>
+      <description>Описание отсутствует</description>
+      <employer>Производство компании Хлебник</employer>
       <area>Всеволожск</area>
-      <salary from="120000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
+      <salary from="3800" to="4000" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="131973946" available="true">
-      <name>Представитель в Т-Bank</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131973946</url>
+    <offer id="134233354" available="true">
+      <name>Специалист</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233354</url>
       <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
-      <area>Краснознаменск (Московская область)</area>
-      <salary from="150000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
+      <employer>Муниципальное казенное учреждение Центр по обслуживанию образовательных учреждений города Феодосии Республики Крым</employer>
+      <area>Феодосия</area>
+      <salary from="28000" to="35000" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="131366873" available="true">
-      <name>Представитель в Т-Bank</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131366873</url>
+    <offer id="134233353" available="true">
+      <name>Ученик маляра (порошковая покраска)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233353</url>
       <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
-      <area>Оха</area>
-      <salary from="82000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133973703" available="true">
-      <name>Главный специалист в планово - экономический отдел</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133973703</url>
-      <description>Описание отсутствует</description>
-      <employer>Газпром нефть</employer>
+      <employer>ВИЗОТЕК РУС</employer>
       <area>Санкт-Петербург</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1448441.png</picture>
+      <salary from="90000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2448200.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233052" available="true">
-      <name>Менеджер по работе с клиентами (Консьерж-сервис)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233052</url>
+    <offer id="134233352" available="true">
+      <name>Кассир-сборщик доставок</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233352</url>
       <description>Описание отсутствует</description>
-      <employer>Хайерлэб</employer>
+      <employer>Своя компания</employer>
+      <area>Уфа</area>
+      <salary from="60000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2030469.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233350" available="true">
+      <name>Финансовый менеджер / операционист по управленческому учёту</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233350</url>
+      <description>Описание отсутствует</description>
+      <employer>ideas</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="100000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5838115.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233349" available="true">
+      <name>Официант в ресторан AVRORA (м. Трубная)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233349</url>
+      <description>Описание отсутствует</description>
+      <employer>Ресторан Avrora</employer>
       <area>Москва</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:48</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1506407.png</picture>
+      <salary from="180000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="133651426" available="true">
-      <name>Ночной менеджер поддержки покупателей</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133651426</url>
+    <offer id="132896558" available="true">
+      <name>Фасовщик-упаковщик на производство</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132896558</url>
       <description>Описание отсутствует</description>
-      <employer>RWB (Wildberries &amp; Russ)</employer>
-      <area>Тверь</area>
-      <salary from="65000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:47</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1490898.png</picture>
+      <employer>Делекто</employer>
+      <area>Лобня (Московская область)</area>
+      <salary from="76000" to="90000" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1502742.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="133217960" available="true">
+    <offer id="132746175" available="true">
+      <name>Электрик-электромеханик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132746175</url>
+      <description>Описание отсутствует</description>
+      <employer>Технологии Очистки</employer>
+      <area>Тольятти</area>
+      <salary from="90000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:20</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6809052.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233348" available="true">
+      <name>Продавец-консультант</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233348</url>
+      <description>Описание отсутствует</description>
+      <employer>Оптика</employer>
+      <area>Чебоксары</area>
+      <salary from="30000" to="50000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="132897007" available="true">
+      <name>Повар на производство (салаты)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132897007</url>
+      <description>Описание отсутствует</description>
+      <employer>Делекто</employer>
+      <area>Лобня (Московская область)</area>
+      <salary from="84000" to="101000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1502742.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233347" available="true">
+      <name>Ассистент отдела продаж</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233347</url>
+      <description>Описание отсутствует</description>
+      <employer>Мед Бизнес Груп</employer>
+      <area>Москва</area>
+      <salary from="100000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133608074" available="true">
+      <name>Менеджер по закупкам и снабжению</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133608074</url>
+      <description>Описание отсутствует</description>
+      <employer>Тим Снаб</employer>
+      <area>Краснодар</area>
+      <salary from="70000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1501746.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="131978227" available="true">
+      <name>Пескоструйщик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131978227</url>
+      <description>Описание отсутствует</description>
+      <employer>Юпитер</employer>
+      <area>Красноярск</area>
+      <salary from="250000" to="250000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1432441.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133384258" available="true">
+      <name>Фармацевт/Провизор/Медконсультант</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133384258</url>
+      <description>Описание отсутствует</description>
+      <employer>Сеть аптек Апрель</employer>
+      <area>Алапаевск</area>
+      <salary from="80000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1391381.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133814795" available="true">
+      <name>Помощник юриста (м. Боровское шоссе)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133814795</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="50000" to="50000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233346" available="true">
+      <name>Консультант уходовой косметики премиального бренда</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233346</url>
+      <description>Описание отсутствует</description>
+      <employer>Ventra</employer>
+      <area>Москва</area>
+      <salary from="130000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1499673.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233345" available="true">
+      <name>Официант</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233345</url>
+      <description>Описание отсутствует</description>
+      <employer>Фиолент</employer>
+      <area>Москва</area>
+      <salary from="150000" to="220000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233344" available="true">
+      <name>Водитель (Категория Е)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233344</url>
+      <description>Описание отсутствует</description>
+      <employer>ПАЦУЛА ЮЛИЯ ВАСИЛЬЕВНА</employer>
+      <area>Екатеринбург</area>
+      <salary from="150000" to="300000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233343" available="true">
+      <name>Бариста</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233343</url>
+      <description>Описание отсутствует</description>
+      <employer>КОФЕМОЛКА</employer>
+      <area>Великий Новгород</area>
+      <salary from="1900" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1468413.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233342" available="true">
+      <name>Медицинская сестра/медицинский брат/Ассистент врача-косметолога</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233342</url>
+      <description>Описание отсутствует</description>
+      <employer>Ева-Клиник</employer>
+      <area>Краснодар</area>
+      <salary from="52500" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3503059.jpg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134016926" available="true">
+      <name>Бухгалтер (УСН)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134016926</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="70000" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133969714" available="true">
+      <name>Менеджер по персоналу/Рекрутер (м. Митино)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133969714</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="60000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233341" available="true">
+      <name>Повар-универсал (в отель)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233341</url>
+      <description>Описание отсутствует</description>
+      <employer>Galt Trading</employer>
+      <area>Ялта</area>
+      <salary from="5000" to="5000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6589775.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233340" available="true">
+      <name>Менеджер по персоналу</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233340</url>
+      <description>Описание отсутствует</description>
+      <employer>Явуз Абдуль-Азиз Орханович</employer>
+      <area>Набережные Челны</area>
+      <salary from="50000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233339" available="true">
+      <name>Design Lead / Руководитель дизайн-команды</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233339</url>
+      <description>Описание отсутствует</description>
+      <employer>Карпов Курсес</employer>
+      <area>Москва</area>
+      <salary from="0" to="150000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4096033.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233338" available="true">
+      <name>Менеджер по работе с клиентами оценочной компании</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233338</url>
+      <description>Описание отсутствует</description>
+      <employer>Единый Центр Оценки и Экспертиз</employer>
+      <area>Всеволожск</area>
+      <salary from="55000" to="60000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3576434.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233337" available="true">
+      <name>Менеджер по продажам</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233337</url>
+      <description>Описание отсутствует</description>
+      <employer>Русстроймет</employer>
+      <area>Москва</area>
+      <salary from="200000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233336" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233336</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Ноябрьск</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133917823" available="true">
+      <name>Комплектовщик на склад</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133917823</url>
+      <description>Описание отсутствует</description>
+      <employer>Производство компании Хлебник</employer>
+      <area>Разметелево</area>
+      <salary from="4200" to="4400" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133766490" available="true">
+      <name>Администратор-охранник (м. Щелковская)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133766490</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="57000" to="60000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233334" available="true">
+      <name>Инженер-проектировщик систем электроснабжения (ЭОМ, ЭМ)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233334</url>
+      <description>Описание отсутствует</description>
+      <employer>Новые системы</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="135000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4274910.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133300392" available="true">
+      <name>Заведующий складом / Начальник склада</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133300392</url>
+      <description>Описание отсутствует</description>
+      <employer>Воевода</employer>
+      <area>Новочеркасск</area>
+      <salary from="110000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233333" available="true">
+      <name>Начинающий специалист в ИТ</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233333</url>
+      <description>Описание отсутствует</description>
+      <employer>Changellenge</employer>
+      <area>Москва</area>
+      <salary from="81000" to="81000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5721911.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="132082573" available="true">
+      <name>Администратор-охранник</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132082573</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="60000" to="60000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133864638" available="true">
+      <name>Рабочий (офисный)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133864638</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="70000" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133320867" available="true">
+      <name>Менеджер по персоналу/Рекрутер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133320867</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Нахабино (Московская область)</area>
+      <salary from="60000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="69529504" available="true">
+      <name>Начинающий специалист в автосалон Major "Оценщик "</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=69529504</url>
+      <description>Описание отсутствует</description>
+      <employer>Major Auto (Мэйджор Авто)</employer>
+      <area>Москва</area>
+      <salary from="120000" to="220000" currency="RUR"/>
+      <date>2026-06-16 17:19</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1474338.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233332" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233332</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Горно-Алтайск</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233331" available="true">
       <name>Старший менеджер по работе с клиентами</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133217960</url>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233331</url>
       <description>Описание отсутствует</description>
       <employer>СБЕР</employer>
-      <area>Кстово</area>
-      <salary from="66300" to="0" currency="RUR"/>
-      <date>2026-06-16 16:47</date>
+      <area>Токаревка</area>
+      <salary from="60500" to="0" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
       <picture>https://img.hhcdn.ru/employer-logo-original-round/6865265.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233051" available="true">
-      <name>Генеральный директор автосалона</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233051</url>
+    <offer id="121595146" available="true">
+      <name>Бухгалтер (ВАО)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=121595146</url>
       <description>Описание отсутствует</description>
-      <employer>JETCAR</employer>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
       <area>Москва</area>
-      <salary from="600000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:47</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/5833932.jpeg</picture>
+      <salary from="90000" to="90000" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233047" available="true">
-      <name>Менеджер по продажам сэндвич-панелей</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233047</url>
+    <offer id="131539165" available="true">
+      <name>Администратор-охранник (м. Сходненская)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131539165</url>
       <description>Описание отсутствует</description>
-      <employer>Дорхан Сэндвич-панели</employer>
-      <area>Тула</area>
-      <salary from="80000" to="290000" currency="RUR"/>
-      <date>2026-06-16 16:46</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/5686102.jpeg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="132389743" available="true">
-      <name>Уборщица/Уборщик помещений</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132389743</url>
-      <description>Описание отсутствует</description>
-      <employer>ЭКМ Холдинг</employer>
-      <area>Казань</area>
-      <salary from="45000" to="50000" currency="RUR"/>
-      <date>2026-06-16 16:46</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/4103698.jpeg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233046" available="true">
-      <name>Заместитель главного бухгалтера</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233046</url>
-      <description>Описание отсутствует</description>
-      <employer>Аквариус, Группа компаний</employer>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
       <area>Москва</area>
+      <salary from="33000" to="33000" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233330" available="true">
+      <name>Маркетолог в онлайн-школу (EdTech, Нейросети)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233330</url>
+      <description>Описание отсутствует</description>
+      <employer>BS University</employer>
+      <area>Краснодар</area>
+      <salary from="90000" to="180000" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1398121.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="131040138" available="true">
+      <name>Оператор call-центра</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131040138</url>
+      <description>Описание отсутствует</description>
+      <employer>ИНКОМ-НЕДВИЖИМОСТЬ</employer>
+      <area>Москва</area>
+      <salary from="0" to="65000" currency="RUR"/>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1488519.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233329" available="true">
+      <name>Инженер строитель</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233329</url>
+      <description>Описание отсутствует</description>
+      <employer>Уфимцев Николай Владимирович</employer>
+      <area>Омск</area>
       <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:46</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/3790906.png</picture>
+      <date>2026-06-16 17:18</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6803145.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233045" available="true">
-      <name>Водитель-завхоз (заведующий хозяйством)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233045</url>
+    <offer id="133909939" available="true">
+      <name>Специалист группы поддержки процессинга и эквайринга</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133909939</url>
       <description>Описание отсутствует</description>
-      <employer>Кудрявцева Наталья Николаевна</employer>
-      <area>Симферополь</area>
-      <salary from="80000" to="100000" currency="RUR"/>
-      <date>2026-06-16 16:46</date>
-      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <employer>КБ Уральский банк реконструкции и развития (УБРиР)</employer>
+      <area>Екатеринбург</area>
+      <salary from="45000" to="45000" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5556439.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233044" available="true">
-      <name>Главный бухгалтер</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233044</url>
+    <offer id="134233327" available="true">
+      <name>Автокурьер на личном автомобиле (МАГНИТ Косметик)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233327</url>
       <description>Описание отсутствует</description>
-      <employer>Интерьерный Салон</employer>
-      <area>Санкт-Петербург</area>
-      <salary from="160000" to="180000" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/3176559.png</picture>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Архангельск</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233043" available="true">
-      <name>Кладовщик</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233043</url>
+    <offer id="134233325" available="true">
+      <name>Начальник участка открытых горных работ</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233325</url>
       <description>Описание отсутствует</description>
-      <employer>ИНТЕРиКО</employer>
+      <employer>Управляющая Компания Окто Золото Оймякон</employer>
       <area>Красноярск</area>
-      <salary from="65000" to="75000" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="131811729" available="true">
-      <name>Представитель в Т-Банк</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131811729</url>
-      <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
-      <area>Биробиджан</area>
-      <salary from="53000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="131811333" available="true">
-      <name>Представитель в Т-Банк</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131811333</url>
-      <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
-      <area>Колпино</area>
-      <salary from="120000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="131459331" available="true">
-      <name>Представитель в Т-Банк</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=131459331</url>
-      <description>Описание отсутствует</description>
-      <employer>Т-Банк</employer>
-      <area>Северская станица</area>
-      <salary from="54000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1405176.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233042" available="true">
-      <name>Администратор</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233042</url>
-      <description>Описание отсутствует</description>
-      <employer>Rihotel</employer>
-      <area>Феодосия</area>
-      <salary from="50000" to="50000" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233041" available="true">
-      <name>Продавец (Гаврилов-Ям, Семашко, 18)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233041</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Гаврилов-Ям</area>
-      <salary from="44000" to="54000" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233040" available="true">
-      <name>Стационарный мерчендайзер (Энгельса)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233040</url>
-      <description>Описание отсутствует</description>
-      <employer>Работут</employer>
-      <area>Санкт-Петербург</area>
-      <salary from="7000" to="7000" currency="RUR"/>
-      <date>2026-06-16 16:45</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/6979629.jpeg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233039" available="true">
-      <name>Повар пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233039</url>
-      <description>Описание отсутствует</description>
-      <employer>Соколов Б.В.</employer>
-      <area>Нижний Новгород</area>
-      <salary from="60000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/2989875.jpeg</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233037" available="true">
-      <name>Агент по недвижимости / Будущий бизнес-партнер</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233037</url>
-      <description>Описание отсутствует</description>
-      <employer>Высотский Эстейт Северный</employer>
-      <area>Москва</area>
       <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/6481044.png</picture>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4055638.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233036" available="true">
-      <name>Менеджер по продажам B2B</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233036</url>
+    <offer id="134233326" available="true">
+      <name>Начальник участка открытых горных работ</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233326</url>
+      <description>Описание отсутствует</description>
+      <employer>Управляющая Компания Окто Золото Оймякон</employer>
+      <area>Иркутск</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/4055638.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233324" available="true">
+      <name>Стажер в ИТ-направление ВТБ ИТ Юниор</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233324</url>
+      <description>Описание отсутствует</description>
+      <employer>Changellenge</employer>
+      <area>Москва</area>
+      <salary from="81000" to="81000" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5721911.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133477323" available="true">
+      <name>Заведующий складом</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133477323</url>
       <description>Описание отсутствует</description>
       <employer>Кочмасов Мурад Абсалутдинович</employer>
-      <area>Москва</area>
-      <salary from="150000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
+      <area>Махачкала</area>
+      <salary from="70000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
       <picture>https://img.hhcdn.ru/employer-logo-original/1502588.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="133722656" available="true">
-      <name>Менеджер склада / кладовщик</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133722656</url>
+    <offer id="134233323" available="true">
+      <name>Ручной тестировщик (Manual QA)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233323</url>
       <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="74000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="125949108" available="true">
-      <name>Инженер отдела технической поддержки (приборы учета электроэнергии)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=125949108</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
+      <employer>АМИКОН</employer>
+      <area>Москва</area>
       <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6920557.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="126023825" available="true">
-      <name>Монтажник РЭА в отдел разработки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=126023825</url>
+    <offer id="134233322" available="true">
+      <name>Бухгалтер по ВЭД</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233322</url>
       <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="100000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="132550635" available="true">
-      <name>Испытатель деталей и приборов</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132550635</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="80000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="125946573" available="true">
-      <name>Инженер сервисного сопровождения АСКУЭ</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=125946573</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="132127669" available="true">
-      <name>Электромонтер / электромеханик / электрик</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132127669</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="90000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133751570" available="true">
-      <name>Техник на производство (помощник оператора)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133751570</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="75000" to="80000" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="132344238" available="true">
-      <name>Инженер-программист (прикладное ПО) в офис</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132344238</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Нижний Новгород</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133600966" available="true">
-      <name>Контролер качества</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133600966</url>
-      <description>Описание отсутствует</description>
-      <employer>Миландр, ПКК</employer>
-      <area>Зеленоград</area>
-      <salary from="80000" to="0" currency="RUR"/>
-      <date>2026-06-16 16:44</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1408796.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233035" available="true">
-      <name>Учитель физики</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233035</url>
-      <description>Описание отсутствует</description>
-      <employer>МАОУ СОШ № 27</employer>
+      <employer>Романова Ольга Васильевна</employer>
       <area>Екатеринбург</area>
-      <salary from="47000" to="59500" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
+      <salary from="100000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
       <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233034" available="true">
-      <name>Администратор в фитнес клуб</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233034</url>
+    <offer id="133963293" available="true">
+      <name>Кладовщик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133963293</url>
       <description>Описание отсутствует</description>
-      <employer>ЛАЙФ ПАРК</employer>
-      <area>Кудрово</area>
-      <salary from="280" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1373549.png</picture>
+      <employer>Кочмасов Мурад Абсалутдинович</employer>
+      <area>Махачкала</area>
+      <salary from="45000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1502588.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233033" available="true">
-      <name>Повар-универсал (Осенний бульвар, д.12, кор.1</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233033</url>
+    <offer id="134233321" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233321</url>
       <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Москва</area>
-      <salary from="82000" to="87000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Екатеринбург</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233032" available="true">
-      <name>Воспитатель</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233032</url>
+    <offer id="134233320" available="true">
+      <name>Курьер неполная занятость</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233320</url>
       <description>Описание отсутствует</description>
-      <employer>ЧДОУ ДАР</employer>
-      <area>Казань</area>
-      <salary from="33000" to="37000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/6855429.png</picture>
+      <employer>Алиди Продвижение</employer>
+      <area>Лодейное Поле</area>
+      <salary from="700" to="0" currency="RUR"/>
+      <date>2026-06-16 17:17</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1424510.png</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134233031" available="true">
-      <name>Senior Affiliate Manager (SEO Partnerships) | Remote</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233031</url>
+    <offer id="130503415" available="true">
+      <name>Ландшафтный архитектор-дизайнер / Senior Landscape Designer-Architect</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130503415</url>
       <description>Описание отсутствует</description>
-      <employer>Lenkep recruitment</employer>
-      <area>Москва</area>
-      <salary from="0" to="3000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1504141.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134233030" available="true">
-      <name>Помощник/ассистент руководителя</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233030</url>
-      <description>Описание отсутствует</description>
-      <employer>Архитектурное бюро С.Горшунова</employer>
-      <area>Нижний Новгород</area>
+      <employer>DEREVO PARK</employer>
+      <area>Санкт-Петербург</area>
       <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/3306719.png</picture>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2395392.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="133575073" available="true">
-      <name>Водитель-курьер в Новокосино</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133575073</url>
+    <offer id="134233319" available="true">
+      <name>Администратор груминг-салона и дневного ухода за питомцами</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233319</url>
+      <description>Описание отсутствует</description>
+      <employer>Кесян Кристина Сергеевна</employer>
+      <area>Москва</area>
+      <salary from="80000" to="120000" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233317" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233317</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Череповец</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233316" available="true">
+      <name>Медицинская сестра / Медицинский брат в эндоскопии</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233316</url>
+      <description>Описание отсутствует</description>
+      <employer>МЕДИЦИНСКИЙ ЦЕНТР ОНКОТЕСТ</employer>
+      <area>Краснодар</area>
+      <salary from="60000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2581655.jpg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233315" available="true">
+      <name>Сервисный инженер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233315</url>
+      <description>Описание отсутствует</description>
+      <employer>Sumitec International</employer>
+      <area>Ковдор</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/291148.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233312" available="true">
+      <name>Агент по доставке банковских продуктов/Банковских карт МТС Банк</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233312</url>
+      <description>Описание отсутствует</description>
+      <employer>Happy Delivery</employer>
+      <area>Раменское (Московская область)</area>
+      <salary from="50000" to="70000" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/7127753.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233311" available="true">
+      <name>Повар универсал в детский сад</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233311</url>
+      <description>Описание отсутствует</description>
+      <employer>Эрудит</employer>
+      <area>Мурино</area>
+      <salary from="80000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/7020009.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="130503408" available="true">
+      <name>Инженер генплана (генпланист, рабочая документация)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=130503408</url>
+      <description>Описание отсутствует</description>
+      <employer>DEREVO PARK</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2395392.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133602796" available="true">
+      <name>Супервайзер персональной поддержки ПВЗ</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133602796</url>
+      <description>Описание отсутствует</description>
+      <employer>RWB (Wildberries &amp; Russ)</employer>
+      <area>Москва</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1490898.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233310" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233310</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Красноярск</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:16</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233308" available="true">
+      <name>Менеджер по подбору персонала (массовый подбор)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233308</url>
+      <description>Описание отсутствует</description>
+      <employer>Группа компаний Перст</employer>
+      <area>Москва</area>
+      <salary from="80000" to="225000" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5878987.jpg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233309" available="true">
+      <name>Менеджер по подбору персонала (массовый подбор)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233309</url>
+      <description>Описание отсутствует</description>
+      <employer>Группа компаний Перст</employer>
+      <area>Калуга</area>
+      <salary from="80000" to="225000" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5878987.jpg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233307" available="true">
+      <name>Водитель карьерного самосвала категория АIII (БелАЗ, МоАЗ 25 тн)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233307</url>
+      <description>Описание отсутствует</description>
+      <employer>Елена Сверлова</employer>
+      <area>Якутск</area>
+      <salary from="300000" to="310000" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133627641" available="true">
+      <name>Персональный менеджер (B2B)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133627641</url>
+      <description>Описание отсутствует</description>
+      <employer>RWB (Wildberries &amp; Russ)</employer>
+      <area>Москва</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1490898.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="132570296" available="true">
+      <name>Персональный менеджер поддержки селлеров</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132570296</url>
+      <description>Описание отсутствует</description>
+      <employer>RWB (Wildberries &amp; Russ)</employer>
+      <area>Москва</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1490898.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233306" available="true">
+      <name>Системный администратор</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233306</url>
+      <description>Описание отсутствует</description>
+      <employer>Центр дополнительного образования Юлии Денисовой</employer>
+      <area>Тула</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233305" available="true">
+      <name>Автокурьер на личном автомобиле (МАГНИТ Косметик)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233305</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Оренбург</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233304" available="true">
+      <name>Старший администратор Барбершопа OldBoy</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233304</url>
+      <description>Описание отсутствует</description>
+      <employer>Барбершоп OldBoy (ИП Дергунова Мария Александровна)</employer>
+      <area>Москва</area>
+      <salary from="80000" to="100000" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2659176.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133271357" available="true">
+      <name>Менеджер по продажам</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133271357</url>
+      <description>Описание отсутствует</description>
+      <employer>Migliori Group</employer>
+      <area>Москва</area>
+      <salary from="80000" to="150000" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/1644029.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233303" available="true">
+      <name>Старший менеджер по работе с клиентами</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233303</url>
+      <description>Описание отсутствует</description>
+      <employer>СБЕР</employer>
+      <area>Северный</area>
+      <salary from="66400" to="0" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6865265.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233301" available="true">
+      <name>Авто-курьер на личном автомобиле: МАГНИТ Косметик</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233301</url>
+      <description>Описание отсутствует</description>
+      <employer>Курьерэкспресс-Главная Доставка</employer>
+      <area>Пермь</area>
+      <salary from="147300" to="238500" currency="RUR"/>
+      <date>2026-06-16 17:15</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1456221.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233299" available="true">
+      <name>Технолог молочного производства</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233299</url>
+      <description>Описание отсутствует</description>
+      <employer>Мама Ольга</employer>
+      <area>Серпухов (Московская область)</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:14</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1472229.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233300" available="true">
+      <name>Технолог молочного производства</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233300</url>
+      <description>Описание отсутствует</description>
+      <employer>Мама Ольга</employer>
+      <area>Чехов (Московская область)</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:14</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1472229.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="129131554" available="true">
+      <name>Менеджер в федеральную компанию (СРОЧНАЯ ВАКАНСИЯ С БЕСПЛАТНЫМ ОБУЧЕНИЕМ)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=129131554</url>
+      <description>Описание отсутствует</description>
+      <employer>Владис (ООО Владис Водный Стадион)</employer>
+      <area>Москва</area>
+      <salary from="300000" to="0" currency="RUR"/>
+      <date>2026-06-16 17:14</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1484566.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133871414" available="true">
+      <name>Офис-менеджер / HR-ассистент / HR-стажер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133871414</url>
+      <description>Описание отсутствует</description>
+      <employer>ЕвроХим, Минерально-Химическая Компания</employer>
+      <area>Москва</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 17:14</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1491831.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233273" available="true">
+      <name>Ночной специалист магазина (Котельники, Угрешского)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233273</url>
+      <description>Описание отсутствует</description>
+      <employer>Сеть супермаркетов ДА!</employer>
+      <area>Котельники  (Московская область)</area>
+      <salary from="74200" to="88000" currency="RUR"/>
+      <date>2026-06-16 17:14</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6446948.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233272" available="true">
+      <name>Учитель технологии</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233272</url>
+      <description>Описание отсутствует</description>
+      <employer>Муниципальное автономное Общеобразовательное учреждение Анкудиновская Средняя Школа</employer>
+      <area>Нижний Новгород</area>
+      <salary from="60000" to="100000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233271" available="true">
+      <name>Водитель эвакуатора</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233271</url>
+      <description>Описание отсутствует</description>
+      <employer>Гуска А.Н.</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="120000" to="200000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133031667" available="true">
+      <name>Оператор сервис-бюро(входящие звонки) / Запись на сервис (м.Тропарево, м.Теплый стан)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133031667</url>
+      <description>Описание отсутствует</description>
+      <employer>АвтоГЕРМЕС, Группа компаний</employer>
+      <area>Москва</area>
+      <salary from="80000" to="120000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1387178.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233270" available="true">
+      <name>Курьер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233270</url>
+      <description>Описание отсутствует</description>
+      <employer>Алиди Продвижение</employer>
+      <area>Волоколамск  (Московская область)</area>
+      <salary from="700" to="0" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1424510.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233269" available="true">
+      <name>Ассистент PR-директора (с госсектором)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233269</url>
+      <description>Описание отсутствует</description>
+      <employer>УПДН (Университет персонализированной диетологии и нутрициологии)</employer>
+      <area>Москва</area>
+      <salary from="40000" to="60000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5704018.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133896630" available="true">
+      <name>Мастер-консультант / Мастер-приёмщик слесарного цеха (м. Алтуфьево)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133896630</url>
+      <description>Описание отсутствует</description>
+      <employer>АвтоГЕРМЕС, Группа компаний</employer>
+      <area>Москва</area>
+      <salary from="180000" to="300000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1387178.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233268" available="true">
+      <name>Повар горячего цеха</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233268</url>
+      <description>Описание отсутствует</description>
+      <employer>Кафе На Знаменской Залкан Р.К</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="110000" to="130000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6389755.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233267" available="true">
+      <name>Старший менеджер по ��аботе с клиентами (Старый город)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233267</url>
+      <description>Описание отсутствует</description>
+      <employer>СБЕР</employer>
+      <area>Старый Оскол</area>
+      <salary from="66300" to="0" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6865265.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233266" available="true">
+      <name>Няня</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233266</url>
+      <description>Описание отсутствует</description>
+      <employer>Tavola Perfetta</employer>
+      <area>Тольятти</area>
+      <salary from="20000" to="30000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133506152" available="true">
+      <name>Мастер-консультант / Мастер-приёмщик слесарного цеха (Тропарёво, Тёплый стан, Генерала Тюленева)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133506152</url>
+      <description>Описание отсутствует</description>
+      <employer>АвтоГЕРМЕС, Группа компаний</employer>
+      <area>Москва</area>
+      <salary from="180000" to="250000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1387178.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="132387868" available="true">
+      <name>Мастер-консультант / Мастер-приёмщик слесарного цеха (м. Выхино)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132387868</url>
+      <description>Описание отсутствует</description>
+      <employer>АвтоГЕРМЕС, Группа компаний</employer>
+      <area>Москва</area>
+      <salary from="180000" to="250000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1387178.png</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="134233265" available="true">
+      <name>Пекарь</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134233265</url>
+      <description>Описание отсутствует</description>
+      <employer>Велта Ойл</employer>
+      <area>Уфа</area>
+      <salary from="135000" to="135000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6958177.jpeg</picture>
+      <categoryId>1</categoryId>
+    </offer>
+    <offer id="133575317" available="true">
+      <name>Автокурьер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133575317</url>
       <description>Описание отсутствует</description>
       <employer>Яндекс.Еда</employer>
-      <area>Москва</area>
+      <area>Барнаул</area>
       <salary from="0" to="190000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
+      <date>2026-06-16 17:13</date>
       <picture>https://img.hhcdn.ru/employer-logo-original-round/5929572.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
-    <offer id="134086398" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086398</url>
+    <offer id="133575316" available="true">
+      <name>Автокурьер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133575316</url>
       <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Батайск</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086396" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086396</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Тамбов</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086394" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086394</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Ижевск</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086391" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086391</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Москва</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086389" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086389</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Воронеж</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086388" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086388</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Дмитров (Московская область)</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086386" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086386</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Шушары</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086385" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086385</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Лермонтов</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086384" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086384</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Колпино</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086383" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086383</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Энгельс</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086381" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086381</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Тула</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086379" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086379</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Тольятти</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086378" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086378</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Коломна (Московская область)</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086377" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086377</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Новосибирск</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086376" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086376</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Мурманск</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086375" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086375</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Ногинск (Московская область)</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086373" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086373</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Зеленодольск (Республика Татарстан)</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="134086372" available="true">
-      <name>Водитель на грузоперевозки</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134086372</url>
-      <description>Описание отсутствует</description>
-      <employer>МАГНИТ, Розничная сеть</employer>
-      <area>Дзержинск (Нижегородская область)</area>
-      <salary from="0" to="0" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original/1395726.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567293" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567293</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Тула</area>
-      <salary from="45000" to="65000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567292" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567292</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Мытищи (Московская область)</area>
-      <salary from="87800" to="94000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567290" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567290</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Зеленогорск (Ленинградская обл)</area>
-      <salary from="72000" to="76000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567289" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567289</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Тюмень</area>
-      <salary from="48200" to="57600" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567287" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567287</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Челябинск</area>
-      <salary from="52800" to="55800" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567284" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567284</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Волгоград</area>
-      <salary from="38000" to="61700" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567283" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567283</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Солнечногорск (Московская область)</area>
-      <salary from="87800" to="92000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567281" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567281</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Серпухов (Московская область)</area>
-      <salary from="50000" to="65000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567280" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567280</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Московский (Москва)</area>
-      <salary from="87800" to="92000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567279" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567279</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Одинцово (Московская область)</area>
-      <salary from="87800" to="94000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567278" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567278</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Домодедово (Московская область)</area>
-      <salary from="87800" to="94000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567277" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567277</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Видное (Московская область)</area>
-      <salary from="55000" to="90000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567276" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567276</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Тюмень</area>
-      <salary from="48200" to="58600" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567274" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567274</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Домодедово (Московская область)</area>
-      <salary from="87800" to="94000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567273" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567273</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Екатеринбург</area>
-      <salary from="56000" to="80000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567272" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567272</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Ижевск</area>
-      <salary from="45000" to="80000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567269" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567269</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Сосновый бор (Московская область, городской округ Подольск)</area>
-      <salary from="71800" to="85100" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567268" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567268</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Сергиев Посад (Московская область)</area>
-      <salary from="64000" to="67200" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567267" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567267</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Зеленогорск (Ленинградская обл)</area>
-      <salary from="72000" to="76000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567266" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567266</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Ступино (Московская область)</area>
-      <salary from="68900" to="73000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567265" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567265</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Новороссийск</area>
-      <salary from="39000" to="55000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567264" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567264</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Москва</area>
-      <salary from="70000" to="114000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567263" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567263</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Москва</area>
-      <salary from="70000" to="114000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567262" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567262</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Москва</area>
-      <salary from="65000" to="101000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567260" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567260</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Москва</area>
-      <salary from="70000" to="114000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567257" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567257</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Зеленоград</area>
-      <salary from="88700" to="94000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567254" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567254</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Звенигород (Московская область)</area>
-      <salary from="71200" to="75400" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567253" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567253</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Ступино (Московская область)</area>
-      <salary from="68900" to="72200" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567252" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567252</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Пермь</area>
-      <salary from="52300" to="60000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567251" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567251</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Саранск</area>
-      <salary from="40000" to="42000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567249" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567249</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Тюмень</area>
-      <salary from="48200" to="57600" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567247" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567247</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Екатеринбург</area>
-      <salary from="56000" to="80000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567246" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567246</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Волгоград</area>
-      <salary from="38000" to="61700" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567245" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567245</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Кисловодск</area>
-      <salary from="59500" to="62500" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567244" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567244</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Красногорск (Московская область)</area>
-      <salary from="85000" to="93000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567242" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567242</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Геленджик</area>
-      <salary from="62300" to="66400" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567241" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567241</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Сочи</area>
-      <salary from="60000" to="76700" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567240" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567240</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Ессентуки</area>
-      <salary from="59000" to="62000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567239" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567239</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Курск</area>
-      <salary from="50500" to="53500" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567238" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567238</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Когалым</area>
-      <salary from="62000" to="65000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567236" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567236</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Магнитогорск</area>
-      <salary from="48300" to="51500" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
-      <categoryId>1</categoryId>
-    </offer>
-    <offer id="133567234" available="true">
-      <name>Пекарь</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133567234</url>
-      <description>Описание отсутствует</description>
-      <employer>Перекрёсток</employer>
-      <area>Мурманск</area>
-      <salary from="60000" to="80000" currency="RUR"/>
-      <date>2026-06-16 16:43</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7147082.png</picture>
+      <employer>Яндекс.Еда</employer>
+      <area>Нижний Новгород</area>
+      <salary from="0" to="190000" currency="RUR"/>
+      <date>2026-06-16 17:13</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/5929572.jpeg</picture>
       <categoryId>1</categoryId>
     </offer>
     </offers>
