@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-06-16 18:53">
+<yml_catalog date="2026-06-16 18:57">
   <shop>
     <name>ВКАНСА</name>
     <company>ВКАНСА</company>
@@ -11,6 +11,174 @@
       <category id="1">Работа</category>
     </categories>
     <offers>
+    <offer id="133842036" available="true">
+      <name>Менеджер по продажам строительной техники</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133842036</url>
+      <description>Описание отсутствует</description>
+      <employer>Научно-технический центр</employer>
+      <area>Грозный</area>
+      <salary from="120000" to="150000" currency="RUR"/>
+      <date>2026-06-16 18:55</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2962955.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234176" available="true">
+      <name>Hermes-B2B</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234176</url>
+      <description>Описание отсутствует</description>
+      <employer>Hermes B2B</employer>
+      <area>Москва</area>
+      <salary from="500" to="500" currency="RUR"/>
+      <date>2026-06-16 18:55</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234175" available="true">
+      <name>Учитель русского и литературы</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234175</url>
+      <description>Описание отсутствует</description>
+      <employer>Частная школа Морошка</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="69000" to="89100" currency="RUR"/>
+      <date>2026-06-16 18:54</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1414707.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234174" available="true">
+      <name>Медицинская сестра / Медицинский брат в стоматологию</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234174</url>
+      <description>Описание отсутствует</description>
+      <employer>ДАША</employer>
+      <area>Волжский (Волгоградская область)</area>
+      <salary from="35000" to="40000" currency="RUR"/>
+      <date>2026-06-16 18:54</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/2071316.jpg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234173" available="true">
+      <name>Бренд-дизайнер</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234173</url>
+      <description>Описание отсутствует</description>
+      <employer>HR KEYS</employer>
+      <area>Москва</area>
+      <salary from="0" to="0" currency="RUR"/>
+      <date>2026-06-16 18:54</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3890426.jpeg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234172" available="true">
+      <name>Хостес в ресторан «Чабрец» (ст. м. Ленинский проспект)</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234172</url>
+      <description>Описание отсутствует</description>
+      <employer>Рестораны ЧАБРЕЦ</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="60000" to="0" currency="RUR"/>
+      <date>2026-06-16 18:54</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6782053.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234146" available="true">
+      <name>Комплектовщик - упаковщик сухофруктов и орехов на склад</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234146</url>
+      <description>Описание отсутствует</description>
+      <employer>Вологина Анастасия Александровна (ЛИДЕР - ГРУПП)</employer>
+      <area>Санкт-Петербург</area>
+      <salary from="172000" to="244000" currency="RUR"/>
+      <date>2026-06-16 18:53</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/6411092.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="133527419" available="true">
+      <name>Фармацевт/Провизор/Медконсультант</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=133527419</url>
+      <description>Описание отсутствует</description>
+      <employer>Сеть аптек Апрель</employer>
+      <area>Криулино</area>
+      <salary from="80000" to="0" currency="RUR"/>
+      <date>2026-06-16 18:52</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1391381.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234145" available="true">
+      <name>Бармен</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234145</url>
+      <description>Описание отсутствует</description>
+      <employer>Сэндвич шоп ПИКСЕЛЬ</employer>
+      <area>Казань</area>
+      <salary from="70000" to="120000" currency="RUR"/>
+      <date>2026-06-16 18:52</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1511518.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234144" available="true">
+      <name>Мобильный мерчандайзер табачной продукции</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234144</url>
+      <description>Описание отсутствует</description>
+      <employer>АТМС</employer>
+      <area>Новый Уренгой</area>
+      <salary from="65000" to="0" currency="RUR"/>
+      <date>2026-06-16 18:52</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234143" available="true">
+      <name>Продавец-консультант в шоурум одежды</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234143</url>
+      <description>Описание отсутствует</description>
+      <employer>Abuterne</employer>
+      <area>Москва</area>
+      <salary from="100000" to="0" currency="RUR"/>
+      <date>2026-06-16 18:52</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original/1477003.png</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="126356052" available="true">
+      <name>Сотрудник ресторана</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=126356052</url>
+      <description>Описание отсутствует</description>
+      <employer>ЮНИРЕСТ</employer>
+      <area>Домодедово (Московская область)</area>
+      <salary from="0" to="92000" currency="RUR"/>
+      <date>2026-06-16 18:52</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234142" available="true">
+      <name>Бухгалтер по расчету заработной платы</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234142</url>
+      <description>Описание отсутствует</description>
+      <employer>Южуралзолото Группа Компаний</employer>
+      <area>Копейск</area>
+      <salary from="146000" to="146000" currency="RUR"/>
+      <date>2026-06-16 18:51</date>
+      <picture>https://img.hhcdn.ru/employer-logo-original-round/3900578.jpeg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
+    <offer id="134234141" available="true">
+      <name>Продавец-кассир</name>
+      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234141</url>
+      <description>Описание отсутствует</description>
+      <employer>Грифон</employer>
+      <area>Брянск</area>
+      <salary from="55000" to="55000" currency="RUR"/>
+      <date>2026-06-16 18:51</date>
+      <picture>https://vakansa24.ru/vacancy-aggregator/icon.svg</picture>
+      <categoryId>1</categoryId>
+      <param name="конверсия"></param>
+    </offer>
     <offer id="134234140" available="true">
       <name>Водитель автономного легкового транспорта (категория В)</name>
       <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234140</url>
@@ -196,7 +364,7 @@
       <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234135</url>
       <description>Описание отсутствует</description>
       <employer>КАРИ</employer>
-      <area>Оси��ово</area>
+      <area>Осиново</area>
       <salary from="60000" to="0" currency="RUR"/>
       <date>2026-06-16 18:47</date>
       <picture>https://img.hhcdn.ru/employer-logo-original-round/6926585.png</picture>
@@ -663,7 +831,7 @@
       <name>Повар-кассир</name>
       <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=132503733</url>
       <description>Описание отсутствует</description>
-      <employer>ЮНИРЕСТ</employer>
+      <employer>��НИРЕСТ</employer>
       <area>Сургут</area>
       <salary from="0" to="95000" currency="RUR"/>
       <date>2026-06-16 18:42</date>
@@ -1038,174 +1206,6 @@
       <employer>Пятёрочка</employer>
       <area>Ишимбай</area>
       <salary from="0" to="145000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234054" available="true">
-      <name>Курьер в Пятёрочку (Липецк, П.И.Смородина, 13а)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234054</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Липецк</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234053" available="true">
-      <name>Курьер в Пятёрочку (Самара)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234053</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Самара</area>
-      <salary from="0" to="145000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234052" available="true">
-      <name>Курьер в Пятёрочку (Кострома, Гагарина, 13)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234052</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Кострома</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234051" available="true">
-      <name>Курьер в Пятёрочку (Химки, Академика Грушина, 8)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234051</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Химки (Московская область)</area>
-      <salary from="0" to="210000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234050" available="true">
-      <name>Курьер в Пятёрочку (Москва, Варшавское, 150)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234050</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Москва</area>
-      <salary from="0" to="210000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234049" available="true">
-      <name>Курьер в Пятёрочку (Липецк, П.А. Папина, 6А)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234049</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёро��ка</employer>
-      <area>Липецк</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234048" available="true">
-      <name>Курьер в Пятёрочку (Кострома, Боровая, 8б)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234048</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Кострома</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234047" available="true">
-      <name>Курьер в Пятёрочку (Псков, Алексея Алехина, 4А)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234047</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Псков</area>
-      <salary from="0" to="145000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234046" available="true">
-      <name>Курьер в Пятёрочку (Липецк, Победы, 19А)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234046</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Липецк</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234045" available="true">
-      <name>Курьер в Пятёрочку (Псков)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234045</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Псков</area>
-      <salary from="0" to="145000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234044" available="true">
-      <name>Курьер в Пятёрочку (Шуя, Аникина, 82)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234044</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Шуя</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234043" available="true">
-      <name>Курьер в Пятёрочку (Липецк, Катукова, 11)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234043</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Липецк</area>
-      <salary from="0" to="184000" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234042" available="true">
-      <name>Ассистент</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234042</url>
-      <description>Описание отсутствует</description>
-      <employer>Высшая школа собак</employer>
-      <area>Москва</area>
-      <salary from="25000" to="0" currency="RUR"/>
-      <date>2026-06-16 18:41</date>
-      <picture>https://img.hhcdn.ru/employer-logo-original-round/6978585.png</picture>
-      <categoryId>1</categoryId>
-      <param name="конверсия"></param>
-    </offer>
-    <offer id="134234041" available="true">
-      <name>Курьер в Пятёрочку (Кинешма, Аристарха Макарова, 52)</name>
-      <url>https://vakansa24.ru/vacancy-aggregator/vacancy.html?id=134234041</url>
-      <description>Описание отсутствует</description>
-      <employer>Пятёрочка</employer>
-      <area>Кинешма</area>
-      <salary from="0" to="184000" currency="RUR"/>
       <date>2026-06-16 18:41</date>
       <picture>https://img.hhcdn.ru/employer-logo-original-round/7101933.png</picture>
       <categoryId>1</categoryId>
