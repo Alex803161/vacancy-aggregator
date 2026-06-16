@@ -70,6 +70,7 @@ function buildXml(vacancies) {
       <date>${publishedDate}</date>
       <picture>${picture}</picture>
       <categoryId>1</categoryId>
+      <param name="конверсия"></param>
     </offer>`;
   }
 
