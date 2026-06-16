@@ -358,7 +358,7 @@ async function sendTelegramNotification(text) {
         // ВКонтакте (добавляем, если ещё нет)
         if (!footer.querySelector('.vk-footer-link')) {
             const vkLink = document.createElement('a');
-            vkLink.href = 'https://vk.com/vakansa24';   // ← Замените на ваш реальный адрес
+            vkLink.href = 'https://vk.com/vakansa_rabota';   // ← Замените на ваш реальный адрес
             vkLink.target = '_blank';
             vkLink.rel = 'noopener noreferrer';
             vkLink.className = 'vk-footer-link highlight';
