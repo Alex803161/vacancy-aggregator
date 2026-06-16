@@ -35,6 +35,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "Фид не изменился"
           else
+            git commit -m "Автообновление yandex_jobs.xml"
             git pull --rebase origin main
-            git commit -m "Автообновление yandex_jobs.xml" && git push
+            git push
           fi
