@@ -19,24 +19,55 @@ async function fetchVacancies() {
 }
 
 function buildXml(vacancies) {
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<jobs>\n  <employer>\n    <name>ВКАНСА</name>\n    <url>${BASE_URL}</url>\n  </employer>`;
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="${new Date().toISOString().split('T')[0]}">
+  <shop>
+    <name>ВКАНСА</name>
+    <company>ВКАНСА</company>
+    <url>${BASE_URL}</url>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Работа</category>
+    </categories>
+    <offers>`;
 
   for (const v of vacancies) {
-    const salary = v.salary
-      ? (v.salary.from ? `от ${v.salary.from}` : '') + (v.salary.to ? ` до ${v.salary.to}` : '') + (v.salary.currency ? ` ${v.salary.currency}` : '')
-      : 'Не указана';
+    const title = (v.name || 'Без названия').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const employer = (v.employer?.name || 'Компания не указана').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const salaryFrom = v.salary?.from || 0;
+    const salaryTo = v.salary?.to || 0;
+    const price = salaryFrom > 0 ? salaryFrom : (salaryTo > 0 ? salaryTo : 0);
+    const currency = v.salary?.currency === 'RUR' ? 'RUR' : 'RUR';
+    const area = (v.area?.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const url = `${BASE_URL}/vacancy.html?id=${v.id}`;
+    const description = (v.description || '').substring(0, 500).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const picture = v.employer?.logo_urls?.original || v.employer?.logo_urls?.['90'] || `${BASE_URL}/icon.svg`;
+    const date = v.published_at ? new Date(v.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+
     xml += `
-  <job>
-    <title>${(v.name || 'Без названия').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</title>
-    <description>${(v.description || '').substring(0, 500).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</description>
-    <salary>${salary}</salary>
-    <area>${v.area?.name || ''}</area>
-    <url>${BASE_URL}/vacancy.html?id=${v.id}</url>
-    <date>${v.published_at || new Date().toISOString()}</date>
-  </job>`;
+    <offer id="${v.id}" available="true">
+      <name>${title}</name>
+      <price>${price}</price>
+      <currencyId>${currency}</currencyId>
+      <categoryId>1</categoryId>
+      <vendor>${employer}</vendor>
+      <url>${url}</url>
+      <picture>${picture}</picture>
+      <description>${description}</description>
+      <param name="Город">${area}</param>
+      <param name="Дата публикации">${date}</param>
+      <param name="Зарплата от">${salaryFrom}</param>
+      <param name="Зарплата до">${salaryTo}</param>
+      <param name="Валюта">${currency}</param>
+    </offer>`;
   }
 
-  xml += '\n</jobs>';
+  xml += `
+    </offers>
+  </shop>
+</yml_catalog>`;
   return xml;
 }
 
@@ -44,9 +75,23 @@ async function main() {
   console.log('Сбор вакансий для Яндекс.Работы...');
   const vacancies = await fetchVacancies();
   if (vacancies.length === 0) {
-    console.log('Нет вакансий, фид не создан.');
-    // Создаём пустой файл, чтобы избежать ошибки git add
-    await fs.writeFile(OUTPUT_FILE, '<?xml version="1.0" encoding="UTF-8"?>\n<jobs>\n</jobs>', 'utf8');
+    console.log('Нет вакансий, создаю пустой фид.');
+    const emptyXml = `<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="${new Date().toISOString().split('T')[0]}">
+  <shop>
+    <name>ВКАНСА</name>
+    <company>ВКАНСА</company>
+    <url>${BASE_URL}</url>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Работа</category>
+    </categories>
+    <offers/>
+  </shop>
+</yml_catalog>`;
+    await fs.writeFile(OUTPUT_FILE, emptyXml, 'utf8');
     return;
   }
   const xml = buildXml(vacancies);
