@@ -328,31 +328,43 @@ async function sendTelegramNotification(text) {
     }
 }
 
-/* ========== Автоматическая вставка ссылки на Telegram-канал ========== */
+/* ========== Автоматическая вставка ссылок на соцсети в футер ========== */
 (function addSocialLinks() {
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', insertLink);
+        document.addEventListener('DOMContentLoaded', insertLinks);
     } else {
-        insertLink();
+        insertLinks();
     }
 
-    function insertLink() {
+    function insertLinks() {
         const footer = document.querySelector('.site-footer');
         if (!footer) return;
 
         const firstRow = footer.querySelector('.footer-links-row');
         if (!firstRow) return;
 
-        if (footer.querySelector('.telegram-footer-link')) return;
+        // Telegram (добавляем, если ещё нет)
+        if (!footer.querySelector('.telegram-footer-link')) {
+            const telegramLink = document.createElement('a');
+            telegramLink.href = 'https://t.me/vakansa24_ru';
+            telegramLink.target = '_blank';
+            telegramLink.rel = 'noopener noreferrer';
+            telegramLink.className = 'telegram-footer-link highlight';
+            telegramLink.innerHTML = '<i class="fab fa-telegram-plane"></i> Telegram';
+            telegramLink.title = 'Наш Telegram-канал';
+            firstRow.appendChild(telegramLink);
+        }
 
-        const link = document.createElement('a');
-        link.href = 'https://t.me/vakansa24_ru';
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.className = 'telegram-footer-link highlight';
-        link.innerHTML = '<i class="fab fa-telegram-plane"></i> Telegram';
-        link.title = 'Наш Telegram-канал';
-
-        firstRow.appendChild(link);
+        // ВКонтакте (добавляем, если ещё нет)
+        if (!footer.querySelector('.vk-footer-link')) {
+            const vkLink = document.createElement('a');
+            vkLink.href = 'https://vk.com/vakansa24';   // ← Замените на ваш реальный адрес
+            vkLink.target = '_blank';
+            vkLink.rel = 'noopener noreferrer';
+            vkLink.className = 'vk-footer-link highlight';
+            vkLink.innerHTML = '<i class="fab fa-vk"></i> ВКонтакте';
+            vkLink.title = 'Наше сообщество ВКонтакте';
+            firstRow.appendChild(vkLink);
+        }
     }
 })();
