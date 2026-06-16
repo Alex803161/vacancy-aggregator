@@ -18,9 +18,22 @@ async function fetchVacancies() {
   return (res.data.items || []).slice(0, 100);
 }
 
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  const yy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const hh = String(d.getHours()).padStart(2, '0');
+  const min = String(d.getMinutes()).padStart(2, '0');
+  return `${yy}-${mm}-${dd} ${hh}:${min}`;
+}
+
 function buildXml(vacancies) {
+  const now = new Date();
+  const currentDate = formatDate(now.toISOString());
+
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="${new Date().toISOString().split('T')[0]}">
+<yml_catalog date="${currentDate}">
   <shop>
     <name>ВКАНСА</name>
     <company>ВКАНСА</company>
@@ -36,31 +49,27 @@ function buildXml(vacancies) {
   for (const v of vacancies) {
     const title = (v.name || 'Без названия').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const employer = (v.employer?.name || 'Компания не указана').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    const salaryFrom = v.salary?.from || 0;
-    const salaryTo = v.salary?.to || 0;
-    const price = salaryFrom > 0 ? salaryFrom : (salaryTo > 0 ? salaryTo : 0);
-    const currency = v.salary?.currency === 'RUR' ? 'RUR' : 'RUR';
     const area = (v.area?.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const url = `${BASE_URL}/vacancy.html?id=${v.id}`;
-    const description = (v.description || '').substring(0, 500).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const description = (v.description || 'Описание отсутствует').substring(0, 500).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const picture = v.employer?.logo_urls?.original || v.employer?.logo_urls?.['90'] || `${BASE_URL}/icon.svg`;
-    const date = v.published_at ? new Date(v.published_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    const publishedDate = v.published_at ? formatDate(v.published_at) : currentDate;
+
+    const salaryFrom = v.salary?.from || 0;
+    const salaryTo = v.salary?.to || 0;
+    const currency = v.salary?.currency === 'RUR' ? 'RUR' : 'RUR';
 
     xml += `
     <offer id="${v.id}" available="true">
       <name>${title}</name>
-      <price>${price}</price>
-      <currencyId>${currency}</currencyId>
-      <categoryId>1</categoryId>
-      <vendor>${employer}</vendor>
       <url>${url}</url>
-      <picture>${picture}</picture>
       <description>${description}</description>
-      <param name="Город">${area}</param>
-      <param name="Дата публикации">${date}</param>
-      <param name="Зарплата от">${salaryFrom}</param>
-      <param name="Зарплата до">${salaryTo}</param>
-      <param name="Валюта">${currency}</param>
+      <employer>${employer}</employer>
+      <area>${area}</area>
+      <salary from="${salaryFrom}" to="${salaryTo}" currency="${currency}"/>
+      <date>${publishedDate}</date>
+      <picture>${picture}</picture>
+      <categoryId>1</categoryId>
     </offer>`;
   }
 
@@ -77,7 +86,7 @@ async function main() {
   if (vacancies.length === 0) {
     console.log('Нет вакансий, создаю пустой фид.');
     const emptyXml = `<?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="${new Date().toISOString().split('T')[0]}">
+<yml_catalog date="${formatDate(new Date().toISOString())}">
   <shop>
     <name>ВКАНСА</name>
     <company>ВКАНСА</company>
