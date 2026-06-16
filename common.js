@@ -326,4 +326,33 @@ async function sendTelegramNotification(text) {
     } catch (e) {
         console.warn('Не удалось отправить уведомление', e);
     }
-                }
+}
+
+/* ========== Автоматическая вставка ссылки на Telegram-канал ========== */
+(function addSocialLinks() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', insertLink);
+    } else {
+        insertLink();
+    }
+
+    function insertLink() {
+        const footer = document.querySelector('.site-footer');
+        if (!footer) return;
+
+        const firstRow = footer.querySelector('.footer-links-row');
+        if (!firstRow) return;
+
+        if (footer.querySelector('.telegram-footer-link')) return;
+
+        const link = document.createElement('a');
+        link.href = 'https://t.me/vakansa24_ru';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'telegram-footer-link highlight';
+        link.innerHTML = '<i class="fab fa-telegram-plane"></i> Telegram';
+        link.title = 'Наш Telegram-канал';
+
+        firstRow.appendChild(link);
+    }
+})();
