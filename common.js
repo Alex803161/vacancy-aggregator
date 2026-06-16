@@ -343,7 +343,7 @@ async function sendTelegramNotification(text) {
         const firstRow = footer.querySelector('.footer-links-row');
         if (!firstRow) return;
 
-        // Telegram (добавляем, если ещё нет)
+        // Telegram
         if (!footer.querySelector('.telegram-footer-link')) {
             const telegramLink = document.createElement('a');
             telegramLink.href = 'https://t.me/vakansa24_ru';
@@ -355,10 +355,10 @@ async function sendTelegramNotification(text) {
             firstRow.appendChild(telegramLink);
         }
 
-        // ВКонтакте (добавляем, если ещё нет)
+        // ВКонтакте (исправленная ссылка)
         if (!footer.querySelector('.vk-footer-link')) {
             const vkLink = document.createElement('a');
-            vkLink.href = 'https://vk.com/vakansa_rabota';   // ← Замените на ваш реальный адрес
+            vkLink.href = 'https://vk.com/club239621028';
             vkLink.target = '_blank';
             vkLink.rel = 'noopener noreferrer';
             vkLink.className = 'vk-footer-link highlight';
