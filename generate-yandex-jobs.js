@@ -74,7 +74,7 @@ function buildXml(vacancies) {
       <param name="Дата публикации">${publishedDate}</param>
       <param name="Зарплата от">${salaryFrom}</param>
       <param name="Зарплата до">${salaryTo}</param>
-      <param name="конверсия"></param>
+      <param name="Конверсия"></param>
     </offer>`;
   }
 
