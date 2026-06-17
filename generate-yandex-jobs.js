@@ -33,7 +33,18 @@ function buildXml(vacancies) {
   const currentDate = formatDate(now.toISOString());
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<vacancies>`;
+<yml_catalog date="${currentDate}">
+  <shop>
+    <name>ВКАНСА</name>
+    <company>ВКАНСА</company>
+    <url>${BASE_URL}</url>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Работа</category>
+    </categories>
+    <offers>`;
 
   for (const v of vacancies) {
     const title = (v.name || 'Без названия').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -46,24 +57,31 @@ function buildXml(vacancies) {
 
     const salaryFrom = v.salary?.from || 0;
     const salaryTo = v.salary?.to || 0;
-    const currency = v.salary?.currency === 'RUR' ? 'RUR' : 'RUR';
+    const price = salaryFrom > 0 ? salaryFrom : (salaryTo > 0 ? salaryTo : 0);
 
     xml += `
-  <vacancy>
-    <vacancy-title>${title}</vacancy-title>
-    <vacancy-salary from="${salaryFrom}" to="${salaryTo}" currency="${currency}"/>
-    <vacancy-area>${area}</vacancy-area>
-    <vacancy-url>${url}</vacancy-url>
-    <vacancy-employer>${employer}</vacancy-employer>
-    <vacancy-date>${publishedDate}</vacancy-date>
-    <vacancy-picture>${picture}</vacancy-picture>
-    <vacancy-description>${description}</vacancy-description>
-    <param name="конверсия"></param>
-  </vacancy>`;
+    <offer id="${v.id}" available="true">
+      <name>${title}</name>
+      <url>${url}</url>
+      <price>${price}</price>
+      <currencyId>RUR</currencyId>
+      <categoryId>1</categoryId>
+      <picture>${picture}</picture>
+      <description>${description}</description>
+      <set-ids/>
+      <param name="Работодатель">${employer}</param>
+      <param name="Город">${area}</param>
+      <param name="Дата публикации">${publishedDate}</param>
+      <param name="Зарплата от">${salaryFrom}</param>
+      <param name="Зарплата до">${salaryTo}</param>
+      <param name="конверсия"></param>
+    </offer>`;
   }
 
   xml += `
-</vacancies>`;
+    </offers>
+  </shop>
+</yml_catalog>`;
   return xml;
 }
 
@@ -73,7 +91,20 @@ async function main() {
   if (vacancies.length === 0) {
     console.log('Нет вакансий, создаю пустой фид.');
     const emptyXml = `<?xml version="1.0" encoding="UTF-8"?>
-<vacancies/>`;
+<yml_catalog date="${formatDate(new Date().toISOString())}">
+  <shop>
+    <name>ВКАНСА</name>
+    <company>ВКАНСА</company>
+    <url>${BASE_URL}</url>
+    <currencies>
+      <currency id="RUR" rate="1"/>
+    </currencies>
+    <categories>
+      <category id="1">Работа</category>
+    </categories>
+    <offers/>
+  </shop>
+</yml_catalog>`;
     await fs.writeFile(OUTPUT_FILE, emptyXml, 'utf8');
     return;
   }
