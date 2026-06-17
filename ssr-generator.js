@@ -6,7 +6,7 @@ const path = require('path');
 const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 const OUTPUT_DIR = path.join(__dirname, 'vacancies');
 const SITEMAP_PATH = path.join(__dirname, 'sitemap.xml');
-const BASE_URL = 'https://alex803161.github.io/vacancy-aggregator';
+const BASE_URL = 'https://vakansa24.ru';
 
 const CITIES = [
   { id: '1', name: 'Москва', slug: 'moskva' },
