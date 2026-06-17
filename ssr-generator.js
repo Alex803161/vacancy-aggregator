@@ -2,10 +2,10 @@ const fs = require('fs-extra');
 const axios = require('axios');
 const path = require('path');
 
-// ИСПРАВЛЕНО: Используем тот же API URL, что и на основном сайте
 const API_URL = 'https://functions.yandexcloud.net/d4e1urrsv08ehb7k6uk8';
 const OUTPUT_DIR = path.join(__dirname, 'vacancies');
 const SITEMAP_PATH = path.join(__dirname, 'sitemap.xml');
+// Меняем на основной домен
 const BASE_URL = 'https://vakansa24.ru';
 
 const CITIES = [
@@ -23,7 +23,7 @@ const PROFESSIONS = [
   'строитель', 'инженер', 'врач', 'учитель', 'курьер'
 ];
 
-async function fetchVacanciesForArea(areaId, text = '', perPage = 50) {
+async function fetchVacanciesForArea(areaId, text = '', perPage = 20) {
   const params = new URLSearchParams({
     action: 'vacancies',
     text: text,
@@ -31,13 +31,10 @@ async function fetchVacanciesForArea(areaId, text = '', perPage = 50) {
     per_page: perPage,
     order_by: 'publication_time'
   });
-  console.log(`Запрос к API: ${API_URL}?${params.toString()}`);
   const res = await axios.get(`${API_URL}?${params.toString()}`);
-  console.log(`Статус ответа: ${res.status}, всего вакансий: ${res.data.items?.length || 0}`);
   return res.data.items || [];
 }
 
-// Функции buildCityPage и buildProfessionPage остались без изменений
 function buildCityPage(city, vacancies) {
   const title = `Работа в ${city.name} – свежие вакансии | ВКАНСА`;
   const description = `Найдите работу в ${city.name}. Актуальные вакансии от прямых работодателей и кадровых агентств. Удобный поиск и фильтры.`;
