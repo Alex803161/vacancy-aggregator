@@ -4,5 +4,4 @@ Disallow: /admin.html
 Disallow: /diagnostic.html
 Disallow: /test-notify.html
 
-Sitemap: https://alex803161.github.io/vacancy-aggregator/sitemap.xml
-Host: alex803161.github.io
+Sitemap: https://vakansa24.ru/sitemap.xml
