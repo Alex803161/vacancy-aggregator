@@ -1,1003 +1,1003 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jobs>
   <job>
-    <job-id>135012732</job-id>
-    <job-title>Контролер-кассир (КАРО 10 София)</job-title>
-    <job-employer>Сеть кинотеатров КАРО</job-employer>
+    <job-id>131554259</job-id>
+    <job-title>Мастер-консультант / Мастер-приёмщик слесарного цеха</job-title>
+    <job-employer>АвтоГЕРМЕС, Группа компаний</job-employer>
     <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012732</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=131554259</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><to>250000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873231</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Владикавказ</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873231</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873223</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Миасс</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873223</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873222</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Подольск (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873222</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873221</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Таганрог</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873221</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873220</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Пушкин</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873220</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134567285</job-id>
+    <job-title>Мастер-консультант / Мастер-приёмщик слесарного цеха (м. Новогиреево)</job-title>
+    <job-employer>АвтоГЕРМЕС, Группа компаний</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134567285</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>120000</from><to>250000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873219</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Видное (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873219</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049143</job-id>
+    <job-title>Начальник отделения (спортивного)</job-title>
+    <job-employer>ГБУ ДО Московская академия плавания</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049143</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>100000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049142</job-id>
+    <job-title>Сотрудник охраны в букмекерский клуб</job-title>
+    <job-employer>BetBoom</job-employer>
+    <job-area>Тула</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049142</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>60000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873214</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Обнинск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873214</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873211</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Химки (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873211</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049141</job-id>
+    <job-title>Инженер-конструктор</job-title>
+    <job-employer>ТрансМашХолдинг, Группа компаний</job-employer>
+    <job-area>Санкт-Петербург</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049141</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>92928</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873206</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Сочи</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873206</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873203</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Иваново (Ивановская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873203</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873200</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Солнечногорск (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873200</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873199</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Псков</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873199</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>125175103</job-id>
+    <job-title>Менеджер по работе с клиентами</job-title>
+    <job-employer>Биосфера</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=125175103</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873197</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Екатеринбург</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873197</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134680664</job-id>
+    <job-title>Продавец-консультант ювелирных изделий (ТК Невский Центр)</job-title>
+    <job-employer>Русские самоцветы</job-employer>
+    <job-area>Санкт-Петербург</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134680664</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>100000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873187</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Уфа</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873187</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873186</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Томск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873186</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873185</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Зеленоград</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873185</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049133</job-id>
+    <job-title>Монтажник ЖБК</job-title>
+    <job-employer>ХАРАКС</job-employer>
+    <job-area>Братск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049133</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049135</job-id>
+    <job-title>Монтажник ЖБК</job-title>
+    <job-employer>ХАРАКС</job-employer>
+    <job-area>Усть-Илимск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049135</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049137</job-id>
+    <job-title>Монтажник ЖБК</job-title>
+    <job-employer>ХАРАКС</job-employer>
+    <job-area>Черемхово</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049137</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049138</job-id>
+    <job-title>Монтажник ЖБК</job-title>
+    <job-employer>ХАРАКС</job-employer>
+    <job-area>Шелехов</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049138</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873184</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Тобольск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873184</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873182</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Ступино (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873182</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873181</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Армавир</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873181</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873180</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Иркутск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873180</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873179</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Ногинск (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873179</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873177</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Нальчик</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873177</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873175</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Колпино</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873175</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>132836555</job-id>
+    <job-title>Мобильный продавец-кассир</job-title>
+    <job-employer>Буханка</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=132836555</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>92800</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873172</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Кисловодск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873172</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873171</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Уссурийск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873171</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>115612259</job-id>
+    <job-title>Охранник</job-title>
+    <job-employer>ЧОП Легион</job-employer>
+    <job-area>Курган</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=115612259</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873168</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Магнитогорск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873168</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873167</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Ставрополь</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873167</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133873165</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Королев (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133873165</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134726109</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Чита</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134726109</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049131</job-id>
+    <job-title>Уборщица/Уборщик в ресторан</job-title>
+    <job-employer>Броско</job-employer>
+    <job-area>Хабаровск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049131</job-url>
+    <job-date>2026-07-10 07:31</job-date>
     <salary><from>50000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012729</job-id>
-    <job-title>Инженер ПТО</job-title>
-    <job-employer>ПОЛАТИ</job-employer>
+    <job-id>134726107</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Комсомольск-на-Амуре</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134726107</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134726106</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Пушкино (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134726106</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134726105</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Улан-Удэ</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134726105</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134726102</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Нефтеюганск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134726102</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134918137</job-id>
+    <job-title>Специалист по персоналу</job-title>
+    <job-employer>Торговый дом Элит Трейд</job-employer>
+    <job-area>Иркутск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134918137</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>90000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980648</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Электросталь (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980648</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980647</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Ивантеевка (Саратовская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980647</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980646</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Благовещенск (Амурская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980646</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980643</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Щербинка (Москва)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980643</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>131849717</job-id>
+    <job-title>Мастер-консультант / Мастер-приёмщик слесарного цеха (Варшавское шоссе)</job-title>
+    <job-employer>АвтоГЕРМЕС, Группа компаний</job-employer>
     <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012729</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=131849717</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>160000</from><to>250000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980641</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Энгельс</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980641</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980640</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Жуковский  (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980640</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980639</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Якутск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980639</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980638</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Щелково (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980638</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980636</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Звенигород (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980636</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>47719354</job-id>
+    <job-title>Специалист отдела телемаркетинга (без поиска и привлечения)</job-title>
+    <job-employer>Хомтелеком24</job-employer>
+    <job-area>Ульяновск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=47719354</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>80000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980634</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Красная Поляна</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980634</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134980630</job-id>
+    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
+    <job-employer>Яндекс.Еда</job-employer>
+    <job-area>Апрелевка (Московская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134980630</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134610898</job-id>
+    <job-title>Закупщик оборудования / Менеджер по закупкам / Категорийный менеджер по оборудованию</job-title>
+    <job-employer>Альтасеилс</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134610898</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>100000</from><to>200000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>115612260</job-id>
+    <job-title>Охранник</job-title>
+    <job-employer>ЧОП Легион</job-employer>
+    <job-area>Тюмень</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=115612260</job-url>
+    <job-date>2026-07-10 07:31</job-date>
     
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>134498498</job-id>
-    <job-title>Комплектовщик</job-title>
-    <job-employer>Бауцентр</job-employer>
+    <job-id>135049128</job-id>
+    <job-title>Начальник склада</job-title>
+    <job-employer>Baltic Logistics, Группа компаний</job-employer>
     <job-area>Калининград</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134498498</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>78000</from><to>84500</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012728</job-id>
-    <job-title>Оператор по работе с клиентами</job-title>
-    <job-employer>Почта России</job-employer>
-    <job-area>Магас</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012728</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>27093</from><to>27200</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012727</job-id>
-    <job-title>Продавец-кассир магазина Samsung в ТЦ Европарк</job-title>
-    <job-employer>Inventive Retail Group</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012727</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>95000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012726</job-id>
-    <job-title>Продавец-кассир (18 комплекс, Сармановский тракт)</job-title>
-    <job-employer>FIX PRICE</job-employer>
-    <job-area>Набережные Челны</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012726</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>57530</from><to>67540</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012678</job-id>
-    <job-title>Менеджер по работе с клиентами (Без продаж)</job-title>
-    <job-employer>Деловые Линии</job-employer>
-    <job-area>Самара</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012678</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>61500</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133234270</job-id>
-    <job-title>Менеджер по поддержке продаж</job-title>
-    <job-employer>БПМСОФТ</job-employer>
-    <job-area>Самара</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133234270</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049128</job-url>
+    <job-date>2026-07-10 07:31</job-date>
     
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133593961</job-id>
-    <job-title>Менеджер по поддержке продаж</job-title>
-    <job-employer>БПМСОФТ</job-employer>
+    <job-id>135049127</job-id>
+    <job-title>Горничная</job-title>
+    <job-employer>Российские железные дороги</job-employer>
+    <job-area>Катунки</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049127</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>27000</from><to>30000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049126</job-id>
+    <job-title>Финансовый директор (CFO)</job-title>
+    <job-employer>METEOR Lift</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049126</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049125</job-id>
+    <job-title>Работник торгового зала (Торфяная, бытовая химия)</job-title>
+    <job-employer>ANCOR</job-employer>
+    <job-area>Санкт-Петербург</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049125</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><to>17400</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049124</job-id>
+    <job-title>Фармацевт-провизор</job-title>
+    <job-employer>Аптеки Плюс</job-employer>
+    <job-area>Левашово (Ленинградская область)</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049124</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>125000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>132956968</job-id>
+    <job-title>Менеджер по работе с партнерами</job-title>
+    <job-employer>yourhr.tech</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=132956968</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049121</job-id>
+    <job-title>Региональный менеджер по объектным продажам</job-title>
+    <job-employer>Юг Декор</job-employer>
+    <job-area>Ростов-на-Дону</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049121</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>80000</from><to>150000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049120</job-id>
+    <job-title>Аппаратчик замораживания пищевого сырья и продуктов</job-title>
+    <job-employer>Агропромкомплектация</job-employer>
+    <job-area>Поныри</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049120</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>73600</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134743364</job-id>
+    <job-title>Оператор АГЗС</job-title>
+    <job-employer>Сеть автозаправок GP VYMPEL</job-employer>
+    <job-area>Энгельс</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134743364</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>45000</from><to>50000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>133566642</job-id>
+    <job-title>Врач-дерматовенеролог (взрослые и дети)</job-title>
+    <job-employer>Медицинский центр Парацельс</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133566642</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>250000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049118</job-id>
+    <job-title>Менеджер в офис банка (Астраханская 140А), г.Саратов</job-title>
+    <job-employer>Совкомбанк</job-employer>
+    <job-area>Саратов</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049118</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>80000</from><to>120000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049117</job-id>
+    <job-title>Курьер на велосипеде</job-title>
+    <job-employer>Фролов Андрей Викторович</job-employer>
     <job-area>Казань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133593961</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049117</job-url>
+    <job-date>2026-07-10 07:31</job-date>
+    <salary><from>200</from><to>600</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134702105</job-id>
+    <job-title>Уборщица/уборщик в офис</job-title>
+    <job-employer>Сеть автозаправок GP VYMPEL</job-employer>
+    <job-area>Саратов</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134702105</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>20000</from><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>134907839</job-id>
+    <job-title>Менеджер первичных продаж/Хантер</job-title>
+    <job-employer>OnlyWork</job-employer>
+    <job-area>Ростов-на-Дону</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134907839</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>100000</from><to>150000</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049116</job-id>
+    <job-title>Руководитель регионального логистического хаба (складская и транспортная логистика)</job-title>
+    <job-employer>Восток-Запад</job-employer>
+    <job-area>Калининград</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049116</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012724</job-id>
-    <job-title>Продавец-кассир</job-title>
-    <job-employer>Бристоль, сеть магазинов</job-employer>
-    <job-area>Ардатов (Нижегородская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012724</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>37064</from><to>41671</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012723</job-id>
-    <job-title>Технолог-консультант</job-title>
-    <job-employer>Комос Групп</job-employer>
-    <job-area>Глазов</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012723</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>55000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012722</job-id>
-    <job-title>Юрист</job-title>
-    <job-employer>ГК УралМетПром</job-employer>
-    <job-area>Волгоград</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012722</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>50000</from><to>60000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012721</job-id>
-    <job-title>Эксперт по недвижимости URBN</job-title>
-    <job-employer>Ульянов Андрей Владимирович</job-employer>
+    <job-id>135049115</job-id>
+    <job-title>Техник по планированию/распределитель работ (производство микроэлектроники)</job-title>
+    <job-employer>Центр ВОСПИ</job-employer>
     <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012721</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>500000</from><currency>RUR</currency></salary>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049115</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>100000</from><to>100000</to><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012719</job-id>
-    <job-title>Специалист первой линии поддержки пользователей</job-title>
-    <job-employer>РОСЭЛТОРГ</job-employer>
-    <job-area>Чебоксары</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012719</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>60000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134056776</job-id>
-    <job-title>Специалист по контекстной рекламе</job-title>
-    <job-employer>E-PROMO</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134056776</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012718</job-id>
-    <job-title>Старший менеджер по работе с клиентами</job-title>
-    <job-employer>СБЕР</job-employer>
-    <job-area>Липецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012718</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>78900</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012716</job-id>
-    <job-title>Медицинская сестра/Медицинский брат</job-title>
-    <job-employer>Мединвестгрупп</job-employer>
-    <job-area>Балашиха (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012716</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012715</job-id>
-    <job-title>Инкассатор</job-title>
-    <job-employer>СБЕР</job-employer>
-    <job-area>Нижний Тагил</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012715</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>85400</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012713</job-id>
-    <job-title>Middle DevOps 1C (Инвестиционный бизнес)</job-title>
-    <job-employer>СБЕР</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012713</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012712</job-id>
-    <job-title>Разнорабочий на объект</job-title>
-    <job-employer>Гелион</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012712</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-id>127279854</job-id>
+    <job-title>Инженер-электроник-настройщик</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
+    <job-area>Рязань</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=127279854</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     <salary><from>100000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012708</job-id>
-    <job-title>Руководитель отдела закупок (грузовой и спецтранспорт)</job-title>
-    <job-employer>Оверкон</job-employer>
-    <job-area>Липецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012708</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>200000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012709</job-id>
-    <job-title>Руководитель отдела закупок (грузовой и спецтранспорт)</job-title>
-    <job-employer>Оверкон</job-employer>
-    <job-area>Тамбов</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012709</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>200000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012710</job-id>
-    <job-title>Руководитель отдела закупок (грузовой и спецтранспорт)</job-title>
-    <job-employer>Оверкон</job-employer>
-    <job-area>Белгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012710</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>200000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012711</job-id>
-    <job-title>Руководитель отдела закупок (грузовой и спецтранспорт)</job-title>
-    <job-employer>Оверкон</job-employer>
-    <job-area>Курск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012711</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>200000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134018723</job-id>
-    <job-title>Системный администратор в офис</job-title>
-    <job-employer>ГК ТЕХПОРТАВТОСЕРВИС</job-employer>
-    <job-area>Екатеринбург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134018723</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134000300</job-id>
-    <job-title>Экономист / Аудитор внутренней службы</job-title>
-    <job-employer>Консалтинговая Компания Беркана</job-employer>
-    <job-area>Ярославль</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134000300</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>120000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012706</job-id>
-    <job-title>Повар</job-title>
-    <job-employer>Рязанское конструкторское бюро Глобус</job-employer>
+    <job-id>128463800</job-id>
+    <job-title>Заместитель начальника отдела ценообразования</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
     <job-area>Рязань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012706</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>69000</from><currency>RUR</currency></salary>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128463800</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>125000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012705</job-id>
-    <job-title>Управляющий пиццерией Додо (г. Артем)</job-title>
-    <job-employer>Додо Пицца г. Москва (ООО АГОРА)</job-employer>
-    <job-area>Артем</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012705</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>140000</from><currency>RUR</currency></salary>
+    <job-id>128463931</job-id>
+    <job-title>Начальник сектора - заместитель главного инженера конструкторского бюро</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
+    <job-area>Рязань</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128463931</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>105000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012704</job-id>
-    <job-title>Секретарь суда</job-title>
-    <job-employer>Кировский районный суд г.Волгограда</job-employer>
-    <job-area>Волгоград</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012704</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
+    <job-id>128463955</job-id>
+    <job-title>Ведущий инженер-программист</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
+    <job-area>Рязань</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128463955</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>80000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012703</job-id>
-    <job-title>Почтальон</job-title>
-    <job-employer>Почта России</job-employer>
-    <job-area>Калининград</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012703</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>33900</from><to>47580</to><currency>RUR</currency></salary>
+    <job-id>128464021</job-id>
+    <job-title>Уборщик производственных и служебных помещений</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
+    <job-area>Рязань</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128464021</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>40000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>131624643</job-id>
-    <job-title>Слесарь-механик по ремонту спецтехники (Шушары)</job-title>
-    <job-employer>ГК ТЕХПОРТАВТОСЕРВИС</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=131624643</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>120000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012702</job-id>
-    <job-title>Маляр по металлу</job-title>
-    <job-employer>Группа Компаний Партнер-Электро</job-employer>
-    <job-area>Ногинск (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012702</job-url>
-    <job-date>2026-07-09 07:32</job-date>
+    <job-id>128464043</job-id>
+    <job-title>Юрисконсульт</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
+    <job-area>Рязань</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128464043</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     <salary><from>90000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012701</job-id>
-    <job-title>Продавец-консультант (ул. Краснопрудная 22-24)</job-title>
-    <job-employer>Подружка, сеть магазинов</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012701</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>46700</from><to>59000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012700</job-id>
-    <job-title>Маркетолог</job-title>
-    <job-employer>26 Кадр</job-employer>
-    <job-area>Ханты-Мансийск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012700</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>90000</from><to>150000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012699</job-id>
-    <job-title>Заместитель начальника транспортно-складской службы</job-title>
-    <job-employer>Baltic Logistics, Группа компаний</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012699</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012698</job-id>
-    <job-title>Главный специалист отдела внутреннего контроля и аудита</job-title>
-    <job-employer>КСЕНЬЕВСКИЙ ПРИИСК</job-employer>
-    <job-area>Чита</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012698</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012697</job-id>
-    <job-title>Производитель работ</job-title>
-    <job-employer>Indecom Group</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012697</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>180000</from><to>200000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>132474012</job-id>
-    <job-title>Продавец-консультант (ТРК Небо на пл.Лядова)</job-title>
-    <job-employer>COLIN'S</job-employer>
-    <job-area>Нижний Новгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=132474012</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>61495</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012695</job-id>
-    <job-title>Повар-универсал в &quot;Перекрёсток&quot; (выплаты еженедельно)</job-title>
-    <job-employer>СМАРТТЕХ 24</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012695</job-url>
-    <job-date>2026-07-09 07:32</job-date>
-    <salary><from>4500</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012693</job-id>
-    <job-title>Системный аналитик</job-title>
-    <job-employer>Газпромбанк</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012693</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012690</job-id>
-    <job-title>Менеджер региональных продаж</job-title>
-    <job-employer>Фаза</job-employer>
-    <job-area>Новокузнецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012690</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>150000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012689</job-id>
-    <job-title>Уборщик производственных и служебных помещений</job-title>
-    <job-employer>Рязанское конструкторское бюро Глобус</job-employer>
+    <job-id>128464183</job-id>
+    <job-title>Регулировщик РЭАиП</job-title>
+    <job-employer>Гранит, РПТП</job-employer>
     <job-area>Рязань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012689</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>38000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134560281</job-id>
-    <job-title>Выездной инженер техподдержки (интернет, ТВ)</job-title>
-    <job-employer>Сибирский медведь</job-employer>
-    <job-area>Крымск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134560281</job-url>
-    <job-date>2026-07-09 07:31</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=128464183</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     <salary><from>80000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012688</job-id>
-    <job-title>Руководитель отдела продаж (со знанием английского или французского языка)</job-title>
-    <job-employer>СИНЕРГИЯ</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012688</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>220000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012687</job-id>
-    <job-title>Креативный продюсер</job-title>
-    <job-employer>Зарицкая Елизавета Евгеньевна</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012687</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012684</job-id>
-    <job-title>Оператор колл-центра университета</job-title>
-    <job-employer>СИНЕРГИЯ</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012684</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>68000</from><to>75000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012682</job-id>
-    <job-title>Ведущий специалист Отдела администрирования ИТ активов</job-title>
-    <job-employer>Трубная Металлургическая Компания</job-employer>
-    <job-area>Екатеринбург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012682</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>100000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012680</job-id>
-    <job-title>Начальник смены</job-title>
-    <job-employer>Свит Лайф Фудсервис</job-employer>
-    <job-area>Серпухов (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012680</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>170000</from><to>200000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012679</job-id>
-    <job-title>Велокурьер на доставку заказов</job-title>
-    <job-employer>Принтшоппэ</job-employer>
-    <job-area>Омск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012679</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>180000</from><to>211000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012677</job-id>
-    <job-title>Электрогазосварщик 5 разряда</job-title>
-    <job-employer>Комос Групп</job-employer>
-    <job-area>Глазов</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012677</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>55000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>124556869</job-id>
-    <job-title>Комплектовщик мелких автозапчастей Toyota</job-title>
-    <job-employer>Глобальные Решения</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=124556869</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>129500</from><to>333000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012675</job-id>
-    <job-title>Кавист (м. Новые Черемушки)</job-title>
-    <job-employer>АСТ-Интернэшнл инваэронмэнт</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012675</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>60000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012673</job-id>
-    <job-title>Учитель русского языка и литературы</job-title>
-    <job-employer>МОБУ СОШ №6</job-employer>
-    <job-area>Сибай</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012673</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>32000</from><to>35000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012672</job-id>
-    <job-title>Контролер качества выпускаемых автомобилей</job-title>
-    <job-employer>Джоб Мастер</job-employer>
+    <job-id>133903020</job-id>
+    <job-title>Бармен-кассир в ресторан здорового питания &quot;CHISLA&quot; (м. Чкаловская)</job-title>
+    <job-employer>Che group</job-employer>
     <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012672</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>90000</from><to>140000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012670</job-id>
-    <job-title>Оператор по работе с клиентами</job-title>
-    <job-employer>Почта России</job-employer>
-    <job-area>Красноярск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012670</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>43400</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012669</job-id>
-    <job-title>Мерчандайзер визитный (Центральный)</job-title>
-    <job-employer>TRproject</job-employer>
-    <job-area>Липецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012669</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>26000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012668</job-id>
-    <job-title>Администратор компьютерного клуба</job-title>
-    <job-employer>КиберПрайд</job-employer>
-    <job-area>Екатеринбург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012668</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>47000</from><to>52000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133346313</job-id>
-    <job-title>Инженер-сметчик (структура заказчика)</job-title>
-    <job-employer>R4S</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133346313</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012666</job-id>
-    <job-title>Медсестра/медбрат эндоскопического кабинета</job-title>
-    <job-employer>Центр диагностики и лечения Лайт</job-employer>
-    <job-area>Киров (Кировская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012666</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>60000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012665</job-id>
-    <job-title>Product Manager</job-title>
-    <job-employer>МФК Саммит</job-employer>
-    <job-area>Краснодар</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012665</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134826608</job-id>
-    <job-title>Ассистент отдела продаж</job-title>
-    <job-employer>R4S</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134826608</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012664</job-id>
-    <job-title>Администратор флагманских центров городских больниц</job-title>
-    <job-employer>ГБУ МФЦ города Москвы Мои документы</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012664</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>110000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012663</job-id>
-    <job-title>Менеджер по продажам B2B (промышленное оборудование)</job-title>
-    <job-employer>Торцевик.РФ</job-employer>
-    <job-area>Казань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012663</job-url>
-    <job-date>2026-07-09 07:31</job-date>
+    <job-url>https://vakansa24.ru/vacancy.html?id=133903020</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     <salary><from>70000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012661</job-id>
-    <job-title>Монтажник радиоэлектронной аппаратуры и приборов</job-title>
-    <job-employer>Рязанское конструкторское бюро Глобус</job-employer>
-    <job-area>Рязань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012661</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>85000</from><currency>RUR</currency></salary>
+    <job-id>135049114</job-id>
+    <job-title>Монтажник систем вентиляции и кондиционирования</job-title>
+    <job-employer>ГИДРОКОМФОРТ</job-employer>
+    <job-area>Калининград</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049114</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>90000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>132873703</job-id>
-    <job-title>Проектный менеджер продаж/ Руководитель отдела развития (производство, разработка продукта)</job-title>
-    <job-employer>Биком</job-employer>
-    <job-area>Нижний Новгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=132873703</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>134735540</job-id>
-    <job-title>Руководитель сектора корпоративного финансирования</job-title>
-    <job-employer>R4S</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=134735540</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>130974060</job-id>
-    <job-title>Менеджер по транспортной логистике</job-title>
-    <job-employer>Арман</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=130974060</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012660</job-id>
-    <job-title>Старший торговый агент</job-title>
-    <job-employer>Мегаполис</job-employer>
-    <job-area>Павловск (Воронежская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012660</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>80000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012659</job-id>
-    <job-title>Бариста (м. Аэропорт, ТЦ Галерея Аэропорт)</job-title>
-    <job-employer>Сеть кофеен Шоколадница</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012659</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>59000</from><to>91000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012658</job-id>
-    <job-title>Менеджер по поиску новых клиентов (телемаркетолог)</job-title>
-    <job-employer>Медтехкомплект</job-employer>
-    <job-area>Нижний Новгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012658</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873349</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Барнаул</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873349</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873348</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Нижний Новгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873348</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012657</job-id>
-    <job-title>Менеджер в IT компанию</job-title>
-    <job-employer>М-СТАЙЛ</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012657</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>120000</from><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873347</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Вологда</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873347</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873345</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Раменское (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873345</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133563358</job-id>
-    <job-title>Финансовый менеджер (кредитный)</job-title>
-    <job-employer>R4S</job-employer>
-    <job-area>Москва</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133563358</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873344</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Ростов-на-Дону</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873344</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873343</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Новокузнецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873343</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873342</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Кемерово</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873342</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873341</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Долгопрудный (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873341</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873340</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Астрахань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873340</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873339</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Красногорск (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873339</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873338</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
+    <job-id>134787344</job-id>
+    <job-title>Менеджер по работе с тендерной документацией</job-title>
+    <job-employer>Вахруши - Литобувь</job-employer>
     <job-area>Киров (Кировская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873338</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134787344</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>53000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873337</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Тамбов</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873337</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-id>135049113</job-id>
+    <job-title>Продавец-консультант автозапчастей (г. Сочи, ул. Авиационная, 15Б)</job-title>
+    <job-employer>ROSSKO</job-employer>
+    <job-area>Адлер</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049113</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>95000</from><to>95000</to><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012656</job-id>
-    <job-title>Продавец автозапчастей / Менеджер по автозапчастям / Ведущий менеджер (APEX в Реутово)</job-title>
-    <job-employer>APEX.RU (Автозапчасти)</job-employer>
-    <job-area>Реутов (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012656</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>130000</from><to>200000</to><currency>RUR</currency></salary>
+    <job-id>135049112</job-id>
+    <job-title>Горничная (Уборка квартир)</job-title>
+    <job-employer>Элиас Групп</job-employer>
+    <job-area>Сочи</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049112</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>50000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873335</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Курск</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873335</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-id>134878628</job-id>
+    <job-title>Администратор 1С</job-title>
+    <job-employer>ФТО</job-employer>
+    <job-area>Челябинск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134878628</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873334</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Серпухов (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873334</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-id>131157602</job-id>
+    <job-title>Кассир</job-title>
+    <job-employer>Пятёрочка</job-employer>
+    <job-area>Мурманск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=131157602</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>55000</from><to>91000</to><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012655</job-id>
-    <job-title>Продавец-консультант автомобилей Geely</job-title>
-    <job-employer>ТрансТехСервис, УК</job-employer>
-    <job-area>Уфа</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012655</job-url>
-    <job-date>2026-07-09 07:31</job-date>
+    <job-id>134098324</job-id>
+    <job-title>Старший юрисконсульт</job-title>
+    <job-employer>Т Плюс</job-employer>
+    <job-area>Нижний Новгород</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134098324</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>86500</from><to>86500</to><currency>RUR</currency></salary>
+    <job-description><![CDATA[Описание отсутствует]]></job-description>
+  </job>
+  <job>
+    <job-id>135049111</job-id>
+    <job-title>Территориальный менеджер по привлечению партнёров pos-кредитования</job-title>
+    <job-employer>Всегда.Да</job-employer>
+    <job-area>Якутск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049111</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     <salary><from>100000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873333</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Истра (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873333</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-id>135049110</job-id>
+    <job-title>Оператор линии на завод</job-title>
+    <job-employer>Джоб Мастер</job-employer>
+    <job-area>Сестрорецк</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049110</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>85500</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873332</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Тюмень</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873332</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873330</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Павловский Посад (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873330</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873329</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Санкт-Петербург</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873329</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873328</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Сергиев Посад (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873328</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873327</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Чебоксары</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873327</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012654</job-id>
-    <job-title>Начальник цеха металлообработки</job-title>
-    <job-employer>Фаза</job-employer>
-    <job-area>Новокузнецк</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012654</job-url>
-    <job-date>2026-07-09 07:31</job-date>
+    <job-id>134878627</job-id>
+    <job-title>Администратор 1С</job-title>
+    <job-employer>ФТО</job-employer>
+    <job-area>Барнаул</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134878627</job-url>
+    <job-date>2026-07-10 07:30</job-date>
     
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873325</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Краснодар</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873325</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
+    <job-id>134100185</job-id>
+    <job-title>Врач - кардиолог</job-title>
+    <job-employer>Медицинский центр Парацельс</job-employer>
+    <job-area>Москва</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=134100185</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>230000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>135012653</job-id>
-    <job-title>Сотрудник склада / Комплектовщик / Упаковщик/ Оператор/ Контролер ОТК</job-title>
-    <job-employer>Федеральная сеть книжных магазинов Читай-город</job-employer>
-    <job-area>Клин (Московская область)</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012653</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><from>60000</from><currency>RUR</currency></salary>
+    <job-id>135049109</job-id>
+    <job-title>Врач ультразвуковой диагностики</job-title>
+    <job-employer>ГБУЗ СО «Тольяттинская городская клиническая больница №1 им. В.А. Гройсмана»</job-employer>
+    <job-area>Тольятти</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049109</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>80000</from><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
   <job>
-    <job-id>133873324</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Рязань</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873324</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>133873323</job-id>
-    <job-title>Курьер заказов из кафе, фудкортов, аптек</job-title>
-    <job-employer>Яндекс.Еда</job-employer>
-    <job-area>Геленджик</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=133873323</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    <salary><to>190000</to><currency>RUR</currency></salary>
-    <job-description><![CDATA[Описание отсутствует]]></job-description>
-  </job>
-  <job>
-    <job-id>135012652</job-id>
-    <job-title>Инженер логист</job-title>
-    <job-employer>Аэродроммаш</job-employer>
-    <job-area>Великий Новгород</job-area>
-    <job-url>https://vakansa24.ru/vacancy.html?id=135012652</job-url>
-    <job-date>2026-07-09 07:31</job-date>
-    
+    <job-id>135049108</job-id>
+    <job-title>Рефмашинист</job-title>
+    <job-employer>Паллада</job-employer>
+    <job-area>Мурманск</job-area>
+    <job-url>https://vakansa24.ru/vacancy.html?id=135049108</job-url>
+    <job-date>2026-07-10 07:30</job-date>
+    <salary><from>100000</from><to>100000</to><currency>RUR</currency></salary>
     <job-description><![CDATA[Описание отсутствует]]></job-description>
   </job>
 </jobs>
